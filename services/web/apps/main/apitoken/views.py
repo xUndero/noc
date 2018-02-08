@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # main.apitoken application
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2018 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -28,12 +28,10 @@ class APITokenApplication(ExtApplication):
         else:
             self.response_not_found()
 
-    @view(
-        "^(?P<type>[^/]+)/$", method=["POST"], access=PermitLogged(),
-        validate={
-            "token": StringParameter()
-        }, api=True
-    )
+    @view("^(?P<type>[^/]+)/$", method=["POST"], access=PermitLogged(),
+          validate={
+              "token": StringParameter()
+          }, api=True)
     def api_set_token(self, request, type, token=None):
         APIToken._get_collection().update({
             "type": type,
