@@ -8,6 +8,7 @@
 # Python module
 import re
 import zlib
+import datetime
 #  # NOC modules
 from noc.lib.nosql import get_db
 from noc.services.web.apps.sa.objectlist.views import ObjectListApplication
@@ -63,7 +64,7 @@ class MonitorApplication(ObjectListApplication):
         time = '--'
         last_success = humanize_distance(job["last"]) if "last" in job else '--'
         last_status = job.get(Job.ATTR_LAST_STATUS)
-        time_start = self.to_json(job.get(Job.ATTR_TS))
+        time_start = job.get(Job.ATTR_TS)
         status = job["s"] if "s" in job else '--'
         if status == Job.S_WAIT:
             key = "discovery-%s-%s" % (job_key, mo_id)
@@ -78,11 +79,11 @@ class MonitorApplication(ObjectListApplication):
                     else:
                         time = "%s mc" % s
         return {
-            '%s_time_start' % prefix: time_start,
+            '%s_time_start' % prefix: datetime.datetime.strftime(time_start, "%d.%m.%Y %H:%M"),
             '%s_last_success' % prefix: last_success,
             '%s_status' % prefix: status,
             '%s_time' % prefix: time,
-            '%s_duration' % prefix: "",
+            '%s_duration' % prefix: humanize_distance(time_start),
             '%s_last_status' % prefix: last_status,
         }
 
