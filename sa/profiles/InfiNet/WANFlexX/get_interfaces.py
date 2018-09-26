@@ -28,6 +28,8 @@ class Script(BaseScript):
                         re.MULTILINE)
     rx_vlan = re.compile(r"^\s+vlan: (?P<vlan>\d+)",
                          re.MULTILINE)
+    rx_vlan2 = re.compile(r"^\s+vlan: (?P<vlan>\d+)\s+parent interface: (?P<ifname>\S+)",
+                          re.MULTILINE)
     rx_ipaddr = re.compile(r"^(?P<ifname>\S+)\s+(?P<net>[0-9\./]+)\s+"
                            r"(?P<ipaddr>[0-9\.]+)\s+",
                            re.MULTILINE)
@@ -50,40 +52,44 @@ class Script(BaseScript):
             if not match:
                 continue
             ifname = match.group("name")
-            # if ifname.startswith("svi"):  # tmp hack
-            #    continue
             iface = {
                 "name": ifname,
                 "type": self.TYPE_MAP[ifname[:2]],
-                "subinterfaces": [{
-                    "name": ifname,
-                    "mtu": match.group("mtu"),
-                    "enabled_afi": []
-                }]
+                "subinterfaces": []
+            }
+            sub = {
+                "name": ifname,
+                "mtu": match.group("mtu"),
+                "enabled_afi": []
             }
             # get interfaces mac addresses
             match = self.rx_mac.search(block)
             if match:
                 mac = match.group("mac")
+                if mac == "00:00:00:00:00:00":
+                    continue
                 iface["mac"] = mac
-                iface["subinterfaces"][0]["mac"] = mac
-            else:
-                mac = ""  # For loopback interface
+                sub["mac"] = mac
             # get SVI interfaces vlans
-            match = self.rx_vlan.search(block)
+            match = self.rx_vlan2.search(block)
             if match:
                 vlan_ids = match.group("vlan")
-                iface["subinterfaces"][0]["vlan_ids"] = [vlan_ids]
-            else:
-                vlan_ids = 0
-            """
-            vlan106: flags=8022<BROADCAST,VLAN,MULTICAST> mtu 1500
-            inet 0.0.0.0 netmask 0x0
-            ether 00:00:00:00:00:00
-            vlan: 0 parent interface: <none>
-            """
-            if mac == "00:00:00:00:00:00" or vlan_ids == 0:
+                if vlan_ids == 0:
+                    continue
+                sub["vlan_ids"] = [vlan_ids]
+                parent_iface = match.group("ifname")
+                for i in ifaces:
+                    if i["name"] == parent_iface:
+                        i["subinterfaces"] += [sub]
+                        break
                 continue
+            else:
+                match = self.rx_vlan.search(block)
+                if match:
+                    vlan_ids = match.group("vlan")
+                    if vlan_ids == 0:
+                        continue
+                    sub["vlan_ids"] = [vlan_ids]
 
             ifaces += [iface]
         # collect interfaces ipv4 addresses
