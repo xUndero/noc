@@ -206,7 +206,7 @@ class SAEAPI(API):
         # Build version
         if vendor and platform and version:
             version = {
-                "vendor": Vendor.get_by_id(vendor).code,
+                "vendor": Vendor.get_by_id(vendor).name,
                 "platform": Platform.get_by_id(platform).name,
                 "version": Firmware.get_by_id(version).version
             }
