@@ -101,7 +101,7 @@ class Script(BaseScript):
                             r[ont_id].update({
                                 "vendor": t["Vendor ID"][0],
                                 "model": t["ONT"][0] + t["Model"][0] if t["Model"] else "",
-                                "version": t["Software Version"][0]
+                                "version": t["Software Version"][0] if t["Software Version"] else ""
                             })
                         continue
                     ont_id, serial = t["ONT ID"][0].split()
