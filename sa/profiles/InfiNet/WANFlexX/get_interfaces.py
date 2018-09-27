@@ -91,6 +91,7 @@ class Script(BaseScript):
                         continue
                     sub["vlan_ids"] = [vlan_ids]
 
+            iface["subinterfaces"] += [sub]
             ifaces += [iface]
         # collect interfaces ipv4 addresses
         ipv4_ifaces = defaultdict(list)
