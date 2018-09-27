@@ -30,7 +30,7 @@ class Script(BaseScript):
                          re.MULTILINE)
     rx_vlan2 = re.compile(r"^\s+vlan: (?P<vlan>\d+)\s+parent interface: (?P<ifname>\S+)",
                           re.MULTILINE)
-    rx_vlan_sub = re.compile(r"^svi(?P<vlan_id>\d+)$")
+    rx_vlan3 = re.compile(r"^svi(?P<vlan>\d+)$")
     rx_ipaddr = re.compile(r"^(?P<ifname>\S+)\s+(?P<net>[0-9\./]+)\s+"
                            r"(?P<ipaddr>[0-9\.]+)\s+",
                            re.MULTILINE)
@@ -91,7 +91,14 @@ class Script(BaseScript):
                     if vlan_ids == 0:
                         continue
                     sub["vlan_ids"] = [vlan_ids]
-
+                else:
+                    # Add vlan to `svi` interface
+                    match = self.rx_vlan3.search(iface["name"])
+                    if match:
+                        vlan_ids = match.group("vlan")
+                        if vlan_ids == 0:
+                            continue
+                        sub["vlan_ids"] = [vlan_ids]
             iface["subinterfaces"] += [sub]
             ifaces += [iface]
         # collect interfaces ipv4 addresses
@@ -105,7 +112,4 @@ class Script(BaseScript):
             if iface["name"] in ipv4_ifaces:
                 iface["subinterfaces"][0]["enabled_afi"] += ["IPv4"]
                 iface["subinterfaces"][0]["ipv4_addresses"] = ipv4_ifaces[iface["name"]]
-                match = self.rx_vlan_sub.search(iface["name"])
-                if match:
-                    iface["subinterfaces"][0]["vlan_ids"] = [match.group("vlan_id")]
         return [{"interfaces": ifaces}]
