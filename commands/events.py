@@ -16,6 +16,7 @@ from htmlentitydefs import name2codepoint
 # Third-party modules
 from bson import ObjectId
 from pymongo import DeleteMany
+from pymongo.errors import DocumentTooLarge
 # NOC modules
 from noc.core.management.base import BaseCommand
 from noc.sa.models.managedobject import ManagedObject
@@ -250,6 +251,7 @@ class Command(BaseCommand):
             "events", before
         ), end="")
         bulk = []
+        window = CLEAN_WINDOW
         while event_ts < before:
             refer_event_ids = []
             for e in [aa, ah]:
@@ -259,11 +261,19 @@ class Command(BaseCommand):
                         refer_event_ids += [ee["opening_event"]]
                     if "closing_event" in ee:
                         refer_event_ids += [ee["closing_event"]]
-            clear_qs = {"timestamp": {"$gte": event_ts, "$lte": event_ts + CLEAN_WINDOW},
-                        "_id": {"$nin": refer_event_ids}}
-            self.print("Interval: %s, %s; Count: %d" % (event_ts, event_ts + CLEAN_WINDOW, ae.count(clear_qs)))
-            bulk += [DeleteMany(clear_qs)]
-            event_ts += CLEAN_WINDOW
+            try:
+                clear_qs = {"timestamp": {"$gte": event_ts, "$lte": event_ts + CLEAN_WINDOW},
+                            "_id": {"$nin": refer_event_ids}}
+                self.print("Interval: %s, %s; Count: %d" % (event_ts, event_ts + CLEAN_WINDOW, ae.count(clear_qs)))
+                bulk += [DeleteMany(clear_qs)]
+                event_ts += window
+                if window != CLEAN_WINDOW:
+                    window = CLEAN_WINDOW
+            except DocumentTooLarge:
+                window = window // 2
+                if window < datetime.timedelta(hours=1):
+                    self.die("Too many events for delete in interval %s" % window)
+                event_ts -= window
         if force:
             self.print("All data before %s from active events will be Remove..\n" % before)
             for i in reversed(range(1, 10)):
