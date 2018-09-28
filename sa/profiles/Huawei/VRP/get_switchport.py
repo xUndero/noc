@@ -76,10 +76,14 @@ class Script(BaseScript):
                 "status": False,
                 # "ifindex": ifindex,
                 # "port_type": port_type,
-                "untagged": pvid,
+                # "untagged": pvid,
                 "tagged": [],
                 "members": []
             }
+            # Avoid zero-value untagged
+            # Found on ME60-X8 5.160 (V600R008C10SPC300)
+            if pvid:
+                r[port_num]["untagged"] = pvid
         start = 2
         for oid, vlans_bank in self.snmp.get_tables([mib["HUAWEI-L2IF-MIB::hwL2IfTrunkPortTable"]]):
             oid, port_num = oid.rsplit(".", 1)
