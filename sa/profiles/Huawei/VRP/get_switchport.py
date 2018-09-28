@@ -24,7 +24,8 @@ class Script(BaseScript):
 
     rx_vlan_comment = re.compile(r"\([^)]+\)", re.MULTILINE | re.DOTALL)
     rx_line1 = re.compile(
-        r"(?P<interface>\S+)\s+(?P<mode>access|trunk|hybrid|trunking)\s+(?P<pvid>\d+)\s+(?P<vlans>(?:\d|\-|\s|\n)+)", re.MULTILINE)
+        r"(?P<interface>\S+)\s+(?P<mode>access|trunk|hybrid|trunking)\s+(?P<pvid>\d+)\s+(?P<vlans>(?:\d|\-|\s|\n)+)",
+        re.MULTILINE)
     rx_line2 = re.compile(
         r"""
         (?P<interface>\S+)\scurrent\sstate
