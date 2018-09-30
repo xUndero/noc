@@ -72,7 +72,7 @@ class FMObjectCollector(BaseCollector):
                 time.mktime(last_alarm["timestamp"].timetuple()), now)
         late_alarm = next(db.noc.alarms.active.aggregate(self.late_alarm_pipeline))
         if late_alarm:
-            yield ("fm_alarms_late_count",), late_alarm["late_alarm"]
+            yield ("fm_alarms_active_late_count",), late_alarm["late_alarm"]
         alarms_rooted = set()
         alarms_nroored = set()
         broken_alarms = 0
