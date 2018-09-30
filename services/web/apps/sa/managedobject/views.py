@@ -64,7 +64,7 @@ class ManagedObjectApplication(ExtModelApplication):
     model = ManagedObject
     query_condition = "icontains"
     query_fields = ["name", "description"]
-    shadow_fields = {"password": "*******", "super_password": "********"}
+    sensitive_fields = {"password", "super_password"}
     # Inlines
     attrs = ModelInline(ManagedObjectAttribute)
     cfg = RepoInline("config")

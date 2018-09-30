@@ -146,7 +146,7 @@ class Application(object):
         self.menu_url = None   # Set by site.autodiscover()
         self.logger = logging.getLogger(self.app_id)
         self.j2_env = None
-        self.effective_permission = {}  # Effective permission for app
+        self._effective_permission = {}  # Effective permission for app
 
     @classmethod
     def add_to_class(cls, name, value):
@@ -190,7 +190,6 @@ class Application(object):
         # Leave only application permissions
         # and strip <module>:<app>:
         app_perms = [p[lps:] for p in user_perms & self.get_permissions()]
-        self.effective_permission = set(app_perms)
         return {
             "class": self.js_app_class,
             "title": unicode(self.title),
@@ -505,7 +504,23 @@ class Application(object):
             extra = self.extra_permissions
         for e in extra:
             p.add(HasPerm(e).get_permission(self))
+        if hasattr(self, "sensitive_fields") and getattr(self, "sensitive_fields", None):
+            p.add("%s:%s" % (prefix, "secret"))
         return p
+
+    def effective_permission(self, user=None):
+        if self._effective_permission or not user:
+            return self._effective_permission
+        from noc.main.models.permission import Permission
+
+        # Amount of characters to strip
+        lps = len(self.get_app_id()) + 1
+        # Get effective user permissions
+        user_perms = Permission.get_effective_permissions(user)
+        # Leave only application permissions
+        # and strip <module>:<app>:
+        app_perms = [p[lps:] for p in user_perms & self.get_permissions()]
+        self._effective_permission = set(app_perms)
 
     def user_access_list(self, user):
         """

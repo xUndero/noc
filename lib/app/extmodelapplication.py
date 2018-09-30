@@ -43,7 +43,7 @@ class ExtModelApplication(ExtApplication):
     pk_field_name = None  # Set by constructor
     clean_fields = {"id": IntParameter()}  # field name -> Parameter instance
     custom_fields = {}  # name -> handler, populated automatically
-    shadow_fields = {}  # field name -> shadow value (replace value in field shadow value)
+    sensitive_fields = {}  # field name -> shadow value (replace value in field shadow value)
     order_map = {}  # field name -> SQL query for ordering
     lookup_default = [{"id": "Leave unchanged", "label": "Leave unchanged"}]
     ignored_fields = set(["id", "bi_id"])
@@ -83,9 +83,6 @@ class ExtModelApplication(ExtApplication):
         # Add searchable custom fields
         self.query_fields += ["%s__%s" % (f.name, self.query_condition)
                               for f in self.get_custom_fields() if f.is_searchable]
-        if not self.config.web.restrict_view or \
-                (self.config.web.restrict_view and "update" in self.effective_permission):
-            self.shadow_fields = {}
 
     def get_validator(self, field):
         """
@@ -128,6 +125,7 @@ class ExtModelApplication(ExtApplication):
         return list(CustomField.table_fields(self.model._meta.db_table))
 
     def get_launch_info(self, request):
+        self.effective_permission(request.user)
         li = super(ExtModelApplication, self).get_launch_info(request)
         cf = self.get_custom_fields()
         if cf:
@@ -163,6 +161,7 @@ class ExtModelApplication(ExtApplication):
         """
         Filter records for lookup
         """
+        self.effective_permission(request.user)
         if query and self.query_fields:
             return self.model.objects.filter(self.get_Q(request, query))
         else:
@@ -259,9 +258,9 @@ class ExtModelApplication(ExtApplication):
         for f in o._meta.local_fields:
             if fields and f.name not in fields:
                 continue  # Restrict to selected fields
-            if f.name in self.shadow_fields and getattr(o, f.name):
-                # Shadow fields (limit view only if update
-                r[f.name] = self.shadow_fields[f.name]
+            if f.name in self.sensitive_fields and "secret" not in self.effective_permission() and getattr(o, f.name):
+                # Sensitive fields (limit view only if secret permission)
+                r[f.name] = "*****"
             elif f.name == "tags":
                 # Send tags as a list
                 r[f.name] = getattr(o, f.name)
@@ -548,6 +547,8 @@ class ExtModelApplication(ExtApplication):
                 Tag.register_tag(t, repr(self.model))
         # Update attributes
         for k, v in attrs.items():
+            if k in self.sensitive_fields and "secret" not in self.effective_permission():
+                continue
             setattr(o, k, v)
         # Run models validators
         try:
