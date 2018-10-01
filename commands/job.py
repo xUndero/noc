@@ -19,7 +19,7 @@ from noc.core.management.base import BaseCommand
 from noc.core.scheduler.scheduler import Scheduler
 
 
-SHARDING_SCHEDULER = ["discovery", "correlator", "escalator"]
+SHARDING_SCHEDULER = {"discovery", "correlator", "escalator"}
 
 
 class Command(BaseCommand):
@@ -178,7 +178,6 @@ class Command(BaseCommand):
                 time.sleep(1)
             scheduler.bulk_write(bulk)
             # Job.get_next_timestamp(64000)
-        print(bulk)
 
 
 if __name__ == "__main__":
