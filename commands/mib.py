@@ -51,12 +51,6 @@ class Command(BaseCommand):
             nargs=argparse.REMAINDER,
             help="SNMP OIDs"
         )
-        # lookup
-        lookup_parser.add_argument(
-            "oids",
-            nargs=argparse.REMAINDER,
-            help="SNMP OIDs"
-        )
         # import
         import_parser = subparsers.add_parser("import")
         import_parser.add_argument(
