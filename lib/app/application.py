@@ -504,7 +504,7 @@ class Application(object):
             extra = self.extra_permissions
         for e in extra:
             p.add(HasPerm(e).get_permission(self))
-        if hasattr(self, "sensitive_fields") and getattr(self, "sensitive_fields", None):
+        if getattr(self, "sensitive_fields", None):
             p.add("%s:%s" % (prefix, "secret"))
         return p
 
