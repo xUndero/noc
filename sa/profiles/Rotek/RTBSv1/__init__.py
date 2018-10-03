@@ -13,7 +13,7 @@ from noc.core.profile.base import BaseProfile
 class Profile(BaseProfile):
     name = "Rotek.RTBSv1"
     pattern_prompt = r"^(?P<hostname>\S+)\s*>?|\W+?#\s+?"
-    pattern_syntax_error = r"(ERROR)"
+    pattern_syntax_error = r"(ERROR|show: not found)"
     command_submit = "\r"
     enable_cli_session = False
     command_exit = "exit\rlogout"
@@ -40,7 +40,8 @@ class Profile(BaseProfile):
 
         def __enter__(self):
             """Enter switch context"""
-            self.script.cli("shell")
+            raise NotImplementedError("Not supported work on Shell")
+            # self.script.cli("shell")
 
         def __exit__(self, exc_type, exc_val, exc_tb):
             """Leave switch context"""
