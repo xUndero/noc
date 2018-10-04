@@ -10,7 +10,8 @@ Ext.define('NOC.sa.monitor.Application', {
         'NOC.sa.monitor.Controller',
         'NOC.sa.monitor.ViewModel',
         'NOC.core.filter.Filter',
-        'NOC.sa.monitor.SelectionGrid'
+        'NOC.sa.monitor.SelectionGrid',
+        'NOC.sa.monitor.Filter'
     ],
 
     alias: 'widget.monitor',
@@ -24,22 +25,20 @@ Ext.define('NOC.sa.monitor.Application', {
 
     items: [
         {
-            xtype: 'selectionGrid',
-            region: 'west',
+            xtype: 'sa.selectionGrid',
+            region: 'center',
             resizable: true,
-            split: true,
-            width: '80%'
+            border: false,
+            split: true
         },
-
         {
-            xtype: 'NOC.Filter',
-            // appId: this.appId,
+            xtype: 'monitor.Filter',
             appId: 'sa.monitor',
             reference: 'filterPanel',
-            region: 'east',
+            region: 'west',
             width: 300,
             collapsed: true,
-            border: true,
+            border: false,
             animCollapse: false,
             collapseMode: 'mini',
             hideCollapseTool: true,
@@ -50,5 +49,8 @@ Ext.define('NOC.sa.monitor.Application', {
             selectionStore: 'monitor.objectsStore',
             treeAlign: 'right'
         }
-    ]
+    ],
+    listeners: {
+        destroy: 'stopPolling'
+    }
 });

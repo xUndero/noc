@@ -6,7 +6,7 @@
 console.debug('Defining NOC.sa.monitor.SelectionGrid');
 Ext.define('NOC.sa.monitor.SelectionGrid', {
     extend: 'Ext.grid.Panel',
-    alias: 'widget.selectionGrid',
+    alias: 'widget.sa.selectionGrid',
 
     bind: {
         store: '{objectsStore}'
@@ -157,6 +157,7 @@ Ext.define('NOC.sa.monitor.SelectionGrid', {
         {
             glyph: NOC.glyph.refresh,
             tooltip: __('Reload data'),
+            enableToggle: true,
             handler: 'onReload'
         },
         {

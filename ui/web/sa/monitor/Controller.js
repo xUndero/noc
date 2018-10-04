@@ -7,6 +7,8 @@ console.debug('Defining NOC.sa.monitor.Controller');
 Ext.define('NOC.sa.monitor.Controller', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.monitor',
+    pollingTaskId: null,
+    pollingInterval: 300000, // msec
 
     mixins: [
         'NOC.core.Export'
@@ -14,10 +16,6 @@ Ext.define('NOC.sa.monitor.Controller', {
 
     onShowFilter: function() {
         this.lookupReference('filterPanel').toggleCollapse();
-    },
-
-    onReload: function() {
-        this.getViewModel().getStore('objectsStore').reload();
     },
 
     onSelectionChange: function(element, selected) {
@@ -39,8 +37,6 @@ Ext.define('NOC.sa.monitor.Controller', {
         this.lookupReference('repoPreview').preview(record);
     },
 
-
-
     onRenderStatus: function(value) {
         var stateCodeToName = {
             W: 'Wait',
@@ -61,5 +57,36 @@ Ext.define('NOC.sa.monitor.Controller', {
 
     onExport: function() {
         this.save(this.lookupReference('selectionGrid'), 'monitor.csv');
+    },
+
+    onReload: function(btn) {
+        if(btn.pressed) {
+            this.startPolling();
+        } else {
+            this.stopPolling();
+        }
+    },
+
+    pollingTask: function(){
+        // console.log('polling task!');
+        this.getViewModel().getStore('objectsStore').reload();
+    },
+
+    startPolling: function() {
+        if(this.pollingTaskId) {
+            this.pollingTask();
+        } else {
+            this.pollingTaskId = Ext.TaskManager.start({
+                run: this.pollingTask,
+                interval: this.pollingInterval
+            });
+        }
+    },
+
+    stopPolling: function() {
+        if(this.pollingTaskId) {
+            Ext.TaskManager.stop(this.pollingTaskId);
+            this.pollingTaskId = null;
+        }
     }
 });
