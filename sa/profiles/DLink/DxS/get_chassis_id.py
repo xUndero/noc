@@ -36,20 +36,20 @@ class Script(BaseScript):
 
     # Do not use noc.sa.profiles.Generic.get_chassis_id
     def execute_snmp(self):
-        macs = []
+        macs = set()
         for v in self.snmp.get(self.OIDS_CHECK).values():
             if v is None:
                 continue
             mac = MAC(v)
             if mac == "00:00:00:00:00:00" or mac in macs:
                 continue
-            macs += [mac]
+            macs.add(mac)
         for oid, v in self.snmp.getnext(mib["IF-MIB::ifPhysAddress"]):
             mac = MAC(v)
             if mac == "00:00:00:00:00:00" or mac in macs:
                 continue
-            macs += [mac]
-        macs.sort()
+            macs.add(mac)
+        macs = sorted(macs)
         return [{
             "first_chassis_mac": f,
             "last_chassis_mac": t
