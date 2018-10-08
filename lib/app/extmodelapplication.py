@@ -30,6 +30,8 @@ from noc.lib.validators import is_int
 from noc.models import is_document
 from noc.main.models.tag import Tag
 from noc.core.stencil import stencil_registry
+from noc.main.models.permission import Permission
+from noc.core.middleware.tls import get_user
 from .extapplication import ExtApplication, view
 from .interfaces import DateParameter, DateTimeParameter
 
@@ -43,10 +45,11 @@ class ExtModelApplication(ExtApplication):
     pk_field_name = None  # Set by constructor
     clean_fields = {"id": IntParameter()}  # field name -> Parameter instance
     custom_fields = {}  # name -> handler, populated automatically
-    sensitive_fields = {}  # field name -> shadow value (replace value in field shadow value)
+    secret_fields = None  # Set of sensitive fields. "secret" permission is required to show of modify
     order_map = {}  # field name -> SQL query for ordering
     lookup_default = [{"id": "Leave unchanged", "label": "Leave unchanged"}]
-    ignored_fields = set(["id", "bi_id"])
+    ignored_fields = {"id", "bi_id"}
+    SECRET_MASK = "********"
 
     def __init__(self, *args, **kwargs):
         super(ExtModelApplication, self).__init__(*args, **kwargs)
@@ -83,6 +86,12 @@ class ExtModelApplication(ExtApplication):
         # Add searchable custom fields
         self.query_fields += ["%s__%s" % (f.name, self.query_condition)
                               for f in self.get_custom_fields() if f.is_searchable]
+
+    def get_permissions(self):
+        p = super(ExtModelApplication, self).get_permissions()
+        if self.secret_fields:
+            p.add("%s:secret" % self.get_app_id().replace(".", ":"))
+        return p
 
     def get_validator(self, field):
         """
@@ -180,6 +189,11 @@ class ExtModelApplication(ExtApplication):
             (str(k), data[k] if data[k] != "" else None)
             for k in data if k not in self.ignored_fields
         )
+        # Protect sensitive fields
+        if self.secret_fields and not self.has_secret():
+            for f in self.secret_fields:
+                if f in data:
+                    del data[f]
         # Clean up fields
         for f in self.clean_fields:
             if f in data:
@@ -253,14 +267,22 @@ class ExtModelApplication(ExtApplication):
             nq[p] = v
         return nq
 
+    def has_secret(self):
+        """
+        Check current user has *secret* permission on given app
+        :return:
+        """
+        perm_name = "%s:secret" % (self.get_app_id().replace(".", ":"))
+        return perm_name in Permission.get_effective_permissions(get_user())
+
     def instance_to_dict(self, o, fields=None):
         r = {}
         for f in o._meta.local_fields:
             if fields and f.name not in fields:
                 continue  # Restrict to selected fields
-            if f.name in self.sensitive_fields and "secret" not in self.effective_permission() and getattr(o, f.name):
-                # Sensitive fields (limit view only if secret permission)
-                r[f.name] = "*****"
+            if self.secret_fields and f.name in self.secret_fields and getattr(o, f.name) and not self.has_secret():
+                # Sensitive fields (limit view only to *secret* permission)
+                r[f.name] = self.SECRET_MASK
             elif f.name == "tags":
                 # Send tags as a list
                 r[f.name] = getattr(o, f.name)
@@ -547,7 +569,7 @@ class ExtModelApplication(ExtApplication):
                 Tag.register_tag(t, repr(self.model))
         # Update attributes
         for k, v in attrs.items():
-            if k in self.sensitive_fields and "secret" not in self.effective_permission():
+            if k in self.secret_fields and "secret" not in self.effective_permission():
                 continue
             setattr(o, k, v)
         # Run models validators
