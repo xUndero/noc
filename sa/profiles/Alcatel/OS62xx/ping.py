@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ---------------------------------------------------------------------
-# AlliedTelesis.AT8000S.ping
+# Alcatel.OS62xx.ping
 # ---------------------------------------------------------------------
 # Copyright (C) 2007-2018 The NOC Project
 # coded by azhur
@@ -14,7 +14,7 @@ import re
 
 
 class Script(BaseScript):
-    name = "AlliedTelesis.AT8000S.ping"
+    name = "Alcatel.OS62xx.ping"
     interface = IPing
 
     rx_result = re.compile(

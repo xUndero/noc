@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ---------------------------------------------------------------------
-# AlliedTelesis.AT8000S.get_interfaces
+# Alcatel.OS62xx.get_interfaces
 # ---------------------------------------------------------------------
 # Copyright (C) 2007-2018 The NOC Project
 # See LICENSE for details
@@ -13,7 +13,7 @@ import re
 
 
 class Script(BaseScript):
-    name = "AlliedTelesis.AT8000S.get_interfaces"
+    name = "Alcatel.OS62xx.get_interfaces"
     interface = IGetInterfaces
 
     rx_port = re.compile(
@@ -170,7 +170,7 @@ class Script(BaseScript):
                 }
                 for i in interfaces:
                     if i["name"] == ifname:
-                        i["subinterfaces"][0]["ipv4_addresses"] += match.group("address")
+                        i["subinterfaces"][0]["ipv4_addresses"] += match.group("address"),
                         break
                 else:
                     interfaces += [iface]
