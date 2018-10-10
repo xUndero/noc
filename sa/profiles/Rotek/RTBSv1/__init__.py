@@ -48,7 +48,6 @@ class Profile(BaseProfile):
             if exc_type is None:
                 self.script.cli("\r")
 
-
     matchers = {
         "is_platform_BS5": {
             "platform": {
