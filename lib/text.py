@@ -8,6 +8,7 @@
 import re
 import six
 from itertools import izip_longest
+from numpy import array
 
 #
 # Parse string containing table an return a list of table rows.
@@ -515,7 +516,6 @@ def parse_table_header(v):
     {10: 'Config Master', 18: 'Current Master', 26: 'Agg Control', 33: 'Min Active',
      43: 'Ld Share Algorithm', 49: 'Flags ', 59: 'Ld Share Group', 63: 'Agg Mbr', 69: 'Link State'}
     """
-    from numpy import array
     head = []
     empty_header = None
     header = {}
