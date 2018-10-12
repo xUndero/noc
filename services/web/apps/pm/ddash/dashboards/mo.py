@@ -109,6 +109,7 @@ class MODashboard(BaseDashboard):
             "subifaces": self.object_data["subifaces"],
             "bi_id": self.object.bi_id,
             "pool": self.object.pool.name,
+            "extra_template": self.extra_template,
             "ping_interval": self.object.object_profile.ping_interval,
             "discovery_interval": self.object.object_profile.periodic_discovery_interval
         }
