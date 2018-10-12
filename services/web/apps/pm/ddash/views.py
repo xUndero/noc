@@ -6,13 +6,16 @@
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
+
+# Python modules
+from __future__ import absolute_import
 # NOC modules
 from noc.lib.app.extapplication import ExtApplication, view
-from dashboards.base import BaseDashboard
-from dashboards.mo import MODashboard
-from dashboards.link import LinkDashboard
-from dashboards.ipsla import IPSLADashboard
-from dashboards.container import ContainerDashboard
+from .dashboards.base import BaseDashboard
+from .dashboards.mo import MODashboard
+from .dashboards.link import LinkDashboard
+from .dashboards.ipsla import IPSLADashboard
+from .dashboards.container import ContainerDashboard
 from noc.core.translation import ugettext as _
 
 
