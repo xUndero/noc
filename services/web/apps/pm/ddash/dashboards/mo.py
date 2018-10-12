@@ -6,18 +6,21 @@
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
+
+# Python modules
+from __future__ import absolute_import
+# Third-Party modules
 import demjson
 from django.db.models import Q
 from jinja2 import Environment, FileSystemLoader
+# NOC modules
+from .base import BaseDashboard
 from noc.config import config
 from noc.inv.models.interface import Interface
 from noc.inv.models.subinterface import SubInterface
-# NOC modules
 from noc.lib.text import split_alnum
 from noc.pm.models.metrictype import MetricType
 from noc.sa.models.managedobject import ManagedObject
-
-from base import BaseDashboard
 
 
 class MODashboard(BaseDashboard):
