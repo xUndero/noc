@@ -83,11 +83,11 @@ class Command(BaseCommand):
         """
         parts = defaultdict(list)
         for row in connect.execute("""
-          SELECT table, name, rows, bytes, min_date, max_date 
-          FROM system.parts 
+          SELECT table, name, rows, bytes, min_date, max_date
+          FROM system.parts
           WHERE
             level > 0
-            AND active = 1 
+            AND active = 1
             AND database = %s
           ORDER BY table, name
         """, args=(config.clickhouse.db,)
