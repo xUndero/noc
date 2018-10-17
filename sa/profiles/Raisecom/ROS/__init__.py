@@ -131,7 +131,7 @@ class Profile(BaseProfile):
             match = self.rx_ver_2017.search(c)
             return match.groupdict()
 
-    rx_port = re.compile("^port(| )(?P<port>\d+)")
+    rx_port = re.compile("^port(|\s+)(?P<port>\d+)")
 
     def convert_interface_name(self, interface):
         if interface.startswith("GE"):
