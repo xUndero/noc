@@ -9,10 +9,10 @@
 # Python modules
 from __future__ import absolute_import
 import logging
-import inspect
 import threading
 import os
 # NOC modules
+from noc.config import config
 from noc.core.loader.base import BaseLoader
 from .base import DataStream
 
@@ -38,8 +38,20 @@ class DataStreamLoader(BaseLoader):
                 if not self.is_valid_name(name):
                     logger.error("Invalid datastream name")
                     return None
-                module_name = "noc.services.datastream.streams.%s" % name
-                datastream = self.find_class(module_name, DataStream)
+                for p in config.get_customized_paths("", prefer_custom=True):
+                    path = os.path.join(p, "services", "datastream", "streams", "%s.py" % name)
+                    if not os.path.exists(path):
+                        continue
+                    if p:
+                        # Customized datastream
+                        base_name = os.path.basename(os.path.dirname(p))
+                        module_name = "%s.services.datastream.streams.%s" % (base_name, name)
+                    else:
+                        # Common datastream
+                        module_name = "noc.services.datastream.streams.%s" % name
+                    datastream = self.find_class(module_name, DataStream, name)
+                    if datastream:
+                        break
                 if not datastream:
                     logger.error("DataStream not found: %s", name)
                 self.datastreams[name] = datastream
@@ -60,7 +72,7 @@ class DataStreamLoader(BaseLoader):
         Scan all available datastreams
         """
         names = set()
-        for dn in ["services/datastream/streams"]:
+        for dn in config.get_customized_paths(os.path.join("services", "datastream", "streams")):
             for file in os.listdir(dn):
                 if file.startswith("_") or not file.endswith(".py"):
                     continue
