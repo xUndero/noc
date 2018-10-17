@@ -13,13 +13,15 @@ import inspect
 import threading
 import os
 # NOC modules
+from noc.core.loader.base import BaseLoader
 from .base import DataStream
 
 logger = logging.getLogger(__name__)
 
 
-class DataStreamLoader(object):
+class DataStreamLoader(BaseLoader):
     def __init__(self):
+        super(DataStreamLoader, self).__init__()
         self.datastreams = {}  # Load datastreams
         self.lock = threading.Lock()
         self.all_datastreams = set()
@@ -37,22 +39,9 @@ class DataStreamLoader(object):
                     logger.error("Invalid datastream name")
                     return None
                 module_name = "noc.services.datastream.streams.%s" % name
-                try:
-                    sm = __import__(module_name, {}, {}, "*")
-                    for n in dir(sm):
-                        o = getattr(sm, n)
-                        if (
-                            inspect.isclass(o) and
-                            issubclass(o, DataStream) and
-                            o.__module__ == sm.__name__
-                        ):
-                            datastream = o
-                            break
-                    if not datastream:
-                        logger.error("DataStream not found: %s", name)
-                except Exception as e:
-                    logger.error("Failed to load DataStream %s: %s", name, e)
-                    datastream = None
+                datastream = self.find_class(module_name, DataStream)
+                if not datastream:
+                    logger.error("DataStream not found: %s", name)
                 self.datastreams[name] = datastream
             return datastream
 
