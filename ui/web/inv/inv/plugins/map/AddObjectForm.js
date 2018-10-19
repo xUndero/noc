@@ -64,6 +64,7 @@ Ext.define("NOC.inv.inv.plugins.map.AddObjectForm", {
         me.callParent();
         me.form.getForm().setValues({
             objectmodel: "Zhopa",
+            // ToDo remove
             display_position: me.newPosition.toString()
         });
     },
