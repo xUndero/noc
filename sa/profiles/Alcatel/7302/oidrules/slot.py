@@ -38,7 +38,8 @@ class SlotRule(OIDRule):
             for s_i in range(1, 3):
                 # Two sensors on cards
                 # r["lt:1/1/%d_s%d" % (ms, s_i)] = "%d.%d" % (i + ms - 2 if ms not in [2, 3] else i + 8 + ms, s_i)
-                r[("1", "1", str(ms), "Temperature_lt_s%d" % s_i, )] = "%d.%d" % (i + ms - 2 if ms not in [2, 3] else i + 8 + ms, s_i)
+                r[("1", "1", str(ms),
+                   "Temperature_lt_s%d" % s_i, )] = "%d.%d" % (i + ms - 2 if ms not in [2, 3] else i + 8 + ms, s_i)
 
         for i in r:
             if self.is_complex:
