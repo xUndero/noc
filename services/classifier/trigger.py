@@ -23,7 +23,6 @@ class Trigger(object):
         # Action
         self.notification_group = t.notification_group
         self.template = t.template
-        self.pyrule = t.pyrule
         self.handler = handler
 
     def match(self, event):
@@ -50,11 +49,9 @@ class Trigger(object):
                 body[lang] = self.template.render_body(LANG=lang,
                                                 event=event, subject=s, body=b)
             self.notification_group.notify(subject=subject, body=body)
-        # Call pyRule
-        if self.pyrule:
-            self.pyrule(event=event)
+        # Call Handler
         if self.handler:
             try:
                 self.handler(event)
-            except:
+            except Exception:
                 error_report()
