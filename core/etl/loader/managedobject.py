@@ -9,9 +9,10 @@
 # Python modules
 from __future__ import absolute_import
 # NOC modules
-from noc.sa.models.managedobject import ManagedObject
 from noc.main.models.pool import Pool
+from noc.sa.models.managedobject import ManagedObject
 from noc.sa.models.profile import Profile
+from noc.inv.models.resourcegroup import ResourceGroup
 from .base import BaseLoader
 
 
@@ -54,7 +55,9 @@ class ManagedObjectLoader(BaseLoader):
         "segment": "networksegment",
         "container": "container",
         "auth_profile": "authprofile",
-        "tt_system": "ttsystem"
+        "tt_system": "ttsystem",
+        "static_client_groups": "resourcegroup",
+        "static_service_groups": "resourcegroup"
     }
 
     def __init__(self, *args, **kwargs):
@@ -71,8 +74,14 @@ class ManagedObjectLoader(BaseLoader):
             v["tags"] = [x.strip().strip('"') for x in v["tags"].split(",")
                          if x.strip()] if v["tags"] else []
         v["profile"] = Profile.get_by_name(v["profile"])
-        v["static_client_groups"] = v["static_client_groups"] or []
-        v["static_service_groups"] = v["static_service_groups"] or []
+        if v["static_client_groups"]:
+            v["static_client_groups"] = [ResourceGroup.get_by_id(v["static_client_groups"])]
+        else:
+            v["static_client_groups"] = []
+        if v["static_service_groups"]:
+            v["static_client_groups"] = [ResourceGroup.get_by_id(v["static_service_groups"])]
+        else:
+            v["static_service_groups"] = []
         return v
 
     def purge(self):
