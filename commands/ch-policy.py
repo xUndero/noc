@@ -114,7 +114,7 @@ class Command(BaseCommand):
         exclude_partition = self.get_inactive_partition(connect)
         partitions = defaultdict(list)
         for row in connect.execute("""
-          SELECT table, partition, SUM(rows), SUM(bytes), MIN(min_date), MAX(max_date) 
+          SELECT table, partition, SUM(rows), SUM(bytes), MIN(min_date), MAX(max_date)
           FROM system.parts
           WHERE
             database = %s
