@@ -44,10 +44,8 @@ class Trigger(object):
             for lang in self.notification_group.languages:
                 s = event.subject
                 b = event.body
-                subject[lang] = self.template.render_subject(LANG=lang,
-                                                event=event, subject=s, body=b)
-                body[lang] = self.template.render_body(LANG=lang,
-                                                event=event, subject=s, body=b)
+                subject[lang] = self.template.render_subject(LANG=lang,event=event, subject=s, body=b)
+                body[lang] = self.template.render_body(LANG=lang, event=event, subject=s, body=b)
             self.notification_group.notify(subject=subject, body=body)
         # Call Handler
         if self.handler:
