@@ -9,7 +9,7 @@
 # Python modules
 from __future__ import print_function
 from collections import namedtuple, defaultdict
-import six
+import time
 import datetime
 # NOC modules
 from noc.config import config
@@ -18,6 +18,7 @@ from noc.core.clickhouse.connect import connection
 from noc.main.models.chpolicy import CHPolicy
 
 PartInfo = namedtuple("PartInfo", ["name", "rows", "bytes", "min_date", "max_date"])
+PartitionInfo = namedtuple("PartitionInfo", ["table_name", "partition", "rows", "bytes", "min_date", "max_date"])
 
 
 class Command(BaseCommand):
@@ -39,22 +40,23 @@ class Command(BaseCommand):
             help="ClickHouse port"
         )
         apply_parser.add_argument(
-            "--dry-run",
+            "--approve",
             dest="dry_run",
-            action="store_true",
-            help="Do not apply changes"
+            action="store_false",
+            help="Apply changes"
         )
 
     def handle(self, cmd, *args, **options):
         getattr(self, "handle_%s" % cmd)(*args, **options)
 
-    def handle_apply(self, host=None, port=None, dry_run=False, *args, **options):
+    def handle_apply(self, host=None, port=None, dry_run=True, *args, **options):
         read_only = dry_run
         ch = connection(host, port, read_only=read_only)
         today = datetime.date.today()
         # Get partitions
         parts = self.get_parts(ch)
         #
+        partition_claimed = []
         claimed_bytes = 0
         for p in CHPolicy.objects.filter(is_active=True).order_by("table"):
             table_claimed = 0
@@ -64,17 +66,44 @@ class Command(BaseCommand):
             is_dry = dry_run or p.dry_run
             self.print("# Table %s deadline %s%s" % (
                 p.table, deadline.isoformat(), " (Dry Run)" if is_dry else ""))
-            for pn, pt in six.iteritems(parts[p.table]):
-                if pt["max_date"] >= deadline:
+            for pi in parts[p.table]:
+                if pi.max_date >= deadline:
                     continue
-                self.print("[%s]  Removing partition %s (%s -- %s, %d rows, %d bytes)" % (
-                    p.table, pn, pt["min_date"], pt["max_date"], pt["rows"], pt["bytes"]))
-                table_claimed += pt["bytes"]
+                self.print("  Removing partition %s (%s -- %s, %d rows, %d bytes)" % (
+                    pi.partition, pi.min_date, pi.max_date, pi.rows, pi.bytes))
+                table_claimed += pi.bytes
                 if not is_dry:
-                    ch.execute("ALTER TABLE %s.%s DROP PARTITION '%s'" % (config.clickhouse.db, p.table, pn))
+                    partition_claimed += [(p.table, pi.partition)]
             self.print("  Total %d bytes to be reclaimed" % table_claimed)
             claimed_bytes += table_claimed
-        self.print("# Done. %d bytes to be reclaimed" % claimed_bytes)
+        if partition_claimed:
+            self.print("Claimed data will be Loss..\n")
+            for i in reversed(range(1, 10)):
+                self.print("%d\n" % i)
+                time.sleep(1)
+            for c in partition_claimed:
+                ch.execute("ALTER TABLE %s.%s DROP PARTITION '%s'" % (config.clickhouse.db, c[0], c[1]))
+            self.print("# Done. %d bytes to be reclaimed" % claimed_bytes)
+
+    def get_inactive_partition(self, connect):
+        """
+        Get partition with inactive parts
+        :param connect:
+        :return:
+        """
+        ap = set()
+        for row in connect.execute("""
+          SELECT table, partition
+          FROM system.parts
+          WHERE
+            active = 0
+            AND database = %s
+          GROUP BY table, partition
+          ORDER BY table, partition
+        """, args=(config.clickhouse.db,)
+        ):
+            ap.add((row[0], row[1]))
+        return ap
 
     def get_parts(self, connect):
         """
@@ -82,28 +111,28 @@ class Command(BaseCommand):
         :param connect:
         :return:
         """
-        partitions = defaultdict(dict)
+        exclude_partition = self.get_inactive_partition(connect)
+        partitions = defaultdict(list)
         for row in connect.execute("""
-          SELECT table, partition, name, rows, bytes, min_date, max_date
+          SELECT table, partition, SUM(rows), SUM(bytes), MIN(min_date), MAX(max_date) 
           FROM system.parts
           WHERE
-            level > 0
-            AND active = 1
-            AND database = %s
-          ORDER BY table, name
+            database = %s
+          GROUP BY table, partition
+          ORDER BY table, partition
         """, args=(config.clickhouse.db,)
         ):
-            if row[1] not in partitions[row[0]]:
-                partitions[row[0]][row[1]] = {
-                    "min_date": datetime.date(*[int(x) for x in row[5].split("-")]),
-                    "max_date": datetime.date(*[int(x) for x in row[6].split("-")]),
-                    "rows": int(row[3]),
-                    "bytes": int(row[4])
-                }
-            else:
-                partitions[row[0]][row[1]]["max_date"] = datetime.date(*[int(x) for x in row[6].split("-")])
-                partitions[row[0]][row[1]]["rows"] += int(row[3])
-                partitions[row[0]][row[1]]["bytes"] += int(row[4])
+            if (row[0], row[1]) in exclude_partition:
+                self.print("Partiton %s from table %s having inactive parts. Skipping..." % (row[0], row[1]))
+                continue
+            partitions[row[0]] += [PartitionInfo(
+                table_name=row[0],
+                partition=row[1],
+                rows=int(row[2]),
+                bytes=int(row[3]),
+                min_date=datetime.date(*[int(x) for x in row[4].split("-")]),
+                max_date=datetime.date(*[int(x) for x in row[5].split("-")])
+            )]
         return partitions
 
 
