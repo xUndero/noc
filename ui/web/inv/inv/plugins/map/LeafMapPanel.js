@@ -18,6 +18,8 @@ Ext.define("NOC.inv.inv.plugins.map.LeafMapPanel", {
         var me = this;
         //
         me.infoTemplate = '<b>{0}</b><br><i>{1}</i><br><hr><a id="{2}" href="api/card/view/object/{3}/" target="_blank">Show...</a>';
+        // Layers holder
+        me.layers = [];
         //
         me.centerButton = Ext.create("Ext.button.Button", {
             tooltip: __("Center to object"),
@@ -47,68 +49,88 @@ Ext.define("NOC.inv.inv.plugins.map.LeafMapPanel", {
     //
     preview: function(data) {
         var me = this,
-            urls = [];
+            urls = [
+                "/ui/pkg/leaflet/leaflet.js",
+                "/ui/pkg/leaflet/leaflet.css"
+            ];
         me.currentId = data.id;
-        urls.push("/ui/pkg/leaflet/leaflet.js");
-        urls.push("/ui/pkg/leaflet/leaflet.css");
         new_load_scripts(urls, me, function() {
             me.createMap(data);
         });
     },
     //
-    createLayer: function(query, layer) {
-        var me = this;
+    createLayer: function(cfg) {
+        var me = this,
+            layer;
+        layer = L.geoJSON({
+            "type": "FeatureCollection",
+            "features": []
+        }, {
+            nocCode: cfg.code,
+            nocMinZoom: cfg.min_zoom,
+            nocMaxZoom: cfg.max_zoom,
+            pointToLayer: function(geoJsonPoint, latlng) {
+                return L.circle(latlng, {
+                    color: cfg.fill_color,
+                    fillColor: cfg.fill_color,
+                    fillOpacity: 1,
+                    radius: 28
+                });
+            },
+            style: function(json) {
+                return {
+                    fillColor: cfg.fill_color,
+                    strokeColor: cfg.stroke_color,
+                    weight: cfg.stroke_width
+                };
+            },
+            filter: function(geoJsonFeature) {
+                // Remove invisible layers on zoom
+                var zoom = me.map.getZoom();
+                return (zoom >= cfg.min_zoom) && (zoom <= cfg.max_zoom)
+            }
+        });
+        layer.addTo(me.map);
+        me.mapControl.addOverlay(layer, cfg.name);
+        layer.on("add", me.visibilityHandler);
+        layer.on("remove", me.visibilityHandler);
+        return layer;
+    },
+    //
+    loadLayer: function(layer) {
+        var me = this,
+            zoom = me.map.getZoom();
+        if((zoom < layer.options.nocMinZoom) || (zoom > layer.options.nocMaxZoom)) {
+            // Not visible
+            layer.clearLayers();
+            return;
+        }
         Ext.Ajax.request({
-            url: "/inv/inv/plugin/map/layers/" + query,
+            url: "/inv/inv/plugin/map/layers/" + me.getQuery(layer.options.nocCode),
             method: 'GET',
             scope: me,
-            success: function(response) {
-                var me = this, addLayer,
-                    geoJSON = Ext.decode(response.responseText);
-                if(!Ext.isFunction(layer.hasLayer)) {
-                    addLayer = L.geoJSON(geoJSON, {
-                        nocCode: layer.code,
-                        nocName: layer.name,
-                        pointToLayer: function(geoJsonPoint, latlng) {
-                            return L.circle(latlng, {
-                                color: layer.fill_color,
-                                fillColor: layer.fill_color,
-                                fillOpacity: 1,
-                                radius: 28
-                            });
-                        },
-                        style: function(json) {
-                            return {
-                                fillColor: layer.fill_color,
-                                strokeColor: layer.stroke_color,
-                                weight: layer.stroke_width
-                            };
-                        },
-                        filter: function(geoJsonFeature) {
-                            var zoom = me.map.getZoom();
-                            return (zoom >= layer.min_zoom) && (zoom <= layer.max_zoom)
-                        }
-                    });
-                    if(layer.is_visible) {
-                        addLayer.bindPopup(Ext.bind(me.onFeatureClick, me)).addTo(me.map);
-                    }
-                    me.mapControl.addOverlay(addLayer, layer.name);
-                    addLayer.on("add", me.visibilityHandler);
-                    addLayer.on("remove", me.visibilityHandler);
-                } else { // modify layer
-                    // console.log("modify layer", geoJSON);
-                    layer.clearLayers();
-                    layer.addData(geoJSON);
+            success: function (response) {
+                var data = Ext.decode(response.responseText);
+                layer.clearLayers();
+                if(!Ext.Object.isEmpty(data)) {
+                    layer.addData(data)
                 }
             },
             failure: function() {
                 NOC.error(__('Failed to get layer'));
             }
-        });
+        })
     },
     //
     getQuery: function(layerCode) {
         return Ext.String.format(layerCode + "/?bbox={0},EPSG%3A4326", this.map.getBounds().toBBoxString());
+    },
+    //
+    refresh: function() {
+        var me = this;
+        Ext.each(me.layers, function(layer) {
+            me.loadLayer(layer);
+        });
     },
     //
     createMap: function(data) {
@@ -124,13 +146,15 @@ Ext.define("NOC.inv.inv.plugins.map.LeafMapPanel", {
         me.map = L.map(mapDom).setView(me.center, me.initScale);
         me.map.addLayer(osm);
         me.map.on('contextmenu', Ext.bind(me.onContextMenu, me));
-        me.map.on('moveend', Ext.bind(me.reloadLayers, me));
+        me.map.on('moveend', Ext.bind(me.refresh, me));
         //
         me.mapControl = L.control.layers();
         me.mapControl.addTo(me.map);
-        Ext.each(data.layers, function(layer) {
-            me.createLayer(me.getQuery(layer.code), layer);
+        me.layers = [];
+        Ext.each(data.layers, function(cfg) {
+            me.layers.push(me.createLayer(cfg));
         });
+        me.refresh();
     },
     //
     visibilityHandler: function(e) {
@@ -248,14 +272,5 @@ Ext.define("NOC.inv.inv.plugins.map.LeafMapPanel", {
             },
             positionSRID: "EPSG:4326"
         }).show();
-    },
-    //
-    reloadLayers: function() {
-        var me = this;
-        me.map.eachLayer(function(layer) {
-            if(layer.hasOwnProperty("options") && layer.options.hasOwnProperty("nocCode")) {
-                me.createLayer(me.getQuery(layer.options.nocCode), layer);
-            }
-        });
     }
 });
