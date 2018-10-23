@@ -91,7 +91,9 @@ Ext.define("NOC.inv.inv.plugins.map.LeafMapPanel", {
                 return (zoom >= cfg.min_zoom) && (zoom <= cfg.max_zoom)
             }
         });
-        layer.addTo(me.map);
+        if(cfg.is_visible) {
+            layer.addTo(me.map);
+        }
         me.mapControl.addOverlay(layer, cfg.name);
         layer.on("add", me.visibilityHandler);
         layer.on("remove", me.visibilityHandler);
