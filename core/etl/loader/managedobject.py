@@ -74,14 +74,8 @@ class ManagedObjectLoader(BaseLoader):
             v["tags"] = [x.strip().strip('"') for x in v["tags"].split(",")
                          if x.strip()] if v["tags"] else []
         v["profile"] = Profile.get_by_name(v["profile"])
-        if v["static_client_groups"]:
-            v["static_client_groups"] = [ResourceGroup.get_by_id(v["static_client_groups"])]
-        else:
-            v["static_client_groups"] = []
-        if v["static_service_groups"]:
-            v["static_client_groups"] = [ResourceGroup.get_by_id(v["static_service_groups"])]
-        else:
-            v["static_service_groups"] = []
+        v["static_client_groups"] = [v["static_client_groups"]] if v["static_client_groups"] else []
+        v["static_service_groups"] = [v["static_service_groups"]] if v["static_service_groups"] else []
         return v
 
     def purge(self):
