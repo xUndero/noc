@@ -79,6 +79,7 @@ Ext.define("NOC.inv.inv.plugins.map.LeafMapPanel", {
             },
             style: function(json) {
                 return {
+                    color: cfg.fill_color,
                     fillColor: cfg.fill_color,
                     strokeColor: cfg.stroke_color,
                     weight: cfg.stroke_width
@@ -105,21 +106,23 @@ Ext.define("NOC.inv.inv.plugins.map.LeafMapPanel", {
             layer.clearLayers();
             return;
         }
-        Ext.Ajax.request({
-            url: "/inv/inv/plugin/map/layers/" + me.getQuery(layer.options.nocCode),
-            method: 'GET',
-            scope: me,
-            success: function (response) {
-                var data = Ext.decode(response.responseText);
-                layer.clearLayers();
-                if(!Ext.Object.isEmpty(data)) {
-                    layer.addData(data)
+        if(me.map.hasLayer(layer)) {
+            Ext.Ajax.request({
+                url: "/inv/inv/plugin/map/layers/" + me.getQuery(layer.options.nocCode),
+                method: 'GET',
+                scope: me,
+                success: function(response) {
+                    var data = Ext.decode(response.responseText);
+                    layer.clearLayers();
+                    if(!Ext.Object.isEmpty(data)) {
+                        layer.addData(data)
+                    }
+                },
+                failure: function() {
+                    NOC.error(__('Failed to get layer'));
                 }
-            },
-            failure: function() {
-                NOC.error(__('Failed to get layer'));
-            }
-        })
+            });
+        }
     },
     //
     getQuery: function(layerCode) {
