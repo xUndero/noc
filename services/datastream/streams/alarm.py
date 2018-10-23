@@ -162,9 +162,8 @@ class AlarmDataStream(DataStream):
         }
 
     @classmethod
-    def filter_alarmclass(cls, alarm_class1, *args):
-        ids = [cls.clean_id_bson(a.id) for a in AlarmClass.objects.filter(
-            name__in=[alarm_class1] + [x for x in args])]
+    def filter_alarmclass(cls, *args):
+        ids = [cls.clean_id_bson(AlarmClass.get_by_name(a).id) for a in args if AlarmClass.get_by_name(a)]
         if len(ids) == 1:
             return {
                 "%s.alarmclass" % cls.F_META: ids[0]
