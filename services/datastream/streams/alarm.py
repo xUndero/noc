@@ -163,7 +163,7 @@ class AlarmDataStream(DataStream):
 
     @classmethod
     def filter_alarmclass(cls, *args):
-        ids = [cls.clean_id_bson(AlarmClass.get_by_name(a).id) for a in args if AlarmClass.get_by_name(a)]
+        ids = [str(AlarmClass.get_by_name(a).id) for a in args if AlarmClass.get_by_name(a)]
         if len(ids) == 1:
             return {
                 "%s.alarmclass" % cls.F_META: ids[0]
