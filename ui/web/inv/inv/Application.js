@@ -191,12 +191,7 @@ Ext.define("NOC.inv.inv.Application", {
         me.invPlugins = {};
         me.tabPanel.removeAll();
         Ext.each(plugins, function(p) {
-            // ToDO remove
-            if(p.name === "map") {
-                me.runPlugin(objectId, {name: "map", xtype: "NOC.inv.inv.plugins.map.LeafMapPanel"});
-            } else {
-                me.runPlugin(objectId, p);
-            }
+            me.runPlugin(objectId, p);
         });
         me.setHistoryHash(objectId);
     },
