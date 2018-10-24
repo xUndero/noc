@@ -70,11 +70,11 @@ Ext.define("NOC.inv.inv.plugins.map.MapPanel", {
             nocMinZoom: cfg.min_zoom,
             nocMaxZoom: cfg.max_zoom,
             pointToLayer: function(geoJsonPoint, latlng) {
-                return L.circle(latlng, {
+                return L.circleMarker(latlng, {
                     color: cfg.fill_color,
                     fillColor: cfg.fill_color,
                     fillOpacity: 1,
-                    radius: 28
+                    radius: 5
                 });
             },
             style: function(json) {
