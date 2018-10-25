@@ -145,11 +145,22 @@ class Map(object):
             )
             for d in ObjectConnection._get_collection().find({
                 "layer": layer.id,
-                "line": {
-                    "$geoWithin": {
-                        "$geometry": bbox
+                "$or": [
+                    {
+                        "line": {
+                            "$geoWithin": {
+                                "$geometry": bbox
+                            }
+                        }
+                    },
+                    {
+                        "line": {
+                            "$geoIntersects": {
+                                "$geometry": bbox
+                            }
+                        }
                     }
-                }
+                ]
             }, {
                 "_id": 1,
                 "connection": 1,
