@@ -24,7 +24,7 @@ class ReportDiscoveryIDPoisonApplication(SimpleReport):
             {"$group": {
                 "_id": "$macs",
                 "count": {"$sum": 1}
-                }},
+            }},
             {"$match": {"count": {"$gt": 1}}}
         ])
 
