@@ -81,8 +81,8 @@ class Map(object):
         """
         Extract GeoJSON from bounding box
         """
-        l = Layer.get_by_code(layer)
-        if not l:
+        lr = Layer.get_by_code(layer)
+        if not lr:
             return {}
         bbox = self.get_bbox(x0, y0, x1, y1, srid)
         features = [
@@ -95,7 +95,7 @@ class Map(object):
                 }
             )
             for d in Object._get_collection().find({
-                "layer": l.id,
+                "layer": lr.id,
                 "point": {
                     "$geoWithin": {
                         "$geometry": bbox
@@ -204,5 +204,6 @@ class Map(object):
             return o, distance(point, o.point)
         else:
             return None, None
+
 
 map = Map()
