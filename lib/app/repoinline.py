@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # RepoInline
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2012 The NOC Project
+# Copyright (C) 2007-2018 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -16,22 +16,26 @@ class RepoInline(object):
 
     def contribute_to_class(self, app, name):
         # Get last revision
-        app.add_view("api_%s_get" % name,
+        app.add_view(
+            "api_%s_get" % name,
             self.api_get, method=["GET"],
             url="^(?P<parent>[^/]+)/repo/%s/$" % name,
             access=self.access, api=True)
         # Get list of revisions
-        app.add_view("api_%s_revisions" % name,
+        app.add_view(
+            "api_%s_revisions" % name,
             self.api_revisions, method=["GET"],
             url="^(?P<parent>[^/]+)/repo/%s/revisions/$" % name,
             access=self.access, api=True)
         # Get particular revision
-        app.add_view("api_%s_get_revision" % name,
+        app.add_view(
+            "api_%s_get_revision" % name,
             self.api_get_revision, method=["GET"],
             url="^(?P<parent>[^/]+)/repo/%s/(?P<revision>[0-9a-f]{24})/$" % name,
             access=self.access, api=True)
         # Get diff
-        app.add_view("api_%s_diff" % name,
+        app.add_view(
+            "api_%s_diff" % name,
             self.api_get_diff, method=["GET"],
             url="^(?P<parent>[^/]+)/repo/%s/(?P<rev1>[0-9a-f]{24})/(?P<rev2>[0-9a-f]{24})/$" % name,
             access=self.access, api=True)
