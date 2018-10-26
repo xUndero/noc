@@ -7,6 +7,7 @@
 # ---------------------------------------------------------------------
 
 # Python modules
+from __future__ import absolute_import
 import inspect
 import os
 # NOC modules
@@ -35,7 +36,7 @@ class InvApplication(ExtApplication):
     def __init__(self, *args, **kwargs):
         ExtApplication.__init__(self, *args, **kwargs)
         # Load plugins
-        from plugins.base import InvPlugin
+        from .plugins.base import InvPlugin
         self.plugins = {}
         for f in os.listdir("services/web/apps/inv/inv/plugins/"):
             if (not f.endswith(".py") or
