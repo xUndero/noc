@@ -113,7 +113,7 @@ def is_ipv4(v):
         return False
     try:
         return len([x for x in X if 0 <= int(x) <= 255]) == 4
-    except:
+    except Exception:
         return False
 
 
@@ -164,7 +164,7 @@ def is_ipv6(v):
         return False
     if len(parts) == 8:
         # Replace empty parts with "0"
-        parts = [p if p else "0" for p in parts]
+        parts = [pp if pp else "0" for pp in parts]
     else:
         # Expand ::
         try:
@@ -211,7 +211,7 @@ def is_ipv4_prefix(v):
         return False
     try:
         y = int(x[1])
-    except:
+    except Exception:
         return False
     return 0 <= y <= 32
 
@@ -243,7 +243,7 @@ def is_ipv6_prefix(v):
         return False
     try:
         y = int(x[1])
-    except:
+    except Exception:
         return False
     return 0 <= y <= 128
 
@@ -369,7 +369,7 @@ def is_re(v):
     try:
         re.compile(v)
         return True
-    except:
+    except Exception:
         return False
 
 
@@ -391,8 +391,9 @@ def is_vlan(v):
     try:
         v = int(v)
         return 1 <= v <= 4095
-    except:
+    except Exception:
         return False
+
 
 def is_mac(v):
     """
@@ -428,10 +429,11 @@ def is_mac(v):
     if v is None or len(v) < 12:
         return False
     try:
-        m = MAC(v)
+        MAC(v)
         return True
     except ValueError:
         return False
+
 
 def is_email(v):
     """
@@ -526,6 +528,8 @@ def generic_validator(check, error_message):
 #
 # Validators
 #
+
+
 check_asn = generic_validator(is_asn, "Invalid ASN")
 check_prefix = generic_validator(is_prefix, "Invalid prefix")
 check_ipv4 = generic_validator(is_ipv4, "Invalid IPv4")
