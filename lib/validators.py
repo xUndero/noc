@@ -501,7 +501,7 @@ def is_objectid(v):
     :param v:
     :return:
     """
-    return rx_objectid.match(v) is not None
+    return v and rx_objectid.match(v) is not None
 
 
 def generic_validator(check, error_message):
