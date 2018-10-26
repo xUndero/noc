@@ -1575,6 +1575,7 @@ Ext.define("NOC.sa.managedobject.Application", {
         me.callParent();
         // Change button's visibility
         var disabled = !me.currentRecord;
+        me.configPreviewButton.setDisabled(disabled || !NOC.hasPermission("config"));
         me.consoleButton.setDisabled(disabled || !NOC.hasPermission("console") || !me.currentRecord.get("is_managed"));
         me.scriptsButton.setDisabled(disabled || !NOC.hasPermission("script") || !me.currentRecord.get("is_managed"));
         me.configPreviewButton.setDisabled(disabled);

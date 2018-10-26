@@ -16,7 +16,7 @@ from django.contrib.auth.models import User, Group
 import cachetools
 
 perm_lock = Lock()
-id_lock = Lock
+id_lock = Lock()
 
 
 class Permission(Model):
