@@ -9,7 +9,8 @@ import re
 import uuid
 try:
     from django.forms import ValidationError
-except:  # pragma: no cover
+# pragma: no cover
+except:  # noqa
     pass
 from noc.core.mac import MAC
 
@@ -324,7 +325,7 @@ def is_rd(v):
         a = int(a)
         if a <= 65535:
             # Type 0 RD: <2byte ASN>: <ID>
-            return 0 <= b <= 4294967295L
+            return 0 <= b <= 4294967295
         # Type 2 RD: <4 byte ASN>: <ID>
         return 0 <= b <= 65535
     if is_ipv4(a):
