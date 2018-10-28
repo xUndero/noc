@@ -25,12 +25,27 @@ class Script(BaseScript):
         r = {}
         names = {x: y for y, x in six.iteritems(self.scripts.get_ifindexes())}
         # Get LocalPort Table
-        for v in self.snmp.get_tables([mib["LLDP-MIB::lldpLocPortNum"],
-                                       mib["LLDP-MIB::lldpLocPortIdSubtype"],
-                                       mib["LLDP-MIB::lldpLocPortId"],
-                                       mib["LLDP-MIB::lldpLocPortDesc"]]):
-            r[v[0]] = {"local_interface": names[int(v[3])],
-                       "local_interface_subtype": v[2]}
+        for port_num, port_subtype, port_id, port_descr in self.snmp.get_tables([
+            mib["LLDP-MIB::lldpLocPortIdSubtype"],
+            mib["LLDP-MIB::lldpLocPortId"],
+            mib["LLDP-MIB::lldpLocPortDesc"]]):
+            if port_subtype == 1:
+                # Iface alias
+                iface_name = port_descr
+            elif port_subtype == 3:
+                # Iface MAC address
+                raise NotImplementedError()
+            elif port_subtype == 7 and port_id.isdigit():
+                # Iface local (ifindex)
+                iface_name = names[int(port_id)]
+            else:
+                # Iface local
+                iface_name = port_id
+            r[port_num] = {"local_interface": iface_name,
+                           "local_interface_subtype": port_subtype}
+        if not r:
+            self.logger.warning("Not getting local LLDP port mappings. Check 1.0.8802.1.1.2.1.3.7 table")
+            raise NotImplementedError()
         return r
 
     def execute_snmp(self):
