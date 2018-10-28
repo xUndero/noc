@@ -6,6 +6,8 @@
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
+# Python modules
+import six
 # NOC modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetlldpneighbors import IGetLLDPNeighbors
@@ -19,6 +21,18 @@ class Script(BaseScript):
     cache = True
     interface = IGetLLDPNeighbors
 
+    def get_local_iface(self):
+        r = {}
+        names = {x: y for y, x in six.iteritems(self.scripts.get_ifindexes())}
+        # Get LocalPort Table
+        for v in self.snmp.get_tables([mib["LLDP-MIB::lldpLocPortNum"],
+                                       mib["LLDP-MIB::lldpLocPortIdSubtype"],
+                                       mib["LLDP-MIB::lldpLocPortId"],
+                                       mib["LLDP-MIB::lldpLocPortDesc"]]):
+            r[v[0]] = {"local_interface": names[int(v[3])],
+                       "local_interface_subtype": v[2]}
+        return r
+
     def execute_snmp(self):
         neighb = (
             "remote_chassis_id_subtype", "remote_chassis_id",
@@ -26,16 +40,8 @@ class Script(BaseScript):
             "remote_port_description", "remote_system_name"
         )
         r = []
-        local_ports = {}
+        local_ports = self.get_local_iface()
         if self.has_snmp():
-            # Get LocalPort Table
-            for v in self.snmp.get_tables([mib["LLDP-MIB::lldpLocPortNum"],
-                                           mib["LLDP-MIB::lldpLocPortIdSubtype"],
-                                           mib["LLDP-MIB::lldpLocPortId"],
-                                           mib["LLDP-MIB::lldpLocPortDesc"]]):
-                local_ports[v[0]] = {"local_interface": v[3],
-                                     "local_interface_subtype": v[2]}
-
             for v in self.snmp.get_tables([mib["LLDP-MIB::lldpRemLocalPortNum"],
                                            mib["LLDP-MIB::lldpRemChassisIdSubtype"],
                                            mib["LLDP-MIB::lldpRemChassisId"],
