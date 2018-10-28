@@ -25,10 +25,10 @@ class Script(BaseScript):
         r = {}
         names = {x: y for y, x in six.iteritems(self.scripts.get_ifindexes())}
         # Get LocalPort Table
-        for port_num, port_subtype, port_id, port_descr in self.snmp.get_tables([
-            mib["LLDP-MIB::lldpLocPortIdSubtype"],
-            mib["LLDP-MIB::lldpLocPortId"],
-            mib["LLDP-MIB::lldpLocPortDesc"]]):
+        for port_num, port_subtype, port_id, port_descr in self.snmp.get_tables(
+                [mib["LLDP-MIB::lldpLocPortIdSubtype"],
+                 mib["LLDP-MIB::lldpLocPortId"],
+                 mib["LLDP-MIB::lldpLocPortDesc"]]):
             if port_subtype == 1:
                 # Iface alias
                 iface_name = port_descr
