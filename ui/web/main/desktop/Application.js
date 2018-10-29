@@ -350,7 +350,7 @@ Ext.define("NOC.main.desktop.Application", {
     //
     stopIdleTimer: function() {
         var me = this;
-        if(me.idleTimerId != -1) {
+        if(me.idleTimerId !== -1) {
             clearTimeout(me.idleTimerId);
             me.idleTimerId = -1;
             Ext.getDoc().un({
@@ -362,10 +362,14 @@ Ext.define("NOC.main.desktop.Application", {
     },
     //
     resetIdleTimer: function() {
-        var me = this;
+        var me = this,
+            logout = function() {
+                window.event = undefined;
+                me.onLogout();
+            };
         clearTimeout(me.idleTimerId);
         if(me.idleTimeout) {
-            me.idleTimerId = Ext.Function.defer(me.onLogout, me.idleTimeout, me);
+            me.idleTimerId = Ext.Function.defer(logout, me.idleTimeout, me);
         }
     },
     //
