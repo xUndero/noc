@@ -47,7 +47,6 @@ class Script(BaseScript):
                     "interface": None
                 })
             else:
-                print match.group("interface")
                 r.append({
                     "ip": match.group("ip"),
                     "mac": match.group("mac"),
