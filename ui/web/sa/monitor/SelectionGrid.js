@@ -50,13 +50,6 @@ Ext.define('NOC.sa.monitor.SelectionGrid', {
             renderer: 'onRenderTooltip'
         },
         {
-            dataIndex: 'platform',
-            text: __('Platform'),
-            tooltip: __('SA Profile'),
-            width: 60,
-            renderer: 'onRenderTooltip'
-        },
-        {
             dataIndex: 'b_time_start',
             text: __('Time start'),
             tooltip: __('Time start'),
