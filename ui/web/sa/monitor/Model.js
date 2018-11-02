@@ -28,10 +28,6 @@ Ext.define("NOC.sa.monitor.Model", {
             name: "profile_name",
             type: "string"
         },
-                {
-            name: "platform",
-            type: "string"
-        },
         {
             name: "b_time_start",
             type: "string"
