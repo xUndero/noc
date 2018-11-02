@@ -9,15 +9,19 @@
 import re
 import zlib
 import datetime
+# Third-party modules
+from django.db.models import Q as d_Q
 #  # NOC modules
 from noc.lib.nosql import get_db
 from noc.services.web.apps.sa.objectlist.views import ObjectListApplication
 from noc.lib.dateutils import humanize_distance
 from noc.core.scheduler.scheduler import Scheduler
+from noc.sa.models.managedobject import ManagedObject
 from noc.core.scheduler.job import Job
 from noc.main.models.pool import Pool
 from noc.core.translation import ugettext as _
 from noc.lib.app.modelapplication import ModelApplication
+from noc.sa.models.useraccess import UserAccess
 
 
 class MonitorApplication(ObjectListApplication):
@@ -49,10 +53,23 @@ class MonitorApplication(ObjectListApplication):
         """
         Filter records for lookup
         """
+        if query:
+            self.logger.info("Queryset %s" % query)
+            if self.managed_filter:
+                q = d_Q(is_managed=True)
+            else:
+                q = d_Q()
+            if not request.user.is_superuser:
+                q &= UserAccess.Q(request.user)
+            sq = ManagedObject.get_search_Q(query)
+            if sq:
+                q &= sq
+            else:
+                q &= d_Q(name__contains=query)
+            return self.model.objects.filter(q)
         status = request.POST.get("status")
         if not status:
             status = "R"
-        self.logger.info("Queryset %s" % query)
         res = []
         for p in Pool.objects.filter():
             if p.name == "P0001":

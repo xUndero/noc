@@ -35,7 +35,7 @@ Ext.define('NOC.sa.monitor.Application', {
             xtype: 'monitor.Filter',
             appId: 'sa.monitor',
             reference: 'filterPanel',
-            region: 'west',
+            region: 'east',
             width: 300,
             collapsed: true,
             border: false,
