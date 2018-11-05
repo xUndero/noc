@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------
 // Network Map Panel
 //---------------------------------------------------------------------
-// Copyright (C) 2007-2015 The NOC Project
+// Copyright (C) 2007-2018 The NOC Project
 // See LICENSE for details
 //---------------------------------------------------------------------
 console.debug("Defining NOC.inv.map.MapPanel");
@@ -104,6 +104,7 @@ Ext.define("NOC.inv.map.MapPanel", {
         var me = this;
 
         me.shapeRegistry = NOC.inv.map.ShapeRegistry;
+        me.usedImages = {};
         me.hasStp = false;
         me.objectNodes = {};
         me.objectsList = [];
@@ -354,6 +355,11 @@ Ext.define("NOC.inv.map.MapPanel", {
             dataName = tokens.join('#');
         }
         var name = me.breakText(dataName, {width: data.shape_width * 2});
+        if(!me.usedImages[data.shape]) {
+            var img = me.shapeRegistry.getImage(data.shape);
+            V(me.paper.svg).defs().append(V(img));
+            me.usedImages[data.shape] = true;
+        }
         sclass = me.shapeRegistry.getShape(data.shape);
         node = new sclass({
             id: data.type + ":" + data.id,
@@ -368,7 +374,7 @@ Ext.define("NOC.inv.map.MapPanel", {
                 text: {
                     text: name
                 },
-                image: {
+                use: {
                     width: data.shape_width,
                     height: data.shape_height
                 }
