@@ -8,6 +8,8 @@
 
 # Python modules
 from __future__ import absolute_import
+# Third-party modules
+from mongoengine.errors import DoesNotExist
 # NOC modules
 import datetime
 import operator
@@ -55,7 +57,7 @@ class ObjectCard(BaseCard):
                         "name": c.name
                     })
                 c = c.container.id if c.container else None
-            except Object.DoesNotExist:
+            except DoesNotExist:
                 metrics["error", ("type", "no_such_object")] += 1
                 break
 

@@ -12,6 +12,7 @@ import datetime
 import operator
 # Third-party modules
 from django.db.models import Q
+from mongoengine.errors import DoesNotExist
 # NOC modules
 from .base import BaseCard
 from noc.sa.models.managedobject import ManagedObject
@@ -69,7 +70,7 @@ class ManagedObjectCard(BaseCard):
                                 "name": o.name
                             })
                         c = o.container.id if o.container else None
-                    except Object.DoesNotExist:
+                    except DoesNotExist:
                         metrics["error", ("type", "no_such_object")] += 1
                         break
             return cp
