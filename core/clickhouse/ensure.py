@@ -13,6 +13,7 @@ import logging
 from noc.config import config
 
 logger = logging.getLogger(__name__)
+BIMODELS_PREFIX = os.path.join("bi", "models")
 
 
 def ensure_bi_models(connect=None):
@@ -21,18 +22,25 @@ def ensure_bi_models(connect=None):
     logger.info("Ensuring BI models:")
     models = set()
     # Get models
-    for f in os.listdir("bi/models"):
-        if f.startswith("_") or not f.endswith(".py"):
-            continue
-        mn = f[:-3]
-        model = Model.get_model_class(mn)
-        if model:
-            models.add(model)
+    for path in config.get_customized_paths("bi/models"):
+        for f in os.listdir(path):
+            if f.startswith("_") or not f.endswith(".py"):
+                continue
+            mn = f[:-3]
+
+            b, _ = path.split(BIMODELS_PREFIX)
+            if b:
+                basename = os.path.basename(os.path.dirname(b))
+            else:
+                basename = "noc"
+            model = Model.get_model_class(mn, basename=basename)
+            if model:
+                models.add(model)
     # Ensure fields
     changed = False
     for model in models:
         logger.info("Ensure table %s" % model._meta.db_table)
-        changed |= model.ensure_table(connect=connect)
+        # changed |= model.ensure_table(connect=connect)
     return changed
 
 
@@ -55,6 +63,7 @@ def ensure_all_pm_scopes():
         return
     # Replicated configuration
     ch = connection(read_only=False)
-    for host, port in ch.execute("SELECT host_address, port FROM system.clusters WHERE cluster = %s", args=[config.clickhouse.cluster]):
+    for host, port in ch.execute("SELECT host_address, port FROM system.clusters WHERE cluster = %s",
+                                 args=[config.clickhouse.cluster]):
         c = connection(host=host, port=port, read_only=False)
         ensure_pm_scopes(c)

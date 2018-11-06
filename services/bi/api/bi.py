@@ -23,17 +23,13 @@ from noc.core.service.api import API, APIError, api, executor
 from noc.core.clickhouse.model import Model
 from noc.core.clickhouse.dictionary import Dictionary
 from noc.main.models import User, Group
-from noc.bi.models.reboots import Reboots
-from noc.bi.models.alarms import Alarms
-from noc.bi.models.span import Span
-from noc.bi.models.managedobjects import ManagedObject
-from noc.bi.models.aggregatedinterface import AggregatedInterface
 from noc.pm.models.metricscope import MetricScope
 from noc.pm.models.metrictype import MetricType
 from noc.bi.models.dashboard import Dashboard, DashboardAccess, DAL_ADMIN, DAL_RO
 from noc.sa.interfaces.base import DictListParameter, DictParameter, IntParameter, StringParameter
 from noc.core.perf import metrics
 from noc.core.translation import ugettext as _
+from noc.services.bi.loader import iter_bi_model
 
 # Access items validations
 I_VALID = DictListParameter(attrs={
@@ -58,14 +54,7 @@ class BIAPI(API):
     """
     name = "bi"
 
-    # @todo: Replace with dynamic loading
-    datasources = [
-        Reboots,
-        Alarms,
-        Span,
-        ManagedObject,
-        AggregatedInterface
-    ]
+    datasources = [m for m in iter_bi_model()]
 
     _ds_cache = cachetools.TTLCache(maxsize=1000, ttl=300)
     _model_cache = cachetools.TTLCache(maxsize=1000, ttl=300)

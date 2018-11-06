@@ -188,16 +188,16 @@ class Model(six.with_metaclass(ModelBase)):
         return changed
 
     @classmethod
-    def get_model_class(cls, name):
+    def get_model_class(cls, name, basename="noc"):
         """
         Returns model class referred by name
-        @todo: Process custom/
-        :param name:
+        :param name: model name (lowercase only!)
+        :param basename: noc or noc.custom for custom model
         :return:
         """
         mname = name.split("-")[0]
         try:
-            m = __import__("noc.bi.models.%s" % mname, {}, {}, "*")
+            m = __import__("%s.bi.models.%s" % (basename, mname), {}, {}, "*")
         except ImportError:
             return None
         for a in dir(m):
