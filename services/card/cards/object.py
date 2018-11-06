@@ -43,18 +43,18 @@ class ObjectCard(BaseCard):
             "id": self.object.id,
             "name": self.object.name
         }]
-        c = self.object.container
+        c = self.object.container.id
         while c:
             try:
                 c = Object.get_by_id(c)
                 if not c:
                     break
-                if c.name != "Root":
+                if c.container:
                     path.insert(0, {
                         "id": c.id,
                         "name": c.name
                     })
-                c = c.container
+                c = c.container.id if c.container else None
             except Object.DoesNotExist:
                 metrics["error", ("type", "no_such_object")] += 1
                 break

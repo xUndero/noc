@@ -68,7 +68,7 @@ class ManagedObjectCard(BaseCard):
                                 "id": o.id,
                                 "name": o.name
                             })
-                        c = o.container
+                        c = o.container.id if o.container else None
                     except Object.DoesNotExist:
                         metrics["error", ("type", "no_such_object")] += 1
                         break
