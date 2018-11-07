@@ -22,13 +22,13 @@ def ensure_bi_models(connect=None):
     logger.info("Ensuring BI models:")
     models = set()
     # Get models
-    for path in config.get_customized_paths("bi/models"):
+    for path in config.get_customized_paths(BIMODELS_PREFIX):
         for f in os.listdir(path):
             if f.startswith("_") or not f.endswith(".py"):
                 continue
             mn = f[:-3]
 
-            b, _ = path.split(BIMODELS_PREFIX)
+            b = path.split(BIMODELS_PREFIX)[0]
             if b:
                 basename = os.path.basename(os.path.dirname(b))
             else:
