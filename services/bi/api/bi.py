@@ -21,6 +21,7 @@ import cachetools
 # NOC modules
 from noc.core.service.api import API, APIError, api, executor
 from noc.core.clickhouse.model import Model
+from noc.core.clickhouse.loader import loader
 from noc.core.clickhouse.dictionary import Dictionary
 from noc.main.models import User, Group
 from noc.pm.models.metricscope import MetricScope
@@ -29,7 +30,6 @@ from noc.bi.models.dashboard import Dashboard, DashboardAccess, DAL_ADMIN, DAL_R
 from noc.sa.interfaces.base import DictListParameter, DictParameter, IntParameter, StringParameter
 from noc.core.perf import metrics
 from noc.core.translation import ugettext as _
-from noc.services.bi.loader import iter_bi_model
 
 # Access items validations
 I_VALID = DictListParameter(attrs={
@@ -53,8 +53,6 @@ class BIAPI(API):
     Monitoring API
     """
     name = "bi"
-
-    datasources = [m for m in iter_bi_model()]
 
     _ds_cache = cachetools.TTLCache(maxsize=1000, ttl=300)
     _model_cache = cachetools.TTLCache(maxsize=1000, ttl=300)
@@ -130,7 +128,10 @@ class BIAPI(API):
     @classmethod
     def get_bi_datasources(cls):
         result = []
-        for model in cls.datasources:
+        for mn in loader.iter_models():
+            model = loader.get_model(mn)
+            if not model:
+                continue
             r = {
                 "name": model._meta.db_table,
                 "description": model._meta.description,
@@ -166,20 +167,11 @@ class BIAPI(API):
                              lock=lambda _: model_lock)
     def get_model(cls, name):
         # Static datasource
-        model = Model.get_model_class(name)
+        model = loader.get_model(name)
         if model:
             return model
         # Dynamic datasource
         return Model.wrap_table(name)
-
-    def iter_datasources(self):
-        """
-        @todo: Dynamic loading
-        @todo: Load from custom/
-        :return:
-        """
-        for ds in self.datasources:
-            yield ds
 
     @api
     def list_datasources(self):
@@ -396,7 +388,7 @@ class BIAPI(API):
         if "field_name" not in params:
             metrics["error", ("type", "get_hierarchy_no_field_name")] += 1
             raise APIError("No field name")
-        model = Model.get_model_class(params["datasource"])
+        model = loader.get_model(params["datasource"])
         if not model:
             metrics["error", ("type", "get_hierarchy_invalid_datasource")] += 1
             raise APIError("Invalid datasource")

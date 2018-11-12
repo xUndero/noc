@@ -2,43 +2,30 @@
 # ----------------------------------------------------------------------
 # Ensure ClickHouse database schema
 # ----------------------------------------------------------------------
-# Copyright (C) 2007-2017 The NOC Project
+# Copyright (C) 2007-2018 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
 # Python modules
+from __future__ import absolute_import
 import os
 import logging
 # NOC modules
 from noc.config import config
+from .loader import loader
 
 logger = logging.getLogger(__name__)
 BIMODELS_PREFIX = os.path.join("bi", "models")
 
 
 def ensure_bi_models(connect=None):
-    from noc.core.clickhouse.model import Model
-
     logger.info("Ensuring BI models:")
-    models = set()
-    # Get models
-    for path in config.get_customized_paths(BIMODELS_PREFIX):
-        for f in os.listdir(path):
-            if f.startswith("_") or not f.endswith(".py"):
-                continue
-            mn = f[:-3]
-
-            b = path.split(BIMODELS_PREFIX)[0]
-            if b:
-                basename = os.path.basename(os.path.dirname(b))
-            else:
-                basename = "noc"
-            model = Model.get_model_class(mn, basename=basename)
-            if model:
-                models.add(model)
     # Ensure fields
     changed = False
-    for model in models:
+    for name in loader.iter_models():
+        model = loader.get_model(name)
+        if not model:
+            continue
         logger.info("Ensure table %s" % model._meta.db_table)
         changed |= model.ensure_table(connect=connect)
     return changed
