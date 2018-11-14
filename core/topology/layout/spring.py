@@ -13,14 +13,15 @@ import math
 import networkx as nx
 import numpy as np
 # NOC modules
+from noc.config import config
 from .base import LayoutBase
 
 
 class SpringLayout(LayoutBase):
     # Optimal distance between nodes
-    L = 200
+    L = config.layout.spring_edge_spacing
     # F-R iterations
-    FR_ITERATIONS = 100
+    FR_ITERATIONS = config.layout.spring_iterations
     #
     NODE_SIZE = 48
 
@@ -187,10 +188,13 @@ def _fruchterman_reingold(A, k=None, pos=None, fixed=None, iterations=50,
     # simple cooling scheme.
     # linearly step down by dt on each iteration so last iteration is size dt.
     dt = t / float(iterations + 1)
-    # the inscrutable (but fast) version
-    # this is still O(V^2)
-    # could use multilevel methods to speed this up significantly
-    k3 = k ** 3
+    # Force weights
+    WPF = config.layout.spring_propulsion_force
+    WEF = config.layout.spring_edge_force
+    WBF = config.layout.spring_bubble_force
+    # Weighted coefficients
+    WA = WEF * A
+    k3 = WPF * (k ** 3)
     # Prepare cycles calculations
     cp = []
     for c in cycles:
@@ -199,7 +203,9 @@ def _fruchterman_reingold(A, k=None, pos=None, fixed=None, iterations=50,
         # Indicator array
         iset = set(int(x) for x in c)
         cp += [(R, list(iset), np.array([1.0 if i in iset else 0.0 for i in range(nnodes)]))]
-    #
+    # the inscrutable (but fast) version
+    # this is still O(V^2)
+    # could use multilevel methods to speed this up significantly
     for iteration in range(iterations):
         # Apply bubbling force
         if cycles:
@@ -226,10 +232,10 @@ def _fruchterman_reingold(A, k=None, pos=None, fixed=None, iterations=50,
         # Attraction - square against optimal length difference
         displacement = np.einsum('ijk,ij->ik',
                                  delta,
-                                 k3 / distance ** 3 - A * (distance - k) ** 2)
+                                 k3 / distance ** 3 - WA * (distance - k) ** 2)
         # Apply bubbling force
         if cycles:
-            displacement += bubble_disp
+            displacement += WBF * bubble_disp
         # update positions
         length = np.linalg.norm(displacement, axis=-1)
         length = np.where(length < min_dist, min_dist, length)

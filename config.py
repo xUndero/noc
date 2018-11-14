@@ -294,6 +294,11 @@ class Config(BaseConfig):
         tree_horizontal_step = IntParameter(default=100)
         tree_vertical_step = IntParameter(default=100)
         tree_max_levels = IntParameter(default=4)
+        spring_propulsion_force = FloatParameter(default=1.0)
+        spring_edge_force = FloatParameter(default=1.0)
+        spring_bubble_force = FloatParameter(default=1.0)
+        spring_edge_spacing = IntParameter(default=200)
+        spring_iterations = IntParameter(default=100)
 
     listen = StringParameter(default="auto:0")
 
