@@ -166,7 +166,6 @@ class Script(BaseScript):
                 sp["untagged"] if "untagged" in sp else None,
                 sp["tagged"]
             )
-        print swports
         r = []
         subs = defaultdict(list)
         """
