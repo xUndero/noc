@@ -183,7 +183,7 @@ class Script(BaseScript):
                 port_vlans.update({interface: {
                     "tagged": [],
                     "untagged": '',
-                    }
+                }
                 })
             cmd = self.cli("show interfaces switchport %s" % interface)
             for vlan in parse_table(cmd, allow_wrap=True):
@@ -247,7 +247,7 @@ class Script(BaseScript):
                     "802.1Q Enabled": len(port_vlans.get(name, None)) > 0,
                     "802.1ad Tunnel": vlan_stack_status.get(name, False),
                     "tagged": port_vlans[name]["tagged"],
-                    }
+                }
                 if port_vlans[name]["untagged"]:
                     swp["untagged"] = port_vlans[name]["untagged"]
                 swp["interface"] = name
