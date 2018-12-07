@@ -38,7 +38,7 @@ class Script(BaseScript):
         "1.2016.1": "SRW-2016",
         "1.2048.1": "SRW-2048",
         "3955.6.5048": "SRW-248G",
-        "3955.6.9.208.2": "SPS208-A2"
+        "9.208.2": "SPS208"
     }
 
     def execute_snmp(self, **kwargs):
@@ -55,6 +55,9 @@ class Script(BaseScript):
                                  cached=True)
         serial = self.snmp.get("1.3.6.1.2.1.47.1.1.1.1.11.67108992",
                                cached=True)
+        if platform == '????':
+            self.logger.warning("Unknown linksys platform: %s, Fallback to CLI")
+            raise NotImplementedError("Unknown linksys platform: %s, Fallback to CLI")
         return {
             "vendor": "Linksys",
             "platform": platform,
@@ -72,8 +75,7 @@ class Script(BaseScript):
         match = self.re_search(self.rx_platform, plat)
         platform = match.group("platform").split('.')
         N = len(platform)
-        platform = platform[N - 3] + '.' + platform[N - 2] + '.' \
-            + platform[N - 1]
+        platform = platform[N - 3] + '.' + platform[N - 2] + '.' + platform[N - 1]
         platform = self.platforms.get(platform.split(')')[0], '????')
 
         ver = self.cli("show version", cached=True)
