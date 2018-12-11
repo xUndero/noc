@@ -115,7 +115,8 @@ class Script(BaseScript):
         if mac in self.IGNORED_MACS:
             return True
         # Multicast addresses has 0-bit of first octet set to 1
-        if int(mac.split(":", 1)[0]) & 0x1:
-            return True
+        # Disabled that many false positive case
+        # if int(mac.split(":", 1)[0]) & 0x1:
+        #     return True
         # Address is allowed
         return False
