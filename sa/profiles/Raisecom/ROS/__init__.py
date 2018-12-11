@@ -122,18 +122,31 @@ class Profile(BaseProfile):
         re.MULTILINE)
 
     def get_version(self, script):
-        match_re_list = [
-            self.rx_ver,
-            self.rx_ver_wipv6,
-            self.rx_ver2,
-            self.rx_ver3,
-            self.rx_ver_2015,
-            self.rx_ver_2016,
-            self.rx_ver_2017
-        ]
         c = script.cli("show version", cached=True)
-        rx = self.find_re(match_re_list, c)
-        match = rx.search(c)
+        if "Support ipv6" in c:
+            match = self.rx_ver.search(c)
+        else:
+            match = self.rx_ver_wipv6.search(c)
+        if match:
+            return match.groupdict()
+        else:
+            match = self.rx_ver2.search(c)
+        if match:
+            return match.groupdict()
+        else:
+            match = self.rx_ver_2016.search(c)
+        if match:
+            return match.groupdict()
+        else:
+            match = self.rx_ver_2015.search(c)
+        if match:
+            return match.groupdict()
+        else:
+            match = self.rx_ver_2017.search(c)
+        if match:
+            return match.groupdict()
+        else:
+            match = self.rx_ver3.search(c)
         return match.groupdict()
 
     rx_port = re.compile("^port(|\s+)(?P<port>\d+)")
