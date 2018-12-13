@@ -21,6 +21,7 @@ from noc.core.error import NO_ERROR, ERR_UNKNOWN
 from noc.core.perf import metrics
 from noc.config import config
 from noc.lib.text import ch_escape
+from noc.core.backport.time import perf_counter
 
 forensic_logger = logging.getLogger("noc.core.forensic")
 span_lock = threading.Lock()
@@ -100,6 +101,7 @@ class Span(object):
             tls.span_context = self.span_context
         tls.span_parent = self.span_id
         self.start = time.time()
+        self.ts0 = perf_counter()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -118,7 +120,7 @@ class Span(object):
         if exc_type and not self.error_text and not self.is_ignorable_error(exc_type):
             self.error_code = ERR_UNKNOWN
             self.error_text = str(exc_val).strip("\t").replace("\t", " ").replace("\n", " ")
-        self.duration = int((time.time() - self.start) * US)
+        self.duration = int((perf_counter() - self.ts0) * US)
         lt = time.localtime(self.start)
         row = "\t".join(str(x) for x in [
             time.strftime("%Y-%m-%d", lt),
