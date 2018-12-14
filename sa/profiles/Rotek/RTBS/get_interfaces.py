@@ -47,35 +47,7 @@ class Script(BaseScript):
                 "freq": freq,
                 "channelbandwidth": channelbandwidth
             }
-        """
-        for soid, sname in self.snmp.getnext("1.3.6.1.4.1.32761.3.5.1.2.1.1.4"):
-            sifindex = int(soid.split(".")[-1])
-            ieee_mode = self.snmp.get("1.3.6.1.4.1.32761.3.5.1.2.1.1.2.%s" % sifindex)
-            freq = self.snmp.get("1.3.6.1.4.1.32761.3.5.1.2.1.1.7.%s" % sifindex)
-            channel = self.snmp.get("1.3.6.1.4.1.32761.3.5.1.2.1.1.8.%s" % sifindex)
-            channelbandwidth = self.snmp.get("1.3.6.1.4.1.32761.3.5.1.2.1.1.9.%s" % sifindex)
-            ss[sifindex] = {
-                "ssid": sname,
-                "ieee_mode": ieee_mode,
-                "channel": channel,
-                "freq": freq,
-                "channelbandwidth": channelbandwidth
-            }
 
-        for soid, sname in self.snmp.getnext("1.3.6.1.4.1.41752.3.5.1.2.1.1.4"):
-            sifindex = int(soid.split(".")[-1])
-            ieee_mode = self.snmp.get("1.3.6.1.4.1.41752.3.5.1.2.1.1.2.%s" % sifindex)
-            freq = self.snmp.get("1.3.6.1.4.1.41752.3.5.1.2.1.1.7.%s" % sifindex)
-            channel = self.snmp.get("1.3.6.1.4.1.41752.3.5.1.2.1.1.8.%s" % sifindex)
-            channelbandwidth = self.snmp.get("1.3.6.1.4.1.41752.3.5.1.2.1.1.9.%s" % sifindex)
-            ss[sifindex] = {
-                "ssid": sname,
-                "ieee_mode": ieee_mode,
-                "channel": channel,
-                "freq": freq,
-                "channelbandwidth": channelbandwidth
-            }
-        """
         for v in self.snmp.getnext("1.3.6.1.2.1.2.2.1.1", cached=True):
             ifindex = v[1]
             name = self.snmp.get("1.3.6.1.2.1.2.2.1.2.%s" % str(ifindex))
