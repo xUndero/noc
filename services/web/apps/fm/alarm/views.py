@@ -374,7 +374,7 @@ class AlarmApplication(ExtApplication):
 
     @view(url=r"^(?P<id>[a-z0-9]{24})/acknowledge/", method=["POST"],
           api=True, access="acknowledge")
-    def api_subscribe(self, request, id):
+    def api_acknowledge(self, request, id):
         alarm = get_alarm(id)
         if not alarm:
             return self.response_not_found()
@@ -385,7 +385,7 @@ class AlarmApplication(ExtApplication):
 
     @view(url=r"^(?P<id>[a-z0-9]{24})/unacknowledge/", method=["POST"],
           api=True, access="acknowledge")
-    def api_subscribe(self, request, id):
+    def api_unacknowledge(self, request, id):
         alarm = get_alarm(id)
         if not alarm:
             return self.response_not_found()
