@@ -13,7 +13,7 @@ import datetime
 from django.template import Template, Context
 from mongoengine.document import Document
 from mongoengine.fields import (StringField, DateTimeField, ListField, EmbeddedDocumentField,
-                                IntField, LongField, BooleanField, ObjectIdField, DictField)
+                                IntField, LongField, ObjectIdField, DictField)
 # NOC modules
 from noc.config import config
 import noc.lib.nosql as nosql
