@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # Qtech.QSW.get_switchport
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2017 The NOC Project
+# Copyright (C) 2007-2018 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -221,7 +221,7 @@ class Script(BaseScript):
                 if match:
                     vlans = match.group("vlans")
                     if vlans == "all":
-                        vlans = "1-4096"
+                        vlans = "1-4095"
                     list_vlans = self.expand_rangelist(vlans)
                     port_vlans[interface]["tagged"] = list_vlans
 
@@ -230,7 +230,7 @@ class Script(BaseScript):
                 if match:
                     vlans = match.group("vlans")
                     if vlans == "all":
-                        vlans = "1-4096"
+                        vlans = "1-4095"
                     list_vlans = self.expand_rangelist(vlans)
                     port_vlans[interface]["tagged"] = list_vlans
 
