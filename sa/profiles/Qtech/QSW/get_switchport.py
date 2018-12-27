@@ -18,7 +18,8 @@ class Script(BaseScript):
     interface = IGetSwitchport
 
     rx_interface = re.compile(
-        r"^\s*(?:Fast|Gigabit)?\s*Ethernet\s+(?P<interface>\S+)\s+(?:is|current state:)\s+(enabled|disabled),\s+port\s+link\s+is\s+(up|down)")
+        r"^\s*(?:Fast|Gigabit)?\s*Ethernet\s+(?P<interface>\S+)\s+"
+        r"(?:is|current state:)\s+(enabled|disabled),\s+port\s+link\s+is\s+(up|down)")
     rx_mode = re.compile(r"^\s*Port\s+mode\s*:\s*(?P<mode>\S+)$")
     rx_vlan_t = re.compile(r"^\s*Vlan\s+allowed\s*:\s*(?P<vlans>\S+)$")
     rx_vlan_at = re.compile(r"^\s*Tagged\s+VLAN\s+ID\s*:\s*(?P<vlans>\S+)$")
