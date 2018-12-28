@@ -721,5 +721,5 @@ class AlarmApplication(ExtApplication):
         r = []
         for model, short_type in ((ServiceProfile, _("Service")), (SubscriberProfile, _("Subscribers"))):
             r += [{"id": str(o.id), "type": short_type, "display_order": o.display_order,
-                   "icon": o.glyph, "label": o.name} for o in model.objects.all()]
+                   "icon": o.glyph, "label": o.name} for o in model.objects.all() if getattr(o, "show_in_summary", True)]
         return r
