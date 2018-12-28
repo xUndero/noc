@@ -650,6 +650,7 @@ class AlarmApplication(ExtApplication):
         """
         Return geo address for Managed Objects
         """
+
         def chunkIt(seq, num):
             avg = len(seq) / float(num)
             out = []
@@ -659,6 +660,7 @@ class AlarmApplication(ExtApplication):
                 out.append(seq[int(last):int(last + avg)])
                 last += avg
             return out
+
         location = []
         address = Object.get_by_id(id).get_address_text()
         if address:
@@ -721,5 +723,7 @@ class AlarmApplication(ExtApplication):
         r = []
         for model, short_type in ((ServiceProfile, _("Service")), (SubscriberProfile, _("Subscribers"))):
             r += [{"id": str(o.id), "type": short_type, "display_order": o.display_order,
-                   "icon": o.glyph, "label": o.name} for o in model.objects.all() if getattr(o, "show_in_summary", True)]
+                   "icon": o.glyph, "label": o.name}
+                  for o in model.objects.all()
+                  if getattr(o, "show_in_summary", True)]
         return r
