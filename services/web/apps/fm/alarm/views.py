@@ -220,11 +220,11 @@ class AlarmApplication(ExtApplication):
             if "~" in c_query:
                 l, r = c_query.split("~")
                 if not l:
-                    cond = {"$lte": int(r)}
+                    cond = {"$lt": int(r)}
                 elif not r:
-                    cond = {"$gte": int(l)}
+                    cond = {"$gt": int(l)}
                 else:
-                    cond = {"$lte": int(r), "$gte": int(l)}
+                    cond = {"$lt": int(r), "$gt": int(l)}
                 q["__raw__"] = {field: {"$elemMatch": {"profile": c_id,
                                                        "summary": cond}}}
             elif c_query == "exists":
