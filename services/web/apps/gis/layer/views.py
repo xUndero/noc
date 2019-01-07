@@ -7,7 +7,7 @@
 # ---------------------------------------------------------------------
 
 # NOC modules
-from noc.lib.app.extdocapplication import ExtDocApplication, view
+from noc.lib.app.extdocapplication import ExtDocApplication
 from noc.gis.models.layer import Layer
 from noc.sa.interfaces.base import ColorParameter
 from noc.core.translation import ugettext as _

@@ -23,9 +23,9 @@ class ReportClassificationRules(ReportApplication):
         builtins = Collection.get_builtins("fm.eventclassificationrules")
         r = ["["]
         r += [",\n".join([
-            indent(r.to_json())
-            for r in EventClassificationRule.objects.order_by("name")
-            if r.uuid and unicode(r.uuid) not in builtins
+            indent(rr.to_json())
+            for rr in EventClassificationRule.objects.order_by("name")
+            if rr.uuid and unicode(rr.uuid) not in builtins
         ])]
         r += ["]", ""]
         return "<pre>" + escape("\n".join(r)) + "</pre>"
