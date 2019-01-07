@@ -44,9 +44,7 @@ class ConnectionTypeApplication(ExtDocApplication):
         o = self.get_object_or_404(ConnectionType, id=id)
         r = []
         if "m" in o.genders:
-            ##
-            ## Type m
-            ##
+            # Type m
             rr = []
             if "f" in o.genders:
                 rr += [fn(o, "f", "Same type")]
@@ -60,9 +58,7 @@ class ConnectionTypeApplication(ExtDocApplication):
                     rr += [fn(ct, "f", "Share common groups: %s" % ", ".join(so & set(ct.c_group)))]
             r += [{"gender": "m", "records": rr}]
         if "f" in o.genders:
-            ##
-            ## Type f
-            ##
+            # Type f
             rr = []
             if "m" in o.genders:
                 rr += [fn(o, "m", "Same type")]
@@ -76,9 +72,7 @@ class ConnectionTypeApplication(ExtDocApplication):
                     rr += [fn(ct, "m", "Share common groups: %s" % ", ".join(so & set(ct.c_group)))]
             r += [{"gender": "f", "records": rr}]
         if "s" in o.genders:
-            ##
-            ## Type s
-            ##
+            # Type s
             rr = [fn(o, "s", "Same type")]
             # Superclassess
             for ct in o.get_superclasses():
