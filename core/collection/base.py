@@ -292,7 +292,9 @@ class Collection(object):
                     raise
                 # Try to find conflicting item
                 for k in self.model._meta["json_unique_fields"]:
-                    if isinstance(d[k], list):
+                    if isinstance(k, tuple):
+                        qs = {kk: d[kk] for kk in k}
+                    elif isinstance(d[k], list):
                         qs = {"%s__in" % k: d[k]}
                     else:
                         qs = {k: d[k]}
