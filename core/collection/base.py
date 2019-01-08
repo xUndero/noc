@@ -297,22 +297,22 @@ class Collection(object):
                     qs = {}
                     for fk in k:
                         if isinstance(d[fk], list):
-                            qs["%s__in" % k] = d[fk]
+                            qs["%s__in" % fk] = d[fk]
                         else:
-                            qs[k] = d[fk]
-                        o = self.model.objects.filter(**qs).first()
-                        if o:
-                            self.stdout.write(
-                                "[%s|%s] Changing local uuid %s (%s)\n" % (
-                                    self.name, data["uuid"],
-                                    o.uuid,
-                                    getattr(o, self.name_field)
-                                )
+                            qs[fk] = d[fk]
+                    o = self.model.objects.filter(**qs).first()
+                    if o:
+                        self.stdout.write(
+                            "[%s|%s] Changing local uuid %s (%s)\n" % (
+                                self.name, data["uuid"],
+                                o.uuid,
+                                getattr(o, self.name_field)
                             )
-                            o.uuid = data["uuid"]
-                            o.save()
-                            # Try again
-                            return self.update_item(data)
+                        )
+                        o.uuid = data["uuid"]
+                        o.save()
+                        # Try again
+                        return self.update_item(data)
                 self.stdout.write("Not find object by query: %s\n" % qs)
                 raise
 
