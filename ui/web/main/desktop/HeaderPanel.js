@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------
 // Header
 //---------------------------------------------------------------------
-// Copyright (C) 2007-2011 The NOC Project
+// Copyright (C) 2007-2019 The NOC Project
 // See LICENSE for details
 //---------------------------------------------------------------------
 console.debug("Defining NOC.main.desktop.HeaderPanel");
@@ -12,6 +12,8 @@ Ext.define("NOC.main.desktop.HeaderPanel", {
         type: "hbox",
         align: "middle"
     },
+    pollingInterval: 3600000,
+    localStoreName: "header-last-update",
     border: false,
     bodyStyle: {
         "background-color": NOC.settings.branding_background_color + " !important",
@@ -27,6 +29,23 @@ Ext.define("NOC.main.desktop.HeaderPanel", {
     //
     initComponent: function() {
         var me = this;
+        // Last update menu
+        me.lastUpdateButton = Ext.create("NOC.core.LookupField", {
+            restUrl: "main/remotesystem/brief/",
+            width: 230,
+            pageSize: false,
+            editable: false,
+            hidden: true,
+            displayTpl: '<tpl for=".">{label}: {last_successful_load}</tpl>',
+            tpl: "<ul class='x-list-plain'><tpl for='.'>" +
+                "<li role='option' class='x-boundlist-item'>" +
+                "<span>{label}:</span></span><span style='padding-left: 3px'>{last_successful_load}</span></li>" +
+                "</tpl></ul>",
+            listeners: {
+                scope: me,
+                select: me.onSelectLastUpdate
+            }
+        });
         // User menu
         me.userMenuButton = Ext.create("Ext.button.Button", {
             text: __("Anonymous"),
@@ -68,7 +87,7 @@ Ext.define("NOC.main.desktop.HeaderPanel", {
         Ext.apply(me, {
             items: [
                 // NOC logo
-                Ext.create("Ext.Img",{
+                Ext.create("Ext.Img", {
                     src: NOC.settings.logo_url,
                     style: {
                         width: NOC.settings.logo_width + "px",
@@ -95,6 +114,8 @@ Ext.define("NOC.main.desktop.HeaderPanel", {
                     },
                     border: false
                 },
+                // Last update
+                me.lastUpdateButton,
                 // User menu
                 me.userMenuButton,
                 // Search field
@@ -109,6 +130,11 @@ Ext.define("NOC.main.desktop.HeaderPanel", {
             ]
         });
         me.userProfileItem = me.userMenuButton.menu.getComponent("header_menu_change_password");
+        Ext.TaskManager.start({
+            run: me.pollingTask,
+            interval: me.pollingInterval,
+            scope: me
+        });
         me.callParent();
     },
     // Change displayed username
@@ -126,5 +152,25 @@ Ext.define("NOC.main.desktop.HeaderPanel", {
         var me = this;
         me.userProfileItem.setDisabled(!canChangeCredentials);
         me.userMenuButton.show();
+    },
+    //
+    onSelectLastUpdate: function(self) {
+        window.localStorage.setItem(this.localStoreName, self.getValue());
+    },
+    //
+    pollingTask: function() {
+        var me = this;
+        this.lastUpdateButton.getStore().load({
+            scope: me,
+            callback: function(records, operation, success) {
+                if(success) {
+                    var values = records.filter(function(item) {return item.id === window.localStorage.getItem(me.localStoreName)});
+                    if(values.length > 0) {
+                        me.lastUpdateButton.setValue(values[0]);
+                    }
+                    me.lastUpdateButton.show();
+                }
+            }
+        });
     }
 });
