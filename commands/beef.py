@@ -12,11 +12,11 @@ import argparse
 import datetime
 import os
 import re
-import six
-import yaml
 from collections import defaultdict
 # Third-party modules
+import six
 import ujson
+import yaml
 # NOC modules
 from noc.core.management.base import BaseCommand
 from noc.core.script.beef import Beef
