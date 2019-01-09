@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------
-// fm.reportifacestatus application
+// inv.reportifacestatus application
 //---------------------------------------------------------------------
 // Copyright (C) 2007-2018 The NOC Project
 // See LICENSE for details
