@@ -2,7 +2,7 @@
 # ----------------------------------------------------------------------
 # Beef management
 # ----------------------------------------------------------------------
-# Copyright (C) 2007-2018 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
@@ -24,14 +24,12 @@ from noc.sa.models.managedobjectselector import ManagedObjectSelector
 from noc.dev.models.spec import Spec
 from noc.main.models.extstorage import ExtStorage
 
-DEFAULT_BEEF_PATH_TEMPLATE = u"ad-hoc/{0.profile.name}/{0.pool.name}/{0.address}.beef.json"
-
-DEFAULT_TEST_CASE_TEMPLATE = u"ad-hoc/{0.profile.name}/{0.uuid}/"
-
 
 class Command(BaseCommand):
     CLI_ENCODING = "quopri"
     MIB_ENCODING = "base64"
+    DEFAULT_BEEF_PATH_TEMPLATE = u"ad-hoc/{0.profile.name}/{0.pool.name}/{0.address}.beef.json"
+    DEFAULT_TEST_CASE_TEMPLATE = u"ad-hoc/{0.profile.name}/{0.uuid}/"
 
     def add_arguments(self, parser):
         subparsers = parser.add_subparsers(dest="cmd")
@@ -223,7 +221,7 @@ class Command(BaseCommand):
                 continue
             elif not mo.object_profile.beef_path_template and force:
                 self.print("  Beef path template is not configured. But force set. Generate path")
-                path = DEFAULT_BEEF_PATH_TEMPLATE.format(mo)
+                path = self.DEFAULT_BEEF_PATH_TEMPLATE.format(mo)
             else:
                 path = mo.object_profile.beef_path_template.render_subject(
                     object=mo,
@@ -309,9 +307,8 @@ class Command(BaseCommand):
         if not export_path:
             self.print(yaml.dump(data))
         else:
-            stream = file(export_path, 'w')
-            stream.write(yaml.dump(data))
-            stream.close()
+            with open(export_path, "w") as f:
+                f.write(yaml.dump(data))
 
     def handle_import(self, storage, path, paths=None, *args, **options):
         """
@@ -323,8 +320,8 @@ class Command(BaseCommand):
         """
         for import_path in paths:
             self.print("Importing %s ..." % import_path)
-            stream = file(import_path, 'r')
-            data = yaml.load(stream)
+            with open(import_path, "r") as f:
+                data = yaml.load(f)
             for c in data["cli_fsm"]:
                 c["reply"] = [reply.encode(self.CLI_ENCODING) for reply in c["reply"]]
             for c in data["cli"]:
@@ -334,8 +331,6 @@ class Command(BaseCommand):
             beef = Beef.from_json(data)
             st = self.get_storage(storage, beef=True)
             beef.save(st, unicode(path))
-            stream.close()
-            # print(beef)
 
     def handle_list(self, storage=None, *args, **options):
         r = ["GUID,Profile,Vendor,Platform,Version,SpecUUID,Changed,Path"]
@@ -442,8 +437,6 @@ class Command(BaseCommand):
                     self.handle_build_test_case(test_storage, save_path)
 
     def handle_build_test_case(self, test_storage, test_path, cfg=None, *args, **options):
-        import yaml
-        import ujson
         import bz2
         from noc.core.script.loader import loader
 
@@ -596,16 +589,6 @@ class Command(BaseCommand):
                 if uuids and beef.uuid not in uuids:
                     continue
                 r[(st_fs, beef_path)] = beef
-                #     {
-                #     "uuid": beef.uuid,
-                #     "profile": beef.box.profile,
-                #     "vendor": beef.box.vendor,
-                #     "platform": beef.box.platform,
-                #     "version": beef.box.version,
-                #     "spec": beef.spec,
-                #     "changed": beef.changed,
-                #     "path": path
-                # }
         return r
 
     rx_arg = re.compile(
