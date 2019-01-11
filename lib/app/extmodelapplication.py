@@ -25,7 +25,8 @@ from noc.sa.interfaces.base import (
     FloatParameter, TagsParameter,
     NoneParameter, StringListParameter,
     DictParameter, ListOfParameter,
-    ModelParameter, InterfaceTypeError)
+    ModelParameter, InterfaceTypeError,
+    StringParameter)
 from noc.lib.validators import is_int
 from noc.models import is_document
 from noc.main.models.tag import Tag
@@ -281,6 +282,9 @@ class ExtModelApplication(ExtApplication):
             if self.secret_fields and f.name in self.secret_fields and getattr(o, f.name) and not self.has_secret():
                 # Sensitive fields (limit view only to *secret* permission)
                 r[f.name] = self.SECRET_MASK
+            elif f.name == "bi_id":
+                # Long integer send as string
+                r[f.name] = str(o.bi_id)
             elif f.name == "tags":
                 # Send tags as a list
                 r[f.name] = getattr(o, f.name)
