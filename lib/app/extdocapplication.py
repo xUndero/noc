@@ -27,7 +27,7 @@ from noc.sa.interfaces.base import (
     ModelParameter, ListOfParameter,
     EmbeddedDocumentParameter, DictParameter,
     InterfaceTypeError, DocumentParameter,
-    ObjectIdParameter, StringParameter)
+    ObjectIdParameter)
 from noc.lib.validators import is_int, is_uuid
 from noc.main.models.permission import Permission
 from noc.core.middleware.tls import get_user
@@ -42,8 +42,7 @@ class ExtDocApplication(ExtApplication):
     query_fields = []  # Use all unique fields by default
     query_condition = "startswith"
     int_query_fields = []  # Integer fields for exact match
-    clean_fields = {"id": ObjectIdParameter(),
-                    "bi_id": StringParameter()}  # field name -> Parameter instance
+    clean_fields = {"id": ObjectIdParameter()}  # field name -> Parameter instance
     parent_field = None  # Tree lookup
     parent_model = None
     secret_fields = None  # Set of sensitive fields. "secret" permission is required to show of modify

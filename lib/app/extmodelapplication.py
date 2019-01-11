@@ -25,8 +25,7 @@ from noc.sa.interfaces.base import (
     FloatParameter, TagsParameter,
     NoneParameter, StringListParameter,
     DictParameter, ListOfParameter,
-    ModelParameter, InterfaceTypeError,
-    StringParameter)
+    ModelParameter, InterfaceTypeError)
 from noc.lib.validators import is_int
 from noc.models import is_document
 from noc.main.models.tag import Tag
