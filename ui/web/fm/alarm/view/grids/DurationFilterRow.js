@@ -98,7 +98,7 @@ Ext.define("NOC.fm.alarm.view.grids.DurationFilterRow", {
                     },
                     editable: false,
                     validator: function(value) {
-                        var num = Number(value.replace("min", "").trim());
+                        var num = Number(value.replace(__("min"), "").trim());
                         return !isNaN(num) && num > 0;
                     },
                     listeners: {
