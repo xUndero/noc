@@ -308,6 +308,16 @@ Ext.define("NOC.fm.alarm.view.grids.Sidebar", {
             ]
         },
         {
+            title: __("Display filters"),
+            collapsed: false,
+            reference: "fm-alarm-display-filters",
+            items: [
+                {
+                    xtype: "fm.alarm.display"
+                }
+            ]
+        },
+        {
             title: __("Show recently closed"),
             collapsed: true,
             reference: "fm-alarm-recent-switcher",
@@ -330,16 +340,6 @@ Ext.define("NOC.fm.alarm.view.grids.Sidebar", {
                             {"value": 10800, "text": __("3 h")}
                         ]
                     }
-                }
-            ]
-        },
-        {
-            title: __("Display filters"),
-            collapsed: false,
-            reference: "fm-alarm-display-filters",
-            items: [
-                {
-                    xtype: "fm.alarm.display"
                 }
             ]
         }
