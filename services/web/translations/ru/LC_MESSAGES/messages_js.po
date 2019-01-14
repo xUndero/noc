@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The NOC Project VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-01-14 19:41+0300\n"
-"PO-Revision-Date: 2019-01-14 21:45+0500\n"
+"POT-Creation-Date: 2019-01-14 20:04+0300\n"
+"PO-Revision-Date: 2019-01-14 22:09+0500\n"
 "Last-Translator: Dmitry Volodin <dv@nocproject.org>\n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -781,6 +781,10 @@ msgstr "Не удалось установить первопричину"
 msgid "Failed to post message"
 msgstr "Не удалось послать сообщение"
 
+#: ui/web/fm/alarm/view/grids/DisplayFilter.js:25
+msgid "Service Profiles"
+msgstr "Профили сервиса"
+
 #: ui/web/fm/alarm/view/grids/DisplayFilter.js:31
 msgid "Recent Alarms (time/opacity)"
 msgstr "Последние аварии (время/интервал)"
@@ -868,6 +872,11 @@ msgstr "Затронуто/ТТ"
 msgid "Save screen"
 msgstr "Сохранить экран"
 
+#: ui/web/fm/alarm/view/grids/MultiPanel.js:103
+#: ui/web/sa/getnow/SelectionGrid.js:91
+msgid "Select All"
+msgstr "Выбрать все"
+
 #: ui/web/fm/alarm/view/grids/MultiPanel.js:170
 msgid "SRV"
 msgstr "Сервис"
@@ -885,12 +894,6 @@ msgstr "поиск..."
 #: ui/web/fm/alarm/view/grids/MultiSelector.js:58
 msgid "Remove this item."
 msgstr "Удалить элемент."
-
-#: ui/web/fm/alarm/view/grids/MultiPanel.js:103
-#: ui/web/fm/alarm/view/grids/MultiSelector.js:108
-#: ui/web/sa/getnow/SelectionGrid.js:91
-msgid "Select All"
-msgstr "Выбрать все"
 
 #: ui/web/fm/alarm/view/grids/MultiPanel.js:151
 #: ui/web/fm/alarm/view/grids/MultiSelector.js:170
@@ -984,40 +987,40 @@ msgid "By Date"
 msgstr "По дате"
 
 #: ui/web/fm/alarm/view/grids/Sidebar.js:311
+msgid "Display filters"
+msgstr "Фильтры отображения"
+
+#: ui/web/fm/alarm/view/grids/Sidebar.js:321
 msgid "Show recently closed"
 msgstr "Отобразить последние закрытые"
 
-#: ui/web/fm/alarm/view/grids/Sidebar.js:325
+#: ui/web/fm/alarm/view/grids/Sidebar.js:335
 msgid "don't show"
 msgstr "Не показывать"
 
 #: ui/web/fm/alarm/view/grids/DurationFilterRow.js:28
-#: ui/web/fm/alarm/view/grids/Sidebar.js:326
+#: ui/web/fm/alarm/view/grids/Sidebar.js:336
 msgid "5 min"
 msgstr "5 мин"
 
 #: ui/web/fm/alarm/view/grids/DurationFilterRow.js:30
-#: ui/web/fm/alarm/view/grids/Sidebar.js:327
+#: ui/web/fm/alarm/view/grids/Sidebar.js:337
 msgid "15 min"
 msgstr "15 мин"
 
 #: ui/web/fm/alarm/view/grids/DurationFilterRow.js:31
-#: ui/web/fm/alarm/view/grids/Sidebar.js:328
+#: ui/web/fm/alarm/view/grids/Sidebar.js:338
 msgid "30 min"
 msgstr "30 мин"
 
 #: ui/web/fm/alarm/view/grids/DurationFilterRow.js:32
-#: ui/web/fm/alarm/view/grids/Sidebar.js:329
+#: ui/web/fm/alarm/view/grids/Sidebar.js:339
 msgid "60 min"
 msgstr "60 мин"
 
-#: ui/web/fm/alarm/view/grids/Sidebar.js:330
+#: ui/web/fm/alarm/view/grids/Sidebar.js:340
 msgid "3 h"
 msgstr "3 часа"
-
-#: ui/web/fm/alarm/view/grids/Sidebar.js:337
-msgid "Display filters"
-msgstr "Фильтры отображения"
 
 #: ui/web/fm/alarmclass/Application.js:134
 msgid "Default Severity"
@@ -1457,13 +1460,11 @@ msgstr ""
 msgid "Text"
 msgstr "Текст"
 
-#: ui/web/cm/errortype/Application.js:61 ui/web/fm/alarmclass/Application.js:94
-#: ui/web/fm/eventclass/Application.js:93
+#: ui/web/fm/alarmclass/Application.js:94 ui/web/fm/eventclass/Application.js:93
 msgid "Subject Template"
 msgstr "Шаблон темы"
 
-#: ui/web/cm/errortype/Application.js:67 ui/web/fm/alarmclass/Application.js:101
-#: ui/web/fm/eventclass/Application.js:100
+#: ui/web/fm/alarmclass/Application.js:101 ui/web/fm/eventclass/Application.js:100
 msgid "Body Template"
 msgstr "Шаблон содерж."
 
@@ -2194,8 +2195,7 @@ msgstr "Шаблон карточки"
 msgid "Get JSON"
 msgstr "Получить JSON"
 
-#: ui/web/bi/dashboardlayout/Application.js:43
-#: ui/web/cm/errortype/Application.js:51 ui/web/dev/quiz/Application.js:49
+#: ui/web/bi/dashboardlayout/Application.js:43 ui/web/dev/quiz/Application.js:49
 #: ui/web/dev/spec/Application.js:63 ui/web/fm/alarmclass/Application.js:68
 #: ui/web/fm/alarmseverity/Application.js:58
 #: ui/web/fm/classificationrule/Application.js:84
@@ -2261,8 +2261,7 @@ msgstr ""
 msgid "Target Connection"
 msgstr ""
 
-#: ui/web/bi/dashboardlayout/Application.js:102
-#: ui/web/cm/errortype/Application.js:73 ui/web/dev/quiz/Application.js:139
+#: ui/web/bi/dashboardlayout/Application.js:102 ui/web/dev/quiz/Application.js:139
 #: ui/web/dev/spec/Application.js:159 ui/web/fm/alarmclass/Application.js:430
 #: ui/web/fm/alarmseverity/Application.js:113
 #: ui/web/fm/classificationrule/Application.js:160
@@ -2282,8 +2281,7 @@ msgstr ""
 msgid "JSON"
 msgstr ""
 
-#: ui/web/bi/dashboardlayout/Application.js:104
-#: ui/web/cm/errortype/Application.js:75 ui/web/dev/quiz/Application.js:141
+#: ui/web/bi/dashboardlayout/Application.js:104 ui/web/dev/quiz/Application.js:141
 #: ui/web/dev/spec/Application.js:161 ui/web/fm/alarmseverity/Application.js:115
 #: ui/web/fm/classificationrule/Application.js:162
 #: ui/web/fm/mibpreference/Application.js:69 ui/web/fm/oidalias/Application.js:81
@@ -3020,7 +3018,6 @@ msgstr "Серийный №"
 #: ui/web/bi/dashboardlayout/Application.js:28
 #: ui/web/bi/dashboardlayout/Application.js:38
 #: ui/web/bi/dashboardlayout/Application.js:56
-#: ui/web/cm/errortype/Application.js:30 ui/web/cm/errortype/Application.js:45
 #: ui/web/cm/validationpolicy/Application.js:23
 #: ui/web/cm/validationpolicy/Application.js:44
 #: ui/web/cm/validationrule/Application.js:58
@@ -5138,7 +5135,6 @@ msgstr "Профиль сегмента"
 msgid "Service"
 msgstr "Сервис"
 
-#: ui/web/fm/alarm/view/grids/DisplayFilter.js:25
 #: ui/web/main/remotesystem/Application.js:113
 msgid "Service Profile"
 msgstr "Профиль сервиса"
@@ -5814,7 +5810,6 @@ msgid "Workflow"
 msgstr ""
 
 #: ui/web/bi/dashboardlayout/Application.js:48
-#: ui/web/cm/errortype/Application.js:35 ui/web/cm/errortype/Application.js:56
 #: ui/web/cm/validationpolicy/Application.js:34
 #: ui/web/cm/validationpolicy/Application.js:56
 #: ui/web/cm/validationrule/Application.js:74
@@ -8143,7 +8138,6 @@ msgid "Period start,qty"
 msgstr ""
 
 #: ui/web/fm/alarm/view/grids/MultiPanel.js:113
-#: ui/web/fm/alarm/view/grids/MultiSelector.js:118
 #: ui/web/sa/getnow/SelectionGrid.js:97 ui/web/sa/getnow/SelectionGrid.js:102
 #: ui/web/sa/runcommands/Application.js:104
 msgid "Unselect All"

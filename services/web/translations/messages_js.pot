@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The NOC Project VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-01-14 19:41+0300\n"
+"POT-Creation-Date: 2019-01-14 20:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -785,6 +785,10 @@ msgstr ""
 msgid "Failed to post message"
 msgstr ""
 
+#: ui/web/fm/alarm/view/grids/DisplayFilter.js:25
+msgid "Service Profiles"
+msgstr ""
+
 #: ui/web/fm/alarm/view/grids/DisplayFilter.js:31
 msgid "Recent Alarms (time/opacity)"
 msgstr ""
@@ -872,6 +876,11 @@ msgstr ""
 msgid "Save screen"
 msgstr ""
 
+#: ui/web/fm/alarm/view/grids/MultiPanel.js:103
+#: ui/web/sa/getnow/SelectionGrid.js:91
+msgid "Select All"
+msgstr ""
+
 #: ui/web/fm/alarm/view/grids/MultiPanel.js:170
 msgid "SRV"
 msgstr ""
@@ -888,12 +897,6 @@ msgstr ""
 #: ui/web/fm/alarm/view/grids/MultiPanel.js:54
 #: ui/web/fm/alarm/view/grids/MultiSelector.js:58
 msgid "Remove this item."
-msgstr ""
-
-#: ui/web/fm/alarm/view/grids/MultiPanel.js:103
-#: ui/web/fm/alarm/view/grids/MultiSelector.js:108
-#: ui/web/sa/getnow/SelectionGrid.js:91
-msgid "Select All"
 msgstr ""
 
 #: ui/web/fm/alarm/view/grids/MultiPanel.js:151
@@ -990,39 +993,39 @@ msgid "By Date"
 msgstr ""
 
 #: ui/web/fm/alarm/view/grids/Sidebar.js:311
+msgid "Display filters"
+msgstr ""
+
+#: ui/web/fm/alarm/view/grids/Sidebar.js:321
 msgid "Show recently closed"
 msgstr ""
 
-#: ui/web/fm/alarm/view/grids/Sidebar.js:325
+#: ui/web/fm/alarm/view/grids/Sidebar.js:335
 msgid "don't show"
 msgstr ""
 
 #: ui/web/fm/alarm/view/grids/DurationFilterRow.js:28
-#: ui/web/fm/alarm/view/grids/Sidebar.js:326
+#: ui/web/fm/alarm/view/grids/Sidebar.js:336
 msgid "5 min"
 msgstr ""
 
 #: ui/web/fm/alarm/view/grids/DurationFilterRow.js:30
-#: ui/web/fm/alarm/view/grids/Sidebar.js:327
+#: ui/web/fm/alarm/view/grids/Sidebar.js:337
 msgid "15 min"
 msgstr ""
 
 #: ui/web/fm/alarm/view/grids/DurationFilterRow.js:31
-#: ui/web/fm/alarm/view/grids/Sidebar.js:328
+#: ui/web/fm/alarm/view/grids/Sidebar.js:338
 msgid "30 min"
 msgstr ""
 
 #: ui/web/fm/alarm/view/grids/DurationFilterRow.js:32
-#: ui/web/fm/alarm/view/grids/Sidebar.js:329
+#: ui/web/fm/alarm/view/grids/Sidebar.js:339
 msgid "60 min"
 msgstr ""
 
-#: ui/web/fm/alarm/view/grids/Sidebar.js:330
+#: ui/web/fm/alarm/view/grids/Sidebar.js:340
 msgid "3 h"
-msgstr ""
-
-#: ui/web/fm/alarm/view/grids/Sidebar.js:337
-msgid "Display filters"
 msgstr ""
 
 #: ui/web/fm/alarmclass/Application.js:134
@@ -1465,12 +1468,11 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: ui/web/cm/errortype/Application.js:61 ui/web/fm/alarmclass/Application.js:94
+#: ui/web/fm/alarmclass/Application.js:94
 #: ui/web/fm/eventclass/Application.js:93
 msgid "Subject Template"
 msgstr ""
 
-#: ui/web/cm/errortype/Application.js:67
 #: ui/web/fm/alarmclass/Application.js:101
 #: ui/web/fm/eventclass/Application.js:100
 msgid "Body Template"
@@ -2221,8 +2223,8 @@ msgid "Get JSON"
 msgstr ""
 
 #: ui/web/bi/dashboardlayout/Application.js:43
-#: ui/web/cm/errortype/Application.js:51 ui/web/dev/quiz/Application.js:49
-#: ui/web/dev/spec/Application.js:63 ui/web/fm/alarmclass/Application.js:68
+#: ui/web/dev/quiz/Application.js:49 ui/web/dev/spec/Application.js:63
+#: ui/web/fm/alarmclass/Application.js:68
 #: ui/web/fm/alarmseverity/Application.js:58
 #: ui/web/fm/classificationrule/Application.js:84
 #: ui/web/fm/eventclass/Application.js:67
@@ -2291,8 +2293,8 @@ msgid "Target Connection"
 msgstr ""
 
 #: ui/web/bi/dashboardlayout/Application.js:102
-#: ui/web/cm/errortype/Application.js:73 ui/web/dev/quiz/Application.js:139
-#: ui/web/dev/spec/Application.js:159 ui/web/fm/alarmclass/Application.js:430
+#: ui/web/dev/quiz/Application.js:139 ui/web/dev/spec/Application.js:159
+#: ui/web/fm/alarmclass/Application.js:430
 #: ui/web/fm/alarmseverity/Application.js:113
 #: ui/web/fm/classificationrule/Application.js:160
 #: ui/web/fm/event/EventPanel.js:228 ui/web/fm/eventclass/Application.js:362
@@ -2315,8 +2317,7 @@ msgid "JSON"
 msgstr ""
 
 #: ui/web/bi/dashboardlayout/Application.js:104
-#: ui/web/cm/errortype/Application.js:75 ui/web/dev/quiz/Application.js:141
-#: ui/web/dev/spec/Application.js:161
+#: ui/web/dev/quiz/Application.js:141 ui/web/dev/spec/Application.js:161
 #: ui/web/fm/alarmseverity/Application.js:115
 #: ui/web/fm/classificationrule/Application.js:162
 #: ui/web/fm/mibpreference/Application.js:69
@@ -3062,7 +3063,6 @@ msgstr ""
 #: ui/web/bi/dashboardlayout/Application.js:28
 #: ui/web/bi/dashboardlayout/Application.js:38
 #: ui/web/bi/dashboardlayout/Application.js:56
-#: ui/web/cm/errortype/Application.js:30 ui/web/cm/errortype/Application.js:45
 #: ui/web/cm/validationpolicy/Application.js:23
 #: ui/web/cm/validationpolicy/Application.js:44
 #: ui/web/cm/validationrule/Application.js:58
@@ -5229,7 +5229,6 @@ msgstr ""
 msgid "Service"
 msgstr ""
 
-#: ui/web/fm/alarm/view/grids/DisplayFilter.js:25
 #: ui/web/main/remotesystem/Application.js:113
 msgid "Service Profile"
 msgstr ""
@@ -5921,7 +5920,6 @@ msgid "Workflow"
 msgstr ""
 
 #: ui/web/bi/dashboardlayout/Application.js:48
-#: ui/web/cm/errortype/Application.js:35 ui/web/cm/errortype/Application.js:56
 #: ui/web/cm/validationpolicy/Application.js:34
 #: ui/web/cm/validationpolicy/Application.js:56
 #: ui/web/cm/validationrule/Application.js:74
@@ -8285,7 +8283,6 @@ msgid "Period start,qty"
 msgstr ""
 
 #: ui/web/fm/alarm/view/grids/MultiPanel.js:113
-#: ui/web/fm/alarm/view/grids/MultiSelector.js:118
 #: ui/web/sa/getnow/SelectionGrid.js:97 ui/web/sa/getnow/SelectionGrid.js:102
 #: ui/web/sa/runcommands/Application.js:104
 msgid "Unselect All"
