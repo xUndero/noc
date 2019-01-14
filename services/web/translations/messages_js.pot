@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The NOC Project VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-01-13 11:20+0300\n"
+"POT-Creation-Date: 2019-01-14 19:41+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -793,6 +793,18 @@ msgstr ""
 msgid "Switch Off"
 msgstr ""
 
+#: ui/web/fm/alarm/view/grids/DurationFilterRow.js:27
+msgid "1 min"
+msgstr ""
+
+#: ui/web/fm/alarm/view/grids/DurationFilterRow.js:29
+msgid "10 min"
+msgstr ""
+
+#: ui/web/fm/alarm/view/grids/DurationFilterRow.js:33
+msgid "1440 min"
+msgstr ""
+
 #: ui/web/fm/alarm/view/grids/Grid.js:30
 msgid "Show map"
 msgstr ""
@@ -876,6 +888,12 @@ msgstr ""
 #: ui/web/fm/alarm/view/grids/MultiPanel.js:54
 #: ui/web/fm/alarm/view/grids/MultiSelector.js:58
 msgid "Remove this item."
+msgstr ""
+
+#: ui/web/fm/alarm/view/grids/MultiPanel.js:103
+#: ui/web/fm/alarm/view/grids/MultiSelector.js:108
+#: ui/web/sa/getnow/SelectionGrid.js:91
+msgid "Select All"
 msgstr ""
 
 #: ui/web/fm/alarm/view/grids/MultiPanel.js:151
@@ -972,15 +990,39 @@ msgid "By Date"
 msgstr ""
 
 #: ui/web/fm/alarm/view/grids/Sidebar.js:311
-msgid "Display filters"
-msgstr ""
-
-#: ui/web/fm/alarm/view/grids/Sidebar.js:321
 msgid "Show recently closed"
 msgstr ""
 
-#: ui/web/fm/alarm/view/grids/Sidebar.js:335
+#: ui/web/fm/alarm/view/grids/Sidebar.js:325
 msgid "don't show"
+msgstr ""
+
+#: ui/web/fm/alarm/view/grids/DurationFilterRow.js:28
+#: ui/web/fm/alarm/view/grids/Sidebar.js:326
+msgid "5 min"
+msgstr ""
+
+#: ui/web/fm/alarm/view/grids/DurationFilterRow.js:30
+#: ui/web/fm/alarm/view/grids/Sidebar.js:327
+msgid "15 min"
+msgstr ""
+
+#: ui/web/fm/alarm/view/grids/DurationFilterRow.js:31
+#: ui/web/fm/alarm/view/grids/Sidebar.js:328
+msgid "30 min"
+msgstr ""
+
+#: ui/web/fm/alarm/view/grids/DurationFilterRow.js:32
+#: ui/web/fm/alarm/view/grids/Sidebar.js:329
+msgid "60 min"
+msgstr ""
+
+#: ui/web/fm/alarm/view/grids/Sidebar.js:330
+msgid "3 h"
+msgstr ""
+
+#: ui/web/fm/alarm/view/grids/Sidebar.js:337
+msgid "Display filters"
 msgstr ""
 
 #: ui/web/fm/alarmclass/Application.js:134
@@ -6499,10 +6541,6 @@ msgstr ""
 msgid "Reload data"
 msgstr ""
 
-#: ui/web/sa/getnow/SelectionGrid.js:91
-msgid "Select All"
-msgstr ""
-
 #: ui/web/sa/getnow/SelectionGrid.js:93
 msgid "Select all records from buffer (screen)"
 msgstr ""
@@ -8246,6 +8284,8 @@ msgstr ""
 msgid "Period start,qty"
 msgstr ""
 
+#: ui/web/fm/alarm/view/grids/MultiPanel.js:113
+#: ui/web/fm/alarm/view/grids/MultiSelector.js:118
 #: ui/web/sa/getnow/SelectionGrid.js:97 ui/web/sa/getnow/SelectionGrid.js:102
 #: ui/web/sa/runcommands/Application.js:104
 msgid "Unselect All"

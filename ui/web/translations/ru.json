@@ -7,13 +7,45 @@
         "Language-Team": "ru <LL@li.org>",
         "Last-Translator": "Dmitry Volodin <dv@nocproject.org>",
         "MIME-Version": "1.0",
-        "PO-Revision-Date": "2019-01-13 16:56+0500",
-        "POT-Creation-Date": "2019-01-13 11:20+0300",
+        "PO-Revision-Date": "2019-01-14 21:45+0500",
+        "POT-Creation-Date": "2019-01-14 19:41+0300",
         "Plural-Forms": "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);",
         "Project-Id-Version": "The NOC Project VERSION",
         "Report-Msgid-Bugs-To": "EMAIL@ADDRESS",
         "X-Generator": "Poedit 2.2"
     },
+    "1 min": [
+        null,
+        "1 мин"
+    ],
+    "10 min": [
+        null,
+        "10 мин"
+    ],
+    "1440 min": [
+        null,
+        "1440 мин"
+    ],
+    "15 min": [
+        null,
+        "15 мин"
+    ],
+    "3 h": [
+        null,
+        "3 часа"
+    ],
+    "30 min": [
+        null,
+        "30 мин"
+    ],
+    "5 min": [
+        null,
+        "5 мин"
+    ],
+    "60 min": [
+        null,
+        "60 мин"
+    ],
     "API": [
         null,
         "Имя API"
@@ -474,6 +506,10 @@
         null,
         "Ветка"
     ],
+    "Build Letter": [
+        null,
+        "Литера"
+    ],
     "Building": [
         null,
         "Здание"
@@ -861,6 +897,10 @@
     "Closed": [
         null,
         "Закрыт"
+    ],
+    "Cloud Inspector": [
+        null,
+        "Свойства \"облака\""
     ],
     "Code": [
         null,
@@ -1329,6 +1369,10 @@
     "Display Order": [
         null,
         "Приоритет отображения"
+    ],
+    "Display filters": [
+        null,
+        "Фильтры отображения"
     ],
     "Disposition": [
         null,
@@ -2013,6 +2057,10 @@
     "Filtering List": [
         null,
         "Список для фильтрации"
+    ],
+    "Filters": [
+        null,
+        "Фильтры"
     ],
     "Firmware": [
         null,
@@ -2980,7 +3028,7 @@
     ],
     "Num Letter": [
         null,
-        "Буква номера"
+        "Номер литеры"
     ],
     "Num2": [
         null,
@@ -4284,7 +4332,7 @@
     ],
     "Switch Off": [
         null,
-        "Переключить"
+        "Отключить"
     ],
     "Switch to breadcrumb view": [
         null,
@@ -4801,6 +4849,10 @@
     "Volume": [
         null,
         "Громкость"
+    ],
+    "Wait": [
+        null,
+        "Только"
     ],
     "Wait TT": [
         null,
