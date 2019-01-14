@@ -88,12 +88,15 @@ class Script(BaseScript):
                 for i in ss.items():
                     if int(i[0]) == ifindex:
                         a = self.cli("show interface %s ssid-broadcast" % name)
-                        sb = a.split(":")[1].strip()
-                        if sb == "on":
-                            ssid_broadcast = "enable"
+                        if len(a.strip()) != 0:
+                            sb = a.split(":")[1].strip()
+                            if sb == "on":
+                                ssid_broadcast = "enable"
+                            else:
+                                ssid_broadcast = "disable"
+                                oper_status = False  # Do not touch !!!
                         else:
-                            ssid_broadcast = "disable"
-                            oper_status = False  # Do not touch !!!
+                            ssid_broadcast = "None"
                         vname = "%s.%s" % (name, i[1]["ssid"])
                         iface = {
                             "type": iftype,
