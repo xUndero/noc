@@ -308,16 +308,6 @@ Ext.define("NOC.fm.alarm.view.grids.Sidebar", {
             ]
         },
         {
-            title: __("Display filters"),
-            collapsed: false,
-            reference: "fm-alarm-display-filters",
-            items: [
-                {
-                    xtype: "fm.alarm.display"
-                }
-            ]
-        },
-        {
             title: __("Show recently closed"),
             collapsed: true,
             reference: "fm-alarm-recent-switcher",
@@ -333,13 +323,23 @@ Ext.define("NOC.fm.alarm.view.grids.Sidebar", {
                         fields: ["value", "text"],
                         data: [
                             {"value": 0, "text": __("don't show")},
-                            {"value": 300, "text": "5 min"},
-                            {"value": 900, "text": "15 min"},
-                            {"value": 1800, "text": "30 min"},
-                            {"value": 3600, "text": "60 min"},
-                            {"value": 10800, "text": "3 h"}
+                            {"value": 300, "text": __("5 min")},
+                            {"value": 900, "text": __("15 min")},
+                            {"value": 1800, "text": __("30 min")},
+                            {"value": 3600, "text": __("60 min")},
+                            {"value": 10800, "text": __("3 h")}
                         ]
                     }
+                }
+            ]
+        },
+        {
+            title: __("Display filters"),
+            collapsed: false,
+            reference: "fm-alarm-display-filters",
+            items: [
+                {
+                    xtype: "fm.alarm.display"
                 }
             ]
         }
@@ -354,7 +354,7 @@ Ext.define("NOC.fm.alarm.view.grids.Sidebar", {
         this.enableBubble("fmAlarmResetFilter");
         Ext.each(this.query("[xtype=datefield]"), addListeter, this);
     },
-    onBeforePickerShow: function(picker){
+    onBeforePickerShow: function(picker) {
         picker.setPosition(picker.getRefOwner().getPosition());
     }
 });
