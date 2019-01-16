@@ -19,18 +19,29 @@ Ext.define("NOC.fm.reportalarmdetail.Application", {
         xtype: "report.control",
         url: "/fm/reportalarmdetail",
         controls: [
+            // {
+            //     name: "source",
+            //     xtype: "segmentedbutton",
+            //     allowBlank: false,
+            //     width: 300,
+            //     items: [
+            //         {text: __("Active Alarms"), value: 'active', pressed: true},
+            //         {text: __("Archived Alarms"), value: 'archive'},
+            //         {text: __("Both"), value: 'both'}
+            //     ]
+            // },
             {
-                name: "alarms_source",
+                name: "source",
                 xtype: "radiogroup",
                 columns: 3,
                 vertical: false,
                 fieldLabel: __("Alarms source"),
                 allowBlank: false,
-                width: 300,
+                width: 500,
                 items: [
-                    {boxLabel: 'Active Alarms', name: 'rb', inputValue: 'active', checked: true},
-                    {boxLabel: 'Archived Alarms', name: 'rb', inputValue: 'archive'},
-                    {boxLabel: 'Both', name: 'rb', inputValue: 'both'}]
+                    {boxLabel: __("Active Alarms"), inputValue: 'active', checked: true},
+                    {boxLabel: __("Archived Alarms"), inputValue: 'archive'},
+                    {boxLabel: __("Both"), inputValue: 'both'}]
             },
             {
                 name: "from_date",
@@ -39,7 +50,7 @@ Ext.define("NOC.fm.reportalarmdetail.Application", {
                 fieldLabel: __("From"),
                 allowBlank: false,
                 format: "d.m.Y",
-                width: 150
+                submitFormat: "d.m.Y"
             },
             {
                 name: "to_date",
@@ -48,7 +59,7 @@ Ext.define("NOC.fm.reportalarmdetail.Application", {
                 fieldLabel: __("To"),
                 allowBlank: false,
                 format: "d.m.Y",
-                width: 150
+                submitFormat: "d.m.Y"
             },
             {
                 name: "segment",
@@ -66,7 +77,6 @@ Ext.define("NOC.fm.reportalarmdetail.Application", {
                 listWidth: 1,
                 listAlign: 'left',
                 labelAlign: "left",
-                labelWidth: 100,
                 width: 500,
                 allowBlank: true
             },
@@ -77,7 +87,6 @@ Ext.define("NOC.fm.reportalarmdetail.Application", {
                 listWidth: 1,
                 listAlign: 'left',
                 labelAlign: "left",
-                labelWidth: 100,
                 width: 500,
                 allowBlank: true
             },
@@ -88,7 +97,6 @@ Ext.define("NOC.fm.reportalarmdetail.Application", {
                 listWidth: 1,
                 listAlign: 'left',
                 labelAlign: "left",
-                labelWidth: 100,
                 width: 500,
                 allowBlank: true
             },

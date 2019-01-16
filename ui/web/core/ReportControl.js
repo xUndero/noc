@@ -24,6 +24,7 @@ Ext.define("NOC.core.ReportControl", {
         me.columnsGrid = Ext.create("Ext.grid.Panel", {
             store: me.columnsStore,
             scrollable: true,
+            maxHeight: 300,
             columns: [
                 {
                     text: __("Active"),
@@ -110,7 +111,15 @@ Ext.define("NOC.core.ReportControl", {
             columns = [],
             setParam = function(control) {
                 if(control.hasOwnProperty("name")) {
-                    var val = this.down("[name=" + control.name + "]").getValue();
+                    var field = this.down("[name=" + control.name + "]"), val;
+                    if(Ext.isFunction(field.getSubmitValue)) { // datefield
+                        val = field.getSubmitValue();
+                    } else {
+                        val = field.getValue();
+                        if(Ext.isObject(val) && val.hasOwnProperty(control.name)) { // radiobutton
+                            val = val[control.name];
+                        }
+                    }
                     if(val) {
                         url.push("&" + control.name + "=" + val);
                     }
