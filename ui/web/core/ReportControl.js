@@ -8,6 +8,7 @@ console.debug("Defining NOC.core.ReportControl");
 
 Ext.define("NOC.core.ReportControl", {
     extend: "Ext.panel.Panel",
+    alias: "widget.report.control",
 
     initComponent: function() {
         var me = this;

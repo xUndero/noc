@@ -19,7 +19,8 @@ Ext.define("NOC.inv.reportifacestatus.Application", {
         var me = this;
 
         Ext.apply(me, {
-            items: Ext.create("NOC.core.ReportControl", {
+            items: {
+                xtype: "report.control",
                 url: "/inv/reportifacestatus",
                 controls: [
                     {
@@ -83,7 +84,7 @@ Ext.define("NOC.inv.reportifacestatus.Application", {
                     ["object_port_speed", __("Port speed"), true],
                     ["object_port_duplex", __("Port duplex"), true]
                 ]
-            })
+            }
         });
         me.callParent();
     }

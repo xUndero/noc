@@ -19,7 +19,8 @@ Ext.define("NOC.inv.reportlinkdetail.Application", {
         var me = this;
 
         Ext.apply(me, {
-            items: Ext.create("NOC.core.ReportControl", {
+            items: {
+                xtype: "report.control",
                 url: "/inv/reportlinkdetail",
                 controls: [
                     {
@@ -63,7 +64,7 @@ Ext.define("NOC.inv.reportlinkdetail.Application", {
                     ["link_proto", __("Link Proto"), true],
                     ["last_seen", __("Link Last Seen"), false]
                 ]
-            })
+            }
         });
         me.callParent();
     }

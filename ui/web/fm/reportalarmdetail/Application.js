@@ -19,7 +19,8 @@ Ext.define("NOC.fm.reportalarmdetail.Application", {
         var me = this;
 
         Ext.apply(me, {
-            items: Ext.create("NOC.core.ReportControl", {
+            items: {
+                xtype: "report.control",
                 url: "/fm/reportalarmdetail",
                 controls: [
                     {
@@ -165,7 +166,7 @@ Ext.define("NOC.fm.reportalarmdetail.Application", {
                     ["segment_5", __("Segment (Level 6)"), false],
                     ["segment_6", __("Segment (Level 7)"), false]
                 ]
-            })
+            }
         });
         me.callParent();
     }

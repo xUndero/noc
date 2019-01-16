@@ -19,7 +19,8 @@ Ext.define("NOC.sa.reportobjectdetail.Application", {
         var me = this;
 
         Ext.apply(me, {
-            items: Ext.create("NOC.core.ReportControl", {
+            items: {
+                xtype: "report.control",
                 url: "/sa/reportobjectdetail",
                 controls: [
                     {
@@ -79,7 +80,7 @@ Ext.define("NOC.sa.reportobjectdetail.Application", {
                     ["sorted_tags", __("Sorted Tags"), false],
                     ["discovery_problem", __("Discovery Problem"), false]
                 ]
-            })
+            }
         });
         me.callParent();
     }
