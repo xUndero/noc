@@ -14,7 +14,7 @@ from noc.lib.text import parse_table
 
 
 class Script(BaseScript):
-    name = "HP.Procurve.get_inventory"
+    name = "HP.ProCurve.get_inventory"
     interface = IGetInventory
 
     rx_chassis = re.compile(
