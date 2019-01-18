@@ -11,9 +11,11 @@ from __future__ import print_function
 import argparse
 from datetime import datetime, timedelta
 from collections import defaultdict
+import math
 import csv
 import time
 import sys
+# Third-perty modules
 from pymongo import UpdateOne
 # NOC modules
 from noc.core.management.base import BaseCommand
@@ -77,19 +79,19 @@ class Command(BaseCommand):
         get_parser.add_argument("--id",
                                 help="Job name in scheduler")
         subparsers.add_parser("set")
-        calculate = subparsers.add_parser("calculate")
-        calculate.add_argument("--device-count",
-                               type=int,
-                               default=0,
-                               help="Device count")
-        calculate.add_argument("--box-interval",
-                               type=int,
-                               default=65400,
-                               help="Box discovery interval (in seconds)")
-        calculate.add_argument("--periodic-interval",
-                               type=int,
-                               default=300,
-                               help="Periodic discovery interval (in seconds)")
+        estimate = subparsers.add_parser("estimate")
+        estimate.add_argument("--device-count",
+                              type=int,
+                              default=0,
+                              help="Device count")
+        estimate.add_argument("--box-interval",
+                              type=int,
+                              default=65400,
+                              help="Box discovery interval (in seconds)")
+        estimate.add_argument("--periodic-interval",
+                              type=int,
+                              default=300,
+                              help="Periodic discovery interval (in seconds)")
         # Parse Job Field
         reschedule = subparsers.add_parser("reschedule",
                                            help="Shift Jobs to interval")
@@ -246,7 +248,7 @@ class Command(BaseCommand):
             ]) if c["_id"]}
         return r
 
-    def handle_calculate(self, device_count=None, box_interval=65400, periodic_interval=300, *args, **options):
+    def handle_estimate(self, device_count=None, box_interval=65400, periodic_interval=300, *args, **options):
         """
         Calculate Resource needed job
         :param device_count: Count active device
@@ -274,8 +276,8 @@ class Command(BaseCommand):
                 continue
             job_count = (task_count[pool]["box_task_per_seconds"] * job_avg[pool].get("box", 0) +
                          task_count[pool]["periodic_task_per_seconds"] * job_avg[pool].get("periodic", 0))
-            self.print("Pool name", "Threads needed")
-            self.print(pool.name, job_count)
+            self.print("%20s %s" % ("Pool", "Threads est."))
+            self.print("%40s %d" % (pool.name, math.ceil(job_count)))
 
 
 if __name__ == "__main__":
