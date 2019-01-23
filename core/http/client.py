@@ -16,6 +16,7 @@ import logging
 import zlib
 import time
 import struct
+import ujson
 # Third-party modules
 import tornado.gen
 import tornado.ioloop
@@ -254,8 +255,12 @@ def fetch(url, method="GET",
                     raise tornado.gen.Return((ERR_TIMEOUT, {}, "Timed out while sending request to proxy"))
         # Process request
         body = body or ""
+        content_type = None
         if isinstance(body, unicode):
             body = body.encode("utf-8")
+        elif not isinstance(body, six.string_types):
+            body = ujson.dumps(body)
+            content_type = "text/json"
         h = {
             "Host": str(u.netloc),
             "Connection": "close",
@@ -293,7 +298,7 @@ def fetch(url, method="GET",
                 )
         if method in REQUIRE_LENGTH_METHODS:
             h["Content-Length"] = str(len(body))
-            h["Content-Type"] = "application/binary"
+            h["Content-Type"] = content_type or "application/binary"
         if user and password:
             # Include basic auth header
             h["Authorization"] = "Basic %s" % (

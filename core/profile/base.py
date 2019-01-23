@@ -193,6 +193,8 @@ class BaseProfile(six.with_metaclass(BaseProfileMetaclass, object)):
     snmp_ifstatus_get_timeout = 2
     # Allow CLI sessions by default
     enable_cli_session = True
+    # Use http session (disable by default)
+    enable_http_session = False
     # True - Send multiline command at once
     # False - Send multiline command line by line
     batch_send_multiline = True
