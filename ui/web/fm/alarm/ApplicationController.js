@@ -41,8 +41,13 @@ Ext.define("NOC.fm.alarm.ApplicationController", {
             view.setHistoryHash(prefix.split("/")[1]);
             this.openForm();
         } else {
-            if(queryStr) {
+            if(queryStr && queryStr !== "__format=ext&status=A&maintenance=hide&collapse=1&cleared_after=0") {
                 this.deserialize(queryStr, viewModel);
+            } else {  // restore from local store
+                var filter = window.localStorage.getItem("fm-alarm-filter");
+                if(filter) {
+                    this.deserialize(filter, viewModel);
+                }
             }
         }
         this.activeBinding = viewModel.bind({
@@ -109,7 +114,6 @@ Ext.define("NOC.fm.alarm.ApplicationController", {
         this.updateHash(false);
     },
     onChangeDisplayFilters: function(data) {
-        // console.log("Display Filters changed :", data);
         if(data.hasOwnProperty("hasProfiles") && !Ext.Object.isEmpty(data.hasProfiles)) {
             window.localStorage.setItem("fm-alarm-has-profiles", JSON.stringify(data.hasProfiles));
         } else {
@@ -274,12 +278,13 @@ Ext.define("NOC.fm.alarm.ApplicationController", {
     },
     updateHash: function(force) {
         if(force || !this.urlHasId(Ext.History.getHash())) {
-            this.setHash(Ext.merge(
+            var queryStr = Ext.merge(
                 this.serialize(this.getViewModel().get("activeFilter")),
                 {
                     cleared_after: this.getViewModel().get("recentFilter.cleared_after")
-                })
-            );
+                });
+            this.setHash(queryStr);
+            window.localStorage.setItem("fm-alarm-filter", Ext.Object.toQueryString(queryStr, true));
         }
     },
     setUrl: function(id) {
