@@ -53,8 +53,8 @@ class HTTP(object):
                 return r
         user, password = None, None
         if use_basic:
-            user = self.script.credential.get("user")
-            password = self.script.credential.get("password")
+            user = self.script.credentials.get("user")
+            password = self.script.credentials.get("password")
         code, headers, result = fetch_sync(
             self.get_url(path),
             headers=headers,
@@ -98,8 +98,8 @@ class HTTP(object):
                 return r
         user, password = None, None
         if use_basic:
-            user = self.script.credential.get("user")
-            password = self.script.credential.get("password")
+            user = self.script.credentials.get("user")
+            password = self.script.credentials.get("password")
         code, headers, result = fetch_sync(
             self.get_url(path),
             method="POST",
