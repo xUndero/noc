@@ -37,10 +37,9 @@ Ext.define("NOC.fm.alarm.ApplicationController", {
             viewModel = view.getViewModel(),
             prefix = url[0], queryStr = url.length ? url[1] : undefined;
         this.initFilter(viewModel);
-        if(prefix && !Ext.String.startsWith(prefix, "fm.alarm")) {
-            var appId = this.getView().noc.app_id,
-                alarmId = this.getView().noc.cmd.args[0];
-            if(appId === "fm.alarm" && this.getView().getCmd() === "history" && this.urlHasId("/" + alarmId)) {
+        if(this.getView().getCmd() === "history" && this.getView().noc.hasOwnProperty("cmd")) {
+            var alarmId = this.getView().noc.cmd.args[0];
+            if(this.urlHasId("fm.alarm/" + alarmId)) {
                 view.setHistoryHash(alarmId);
                 this.openForm();
             }
@@ -308,6 +307,9 @@ Ext.define("NOC.fm.alarm.ApplicationController", {
                 return /^[0-9a-f]{24}$/i.test(str);
             };
         if(tokens.length === 1) {
+            return false;
+        }
+        if(tokens[0] !== "fm.alarm") {
             return false;
         }
         return !!(tokens.length > 1 && isId(tokens[1]));
