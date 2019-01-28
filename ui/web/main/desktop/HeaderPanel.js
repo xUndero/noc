@@ -32,10 +32,12 @@ Ext.define("NOC.main.desktop.HeaderPanel", {
         // Last update menu
         me.lastUpdateButton = Ext.create("NOC.core.LookupField", {
             restUrl: "main/remotesystem/brief/",
-            width: 230,
             pageSize: false,
             editable: false,
             hidden: true,
+            emptyText: __("Remote sync time"),
+            margin: "0 5",
+            hideTrigger: true,
             displayTpl: '<tpl for=".">{label}: {last_successful_load}</tpl>',
             tpl: "<ul class='x-list-plain'><tpl for='.'>" +
                 "<li role='option' class='x-boundlist-item'>" +
