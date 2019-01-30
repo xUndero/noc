@@ -33,6 +33,7 @@ Ext.define("NOC.main.desktop.HeaderPanel", {
         me.lastUpdateButton = Ext.create("NOC.core.LookupField", {
             restUrl: "main/remotesystem/brief/",
             pageSize: false,
+            typeAhead: false,
             editable: false,
             hidden: true,
             emptyText: __("Remote sync time"),
