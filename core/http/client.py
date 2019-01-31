@@ -231,7 +231,7 @@ def fetch(url, method="GET",
                     raise tornado.gen.Return((ERR_PARSE_ERROR, {}, "Parse error"))
             code = parser.get_status_code()
             logger.debug("Proxy response: %s", code)
-            if not (200 <= code <= 299):
+            if not 200 <= code <= 299:
                 raise tornado.gen.Return((code, parser.get_headers(), "Proxy error: %s" % code))
             # Switch to TLS when necessary
             if use_tls:
