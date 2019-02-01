@@ -17,7 +17,7 @@ from noc.core.translation import ugettext as _
 
 
 class Syslog(Model):
-    class Meta:
+    class Meta(object):
         db_table = "syslog"
         engine = MergeTree("date", ("managed_object", "ts"))
 
