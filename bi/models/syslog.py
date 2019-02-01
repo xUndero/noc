@@ -26,7 +26,7 @@ class Syslog(Model):
     managed_object = ReferenceField(ManagedObject, description=_("Object Name"))
     facility = UInt8Field(description=_("Facility"))
     severity = UInt8Field(description=_("Severity"))
-    message = StringField()
+    message = StringField(description=_("Syslog Message"))
 
     @classmethod
     def transform_query(cls, query, user):
