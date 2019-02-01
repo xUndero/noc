@@ -20,7 +20,7 @@ class RemoteSystemApplication(ExtDocApplication):
     menu = [_("Setup"), _("Remote Systems")]
     model = RemoteSystem
 
-    @view(method=["GET"], url="^brief/$", access="brief", api=True)
+    @view(method=["GET"], url="^brief_lookup/$", access="lookup", api=True)
     def api_brief(self, request):
         return [{"id": str(rs.id), "label": rs.name,
                  "last_successful_load": rs.last_successful_load.strftime("%Y-%m-%d %H:%M") if

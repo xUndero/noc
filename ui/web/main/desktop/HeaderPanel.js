@@ -31,7 +31,7 @@ Ext.define("NOC.main.desktop.HeaderPanel", {
         var me = this;
         // Last update menu
         me.lastUpdateButton = Ext.create("NOC.core.LookupField", {
-            restUrl: "main/remotesystem/brief/",
+            restUrl: "main/remotesystem/brief_lookup/",
             pageSize: false,
             typeAhead: false,
             editable: false,
