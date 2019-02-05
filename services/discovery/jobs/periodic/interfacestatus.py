@@ -37,7 +37,7 @@ class InterfaceStatusCheck(DiscoveryCheck):
 
     def handler(self):
         def get_interface(name):
-            if_name = interfaces.get(name)
+            if_name = interfaces.get(name)["interface"]
             if if_name:
                 return if_name
             for iname in self.object.get_profile().get_interface_names(i["interface"]):
@@ -57,7 +57,7 @@ class InterfaceStatusCheck(DiscoveryCheck):
             "Checking interface statuses"
         )
         interfaces = dict(
-            (i.name, i)
+            (i.name, {"interface": i, "ifindex": i["ifindex"]})
             for i in Interface.objects.filter(
                 managed_object=self.object.id,
                 type="physical",
@@ -68,7 +68,10 @@ class InterfaceStatusCheck(DiscoveryCheck):
         if not interfaces:
             self.logger.info("No interfaces with status discovery enabled. Skipping")
             return
-        result = self.object.scripts.get_interface_status_ex()
+        ifaces = list({"interface": key, "ifindex": v["ifindex"]} for key, v in interfaces.iteritems())
+
+        result = self.object.scripts.get_interface_status_ex(interfaces=ifaces)
+
         collection = Interface._get_collection()
         bulk = []
         for i in result:
