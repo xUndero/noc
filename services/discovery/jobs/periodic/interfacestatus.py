@@ -68,10 +68,12 @@ class InterfaceStatusCheck(DiscoveryCheck):
         if not interfaces:
             self.logger.info("No interfaces with status discovery enabled. Skipping")
             return
-        ifaces = list({"interface": key, "ifindex": v["ifindex"]} for key, v in interfaces.iteritems())
-
-        result = self.object.scripts.get_interface_status_ex(interfaces=ifaces)
-
+        ifaces = list({"interface": key, "ifindex": v["ifindex"]}
+                      for key, v in interfaces.iteritems() if v["ifindex"] is not None)
+        if ifaces:
+            result = self.object.scripts.get_interface_status_ex(interfaces=ifaces)
+        else:
+            result = self.object.scripts.get_interface_status_ex()
         collection = Interface._get_collection()
         bulk = []
         for i in result:
