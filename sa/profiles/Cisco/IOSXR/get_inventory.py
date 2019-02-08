@@ -86,8 +86,11 @@ class Script(BaseScript):
             number = name.split()[1].split("/")[1][2]
             return "FAN", number, pid
         elif "Power Module" in descr or "Power Supply" in descr:
-            # number = 0/PM0/SP
-            number = name.split()[1].split("/")[1][2:]
+            numbers = name.split()[1].split("/")
+            if len(numbers) == 4:  # 0/PS0/M1/SP
+                number = numbers[2][2:]
+            else:  # 0/PM0/SP
+                number = numbers[1][2:]
             return "PWR", number, pid
         elif name.startswith("chassis"):
             return "CHASSIS", None, pid
