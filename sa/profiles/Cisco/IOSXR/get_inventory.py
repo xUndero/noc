@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # Cisco.IOSXR.get_inventory
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2013 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -19,11 +19,11 @@ class Script(BaseScript):
 
     rx_item = re.compile(
         r"^NAME: \"(?P<name>[^\"]+)\",? DESCR: \"(?P<descr>[^\"]+)\"\n"
-        r"PID:\s+(?P<pid>\S*)\s*,?\s+VID:\s+(?P<vid>\S*)\s*,? SN: (?P<serial>\S+)",
+        r"PID:\s+(?P<pid>\S*?)\s*,?\s+VID:\s+(?P<vid>\S*?)\s*,? SN: (?P<serial>\S+)",
         re.MULTILINE | re.DOTALL | re.IGNORECASE
     )
 
-    rx_trans = re.compile("((?:100|1000|10G)BASE\S+)")
+    rx_trans = re.compile(r"((?:100|1000|10G)BASE\S+)")
 
     def execute(self):
         objects = []
@@ -67,8 +67,7 @@ class Script(BaseScript):
             return "MOD", number, pid
         elif (
             (
-                "LC" in descr or "Line Card" in descr or "Linecard" in descr or
-                "Interface Module" in descr
+                "LC" in descr or "Line Card" in descr or "Linecard" in descr or "Interface Module" in descr
             ) and "module mau" not in name and not name.startswith("chassis")
         ):
             number = name.split()[1].split("/")[1]
@@ -86,8 +85,7 @@ class Script(BaseScript):
         elif "FAN" in pid:
             number = name.split()[1].split("/")[1][2]
             return "FAN", number, pid
-        elif ("Power Module" in descr or
-              "Power Supply" in descr):
+        elif "Power Module" in descr or "Power Supply" in descr:
             # number = 0/PM0/SP
             number = name.split()[1].split("/")[1][2:]
             return "PWR", number, pid
