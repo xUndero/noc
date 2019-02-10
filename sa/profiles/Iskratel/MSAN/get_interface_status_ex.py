@@ -59,7 +59,7 @@ class Script(BaseScript):
             for ifindex, name in self.get_iftable("IF-MIB::ifName").iteritems():
                 try:
                     v = self.profile.convert_interface_name(name)
-                except InterfaceTypeError, why:
+                except InterfaceTypeError as why:
                     self.logger.debug(
                         "Ignoring unknown interface %s: %s",
                         name, why
