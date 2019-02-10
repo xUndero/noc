@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # Generic.get_interface_status_ex
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2018 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -104,8 +104,8 @@ class Script(BaseScript):
                 if self.is_high_speed(ri, s):
                     highspeed.add(ifindex)
                 elif s:
-                    ri["in_speed"] = s // 1000
-                    ri["out_speed"] = s // 1000
+                    r[ifindex]["in_speed"] = s // 1000
+                    r[ifindex]["out_speed"] = s // 1000
         # Refer to ifHighSpeed if necessary
         if highspeed:
             for ifindex, s in self.get_iftable("IF-MIB::ifHighSpeed", if_index):
