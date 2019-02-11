@@ -34,8 +34,15 @@ class DigestAuthMiddeware(BaseMiddleware):
         self.request_id = 1
 
     def get_digest(self, uri, realm):
+        """
+
+        :param uri:
+        :param realm:
+        :param method: GET/POST
+        :return:
+        """
         A1 = '%s:%s:%s' % (self.user, realm, self.password)
-        A2 = '%s:%s' % ("GET", uri)
+        A2 = '%s:%s' % (self.method, uri)
 
         HA1 = hashlib.md5(A1).hexdigest()
         HA2 = hashlib.md5(A2).hexdigest()
