@@ -43,7 +43,7 @@ class InterfaceStatusCheck(DiscoveryCheck):
             for iname in self.object.get_profile().get_interface_names(i["interface"]):
                 if_name = interfaces.get(iname)
                 if if_name:
-                    return if_name
+                    return if_name["interface"]
             return None
 
         has_interfaces = "DB | Interfaces" in self.object.get_caps()
