@@ -121,6 +121,6 @@ class DigestAuthMiddeware(BaseMiddleware):
         )
         if "WWW-Authenticate" in resp_headers and resp_headers["WWW-Authenticate"].startswith("Digest"):
             items = urllib2.parse_http_list(resp_headers["WWW-Authenticate"][7:])
-            digetst_response = urllib2.parse_keqv_list(items)
-            headers["Authorization"] = self.build_digest_header(url, self.method, digetst_response)
+            digest_response = urllib2.parse_keqv_list(items)
+            headers["Authorization"] = self.build_digest_header(url, self.method, digest_response)
         return url, body, headers
