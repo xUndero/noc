@@ -38,7 +38,7 @@ class Script(BaseScript):
         r"^\s*\-+\s*\n"
         r"(?P<tagged>.+)"
         r"^\s*\-+\s*\n"
-        r"^\s*Total:\s+\d+\s+Native VLAN:\s+(?P<untagged>\d+|-)\s*\n",
+        r"^\s*Total:\s+\d+\s+(Native VLAN:\s+(?P<untagged>\d+|-)\s*)?\n",
         re.MULTILINE | re.DOTALL)
     rx_vlan2 = re.compile(
         r"^\s+\d+\s+eth\s+(?:down|up)\s+(?P<ifname>\d+/\s*\d+/\s*\d+)\s+"
@@ -185,7 +185,7 @@ class Script(BaseScript):
                     if m:
                         vlans_found = True
                         tagged = []
-                        if m.group("untagged") != "-":
+                        if m.group("untagged") and m.group("untagged") != "-":
                             untagged = int(m.group("untagged"))
                             iface["subinterfaces"][0]["untagged_vlan"] = untagged
                         else:
@@ -295,7 +295,7 @@ class Script(BaseScript):
                             m = self.rx_vlan.search(c)
                             if m:
                                 tagged = []
-                                if m.group("untagged") != "-":
+                                if m.group("untagged") and m.group("untagged") != "-":
                                     untagged = int(m.group("untagged"))
                                     iface["subinterfaces"][0]["untagged_vlan"] = untagged
                                 else:
