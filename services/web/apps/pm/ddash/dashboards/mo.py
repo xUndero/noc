@@ -68,7 +68,8 @@ class MODashboard(BaseDashboard):
                     lags += [{
                         "name": iface.name,
                         "ports": [i.name for i in iface.lag_members],
-                        "descr": self.str_cleanup(iface.description, remove_letters=TITLE_BAD_CHARS) or "No description",
+                        "descr": self.str_cleanup(iface.description,
+                                                  remove_letters=TITLE_BAD_CHARS) or "No description",
                         "status": ["status : ".join([i.name, i.status]) for i in iface.lag_members]
                     }]
                     continue
