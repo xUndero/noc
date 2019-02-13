@@ -20,7 +20,6 @@ console.debug("Patching ExtJS " + Ext.getVersion().version);
 //
 Ext.override(Ext.grid.column.Column, {
     initConfig: function(config) {
-        console.log(config);
         if (!Ext.String.endsWith(config.xtype, "column") &&
             config.formatter === undefined
             && !config.renderer) {
