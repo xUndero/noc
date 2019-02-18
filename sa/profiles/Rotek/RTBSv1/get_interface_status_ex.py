@@ -143,6 +143,7 @@ class Script(BaseScript):
 
     def execute_snmp(self, interfaces=None, **kwargs):
         r = self.get_data()
-        r2 = self.get_data2()
-        r += r2
+        if not self.is_platform_BS5:
+            r2 = self.get_data2()
+            r += r2
         return r
