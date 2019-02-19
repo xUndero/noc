@@ -49,6 +49,8 @@ def parse_table(s, allow_wrap=False, allow_extend=False, max_width=0, footer=Non
     if footer is not None:
         rx_footer = re.compile(footer)
     for line in s.splitlines():
+        # Replace tabs with spaces with step 8
+        line = line.expandtabs()
         if not line.strip() and footer is None:
             columns = []
             continue
@@ -78,8 +80,6 @@ def parse_table(s, allow_wrap=False, allow_extend=False, max_width=0, footer=Non
                 last = columns.pop()
                 columns.append((last[0], max_width))
         elif columns:  # Fetch cells
-            # Replace tabs with spaces with step 8
-            line = ''.join('%-8s' % item for item in line.split('\t'))
             if allow_extend:
                 # Find which spaces between column not empty
                 s = [column_spaces.index((f, t)) for f, t in column_spaces
