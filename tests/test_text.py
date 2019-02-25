@@ -53,26 +53,26 @@ from noc.lib.text import parse_table
     (
         "Vlan    Mac Address       Type       Ports\n"
         "----    -----------       ----       -----\n"
-        "All\t8479.73d9.969c\t  STATIC     CPU\n"
-        "611\t0050.561c.3efc\t  DYNAMIC    g0/2\n"
-        "611\t0050.561c.3cdc\t  DYNAMIC    g0/2\n"
-        "611\t0050.561c.4010\t  DYNAMIC    g0/2\n"
-        "1\tb8a3.86c0.1fd8\t  DYNAMIC    g0/1\n"
-        "1\t001f.cefb.0bb1\t  DYNAMIC    g0/2\n"
-        "611\t0050.561c.6bfc\t  DYNAMIC    g0/2\n"
-        "611\t0050.561c.42d8\t  DYNAMIC    g0/2\n"
-        "611\t0050.561c.6bf8\t  DYNAMIC    g0/2\n",
+        "All\t1111.2222.3333\t  STATIC     CPU\n"
+        "611\t1234.2222.2222\t  DYNAMIC    g0/2\n"
+        "611\t2345.3333.3333\t  DYNAMIC    g0/2\n"
+        "611\t3456.4444.4444\t  DYNAMIC    g0/2\n"
+        "1\t4567.5555.5555\t  DYNAMIC    g0/1\n"
+        "1\t5678.6666.6666\t  DYNAMIC    g0/2\n"
+        "611\t0050.7777.7777\t  DYNAMIC    g0/2\n"
+        "611\t0050.8888.8888\t  DYNAMIC    g0/2\n"
+        "611\t0050.9999.9999\t  DYNAMIC    g0/2\n",
         {"allow_extend": True, "n_row_delim": ","},
         [
-            ["All", "8479.73d9.969c", "STATIC", "CPU"],
-            ["611", "0050.561c.3efc", "DYNAMIC", "g0/2"],
-            ["611", "0050.561c.3cdc", "DYNAMIC", "g0/2"],
-            ["611", "0050.561c.4010", "DYNAMIC", "g0/2"],
-            ["1", "b8a3.86c0.1fd8", "DYNAMIC", "g0/1"],
-            ["1", "001f.cefb.0bb1", "DYNAMIC", "g0/2"],
-            ["611", "0050.561c.6bfc", "DYNAMIC", "g0/2"],
-            ["611", "0050.561c.42d8", "DYNAMIC", "g0/2"],
-            ["611", "0050.561c.6bf8", "DYNAMIC", "g0/2"]
+            ["All", "1111.2222.3333", "STATIC", "CPU"],
+            ["611", "1234.2222.2222", "DYNAMIC", "g0/2"],
+            ["611", "2345.3333.3333", "DYNAMIC", "g0/2"],
+            ["611", "3456.4444.4444", "DYNAMIC", "g0/2"],
+            ["1", "4567.5555.5555", "DYNAMIC", "g0/1"],
+            ["1", "5678.6666.6666", "DYNAMIC", "g0/2"],
+            ["611", "0050.7777.7777", "DYNAMIC", "g0/2"],
+            ["611", "0050.8888.8888", "DYNAMIC", "g0/2"],
+            ["611", "0050.9999.9999", "DYNAMIC", "g0/2"]
         ]
     )
 ])
