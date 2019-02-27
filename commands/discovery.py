@@ -65,7 +65,7 @@ class Command(BaseCommand):
             "nri_service",
             "metrics",
         ],
-        "periodic": ["uptime", "interfacestatus", "mac", "metrics", "cpestatus"],
+        "periodic": ["uptime", "interfacestatus", "mac", "metrics", "cpestatus", "alarms"],
         "segment": ["mac"],
     }
 
