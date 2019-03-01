@@ -51,6 +51,42 @@ from noc.lib.text import parse_table
         ]
     ),
     (
+        """Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
+
+        M - not in use, minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+
+Number of channel-groups in use: 7
+Number of aggregators:           7
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+11     Po11(SD)        LACP      Gi1/20(D)   Gi1/21(D)
+12     Po12(SD)        LACP      Gi2/16(D)
+13     Po13(SU)        LACP      Te3/2(P)
+14     Po14(SU)        LACP      Te3/4(P)    Te4/4(P)
+15     Po15(SU)        LACP      Gi2/6(P)    Gi2/14(P)
+16     Po16(SU)        LACP      Te3/3(P)    Te4/3(P)
+17     Po17(SU)        LACP      Gi2/3(P)    Gi2/19(P)   Gi2/20(P)
+                                 Gi2/22(P)
+""",
+        {"allow_wrap": True, "max_width": 120},
+        [['11', 'Po11(SD)', 'LACP', 'Gi1/20(D)   Gi1/21(D)'],
+         ['12', 'Po12(SD)', 'LACP', 'Gi2/16(D)'],
+         ['13', 'Po13(SU)', 'LACP', 'Te3/2(P)'],
+         ['14', 'Po14(SU)', 'LACP', 'Te3/4(P)    Te4/4(P)'],
+         ['15', 'Po15(SU)', 'LACP', 'Gi2/6(P)    Gi2/14(P)'],
+         ['16', 'Po16(SU)', 'LACP', 'Te3/3(P)    Te4/3(P)'],
+         ['17', 'Po17(SU)', 'LACP', 'Gi2/3(P)    Gi2/19(P)   Gi2/20(P)Gi2/22(P)']]
+    ),
+    (
         'Vlan    Mac Address       Type       Ports\n'
         '----    -----------       ----       -----\n'
         'All\t1111.2222.3333\t  STATIC     CPU\n'
@@ -96,7 +132,52 @@ from noc.lib.text import parse_table
             ["611", "1111.2223.38e4", "DYNAMIC", "g0/2"],
             ["611", "1111.222a.2e1e", "DYNAMIC", "g0/2"]
         ]
-    )
+    ),
+    ("""ifIndex     ifDescr                                Interface
+----------  -------------------------------------  ---------
+         1  Switch  1 - Port  0                    GigabitEthernet 1/1
+         2  Switch  1 - Port  1                    GigabitEthernet 1/2
+         3  Switch  1 - Port  2                    GigabitEthernet 1/3
+         4  Switch  1 - Port  3                    GigabitEthernet 1/4
+         5  Switch  1 - Port  4                    GigabitEthernet 1/5
+         6  Switch  1 - Port  5                    GigabitEthernet 1/6
+         7  Switch  1 - Port  6                    GigabitEthernet 1/7
+         8  Switch  1 - Port  7                    GigabitEthernet 1/8
+         9  Switch  1 - Port  8                    GigabitEthernet 1/9
+        10  Switch  1 - Port  9                    GigabitEthernet 1/10
+        11  Switch  1 - Port 10                    GigabitEthernet 1/11
+        12  Switch  1 - Port 11                    GigabitEthernet 1/12
+        13  Switch  1 - Port 12                    2.5GigabitEthernet 1/1
+""",
+     {"allow_wrap": True, "max_width": 80},
+     [['1', 'Switch  1 - Port  0', 'GigabitEthernet 1/1'],
+      ['2', 'Switch  1 - Port  1', 'GigabitEthernet 1/2'],
+      ['3', 'Switch  1 - Port  2', 'GigabitEthernet 1/3'],
+      ['4', 'Switch  1 - Port  3', 'GigabitEthernet 1/4'],
+      ['5', 'Switch  1 - Port  4', 'GigabitEthernet 1/5'],
+      ['6', 'Switch  1 - Port  5', 'GigabitEthernet 1/6'],
+      ['7', 'Switch  1 - Port  6', 'GigabitEthernet 1/7'],
+      ['8', 'Switch  1 - Port  7', 'GigabitEthernet 1/8'],
+      ['9', 'Switch  1 - Port  8', 'GigabitEthernet 1/9'],
+      ['10', 'Switch  1 - Port  9', 'GigabitEthernet 1/10'],
+      ['11', 'Switch  1 - Port 10', 'GigabitEthernet 1/11'],
+      ['12', 'Switch  1 - Port 11', 'GigabitEthernet 1/12'],
+      ['13', 'Switch  1 - Port 12', '2.5GigabitEthernet 1/1']]
+     ),
+    ("""
+LLDP Remote Device Summary
+
+Local
+Interface  RemID    Chassis ID            Port ID             System Name
+---------  -------  --------------------  ------------------  ------------------
+0/9        1        11:22:33:44:55:66     GigabitEthernet2/0/9  SS-MS-1
+0/10
+
+""",
+     {"expand_columns": True},
+     [['0/9', '1', '11:22:33:44:55:66', 'GigabitEthernet2/0/9', 'SS-MS-1'],
+      ['0/10', '', '', '', '']]
+     )
 ])
 def test_parse_table(value, kwargs, expected):
     assert parse_table(value, **kwargs) == expected
