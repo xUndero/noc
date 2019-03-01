@@ -191,7 +191,22 @@ Interface  RemID    Chassis ID            Port ID             System Name
      {"allow_extend": True},
      [['0/9', '3', '11:22:33:44:55:66', 'GigabitEthernet0/0/8', 'qqq0-sasasasa-rr11'],
       ['0/10', '1', '11:22:33:44:55:67', 'gi1/1/1', 'e22-a77']]
-     )
+     ),
+    (
+        """
+
+ Port       Device ID         Port ID        System Name    Capabilities  TTL
+------- ----------------- --------------- ----------------- ------------ -----
+g1      00:11:22:33:44:55 GigabitEthernet SS555_XXXX_Skeeee     B, R      109
+                          0/0/3           x_333_Stack
+g2      00:11:22:33:44:55 GigabitEthernet SS555_XXXX_Skeeee     B, R      109
+                          1/0/3           x_333_Stack
+
+""",
+        {"allow_extend": True, "allow_wrap": True},
+        [['g1', '00:11:22:33:44:55', 'GigabitEthernet0/0/3', 'SS555_XXXX_Skeeeex_333_Stack', 'B, R', '109'],
+         ['g2', '00:11:22:33:44:55', 'GigabitEthernet1/0/3', 'SS555_XXXX_Skeeeex_333_Stack', 'B, R', '109']]
+    )
 ])
 def test_parse_table(value, kwargs, expected):
     assert parse_table(value, **kwargs) == expected
