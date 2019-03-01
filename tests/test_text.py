@@ -133,8 +133,7 @@ Group  Port-channel  Protocol    Ports
             ["611", "1111.222a.2e1e", "DYNAMIC", "g0/2"]
         ]
     ),
-    (
-            """ifIndex     ifDescr                                Interface
+    ("""ifIndex     ifDescr                                Interface
 ----------  -------------------------------------  ---------
          1  Switch  1 - Port  0                    GigabitEthernet 1/1
          2  Switch  1 - Port  1                    GigabitEthernet 1/2
@@ -150,23 +149,22 @@ Group  Port-channel  Protocol    Ports
         12  Switch  1 - Port 11                    GigabitEthernet 1/12
         13  Switch  1 - Port 12                    2.5GigabitEthernet 1/1
 """,
-            {"allow_wrap": True, "max_width": 80},
-            [['1', 'Switch  1 - Port  0', 'GigabitEthernet 1/1'],
-             ['2', 'Switch  1 - Port  1', 'GigabitEthernet 1/2'],
-             ['3', 'Switch  1 - Port  2', 'GigabitEthernet 1/3'],
-             ['4', 'Switch  1 - Port  3', 'GigabitEthernet 1/4'],
-             ['5', 'Switch  1 - Port  4', 'GigabitEthernet 1/5'],
-             ['6', 'Switch  1 - Port  5', 'GigabitEthernet 1/6'],
-             ['7', 'Switch  1 - Port  6', 'GigabitEthernet 1/7'],
-             ['8', 'Switch  1 - Port  7', 'GigabitEthernet 1/8'],
-             ['9', 'Switch  1 - Port  8', 'GigabitEthernet 1/9'],
-             ['10', 'Switch  1 - Port  9', 'GigabitEthernet 1/10'],
-             ['11', 'Switch  1 - Port 10', 'GigabitEthernet 1/11'],
-             ['12', 'Switch  1 - Port 11', 'GigabitEthernet 1/12'],
-             ['13', 'Switch  1 - Port 12', '2.5GigabitEthernet 1/1']]
-    ),
-    (
-            """
+     {"allow_wrap": True, "max_width": 80},
+     [['1', 'Switch  1 - Port  0', 'GigabitEthernet 1/1'],
+      ['2', 'Switch  1 - Port  1', 'GigabitEthernet 1/2'],
+      ['3', 'Switch  1 - Port  2', 'GigabitEthernet 1/3'],
+      ['4', 'Switch  1 - Port  3', 'GigabitEthernet 1/4'],
+      ['5', 'Switch  1 - Port  4', 'GigabitEthernet 1/5'],
+      ['6', 'Switch  1 - Port  5', 'GigabitEthernet 1/6'],
+      ['7', 'Switch  1 - Port  6', 'GigabitEthernet 1/7'],
+      ['8', 'Switch  1 - Port  7', 'GigabitEthernet 1/8'],
+      ['9', 'Switch  1 - Port  8', 'GigabitEthernet 1/9'],
+      ['10', 'Switch  1 - Port  9', 'GigabitEthernet 1/10'],
+      ['11', 'Switch  1 - Port 10', 'GigabitEthernet 1/11'],
+      ['12', 'Switch  1 - Port 11', 'GigabitEthernet 1/12'],
+      ['13', 'Switch  1 - Port 12', '2.5GigabitEthernet 1/1']]
+     ),
+    ("""
 LLDP Remote Device Summary
 
 Local
@@ -176,12 +174,11 @@ Interface  RemID    Chassis ID            Port ID             System Name
 0/10
 
 """,
-            {"allow_extend": True},
-            [['0/9', '1', '11:22:33:44:55:66', 'GigabitEthernet2/0/9', 'SS-MS-1'],
-             ['0/10', '', '', '', '']]
-    ),
-    (
-            """
+     {"allow_extend": True},
+     [['0/9', '1', '11:22:33:44:55:66', 'GigabitEthernet2/0/9', 'SS-MS-1'],
+      ['0/10', '', '', '', '']]
+     ),
+    ("""
 LLDP Remote Device Summary
 
 Local
@@ -191,10 +188,10 @@ Interface  RemID    Chassis ID            Port ID             System Name
 0/10       1        11:22:33:44:55:67     gi1/1/1             e22-a777-b774-1
 
 """,
-            {"allow_extend": True},
-            [['0/9', '3', '11:22:33:44:55:66', 'GigabitEthernet0/0/8', 'qqq0-sasasasa-rr11'],
-             ['0/10', '1', '11:22:33:44:55:67', 'gi1/1/1', 'e22-a77']]
-    )
+     {"allow_extend": True},
+     [['0/9', '3', '11:22:33:44:55:66', 'GigabitEthernet0/0/8', 'qqq0-sasasasa-rr11'],
+      ['0/10', '1', '11:22:33:44:55:67', 'gi1/1/1', 'e22-a77']]
+     )
 ])
 def test_parse_table(value, kwargs, expected):
     assert parse_table(value, **kwargs) == expected
