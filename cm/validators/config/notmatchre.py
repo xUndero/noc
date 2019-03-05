@@ -36,7 +36,7 @@ class NotMatchStringRE(TextValidator):
         tpl = self.expand_template(template)
         try:
             rx = re.compile(tpl, re.DOTALL | re.MULTILINE)
-        except:
+        except re.error:
             return
         if rx.search(self.get_config_block()):
             if self.scope == self.INTERFACE:
