@@ -33,7 +33,7 @@ class Profile(BaseProfile):
     rx_card = re.compile(
         r"1\s+(?P<shelf>\d+)\s+(?P<slot>\d+)\s+"
         r"(?P<cfgtype>\S+)\s+(?P<realtype>\S+|)\s+(?P<port>\d+)\s+"
-        r"(?P<hardver>\d+|)\s+(?P<softver>V\S+|)\s+(?P<status>INSERVICE|OFFLINE)"
+        r"(?P<hardver>\d+|)\s+(?P<softver>V\S+|)\s+(?P<status>INSERVICE|OFFLINE|STANDBY)"
     )
 
     def fill_ports(self, script):

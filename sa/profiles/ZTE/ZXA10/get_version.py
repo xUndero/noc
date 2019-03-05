@@ -19,29 +19,16 @@ class Script(BaseScript):
     cache = True
     interface = IGetVersion
 
-    rx_platform = re.compile(
-        r"^\d+\s+(?P<platform>\S+)MBRack\s+.+\n", re.MULTILINE
-    )
     rx_version = re.compile(
-        r"Serial Number\s+:\s+(?P<serial>\S+)\s+.+\n"
-        r"CPLD Version.+\n"
-        r"Boot Version\s+:\s+(?P<bootprom>\S+)\s+.+\n"
-        r"Software Version\s+:\s+(?P<version>\S+)\s+.+\n",
+        r"^System Description: (?P<platform>\S+) Version (?P<version>\S+) Software,",
         re.MULTILINE
     )
 
     def execute_cli(self):
-        v = self.cli("show rack")
-        match = self.rx_platform.search(v)
-        platform = match.group("platform")
-        v = self.cli("show card type MCCARD")
+        v = self.cli("show system-group", cached=True)
         match = self.rx_version.search(v)
         return {
             "vendor": "ZTE",
-            "platform": platform,
-            "version": match.group("version"),
-            "attributes": {
-                "Boot PROM": match.group("bootprom"),
-                "Serial Number": match.group("serial")
-            }
+            "platform": match.group("platform"),
+            "version": match.group("version")
         }

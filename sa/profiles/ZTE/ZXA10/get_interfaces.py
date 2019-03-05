@@ -24,7 +24,7 @@ class Script(BaseScript):
         "PRWGS": ""
     }
     rx_iface = re.compile(
-        r"^(?P<ifname>\S+) is (?P<admin_status>deactivate|down|administratively down|up),\s*"
+        r"^(?P<ifname>\S+) is (?P<admin_status>activate|deactivate|down|administratively down|up),\s*"
         r"line protocol is (?P<oper_status>down|up).+\n"
         r"^\s+Description is none",
         re.MULTILINE
@@ -63,7 +63,7 @@ class Script(BaseScript):
         for p in ports:
             if int(p["port"]) < 1:
                 continue
-            prefix = self.type[p["cfgtype"]]
+            prefix = self.type[p["realtype"]]
             for i in range(int(p["port"])):
                 ifname = "%s%s/%s/%s" % (prefix, p["shelf"], p["slot"], str(i + 1))
                 v = self.cli("show interface %s" % ifname)

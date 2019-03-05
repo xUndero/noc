@@ -18,5 +18,5 @@ class Script(BaseScript):
 
     def execute_cli(self):
         config = self.cli("show running-config")
-        config = self.strip_first_lines(config, 1)
+        config = self.strip_first_lines(config, 3)
         return self.cleaned_config(config)
