@@ -30,7 +30,7 @@ class Script(BaseScript):
         re.MULTILINE
     )
     rx_vlan = re.compile(
-        r"^(?P<mode>access=0|trunk\>0)\s+(?P<pvid>\d+).+\n"
+        r"^(?P<mode>access=0|trunk\>0|hybrid\>=0)\s+(?P<pvid>\d+).+\n"
         r"^UntaggedVlan:\s*\n"
         r"(^(?P<untagged>\d+)\s*\n)?"
         r"^TaggedVlan:\s*\n"
