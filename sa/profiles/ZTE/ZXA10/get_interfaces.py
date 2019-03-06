@@ -61,7 +61,7 @@ class Script(BaseScript):
         interfaces = []
         ports = self.profile.fill_ports(self)
         for p in ports:
-            if int(p["port"]) < 1:
+            if int(p["port"]) < 1 or p["realtype"] == "":
                 continue
             prefix = self.type[p["realtype"]]
             for i in range(int(p["port"])):
