@@ -102,6 +102,14 @@ def test_decode_utctime():
     raise NotImplementedError()
 
 
+@pytest.mark.parametrize("raw,value", [
+    ("\x44\x81\x06\x04\x04test", "test")
+])
+def test_decode_opaque(raw, value):
+    decoder = BERDecoder()
+    assert decoder.parse_tlv(raw)[0] == value
+
+
 @pytest.mark.xfail()
 def test_encode_tlv():
     raise NotImplementedError()

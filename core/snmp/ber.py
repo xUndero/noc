@@ -214,6 +214,9 @@ class BERDecoder(object):
             r += [v]
         return r
 
+    def parse_opaque(self, msg):
+        return self.parse_tlv(msg)[0]
+
     def parse_utctime(self, msg):
         return msg  # @todo: Convert to datetime
 
@@ -282,7 +285,7 @@ class BERDecoder(object):
         did(64, False, 1): parse_int,  # Counter32
         did(64, False, 2): parse_int,  # Gauge32
         did(64, False, 3): parse_int,  # TimeTicks
-        did(64, False, 4): parse_tlv,  # Opaque
+        did(64, False, 4): parse_opaque,  # Opaque
         # 5: NsapAddress
         did(64, False, 6): parse_int,   # 6, Counter64
         # 7: UInteger32
