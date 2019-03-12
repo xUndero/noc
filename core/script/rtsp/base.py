@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------
-# MML class
+# RTSP class
 # ----------------------------------------------------------------------
 # Copyright (C) 2007-2018 The NOC Project
 # See LICENSE for details
@@ -170,8 +170,9 @@ class RTSPBase(object):
             "User-Agent": DEFAULT_USER_AGENT
         }
         if self.auth:
-            h["Authorization"] = self.auth.build_digest_header(self.get_uri(), method,
-                                                               self.headers["WWW-Authenticate"]["Digest"])
+            h["Authorization"] = self.auth.build_digest_header(
+                self.get_uri(), method,
+                self.headers["WWW-Authenticate"]["Digest"])
         req = b"%s %s %s\r\n%s\r\n\r\n%s" % (
             method,
             self.get_uri(),
