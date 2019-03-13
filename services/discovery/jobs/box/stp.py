@@ -10,6 +10,7 @@
 from collections import defaultdict
 # NOC modules
 from noc.services.discovery.jobs.base import TopologyDiscoveryCheck
+from noc.core.error import NOCError
 
 
 class STPCheck(TopologyDiscoveryCheck):
@@ -83,7 +84,7 @@ class STPCheck(TopologyDiscoveryCheck):
             return dmap
         try:
             result = ro.scripts.get_spanning_tree()
-        except Exception as e:
+        except NOCError as e:
             self.logger.error(
                 "Cannot get neighbors from candidate %s: %s",
                 ro.name,
