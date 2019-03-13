@@ -81,7 +81,20 @@ class STPCheck(TopologyDiscoveryCheck):
                 ro.name, self.required_script
             )
             return dmap
-        result = ro.scripts.get_spanning_tree()
+        try:
+            result = ro.scripts.get_spanning_tree()
+        except Exception as e:
+            self.logger.error(
+                "Cannot get neighbors from candidate %s: %s",
+                ro.name,
+                e
+            )
+            self.set_problem(
+                # path=list(candidates[remote_object])[0][0],
+                message="Cannot get neighbors from candidate %s: %s" % (
+                    ro.name, e)
+            )
+            return dmap
         for i in result["instances"]:
             for iface in i["interfaces"]:
                 if iface["role"] == "designated":
