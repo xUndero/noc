@@ -107,6 +107,6 @@ class STPCheck(TopologyDiscoveryCheck):
 
     @staticmethod
     def convert_port_id(port_id):
-        l, r = [int(x) for x in port_id.split(".")]
-        l //= 16
-        return "%x" % ((l << 12) + r)
+        left, right = [int(x) for x in port_id.split(".")]
+        left //= 16
+        return "%x" % ((left << 12) + right)
