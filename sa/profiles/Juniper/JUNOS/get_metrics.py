@@ -26,7 +26,6 @@ class Script(GetMetricsScript):
         access="S"  # not CLI version
     )
     def get_subscribers_metrics(self, metrics):
-        version = self.version['version'].split('.')
         if self.is_gte_16:
             for oid, v in self.snmp.getnext("1.3.6.1.4.1.2636.3.64.1.1.1.5.1.3", bulk=False):
                 oid2 = oid.split("1.3.6.1.4.1.2636.3.64.1.1.1.5.1.3.8.")
