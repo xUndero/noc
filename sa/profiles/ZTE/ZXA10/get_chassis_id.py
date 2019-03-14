@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # ZTE.ZXA10.get_chassis_id
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2016 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 """
@@ -29,9 +29,7 @@ class Script(BaseScript):
         macs = []
         v = self.cli("show mac system", cached=True)
         match = self.rx_mac.search(v)
-        macs += [match.group("inmac")]
-        macs += [match.group("outmac")]
-        macs.sort()
+        macs = sorted([match.group("inmac"), match.group("outmac")])
         return [{
             "first_chassis_mac": f,
             "last_chassis_mac": t

@@ -24,7 +24,4 @@ class Script(BaseScript):
 
     def execute_cli(self):
         v = self.cli("show arp")
-        r = []
-        for match in self.rx_arp.finditer(v):
-            r += [match.groupdict()]
-        return r
+        return [match.groupdict() for match in self.rx_arp.finditer(v)]
