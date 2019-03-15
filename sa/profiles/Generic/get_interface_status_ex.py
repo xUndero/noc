@@ -22,6 +22,7 @@ class Script(BaseScript):
     HIGH_SPEED = 4294967295
     MAX_REPETITIONS = 40
     MAX_GETNEXT_RETIRES = 0
+    IFNAME_OID = "IF-MIB::ifName"
 
     def get_max_repetitions(self):
         return self.MAX_REPETITIONS
@@ -43,6 +44,13 @@ class Script(BaseScript):
         :return:
         """
         return self.profile.snmp_ifstatus_get_chunk
+
+    def get_ifname_oid(self):
+        """
+        OID return interface name
+        :return:
+        """
+        return self.IFNAME_OID
 
     def get_iftable(self, oid, ifindex=None):
         """
@@ -80,7 +88,7 @@ class Script(BaseScript):
             for i in interfaces:
                 r[i["ifindex"]] = {"interface": i["interface"]}
         else:
-            for ifindex, name in self.get_iftable("IF-MIB::ifName"):
+            for ifindex, name in self.get_iftable(self.get_ifname_oid()):
                 try:
                     v = self.profile.convert_interface_name(name)
                 except InterfaceTypeError as e:
