@@ -6,71 +6,13 @@
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
-# Python modules
-import six
 # NOC modules
-from noc.core.script.base import BaseScript
-from noc.sa.interfaces.igetinterfacestatusex import IGetInterfaceStatusEx
+from noc.sa.profiles.Generic.get_interface_status_ex import Script as BaseScript
 from noc.sa.interfaces.base import InterfaceTypeError
-from noc.core.mib import mib
 
 
 class Script(BaseScript):
     name = "Alstec.MSPU.get_interface_status_ex"
-    interface = IGetInterfaceStatusEx
-    requires = []
-    HIGH_SPEED = 4294967295
-    MAX_REPETITIONS = 40
-    MAX_GETNEXT_RETIRES = 0
-
-    def get_max_repetitions(self):
-        return self.MAX_REPETITIONS
-
-    def get_getnext_retires(self):
-        return self.MAX_GETNEXT_RETIRES
-
-    def get_snmp_ifstatus_get_timeout(self):
-        """
-        Timeout for snmp GET request
-        :return:
-        """
-        return self.profile.snmp_ifstatus_get_timeout
-
-    def get_snmp_ifstatus_get_chunk(self):
-        """
-        Aggregate up to *snmp_metrics_get_chunk* oids
-        to one SNMP GET request
-        :return:
-        """
-        return self.profile.snmp_ifstatus_get_chunk
-
-    def get_iftable(self, oid, ifindex=None):
-        """
-        If ifindex - collect information on the given interfaces
-        Else - collect information for all interfaces
-        :return:
-        """
-        if "::" in oid:
-            oid = mib[oid]
-        if ifindex:
-            results = self.snmp.get_chunked(
-                oids=["%s.%s" % (oid, i) for i in ifindex],
-                chunk_size=self.get_snmp_ifstatus_get_chunk(),
-                timeout_limits=self.get_snmp_ifstatus_get_timeout()
-            )
-            for k, v in six.iteritems(results):
-                yield int(k.split(".")[-1]), v
-        else:
-            for oid, v in self.snmp.getnext(oid, max_repetitions=self.get_max_repetitions(),
-                                            max_retries=self.get_getnext_retires()):
-                yield int(oid.rsplit(".", 1)[-1]), v
-
-    def apply_table(self, r, mib, name, f=None):
-        f = f or (lambda x: x)
-        for ifindex, v in self.get_iftable(mib, list(r)):
-            s = r.get(ifindex)
-            if s:
-                s[name] = f(v)
 
     def get_data(self, interfaces=None):
         # ifIndex -> ifName mapping
@@ -112,7 +54,3 @@ class Script(BaseScript):
                 ri["out_speed"] = s // 10
 
         return r.values()
-
-    def execute_snmp(self, interfaces=None, **kwargs):
-        r = self.get_data(interfaces=interfaces)
-        return r
