@@ -10,6 +10,7 @@
 import threading
 import operator
 # Third-party modules
+import six
 import cachetools
 from pymongo import ReadPreference
 from pymongo.errors import BulkWriteError
@@ -39,11 +40,11 @@ class InterfaceStatusCheck(DiscoveryCheck):
         def get_interface(name):
             if_name = interfaces.get(name)
             if if_name:
-                return if_name["interface"]
+                return if_name
             for iname in self.object.get_profile().get_interface_names(i["interface"]):
                 if_name = interfaces.get(iname)
                 if if_name:
-                    return if_name["interface"]
+                    return if_name
             return None
 
         has_interfaces = "DB | Interfaces" in self.object.get_caps()
@@ -57,7 +58,7 @@ class InterfaceStatusCheck(DiscoveryCheck):
             "Checking interface statuses"
         )
         interfaces = dict(
-            (i.name, {"interface": i, "ifindex": i["ifindex"]})
+            (i.name, i)
             for i in Interface.objects.filter(
                 managed_object=self.object.id,
                 type="physical",
@@ -68,12 +69,9 @@ class InterfaceStatusCheck(DiscoveryCheck):
         if not interfaces:
             self.logger.info("No interfaces with status discovery enabled. Skipping")
             return
-        ifaces = list({"interface": key, "ifindex": v["ifindex"]}
-                      for key, v in interfaces.iteritems() if v["ifindex"] is not None)
-        if ifaces:
-            result = self.object.scripts.get_interface_status_ex(interfaces=ifaces)
-        else:
-            result = self.object.scripts.get_interface_status_ex()
+        hints = [{"interface": key, "ifindex": v.ifindex}
+                 for key, v in six.iteritems(interfaces) if getattr(v, "ifindex", None) is not None] or None
+        result = self.object.scripts.get_interface_status_ex(interfaces=hints)
         collection = Interface._get_collection()
         bulk = []
         for i in result:
