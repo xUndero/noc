@@ -84,6 +84,7 @@ class Script(BaseScript):
         # ifIndex -> ifName mapping
         r = {}  # ifindex -> data
         unknown_interfaces = []
+        # interfaces = [{'interface': u'Eth 1/25', 'ifindex': 25}, {'interface': u'Eth 1/24', 'ifindex': 24}, {'interface': u'Eth 1/27', 'ifindex': 27}, {'interface': u'Eth 1/26', 'ifindex': 26}, {'interface': u'Eth 1/21', 'ifindex': 21}, {'interface': u'Eth 1/20', 'ifindex': 20}, {'interface': u'Eth 1/23', 'ifindex': 23}, {'interface': u'Eth 1/22', 'ifindex': 22}, {'interface': u'Eth 1/28', 'ifindex': 28}, {'interface': u'Eth 1/8', 'ifindex': 6000}, {'interface': u'Eth 1/9', 'ifindex': 9}, {'interface': u'Eth 1/2', 'ifindex': 22000}, {'interface': u'Eth 1/3', 'ifindex': 3}, {'interface': u'Eth 1/1', 'ifindex': 1}, {'interface': u'Eth 1/6', 'ifindex': 6}, {'interface': u'Eth 1/7', 'ifindex': 7}, {'interface': u'Eth 1/4', 'ifindex': 4}, {'interface': u'Eth 1/5', 'ifindex': 5}, {'interface': u'Eth 1/18', 'ifindex': 18}, {'interface': u'Eth 1/19', 'ifindex': 19}, {'interface': u'Eth 1/14', 'ifindex': 14}, {'interface': u'Eth 1/15', 'ifindex': 15}, {'interface': u'Eth 1/16', 'ifindex': 16}, {'interface': u'Eth 1/17', 'ifindex': 17}, {'interface': u'Eth 1/10', 'ifindex': 10}, {'interface': u'Eth 1/11', 'ifindex': 11}, {'interface': u'Eth 1/12', 'ifindex': 12}, {'interface': u'Eth 1/13', 'ifindex': 13}]
         if interfaces:
             for i in interfaces:
                 r[i["ifindex"]] = {"interface": i["interface"]}
@@ -98,11 +99,12 @@ class Script(BaseScript):
                 r[ifindex] = {"interface": v}
         if_index = list(r)
         # Apply ifAdminStatus
-        self.apply_table(r, "IF-MIB::ifAdminStatus", "admin_status", lambda x: x == 1)
+        self.apply_table(r, "IF-MIB::ifAdminStatus", "admin_status", lambda x: x == 1 if x is not None else None)
         # Apply ifOperStatus
-        self.apply_table(r, "IF-MIB::ifOperStatus", "oper_status", lambda x: x == 1)
+        self.apply_table(r, "IF-MIB::ifOperStatus", "oper_status", lambda x: x == 1 if x is not None else None)
         # Apply dot3StatsDuplexStatus
-        self.apply_table(r, "EtherLike-MIB::dot3StatsDuplexStatus", "full_duplex", lambda x: x != 2)
+        self.apply_table(r, "EtherLike-MIB::dot3StatsDuplexStatus", "full_duplex",
+                         lambda x: x != 2 if x is not None else None)
         # Apply ifSpeed
         highspeed = set()
         for ifindex, s in self.get_iftable("IF-MIB::ifSpeed", if_index):

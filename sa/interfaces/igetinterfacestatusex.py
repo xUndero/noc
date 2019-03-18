@@ -9,7 +9,7 @@
 from __future__ import absolute_import
 # NOC modules
 from noc.core.interface.base import BaseInterface
-from .base import (DictListParameter, InterfaceNameParameter, BooleanParameter, IntParameter)
+from .base import (DictListParameter, InterfaceNameParameter, BooleanParameter, IntParameter, NoneParameter)
 
 
 class IGetInterfaceStatusEx(BaseInterface):
@@ -26,9 +26,9 @@ class IGetInterfaceStatusEx(BaseInterface):
     returns = DictListParameter(
         attrs={
             "interface": InterfaceNameParameter(),
-            "admin_status": BooleanParameter(default=False),
-            "oper_status": BooleanParameter(default=False),
-            "full_duplex": BooleanParameter(default=True),
+            "admin_status": BooleanParameter(required=False),
+            "oper_status": BooleanParameter(required=False),
+            "full_duplex": BooleanParameter(required=False),
             "last_change": IntParameter(required=False),
             # Input speed, kbit/s
             "in_speed": IntParameter(required=False),
