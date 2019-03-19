@@ -60,7 +60,7 @@ def match_in(v, iter):
         return str(v) in iter
     if isinstance(v, Iterable):
         # if v list - check intersection
-        return set(v).intersection(set(iter))
+        return bool(set(v).intersection(set(iter)))
     return False
 
 
