@@ -37,7 +37,7 @@ class Script(GetMetricsScript):
         access="C",  # CLI version
         volatile=False
     )
-    def collect_dom_metrics(self, metrics):
+    def collect_dom_metrics_cli(self, metrics):
         super(Script, self).collect_dom_metrics(metrics)
         self.collect_cpe_metricscli(metrics)
 
@@ -125,7 +125,7 @@ class Script(GetMetricsScript):
         access="S",  # CLI version
         volatile=False
     )
-    def collect_dom_metrics(self, metrics):
+    def collect_dom_metrics_snmp(self, metrics):
         super(Script, self).collect_dom_metrics(metrics)
         self.collect_cpe_metrics_snmp(metrics)
 
@@ -138,13 +138,13 @@ class Script(GetMetricsScript):
             global_id_map[ont_index] = ont_serial.encode("hex").upper()
         for ont_index, ont_temp_c, ont_current_ma, ont_optical_tx_dbm, ont_optical_rx_dbm, \
             ont_voltage_v, optical_rx_dbm_cpe in self.snmp.get_tables([
-            mib["HUAWEI-XPON-MIB::hwGponOntOpticalDdmTemperature"],
-            mib["HUAWEI-XPON-MIB::hwGponOntOpticalDdmBiasCurrent"],
-            mib["HUAWEI-XPON-MIB::hwGponOntOpticalDdmTxPower"],
-            mib["HUAWEI-XPON-MIB::hwGponOntOpticalDdmRxPower"],
-            mib["HUAWEI-XPON-MIB::hwGponOntOpticalDdmVoltage"],
-            mib["HUAWEI-XPON-MIB::hwGponOntOpticalDdmOltRxOntPower"]], bulk=False
-        ):
+                mib["HUAWEI-XPON-MIB::hwGponOntOpticalDdmTemperature"],
+                mib["HUAWEI-XPON-MIB::hwGponOntOpticalDdmBiasCurrent"],
+                mib["HUAWEI-XPON-MIB::hwGponOntOpticalDdmTxPower"],
+                mib["HUAWEI-XPON-MIB::hwGponOntOpticalDdmRxPower"],
+                mib["HUAWEI-XPON-MIB::hwGponOntOpticalDdmVoltage"],
+                mib["HUAWEI-XPON-MIB::hwGponOntOpticalDdmOltRxOntPower"]],
+                bulk=False):
             ifindex, ont_id = ont_index.split(".")
             ont_id = "%s/%s" % (names[int(ifindex)], ont_id)
             ipath = [global_id_map[ont_index], "", "", "0"]
@@ -188,8 +188,7 @@ class Script(GetMetricsScript):
         for ont_index, ont_optical_errors_bip_out, ont_optical_errors_bip_in in self.snmp.get_tables([
             mib["HUAWEI-XPON-MIB::hwGponOntTrafficFlowStatisticUpFrameBipErrCnt"],
             mib["HUAWEI-XPON-MIB::hwGponOntTrafficFlowStatisticDnFramesBipErrCnt"]
-            ], bulk=False
-        ):
+        ], bulk=False):
             ifindex, ont_id = ont_index.split(".")
             ipath = [global_id_map[ont_index], "", "", "0"]
             mpath = ["", "", "", names[int(ifindex)]]

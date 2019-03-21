@@ -62,8 +62,7 @@ class Script(BaseScript):
                 mib["HUAWEI-XPON-MIB::hwGponOltOpticsDdmInfoSupplyVoltage"],
                 mib["HUAWEI-XPON-MIB::hwGponOltOpticsDdmInfoTxBiasCurrent"],
                 mib["HUAWEI-XPON-MIB::hwGponOltOpticsDdmInfoTxPower"],
-                mib["HUAWEI-XPON-MIB::hwGponOltOpticsDdmInfoRxPower"]
-                ], bulk=False):
+                mib["HUAWEI-XPON-MIB::hwGponOltOpticsDdmInfoRxPower"]], bulk=False):
             if olt_temp_c == 2147483647:
                 continue
             iface_index = olt_index.rsplit(".", 1)[-1]
