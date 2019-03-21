@@ -25,13 +25,26 @@ class Script(GetMetricsScript):
         r"Latest RTT:\s+(\d+)"
     )
 
+    """
+    RTT Values:
+        Number Of RTT: 1000             RTT Min/Avg/Max: 73/74/75 milliseconds
+    Latency one-way time:
+        Number of Latency one-way Samples: 1000
+        Source to Destination Latency one way Min/Avg/Max: 36/36/38 milliseconds
+        Destination to Source Latency one way Min/Avg/Max: 37/37/39 milliseconds
+    Jitter Time:
+        Number of SD Jitter Samples: 999
+        Number of DS Jitter Samples: 999
+        Source to Destination Jitter Min/Avg/Max: 0/1/2 milliseconds
+        Destination to Source Jitter Min/Avg/Max: 0/1/2 milliseconds
+    """
     @metrics(
         ["SLA | JITTER", "SLA | UDP RTT"],
         has_capability="Cisco | IP | SLA | Probes",
         volatile=False,
         access="C"  # CLI version
     )
-    def get_ip_sla_udp_jitter_metrics(self, metrics):
+    def get_ip_sla_udp_jitter_metrics_cli(self, metrics):
         """
         Returns collected ip sla metrics in form
         probe id -> {
@@ -79,7 +92,7 @@ class Script(GetMetricsScript):
         volatile=False,
         access="C"  # CLI version
     )
-    def get_ip_sla_icmp_echometrics(self, metrics):
+    def get_ip_sla_icmp_echo_metrics_cli(self, metrics):
         """
         Returns collected ip sla metrics in form
         probe id -> {
@@ -116,3 +129,49 @@ class Script(GetMetricsScript):
                                     multi=True)
                 except ValueError:
                     pass
+
+    @metrics(
+        ["SLA | Jitter | Ingress", "SLA | Jitter | Egress", "SLA | Jitter | Rtt"],
+        has_capability="Cisco | IP | SLA | Probes",
+        volatile=False,
+        access="S"  # CLI version
+    )
+    def get_ip_sla_udp_jitter_metrics_snmp(self, metrics):
+        """
+        Returns collected ip sla metrics in form
+        probe id -> {
+            rtt: RTT in seconds
+        }
+        :return:
+        """
+        setup_metrics = {tuple(m.path): m.id for m in metrics if m.metric in {
+            "SLA | Jitter | Ingress", "SLA | Jitter | Egress", "SLA | Jitter | Rtt"}}
+
+        for sla_index, sla_rtt_sum, sla_egress, sla_ingress in self.snmp.get_tables([
+            "1.3.6.1.4.1.9.9.42.1.3.5.1.9", "1.3.6.1.4.1.9.9.42.1.3.5.1.63", "1.3.6.1.4.1.9.9.42.1.3.5.1.64"
+        ], bulk=False
+        ):
+            sla_probe_index, m_timestamp = sla_index.split(".")
+            if ("", str(sla_probe_index)) not in setup_metrics:
+                continue
+            if sla_rtt_sum:
+                self.set_metric(
+                    id=setup_metrics[("", str(sla_probe_index))],
+                    metric="SLA | Jitter | Rtt",
+                    path=("", sla_probe_index),
+                    value=float(sla_rtt_sum) * 1000.0,
+                    multi=True)
+            if sla_egress:
+                self.set_metric(
+                    id=setup_metrics[("", str(sla_probe_index))],
+                    metric="SLA | Jitter | Egress",
+                    path=("", sla_probe_index),
+                    value=float(sla_egress) * 1000.0,
+                    multi=True)
+            if sla_ingress:
+                self.set_metric(
+                    id=setup_metrics[("", str(sla_probe_index))],
+                    metric="SLA | Jitter | Ingress",
+                    path=("", sla_probe_index),
+                    value=float(sla_ingress) * 1000.0,
+                    multi=True)
