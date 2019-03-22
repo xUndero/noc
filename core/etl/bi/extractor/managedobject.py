@@ -13,7 +13,7 @@ from noc.lib.text import ch_escape
 from collections import defaultdict
 # NOC modules
 from .base import BaseExtractor
-from noc.sa.models.managedobject import ManagedObject
+from noc.sa.models.managedobject import ManagedObject, ManagedObjectAttribute
 from noc.bi.models.managedobjects import ManagedObject as ManagedObjectBI
 from noc.core.etl.bi.stream import Stream
 from noc.inv.models.interface import Interface
@@ -39,8 +39,7 @@ class ManagedObjectsExtractor(BaseExtractor):
     }
 
     def __init__(self, prefix, start, stop):
-        super(ManagedObjectsExtractor, self).__init__(prefix, start,
-                                                      stop)
+        super(ManagedObjectsExtractor, self).__init__(prefix, start, stop)
         self.mo_stream = Stream(ManagedObjectBI, prefix)
 
     def extract(self):
@@ -50,7 +49,8 @@ class ManagedObjectsExtractor(BaseExtractor):
         x_data = [
             self.get_interfaces(),
             self.get_links(),
-            self.get_caps()
+            self.get_caps(),
+            self.get_attributes()
         ]
         # Extract managed objects
         for mo in ManagedObject.objects.all():
@@ -61,8 +61,8 @@ class ManagedObjectsExtractor(BaseExtractor):
                 "managed_object": mo,
                 "profile": mo.profile,
                 "administrative_domain": mo.administrative_domain,
-                "segment": mo.segment,
-                "container": mo.container,
+                "segment": None,
+                "container": None,
                 "level": mo.object_profile.level,
                 "x": mo.x,
                 "y": mo.y,
@@ -75,9 +75,10 @@ class ManagedObjectsExtractor(BaseExtractor):
                 "hostname": did.hostname if did else "",
                 "ip": mo.address,
                 "is_managed": mo.is_managed,
-                "location": mo.container.get_address_text() if mo.container else "",
+                "location": None,
                 "uptime": uptime.last_value if uptime else 0.0,
-                "tags": [str(t) for t in mo.tags] if mo.tags else []
+                "tags": [str(t) for t in mo.tags] if mo.tags else [],
+                "serials": []
                 # subscribers
                 # services
             }
@@ -168,3 +169,9 @@ class ManagedObjectsExtractor(BaseExtractor):
                 {"$project": project_expr}
             ])
         )
+
+    def get_attributes(self):
+        # @todo Serials from object model
+        r = {mo_id: {"serials": [serial or []]} for mo_id, serial in
+             ManagedObjectAttribute.objects.filter(key="Serial Number").values_list("managed_object", "value")}
+        return r
