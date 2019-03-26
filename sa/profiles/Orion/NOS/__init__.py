@@ -39,7 +39,7 @@ class Profile(BaseProfile):
         re.MULTILINE)
 
     rx_ver2 = re.compile(
-        r"^Product name\s*:\s*(?P<platform>.+)\s*\n"
+        r"^Product Name\s*:\s*(?P<platform>.+)\s*\n"
         r"^Hardware Version: (?P<hardware>\S+)\s*\n"
         r"^Software Version: NOS_(?P<version>\d+\.\d+\.\d+).+\n"
         r"(^PCB Version.+\n)?"
@@ -47,9 +47,9 @@ class Profile(BaseProfile):
         r"(^NOS Version.+\n)?"
         r"^Bootstrap Version: (?P<bootprom>\d+\.\d+\.\d+).*\n"
         r"(^Compiled.+\n)?"
-        r"\n"
-        r"^System MacAddress is\s*:\s*(?P<mac>\S+)\s*\n"
-        r"^Serial number\s*:\s*(?P<serial>\S+)\s*\n",
+        r"\s*\n"
+        r"^System MacAddress:\s*(?P<mac>\S+)\s*\n"
+        r"^Serial number:\s*(?P<serial>\S+)\s*\n",
         re.MULTILINE)
 
     def get_version(self, script):
