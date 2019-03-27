@@ -18,7 +18,7 @@ class Profile(BaseProfile):
     enable_http_session = True
     http_request_middleware = ["digestauth"]
 
-    rx_depth = re.compile("\S+(\[[\S\d]+\])")
+    rx_depth = re.compile(r"\S+(\[[\S\d]+\])")
 
     @staticmethod
     def parse_equal_output(string):
