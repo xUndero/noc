@@ -90,7 +90,7 @@ class Command(BaseCommand):
 
     def get_config(self):
         with open(self.CONF) as f:
-            return yaml.load(f)
+            return yaml.safe_load(f)
 
     def handle(self, cmd, *args, **options):
         return getattr(self, "handle_%s" % cmd)(*args, **options)

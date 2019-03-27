@@ -28,7 +28,7 @@ def update_if_changed(pool, values):
 
 def main():
     with open(CONFIG) as f:
-        data = yaml.load(f)
+        data = yaml.safe_load(f)
     changed = False
     for p in data["pools"]:
         try:

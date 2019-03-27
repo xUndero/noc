@@ -171,7 +171,7 @@ class LegacyProtocol(BaseProtocol):
         logger.info("Legacy config will be deprecated after 1 June 2018. "
                     "Please update tower and remove from used config options.")
         with open(self.path) as f:
-            data = yaml.load(f)["config"]
+            data = yaml.safe_load(f)["config"]
         for legacy_key, new_key in self.NOC_MAPPINGS:
             v = get_path(data, legacy_key % {"node": self.config.node, "pool": self.config.pool})
             if v is not None:
