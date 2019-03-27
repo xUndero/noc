@@ -37,7 +37,7 @@ class YAMLProtocol(BaseProtocol):
         if not os.path.exists(self.path):
             return
         with open(self.path) as f:
-            data = yaml.load(f)
+            data = yaml.safe_load(f)
         if data:
             self.config.update(data)
 
