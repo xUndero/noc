@@ -13,7 +13,6 @@ import yaml
 import ujson
 # NOC modules
 from noc.core.management.base import BaseCommand
-from noc.core.handler import get_handler
 from noc.main.models.remotesystem import RemoteSystem
 
 
@@ -107,7 +106,7 @@ class Command(BaseCommand):
             self.die("Invalid remote system: %s" % options["system"])
         remote_system.extract(options.get("extractors", []))
 
-    def handle_check(self,  *args, **options):
+    def handle_check(self, *args, **options):
         remote_system = RemoteSystem.get_by_name(options["system"])
         if not remote_system:
             self.die("Invalid remote system: %s" % options["system"])
@@ -151,6 +150,7 @@ class Command(BaseCommand):
         else:
             n_errors = 0
         return 1 if n_errors else 0
+
 
 if __name__ == "__main__":
     Command().run()
