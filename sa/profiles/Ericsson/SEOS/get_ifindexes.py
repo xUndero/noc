@@ -28,8 +28,8 @@ class Script(BaseScript):
         r = {}
         unknown_interfaces = []
         for oid, index in self.snmp.getnext(mib["IF-MIB::ifIndex"], max_retries=self.get_getnext_retires()):
-            name = self.snmp.get(mib["IF-MIB::ifName.%s" % index])
-            descr = self.snmp.get(mib["IF-MIB::ifDescr.%s" % index])
+            name = self.snmp.get(mib["IF-MIB::ifName", index])
+            descr = self.snmp.get(mib["IF-MIB::ifDescr", index])
             try:
                 v = self.profile.convert_interface_name("%s/%s" % (name, descr))
             except InterfaceTypeError as e:
