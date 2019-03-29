@@ -49,13 +49,17 @@ class ManagedObjectsExtractor(BaseExtractor):
         x_data = [
             self.get_interfaces(),
             self.get_links(),
-            self.get_caps(),
-            self.get_attributes()
+            self.get_caps()
         ]
+        sn = self.get_mo_sn()
         # Extract managed objects
         for mo in ManagedObject.objects.all():
             did = DiscoveryID.objects.filter(object=mo).first()
             uptime = Uptime.objects.filter(object=mo.id, stop=None).first()
+            serials = sn.get(mo.id, [])
+            inventory = mo.get_inventory()[0]
+            if inventory:
+                serials += inventory.get_object_serials(chassis_only=False)
             r = {
                 "ts": ts,
                 "managed_object": mo,
@@ -78,7 +82,7 @@ class ManagedObjectsExtractor(BaseExtractor):
                 "location": mo.container.get_address_text() if mo.container else "",
                 "uptime": uptime.last_value if uptime else 0.0,
                 "tags": [str(t) for t in mo.tags] if mo.tags else [],
-                "serials": []
+                "serials": list(set(serials))
                 # subscribers
                 # services
             }
@@ -170,8 +174,12 @@ class ManagedObjectsExtractor(BaseExtractor):
             ])
         )
 
-    def get_attributes(self):
-        # @todo Serials from object model
-        r = {mo_id: {"serials": [serial or []]} for mo_id, serial in
+    @staticmethod
+    def get_mo_sn():
+        """
+        Extract serial number from attributes
+        :return:
+        """
+        r = {mo_id: [serial] for mo_id, serial in
              ManagedObjectAttribute.objects.filter(key="Serial Number").values_list("managed_object", "value")}
         return r
