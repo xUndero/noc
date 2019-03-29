@@ -57,9 +57,9 @@ class ManagedObjectsExtractor(BaseExtractor):
             did = DiscoveryID.objects.filter(object=mo).first()
             uptime = Uptime.objects.filter(object=mo.id, stop=None).first()
             serials = sn.get(mo.id, [])
-            inventory = mo.get_inventory()[0]
+            inventory = mo.get_inventory()
             if inventory:
-                serials += inventory.get_object_serials(chassis_only=False)
+                serials += inventory[0].get_object_serials(chassis_only=False)
             r = {
                 "ts": ts,
                 "managed_object": mo,
