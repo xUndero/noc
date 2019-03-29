@@ -2,12 +2,10 @@
 # ---------------------------------------------------------------------
 # DLink.DxS_Smart.get_portchannel
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2016 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
-# Python modules
-import re
 # NOC modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetportchannel import IGetPortchannel
@@ -35,7 +33,7 @@ class Script(BaseScript):
                         p += bin[int(c[i], 16)]
                 return p
             try:
-                pmib = self.profile.get_pmib(self.scripts.get_version())
+                pmib = self.profile.get_pmib(self, self.scripts.get_version())
                 if pmib is None:
                     raise NotImplementedError()
                 for v in self.snmp.get_tables([

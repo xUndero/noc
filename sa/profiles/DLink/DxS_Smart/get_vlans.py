@@ -2,13 +2,10 @@
 # ---------------------------------------------------------------------
 # DLink.DxS_Smart.get_vlans
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2014 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
-# Python modules
-import re
-import logging
 # NOC modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetvlans import IGetVlans
@@ -22,7 +19,7 @@ class Script(BaseScript):
         r = []
         if self.has_snmp():
             try:
-                pmib = self.profile.get_pmib(self.scripts.get_version())
+                pmib = self.profile.get_pmib(self, self.scripts.get_version())
                 if pmib is None:
                     raise NotImplementedError()
                 for oid, v in self.snmp.getnext(pmib + ".7.6.1.1",
@@ -41,5 +38,5 @@ class Script(BaseScript):
                         "name": v['vlan_name']
                     }]
                 return r
-            except:
+            except self.CLISyntaxError:
                 raise self.NotSupportedError()

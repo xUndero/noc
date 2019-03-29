@@ -71,7 +71,7 @@ class Profile(BaseProfile):
         else:
             return s
 
-    def get_pmib(self, v):
+    def get_pmib(self, script, v):
         if v["platform"].startswith("DES-1210-52"):
             if v["version"].startswith("1") or v["version"].startswith("2"):
                 return "1.3.6.1.4.1.171.10.75.7"
@@ -96,7 +96,11 @@ class Profile(BaseProfile):
                 return "1.3.6.1.4.1.171.10.75.15"
         if v["platform"].startswith("DES-1210"):
             return "1.3.6.1.4.1.171.10.75.7"
-        return self.platforms[v["platform"]]
+        r = self.platforms.get(v["platform"])
+        if r:
+            return r
+        else:
+            raise script.NotSupportedError()
 
     rx_port = re.compile(
         r"^(?P<port>\d+)\s+"
