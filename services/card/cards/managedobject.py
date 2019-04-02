@@ -16,7 +16,7 @@ from django.db.models import Q
 from mongoengine.errors import DoesNotExist
 # NOC modules
 from .base import BaseCard
-from noc.sa.models.managedobject import ManagedObject
+from noc.sa.models.managedobject import ManagedObject, ManagedObjectAttribute
 from noc.fm.models.activealarm import ActiveAlarm
 from noc.sa.models.servicesummary import SummaryItem
 from noc.fm.models.uptime import Uptime
@@ -228,7 +228,9 @@ class ManagedObjectCard(BaseCard):
                     "profile": i.profile,
                     "service": i.service,
                     "service_summary":
-                        service_summary.get("interface").get(i.id, {})
+                        service_summary.get("interface").get(i.id, {}),
+                    "description": i.description
+
                 }]
 
                 si = list(i.subinterface_set.filter(enabled_afi="BRIDGE"))
@@ -346,7 +348,9 @@ class ManagedObjectCard(BaseCard):
             "maintenance": maintenance,
             "redundancy": redundancy,
             "inventory": self.flatten_inventory(inv),
-            "serial_number": self.object.get_attr("Serial Number")
+            "serial_number": self.object.get_attr("Serial Number"),
+            "attributes": list(ManagedObjectAttribute.objects.filter(managed_object=self.object.id))
+
         }
         return r
 
