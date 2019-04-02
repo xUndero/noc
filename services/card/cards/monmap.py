@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # MonMap
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2017 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -149,7 +149,8 @@ class MonMapCard(BaseCard):
         for container, mol in itertools.groupby(
             moss.values_list("id", "name", "container").order_by("container"), key=lambda o: o[2]
         ):
-            name, data = containers.get(container, ("", {"geopoint": {}}))
+            name = Object.get_by_id(container).get_address_text()
+            d, data = containers.get(container, ("", {"geopoint": {}}))
             x = data["geopoint"].get("x")
             y = data["geopoint"].get("y")
             ss = {"objects": [], "total": 0, "error": 0, "warning": 0, "good": 0, "maintenance": 0}
