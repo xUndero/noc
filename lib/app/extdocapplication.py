@@ -49,6 +49,7 @@ class ExtDocApplication(ExtApplication):
     secret_fields = None  # Set of sensitive fields. "secret" permission is required to show of modify
     lookup_default = [{"id": "Leave unchanged", "label": "Leave unchanged"}]
     ignored_fields = {"id", "bi_id"}
+    restrict_fields = None  # dict of restrict: field: restrict_name
     SECRET_MASK = "********"
 
     rx_oper_splitter = re.compile("^(?P<field>\S+)(?P<f_num>\d+)__in")
@@ -120,6 +121,9 @@ class ExtDocApplication(ExtApplication):
         p = super(ExtDocApplication, self).get_permissions()
         if self.secret_fields:
             p.add("%s:secret" % self.get_app_id().replace(".", ":"))
+        if self.restrict_fields:
+            for f in self.restrict_fields:
+                p.add("%s:restrict:%s" % (self.get_app_id().replace(".", ":"), f))
         return p
 
     def get_custom_fields(self):
@@ -193,6 +197,11 @@ class ExtDocApplication(ExtApplication):
             for f in self.secret_fields:
                 if f in data:
                     del data[f]
+        # Protect restrict fields
+        if self.restrict_fields:
+            for f in self.restrict_fields:
+                if f in data and self.has_restrict(f):
+                    del data[f]
         # Clean up fields
         for f in self.clean_fields:
             if f in data:
@@ -239,6 +248,14 @@ class ExtDocApplication(ExtApplication):
         :return:
         """
         perm_name = "%s:secret" % (self.get_app_id().replace(".", ":"))
+        return perm_name in Permission.get_effective_permissions(get_user())
+
+    def has_restrict(self, field):
+        """
+        Check current user has not *restrict* permission on given app
+        :return:
+        """
+        perm_name = "%s:restrict:%s" % (self.get_app_id().replace(".", ":"), field)
         return perm_name in Permission.get_effective_permissions(get_user())
 
     def instance_to_dict(self, o, fields=None, nocustom=False):
