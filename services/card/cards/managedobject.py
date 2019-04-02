@@ -230,7 +230,6 @@ class ManagedObjectCard(BaseCard):
                     "service_summary":
                         service_summary.get("interface").get(i.id, {}),
                     "description": i.description
-
                 }]
 
                 si = list(i.subinterface_set.filter(enabled_afi="BRIDGE"))
@@ -350,7 +349,6 @@ class ManagedObjectCard(BaseCard):
             "inventory": self.flatten_inventory(inv),
             "serial_number": self.object.get_attr("Serial Number"),
             "attributes": list(ManagedObjectAttribute.objects.filter(managed_object=self.object.id))
-
         }
         return r
 
