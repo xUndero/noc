@@ -2,10 +2,12 @@
 # ---------------------------------------------------------------------
 # DLink.DxS_Smart.get_switchport
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2019 The NOC Project
+# Copyright (C) 2007-2014 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
+# Python modules
+import re
 # NOC modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetswitchport import IGetSwitchport
@@ -28,7 +30,7 @@ class Script(BaseScript):
         for s in self.scripts.get_interface_status():
             interface_status[s["interface"]] = s["status"]
 
-        # TODO
+        #TODO
         # Get 802.1ad status if supported
         vlan_stack_status = {}
 #        try:
@@ -57,7 +59,7 @@ class Script(BaseScript):
             try:
                 # Make a list of tags for each interface or portchannel
                 port_vlans = {}
-                pmib = self.profile.get_pmib(self, self.scripts.get_version())
+                pmib = self.profile.get_pmib(self.scripts.get_version())
                 if pmib is None:
                     raise NotImplementedError()
                 for v in self.snmp.get_tables(
@@ -105,12 +107,10 @@ class Script(BaseScript):
                 # Get switchport description
                 port_descr = {}
                 for iface, description in self.snmp.join_tables(
-                    "1.3.6.1.2.1.31.1.1.1.1", "1.3.6.1.2.1.31.1.1.1.18"
-                ):
-                    if (
-                        iface[:3] == 'Aux' or iface[:4] == 'Vlan' or
-                        iface[:11] == 'InLoopBack' or iface == 'System'
-                    ):
+                    "1.3.6.1.2.1.31.1.1.1.1", "1.3.6.1.2.1.31.1.1.1.18"):
+                    if iface[:3] == 'Aux' or iface[:4] == 'Vlan' \
+                    or iface[:11] == 'InLoopBack' \
+                    or iface == 'System':
                         continue
                     if iface[:6] == "Slot0/":
                         iface = iface[6:]

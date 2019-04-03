@@ -11,6 +11,7 @@
 """
 import re
 from noc.core.profile.base import BaseProfile
+from noc.core.script.error import NotSupportedError
 
 
 class Profile(BaseProfile):
@@ -71,7 +72,7 @@ class Profile(BaseProfile):
         else:
             return s
 
-    def get_pmib(self, script, v):
+    def get_pmib(self, v):
         if v["platform"].startswith("DES-1210-52"):
             if v["version"].startswith("1") or v["version"].startswith("2"):
                 return "1.3.6.1.4.1.171.10.75.7"
@@ -100,7 +101,7 @@ class Profile(BaseProfile):
         if r:
             return r
         else:
-            raise script.NotSupportedError()
+            raise NotSupportedError()
 
     rx_port = re.compile(
         r"^(?P<port>\d+)\s+"
