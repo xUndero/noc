@@ -62,9 +62,9 @@ class Profile(BaseProfile):
     }
 
     def cmp_version(self, x, y):
-        return cmp(
-            [int(z) for z in self.rx_ver.findall(x)],
-            [int(z) for z in self.rx_ver.findall(y)])
+        a = [int(z) for z in self.rx_ver.findall(x)]
+        b = [int(z) for z in self.rx_ver.findall(y)]
+        return (a > b) - (a < b)
 
     def convert_interface_name(self, s):
         if s.startswith("Slot0/"):
