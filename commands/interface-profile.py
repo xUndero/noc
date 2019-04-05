@@ -106,8 +106,9 @@ class Command(BaseCommand):
 
     def handle_reset(self, moo, *args, **kwargs):
         for o in self.get_objects(moo):
-            self.stdout.write("%s (%s):\n" % (o.name, (o.platform.name if o.platform else None)
-                                              or o.profile.name))
+            self.stdout.write("%s (%s):\n" % (
+                o.name, (o.platform.name if o.platform else None) or o.profile.name
+            ))
             for i in Interface.objects.filter(managed_object=o.id):
                 if i.profile:
                     self.stdout.write("    resetting profile on %s to default\n" % i.name)
