@@ -2,14 +2,14 @@
 # ---------------------------------------------------------------------
 # Abstract Wiki parsers class
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2018 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
 # NOC modules
 from __future__ import absolute_import
 from noc.lib.validators import is_int
-from noc.settings import config
+from noc.config import config
 
 
 class BaseParser(object):

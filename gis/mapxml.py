@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # Generate Mapnik XML for Map object
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2011 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -10,7 +10,7 @@
 from xml.dom.minidom import Document
 # NOC modules
 from noc.gis.models import Style, FontSet
-from noc.settings import config
+from noc.config import config
 
 
 SYMBOLIZERS = dict((s.lower()[:-10], s) for s in (

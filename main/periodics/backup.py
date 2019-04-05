@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # Backup database,  repo and configs to main.backupdir
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2017 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -15,10 +15,9 @@ import re
 import shutil
 # NOC modules
 from noc.lib.periodic import Task as PeriodicTask
-from noc.settings import config
+from noc.config import config
 from noc import settings
 from noc.core.fileutils import safe_rewrite
-from noc.config import config
 
 
 class Task(PeriodicTask):
@@ -70,15 +69,14 @@ class Task(PeriodicTask):
                 bdate = datetime.datetime(year=int(match.group("year")),
                                           month=int(match.group("month")),
                                           day=int(match.group("day")))
-            except:
+            except:  # noqa
                 continue
             # Filter out actual backups
             delta = now - bdate
             if delta.days < keep_days:
                 continue
             elif delta.days < keep_days + keep_weeks * 7:
-                if (bdate.weekday() == keep_day_of_week or
-                            bdate.day == keep_day_of_month):
+                if (bdate.weekday() == keep_day_of_week or bdate.day == keep_day_of_month):
                     continue
             elif (delta.days < keep_days + keep_weeks * 7 + keep_months * 31):
                 if bdate.day == keep_day_of_month:
@@ -95,12 +93,12 @@ class Task(PeriodicTask):
         if os.path.isdir(path):
             try:
                 shutil.rmtree(path)
-            except:
+            except:  # noqa
                 pass
         else:
             try:
                 os.unlink(path)
-            except:
+            except:  # noqa
                 pass
 
     def subprocess_call(self, cmd, env=None):
@@ -118,8 +116,9 @@ class Task(PeriodicTask):
             return
         tar_cmd = [config.get("path", "tar"), "cf", "-"] + files
         gzip_cmd = [config.get("path", "gzip")]
-        self.debug(("cd %s &&" % cwd if cwd else ".") + " ".join(tar_cmd) +
-            " | " + " ".join(gzip_cmd))
+        self.debug(
+            ("cd %s &&" % cwd if cwd else ".") + " ".join(tar_cmd) + " | " + " ".join(gzip_cmd)
+        )
         with open(archive, "w") as f:
             try:
                 p1 = subprocess.Popen(tar_cmd, cwd=cwd, stdout=subprocess.PIPE)
@@ -184,7 +183,7 @@ class Task(PeriodicTask):
         out = os.path.join(config.get("path", "backup_dir"), f_out)
         try:
             os.mkdir(out)
-        except OSError as e:
+        except OSError as why:
             self.error("Cannot create directory %s: %s" % (out, why))
             return False
         cmd = [config.get("path", "mongodump"),
@@ -212,8 +211,9 @@ class Task(PeriodicTask):
         """
         now = datetime.datetime.now()
         repo_root = config.get("cm", "repo")
-        repo_out = "noc-repo-%04d-%02d-%02d-%02d-%02d.tar.gz" % (now.year,
-                                    now.month, now.day, now.hour, now.minute)
+        repo_out = "noc-repo-%04d-%02d-%02d-%02d-%02d.tar.gz" % (
+            now.year, now.month, now.day, now.hour, now.minute
+        )
         repo_out = os.path.join(config.get("path", "backup_dir"), repo_out)
         self.info("dumping repo into %s" % repo_out)
         self.tar(repo_out, [f for f in os.listdir(repo_root)
@@ -225,8 +225,9 @@ class Task(PeriodicTask):
         Backup etc/
         """
         now = datetime.datetime.now()
-        etc_out = "noc-etc-%04d-%02d-%02d-%02d-%02d.tar.gz" % (now.year,
-                                    now.month, now.day, now.hour, now.minute)
+        etc_out = "noc-etc-%04d-%02d-%02d-%02d-%02d.tar.gz" % (
+            now.year, now.month, now.day, now.hour, now.minute
+        )
         etc_out = os.path.join(config.get("path", "backup_dir"), etc_out)
         self.info("dumping etc/ into %s" % etc_out)
         try:
@@ -241,7 +242,7 @@ class Task(PeriodicTask):
         return self.tar(etc_out, files)
 
     def execute(self):
-        from django.conf import settings
+        # from django.conf import settings
 
         if not self.check_paths():
             return False
