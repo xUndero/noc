@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from noc.lib.nosql import get_db
-from noc.config import config
+# from noc.lib.nosql import get_db
+# from noc.config import config
 
 
 class Migration:
