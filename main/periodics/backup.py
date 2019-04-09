@@ -69,7 +69,7 @@ class Task(PeriodicTask):
                 bdate = datetime.datetime(year=int(match.group("year")),
                                           month=int(match.group("month")),
                                           day=int(match.group("day")))
-            except:  # noqa
+            except Exception:
                 continue
             # Filter out actual backups
             delta = now - bdate
@@ -93,12 +93,12 @@ class Task(PeriodicTask):
         if os.path.isdir(path):
             try:
                 shutil.rmtree(path)
-            except:  # noqa
+            except Exception:
                 pass
         else:
             try:
                 os.unlink(path)
-            except:  # noqa
+            except Exception:
                 pass
 
     def subprocess_call(self, cmd, env=None):

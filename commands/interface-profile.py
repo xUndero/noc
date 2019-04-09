@@ -9,14 +9,12 @@
 # Python modules
 import argparse
 # NOC modules
-from noc.core.management.base import BaseCommand  # , CommandError
+from noc.core.management.base import BaseCommand
 from noc.inv.models.interface import Interface
 from noc.inv.models.interfaceprofile import InterfaceProfile
 from noc.inv.models.interfaceclassificationrule import InterfaceClassificationRule
 from noc.sa.models.managedobjectselector import ManagedObjectSelector
 from noc.lib.text import split_alnum
-# from noc.settings import config
-# from noc.core.handler import get_handler
 
 
 class Command(BaseCommand):
