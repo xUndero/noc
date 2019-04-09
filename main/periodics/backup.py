@@ -242,7 +242,6 @@ class Task(PeriodicTask):
         return self.tar(etc_out, files)
 
     def execute(self):
-        # from django.conf import settings
 
         if not self.check_paths():
             return False
