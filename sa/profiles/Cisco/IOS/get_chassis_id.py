@@ -178,7 +178,7 @@ class Script(BaseScript):
             try:
                 return self.execute_cat4000()
             except self.CLISyntaxError():
-                # Found in 'WS-C3850-48T' with IOX-XE '03.06.03.E'
+                # Found in 'WS-C3850-48T' with IOS-XE '03.06.03.E'
                 if self.is_small_cat:
                     return self.execute_small_cat()
         elif self.is_small_cat or self.is_platform_me3x00x:
