@@ -34,6 +34,7 @@ class Profile(BaseProfile):
     config_tokenizer = "curly"
     config_tokenizer_settings = {
         "line_comment": "#",
+        "inline_comment": "##",
         "explicit_eol": ";",
         "string_quote": "\""
     }
