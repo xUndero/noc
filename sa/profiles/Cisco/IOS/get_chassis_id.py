@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # Cisco.IOS.get_chassis_id
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2018 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -175,7 +175,12 @@ class Script(BaseScript):
         elif self.is_cat6000 or self.is_platform_7600:
             return self.execute_cat6000()
         elif self.is_cat4000:
-            return self.execute_cat4000()
+            try:
+                return self.execute_cat4000()
+            except self.CLISyntaxError():
+                # Found in 'WS-C3850-48T' with IOX-XE '03.06.03.E'
+                if self.is_small_cat:
+                    return self.execute_small_cat()
         elif self.is_small_cat or self.is_platform_me3x00x:
             return self.execute_small_cat()
         raise self.NotSupportedError()
