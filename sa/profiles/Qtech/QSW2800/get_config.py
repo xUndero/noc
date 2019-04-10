@@ -15,6 +15,10 @@ class Script(BaseScript):
     name = "Qtech.QSW2800.get_config"
     interface = IGetConfig
 
-    def execute_cli(self, **kwargs):
-        config = self.cli("show running-config")
+    def execute_cli(self, policy="r", **kwargs):
+        assert policy in ("r", "s")
+        if policy == "s":
+            config = self.cli("show startup-config")
+        else:
+            config = self.cli("show running-config", cached=True)
         return self.cleaned_config(config)
