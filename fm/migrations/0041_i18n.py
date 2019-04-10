@@ -25,7 +25,9 @@ class Migration(object):
                 text = d["text"]["en"]
                 bulk += [
                     UpdateOne(
-                        {"_id": d["_id"]}, {
+                        {
+                            "_id": d["_id"]
+                        }, {
                             "$set": {
                                 "subject_template": text["subject_template"],
                                 "body_template": text["body_template"],

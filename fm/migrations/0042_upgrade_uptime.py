@@ -23,7 +23,9 @@ class Migration(object):
         bulk = []
         for d in db.noc.fm.uptimes.find({}):
             bulk += [
-                UpdateOne({"_id": d["_id"]}, {"$set": {
+                UpdateOne({
+                    "_id": d["_id"]
+                }, {"$set": {
                     "last_value": float(total_seconds(d["last"] - d["start"]))
                 }})
             ]
