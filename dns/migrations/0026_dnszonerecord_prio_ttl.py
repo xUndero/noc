@@ -14,9 +14,7 @@ from django.db import models
 
 class Migration(object):
     def forwards(self):
-        db.add_column(
-            "dns_dnszonerecord", "priority", models.IntegerField("Priority", null=True, blank=True)
-        )
+        db.add_column("dns_dnszonerecord", "priority", models.IntegerField("Priority", null=True, blank=True))
         db.add_column("dns_dnszonerecord", "ttl", models.IntegerField("TTL", null=True, blank=True))
 
     def backwards(self):

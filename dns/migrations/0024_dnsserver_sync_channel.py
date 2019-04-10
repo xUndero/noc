@@ -15,8 +15,7 @@ from django.db import models
 class Migration(object):
     def forwards(self):
         db.add_column(
-            "dns_dnsserver", "sync_channel",
-            models.CharField("Sync channel", max_length=64, blank=True, null=True)
+            "dns_dnsserver", "sync_channel", models.CharField("Sync channel", max_length=64, blank=True, null=True)
         )
 
     def backwards(self):

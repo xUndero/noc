@@ -23,16 +23,9 @@ class Migration(object):
             smap[d["name"]] = str(d["_id"])
         # Create .sync
         db.execute("ALTER TABLE dns_dnsserver ADD sync CHAR(24)")
-        for i, ch in db.execute(
-                "SELECT id, sync_channel FROM dns_dnsserver WHERE sync_channel IS NOT NULL"):
+        for i, ch in db.execute("SELECT id, sync_channel FROM dns_dnsserver WHERE sync_channel IS NOT NULL"):
             if ch not in smap:
-                n = c.insert(
-                    {
-                        "name": ch,
-                        "is_active": True,
-                        "description": "Converted from DNS Server settings"
-                    }
-                )
+                n = c.insert({"name": ch, "is_active": True, "description": "Converted from DNS Server settings"})
                 smap[ch] = str(n)
             print(smap)
             db.execute("UPDATE dns_dnsserver SET sync=%s WHERE id=%s", [smap[ch], i])

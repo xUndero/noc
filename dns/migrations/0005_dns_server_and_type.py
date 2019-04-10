@@ -18,10 +18,8 @@ class Migration(object):
         db.create_table(
             'dns_dnsserver', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-                ('name', models.CharField("Name", max_length=64, unique=True)), (
-                    'description',
-                    models.CharField("Description", max_length=128, blank=True, null=True)
-                ),
+                ('name', models.CharField("Name", max_length=64, unique=True)),
+                ('description', models.CharField("Description", max_length=128, blank=True, null=True)),
                 ('location', models.CharField("Location", max_length=128, blank=True, null=True))
             )
         )

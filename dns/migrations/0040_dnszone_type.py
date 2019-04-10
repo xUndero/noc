@@ -26,9 +26,7 @@ class Migration(object):
             )
         )
         db.execute("UPDATE dns_dnszone SET type = '4' WHERE name ILIKE '%%.in-addr.arpa'")
-        db.execute(
-            "UPDATE dns_dnszone SET type = '6' WHERE name ILIKE '%%.ip6.int' OR name ILIKE '.ip6.arpa'"
-        )
+        db.execute("UPDATE dns_dnszone SET type = '6' WHERE name ILIKE '%%.ip6.int' OR name ILIKE '.ip6.arpa'")
 
     def backwards(self):
         db.drop_column("dns_dnszone", "type")

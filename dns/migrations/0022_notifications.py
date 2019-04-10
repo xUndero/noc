@@ -22,13 +22,9 @@ class Migration(object):
             pk_field_type=models.AutoField
         )
         db.add_column(
-            "dns_dnszoneprofile", "notification_group",
-            models.ForeignKey(NotificationGroup, blank=True, null=True)
+            "dns_dnszoneprofile", "notification_group", models.ForeignKey(NotificationGroup, blank=True, null=True)
         )
-        db.add_column(
-            "dns_dnszone", "notification_group",
-            models.ForeignKey(NotificationGroup, blank=True, null=True)
-        )
+        db.add_column("dns_dnszone", "notification_group", models.ForeignKey(NotificationGroup, blank=True, null=True))
 
     def backwards(self):
         db.delete_column("dns_dnszoneprofile", "notification_group_id")

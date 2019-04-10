@@ -44,10 +44,9 @@ class Migration(object):
         db.create_table(
             'dns_dnszone', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-                ('name', models.CharField("Domain", max_length=64, unique=True)), (
-                    'description',
-                    models.CharField("Description", null=True, blank=True, max_length=64)
-                ), ('is_auto_generated', models.BooleanField("Auto generated?")),
+                ('name', models.CharField("Domain", max_length=64, unique=True)),
+                ('description', models.CharField("Description", null=True, blank=True, max_length=64)),
+                ('is_auto_generated', models.BooleanField("Auto generated?")),
                 ('serial', models.CharField("Serial", max_length=10, default="0000000000")),
                 ('profile', models.ForeignKey(DNSZoneProfile, verbose_name="Profile"))
             )
@@ -87,9 +86,7 @@ class Migration(object):
             )
         )
 
-        db.send_create_signal(
-            'dns', ['DNSZoneProfile', 'DNSZone', 'DNSZoneRecordType', 'DNSZoneRecord']
-        )
+        db.send_create_signal('dns', ['DNSZoneProfile', 'DNSZone', 'DNSZoneRecordType', 'DNSZoneRecord'])
 
     def backwards(self):
         db.delete_table('dns_dnszonerecord')

@@ -14,9 +14,7 @@ from django.db import models
 
 class Migration(object):
     def forwards(self):
-        db.add_column(
-            "dns_dnszone", "paid_till", models.DateField("Paid Tille", null=True, blank=True)
-        )
+        db.add_column("dns_dnszone", "paid_till", models.DateField("Paid Tille", null=True, blank=True))
 
     def backwards(self):
         db.delete_column("dns_dnszone", "paid_till")

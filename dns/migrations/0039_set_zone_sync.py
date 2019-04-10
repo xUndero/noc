@@ -28,8 +28,7 @@ class Migration(object):
                  WHERE
                      z.is_auto_generated = TRUE
                      AND s.sync IS NOT NULL"""):
-            if not sc.count_documents({"sync_id": str(sync_id), "model_id": "dns.DNSZone",
-                                       "object_id": str(zone_id)}):
+            if not sc.count_documents({"sync_id": str(sync_id), "model_id": "dns.DNSZone", "object_id": str(zone_id)}):
                 sc.insert(
                     {
                         "uuid": str(uuid.uuid4()),

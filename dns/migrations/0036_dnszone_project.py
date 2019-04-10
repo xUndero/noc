@@ -25,8 +25,7 @@ class Migration(object):
             pk_field_type=models.AutoField
         )
         db.add_column(
-            "dns_dnszone", "project",
-            models.ForeignKey(Project, verbose_name="Project", null=True, blank=True)
+            "dns_dnszone", "project", models.ForeignKey(Project, verbose_name="Project", null=True, blank=True)
         )
 
     def backwards(self):

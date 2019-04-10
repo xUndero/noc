@@ -22,9 +22,7 @@ class Migration(object):
             ALTER COLUMN content TYPE VARCHAR(256)
             """
         )
-        db.add_column(
-            "dns_dnszonerecord", "type", models.CharField("Type", max_length=16, default="")
-        )
+        db.add_column("dns_dnszonerecord", "type", models.CharField("Type", max_length=16, default=""))
 
     def backwards(self):
         pass
