@@ -112,6 +112,10 @@ Ext.define("NOC.core.CMText", {
             css.style.height = "100%";
         }
         me.setTheme(NOC.settings.preview_theme);
+        me.editor.on("change", function(editor) {
+            me.fireEvent("change", editor, editor.getValue());
+        }, me);
+
     },
 
     // Set CodeMirror theme
