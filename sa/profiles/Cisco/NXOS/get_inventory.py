@@ -27,7 +27,7 @@ class Script(BaseScript):
         r"^\s+transceiver is present\n"
         r"^\s+type is(?:\s(?P<type>\S+))?\s*\n"
         r"^\s+name is\s(?P<vendor>\S+)\s*\n"
-        r"^\s+part number is\s(?P<partno>\S+)\n"
+        r"^\s+part number is\s(?P<partno>\S+(?: \S+)*)\s*\n"
         r"^\s+revision is\s(?P<rev>\S+)\s*\n"
         r"^\s+serial number is\s(?P<serial>\S+)\s*\n",
         re.MULTILINE
@@ -107,7 +107,7 @@ class Script(BaseScript):
                         t = dict(i)
                         # check number of chassis and module
                         if not number_c:
-                            if (len(t["number"].split("/")) == 2):
+                            if len(t["number"].split("/")) == 2:
                                 if t["number"].split("/")[0] == number:
                                     objects += [t]
                                     # rewrite number
