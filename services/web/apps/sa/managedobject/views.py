@@ -688,7 +688,7 @@ class ManagedObjectApplication(ExtModelApplication):
                 "result": r
             }
             if dump:
-                result["confdb"] = ujson.loads(cdb)
+                result["confdb"] = ujson.loads(cdb.dump("json"))
         except SyntaxError as e:
             result = {
                 "status": False,
