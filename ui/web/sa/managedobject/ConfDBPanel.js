@@ -71,6 +71,7 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
         me.queryButton = Ext.create("Ext.button.Button", {
             text: __("Query"),
             glyph: NOC.glyph.search_plus,
+            enableToggle: true,
             scope: me,
             handler: me.onShowQueryPanel
         });
@@ -82,7 +83,7 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
             handler: me.runQuery
         });
         me.helpButton = Ext.create("Ext.button.Button", {
-            text: __("Help"),
+            tooltip: __("Help"),
             glyph: NOC.glyph.question,
             scope: me,
             handler: me.onHelp
@@ -117,11 +118,18 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
                     scope: me,
                     change: function(field, value) {
                         this.runButton.setDisabled(!value);
-                    }
+                    },
+                    run: me.runQuery
                 }
             }],
             tbar: [
                 me.runButton,
+                {
+                    xtype: "checkbox",
+                    itemId: "cleanup",
+                    checked   : true,
+                    boxLabel  : __("Cleanup")
+                },
                 "->",
                 me.helpButton
             ]
@@ -284,7 +292,11 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
             method: "POST",
             scope: me,
             jsonData: {
-                query: me.queryPanel.down("[itemId=query]").getValue()
+                query: Ext.String.trim(
+                    me.queryPanel.down("[itemId=query]").getValue()
+                ),
+                // dump: true,
+                cleanup: me.queryPanel.down("[itemId=cleanup]").getValue()
             },
             success: function(response) {
                 var data = Ext.decode(response.responseText);
