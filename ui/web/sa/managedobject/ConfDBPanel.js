@@ -73,7 +73,13 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
             glyph: NOC.glyph.search_plus,
             enableToggle: true,
             scope: me,
-            handler: me.onShowQueryPanel
+            handler: me.onToggleQueryPanel
+        });
+        me.cleanupButton = Ext.create("Ext.button.Button", {
+            text: __("Cleanup"),
+            glyph: NOC.glyph.eraser,
+            enableToggle: true,
+            pressed: true
         });
         me.runButton = Ext.create("Ext.button.Button", {
             text: __("Run"),
@@ -81,6 +87,12 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
             disabled: true,
             scope: me,
             handler: me.runQuery
+        });
+        me.closeQueryButton = Ext.create("Ext.button.Button", {
+            tooltip: __("Close Query"),
+            glyph: NOC.glyph.times,
+            scope: me,
+            handler: me.onCloseQuery
         });
         me.helpButton = Ext.create("Ext.button.Button", {
             tooltip: __("Help"),
@@ -100,6 +112,7 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
                 me.refreshButton,
                 "-",
                 me.queryButton,
+                me.cleanupButton,
                 "->",
                 me.searchField,
                 me.matchField
@@ -124,12 +137,7 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
             }],
             tbar: [
                 me.runButton,
-                {
-                    xtype: "checkbox",
-                    itemId: "cleanup",
-                    checked   : true,
-                    boxLabel  : __("Cleanup")
-                },
+                me.closeQueryButton,
                 "->",
                 me.helpButton
             ]
@@ -259,7 +267,7 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
         me.leafCount();
     },
     //
-    onShowQueryPanel: function() {
+    onToggleQueryPanel: function() {
         var me = this;
         if(me.rightPanel.isHidden()) {
             me.rightPanel.show();
@@ -270,6 +278,12 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
     //
     onHelp: function() {
         console.log("show help, not implemented");
+    },
+    //
+    onCloseQuery: function() {
+        var me = this;
+        me.queryButton.setPressed(false);
+        me.onToggleQueryPanel();
     },
     //
     leafCount: function() {
@@ -285,19 +299,18 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
     },
     //
     runQuery: function() {
-        var me = this;
+        var me = this, query = {dump: true};
         me.mask(__("Querying ..."));
+        query["cleanup"] = me.cleanupButton.pressed;
+        query["query"] = Ext.String.trim(
+            me.queryPanel.down("[itemId=query]").getValue()
+        );
+        console.log(query);
         Ext.Ajax.request({
             url: me.url,
             method: "POST",
             scope: me,
-            jsonData: {
-                query: Ext.String.trim(
-                    me.queryPanel.down("[itemId=query]").getValue()
-                ),
-                // dump: true,
-                cleanup: me.queryPanel.down("[itemId=cleanup]").getValue()
-            },
+            jsonData: query,
             success: function(response) {
                 var data = Ext.decode(response.responseText);
                 me.unmask();
