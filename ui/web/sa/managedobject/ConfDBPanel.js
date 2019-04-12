@@ -187,8 +187,9 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
                     node.children.push(r)
                 })
             };
+        me.store.removeAll();
         applyNode(result, data);
-        me.store.setRootNode(result)
+        me.store.setRootNode(result);
     },
     //
     preview: function(record, backItem) {
@@ -198,7 +199,7 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
         me.confDBPanel.mask();
         me.url = "/sa/managedobject/" + record.get("id") + "/confdb/";
         Ext.Ajax.request({
-            url: me.url,
+            url: me.cleanupButton.pressed ? me.url + "?cleanup=true" : me.url,
             method: "GET",
             scope: me,
             success: function(response) {
@@ -215,7 +216,11 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
     //
     onRefresh: function() {
         var me = this;
-        me.preview(me.currentRecord);
+        if(me.queryButton.pressed) {
+            me.runQuery();
+        } else {
+            me.preview(me.currentRecord);
+        }
     },
     //
     onSpecialKey: function(field, key) {
@@ -305,7 +310,6 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
         query["query"] = Ext.String.trim(
             me.queryPanel.down("[itemId=query]").getValue()
         );
-        console.log(query);
         Ext.Ajax.request({
             url: me.url,
             method: "POST",
@@ -317,6 +321,7 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
                 if(data.status) {
                     me.resultPanel.destroy();
                     me.rightPanel.add(me.resultPanel = this.createResultPanel(data.result));
+                    me.setConfDB(data.confdb);
                 } else {
                     NOC.error(data.error);
                 }
