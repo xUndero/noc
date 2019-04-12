@@ -669,7 +669,7 @@ class ManagedObjectApplication(ExtModelApplication):
         cleanup = True
         if "cleanup" in request.GET:
             c = request.GET["cleanup"].strip().lower()
-            cleanup = not c in ("no", "false", "0")
+            cleanup = c not in ("no", "false", "0")
         cdb = o.get_confdb(cleanup=cleanup)
         return self.render_plain_text(cdb.dump("json"), mimetype="text/json")
 
