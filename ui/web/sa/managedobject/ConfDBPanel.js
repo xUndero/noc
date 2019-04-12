@@ -75,11 +75,12 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
             scope: me,
             handler: me.onToggleQueryPanel
         });
-        me.cleanupButton = Ext.create("Ext.button.Button", {
-            text: __("Cleanup"),
-            glyph: NOC.glyph.eraser,
-            enableToggle: true,
-            pressed: true
+        me.cleanupButton = Ext.create({
+            xtype: "checkbox",
+            boxLabel: __("Cleanup"),
+            scope: me,
+            checked: true,
+            handler: me.onRefresh
         });
         me.runButton = Ext.create("Ext.button.Button", {
             text: __("Run"),
@@ -110,8 +111,8 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
             tbar: [
                 me.getCloseButton(),
                 me.refreshButton,
-                "-",
                 me.queryButton,
+                "-",
                 me.cleanupButton,
                 "->",
                 me.searchField,
@@ -199,7 +200,7 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
         me.confDBPanel.mask();
         me.url = "/sa/managedobject/" + record.get("id") + "/confdb/";
         Ext.Ajax.request({
-            url: me.cleanupButton.pressed ? me.url + "?cleanup=true" : me.url,
+            url: me.url + "?cleanup=" + me.cleanupButton.value,
             method: "GET",
             scope: me,
             success: function(response) {
@@ -306,7 +307,7 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
     runQuery: function() {
         var me = this, query = {dump: true};
         me.mask(__("Querying ..."));
-        query["cleanup"] = me.cleanupButton.pressed;
+        query["cleanup"] = me.cleanupButton.value;
         query["query"] = Ext.String.trim(
             me.queryPanel.down("[itemId=query]").getValue()
         );
