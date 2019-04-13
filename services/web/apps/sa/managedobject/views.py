@@ -666,7 +666,11 @@ class ManagedObjectApplication(ExtModelApplication):
         o = self.get_object_or_404(ManagedObject, id=id)
         if not o.has_access(request.user):
             return self.response_forbidden("Access denied")
-        cdb = o.get_confdb()
+        cleanup = True
+        if "cleanup" in request.GET:
+            c = request.GET["cleanup"].strip().lower()
+            cleanup = c not in ("no", "false", "0")
+        cdb = o.get_confdb(cleanup=cleanup)
         return self.render_plain_text(cdb.dump("json"), mimetype="text/json")
 
     @view(
