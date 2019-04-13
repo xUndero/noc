@@ -151,6 +151,8 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
             width: "30%",
             split: true,
             hidden: true,
+            stateful: true,
+            stateId: "sa.confdb.right",
             items: [
                 me.queryPanel,
                 me.resultPanel
@@ -346,8 +348,9 @@ Ext.define("NOC.sa.managedobject.ConfDBPanel", {
                 xtype: "panel",
                 region: "south",
                 height: "70%",
-                split: true
-
+                split: true,
+                stateful: true,
+                stateId: "sa.confdb.query"
             };
         if(data) {
             Ext.each(data, function(e) {
