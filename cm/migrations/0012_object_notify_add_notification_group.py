@@ -13,7 +13,7 @@ from django.db import models
 
 
 class Migration(object):
-    depends_on = (("main", "0017_initial_userprofileacontacts"),)
+    depends_on = (("main", "0017_initial_userprofilecontacts"),)
 
     def forwards(self):
         NotificationGroup = db.mock_model(
