@@ -1413,6 +1413,10 @@ class PolicyDiscoveryCheck(DiscoveryCheck):
     def request_data_from_confdb(self):
         self.logger.info("Requesting data from ConfDB")
         self.confdb = self.get_artefact("confdb")
+        if not self.confdb:
+            self.logger.info("Building ConfDB")
+            self.confdb = self.object.get_confdb()
+            self.set_artefact("confdb", self.confdb)
         return self.get_data_from_confdb()
 
     def get_data_from_confdb(self):
