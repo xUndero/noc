@@ -1,0 +1,49 @@
+FROM alpine:3.8
+
+MAINTAINER Aleksey Shirokih <shirokih@nocproject.org>
+
+WORKDIR /opt/noc
+
+ENV\
+    DJANGO_SETTINGS_MODULE=noc.settings \
+    PYTHONPATH=/opt/noc:/opt:/usr/bin/python2.7
+
+
+RUN apk add --update --no-cache \
+    ca-certificates \
+    libpq libssh2 \
+    mercurial \
+    py-cffi \
+    py-numpy \
+    py-pip \
+    snappy \
+    tzdata \
+    curl
+
+COPY requirements/ /opt/noc/requirements
+
+RUN apk add --no-cache\
+        curl \
+        cyrus-sasl-dev \
+        cython \
+        cython-dev \
+        gcc \
+        libffi-dev \
+        libmemcached-dev \
+        libressl-dev \
+        libssh2-dev \
+        musl-dev \
+        postgresql-dev \
+        python-dev \
+        tar \
+        zlib-dev \
+    && pip install --no-cache --trusted-host cdn.getnoc.com --find-links https://cdn.getnoc.com/npkg/ --upgrade -r requirements/docker.txt \
+    && pip install --no-cache --upgrade -r requirements/test.txt
+
+COPY files/sitecustomize.py /usr/lib/python2.7/site-packages/sitecustomize.py
+COPY files/site.py /usr/lib/python2.7/site-packages/site.py
+
+EXPOSE 1200
+
+VOLUME /opt/noc
+VOLUME /usr/lib/python2.7/site-packages/django
