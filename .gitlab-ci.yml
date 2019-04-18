@@ -1,3 +1,4 @@
+---
 stages:
   - lint
   - test
@@ -10,7 +11,7 @@ flake8:
     - FLIST=$(git --no-pager diff --name-only $(git rev-parse --abbrev-ref HEAD) $(git merge-base origin/HEAD HEAD) |egrep ".py$" || true)
     - if [ ! -z "$FLIST" ]; then flake8 $FLIST; else true; fi
   except:
-    - microservices
+    - master
   tags:
     - docker
 
@@ -26,7 +27,7 @@ yapf:
   allow_failure: true
 
 # waiting for https://github.com/rubik/xenon/issues/21
-radon:
+xenon:
   stage: lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
@@ -37,7 +38,7 @@ radon:
     - if [ ! -z "$FLIST" ]; then for i in "${FLIST}" ; do (xenon --max-absolute B --max-modules B --max-average B "$i"; let x+=$?); done; fi
     - if [ "$x" -gt 0 ] ; then exit 1; fi
   except:
-    - microservices
+    - master
   tags:
     - docker
   allow_failure: true
@@ -50,7 +51,7 @@ pylint:
     - FLIST=$(git --no-pager diff --name-only $(git rev-parse --abbrev-ref HEAD) $(git merge-base origin/HEAD HEAD) |egrep ".py$" || true)
     - if [ ! -z "$FLIST" ]; then pylint "$FLIST" ; else true; fi
   except:
-    - microservices
+    - master
   tags:
     - docker
 
@@ -61,7 +62,7 @@ futurize:
     - FLIST=$(git --no-pager diff --name-only $(git rev-parse --abbrev-ref HEAD) $(git merge-base origin/HEAD HEAD) |egrep ".py$" || true)
     - /bin/future.sh "$FLIST"
   except:
-    - microservices
+    - master
   tags:
     - docker
 
@@ -91,7 +92,7 @@ test_migrate:
     - python ./commands/migrate.py
     - python ./commands/migrate-ch.py
   only:
-    - microservices
+    - master
   tags:
     - docker
 
