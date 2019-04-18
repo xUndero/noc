@@ -17,6 +17,7 @@ contrib/lib/*
 contrib/bin/*
 contrib/share/*
 .*
+!/.docker/*
 !/.gitlab-ci.yml
 !/.gitignore
 !/.flake8
