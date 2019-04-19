@@ -3,11 +3,13 @@ FROM alpine:3.8
 MAINTAINER Aleksey Shirokih <shirokih@nocproject.org>
 
 WORKDIR /opt/noc
-
 ENV\
     DJANGO_SETTINGS_MODULE=noc.settings \
-    PYTHONPATH=/opt/noc:/opt:/usr/bin/python2.7
+    PYTHONPATH=/opt/noc:/opt:/usr/bin/python2.7 \
+    NOC_LISTEN="auto:1200"
 
+COPY requirements/docker.txt /opt/noc/requirements/docker.txt
+COPY requirements/test.txt /opt/noc/requirements/test.txt
 
 RUN apk add --update --no-cache \
     ca-certificates \
@@ -18,12 +20,8 @@ RUN apk add --update --no-cache \
     py-pip \
     snappy \
     tzdata \
-    curl
-
-COPY requirements/ /opt/noc/requirements
-
-RUN apk add --no-cache\
-        curl \
+    curl \
+   && apk add --no-cache --virtual .build-deps \
         cyrus-sasl-dev \
         cython \
         cython-dev \
@@ -35,13 +33,13 @@ RUN apk add --no-cache\
         musl-dev \
         postgresql-dev \
         python-dev \
-        tar \
-        zlib-dev \
-    && pip install --no-cache --trusted-host cdn.getnoc.com --find-links https://cdn.getnoc.com/npkg/ --upgrade -r requirements/docker.txt \
-    && pip install --no-cache --upgrade -r requirements/test.txt
+        zlib-dev
+RUN pip install --no-cache --trusted-host cdn.getnoc.com --find-links https://cdn.getnoc.com/npkg/ --upgrade -r /opt/noc/requirements/docker.txt \
+    && pip install --no-cache --trusted-host cdn.getnoc.com --find-links https://cdn.getnoc.com/npkg/ --upgrade -r /opt/noc/requirements/test.txt
 
-COPY files/sitecustomize.py /usr/lib/python2.7/site-packages/sitecustomize.py
-COPY files/site.py /usr/lib/python2.7/site-packages/site.py
+COPY . /opt/noc
+RUN find /opt/noc/ -type f -name "*.py" -print0 | xargs -0 python -m py_compile \
+    && /usr/bin/cythonize -i speedup/*.pyx \
 
 EXPOSE 1200
 

@@ -10,7 +10,7 @@ flake8:
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
     - set -x
-    - FLIST=$(git --no-pager diff --name-only $(git rev-parse --abbrev-ref HEAD) $(git merge-base origin/HEAD HEAD) |egrep ".py$" || true)
+    - FLIST=$(git --no-pager diff --name-only $(git rev-parse --abbrev-ref HEAD) $(git merge-base origin/HEAD HEAD) |egrep ".py$" | grep -v ".docker/"|| true)
     - if [ ! -z "$FLIST" ]; then flake8 $FLIST; else true; fi
   except:
     - master
@@ -61,7 +61,7 @@ futurize:
   stage: lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
-    - FLIST=$(git --no-pager diff --name-only $(git rev-parse --abbrev-ref HEAD) $(git merge-base origin/HEAD HEAD) |egrep ".py$" || true)
+    - FLIST=$(git --no-pager diff --name-only $(git rev-parse --abbrev-ref HEAD) $(git merge-base origin/HEAD HEAD) |egrep ".py$" | grep -v ".docker/" || true)
     - /bin/future.sh "$FLIST"
   except:
     - master
@@ -70,69 +70,17 @@ futurize:
 
 test_migrate:
   stage: test
-  image: registry.getnoc.com/noc/nocmc/microservices:build
-  variables:
-    NOC_PG_DB: noc
-    NOC_PG_USER: noc
-    NOC_PG_PASSWORD: noc
-    BRANCH: microservices
-  services:
-    - name: registry.getnoc.com/infrastructure/postgres:dev
-      alias: postgres
-    - name: registry.getnoc.com/infrastructure/mongo:dev
-      alias: mongo
-    - name: registry.getnoc.com/infrastructure/clickhouse:master
-      alias: clickhouse
   before_script:
-    - export NOC_PG_ADDRESSES=registry.getnoc.com-infrastructure-postgres:5432
-    - export NOC_MONGO_ADDRESSES=registry.getnoc.com-infrastructure-mongo:27017
-    - export NOC_CLICKHOUSE_RW_ADDRESSES=registry.getnoc.com-infrastructure-clickhouse:8123
-    - export PYTHONPATH=$PYTHONPATH:$CI_PROJECT_DIR:$CI_PROJECT_DIR/../
+    - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} up clickhouse postgres mongo
   script:
-    - find . -type f -name "*.py" -print0 | xargs -0 python -m py_compile
-    - /usr/bin/cythonize -i speedup/*.pyx
-    - python ./commands/migrate.py
-    - python ./commands/migrate-ch.py
+    - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} up migrate
+  after_script:
+    - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} down
+    - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} rm -v
   only:
     - master
   tags:
-    - docker
-
-test_noc:
-  stage: test
-  image: registry.getnoc.com/noc/nocmc/microservices:build
-  variables:
-    NOC_PG_DB: noc
-    NOC_PG_USER: noc
-    NOC_PG_PASSWORD: noc
-    BRANCH: microservices
-  services:
-    - name: registry.getnoc.com/infrastructure/postgres:master
-      alias: postgres
-    - name: registry.getnoc.com/infrastructure/mongo:master
-      alias: mongo
-    - name: registry.getnoc.com/infrastructure/clickhouse:master
-      alias: clickhouse
-  before_script:
-    - export NOC_PG_ADDRESSES=registry.getnoc.com-infrastructure-postgres:5432
-    - export NOC_MONGO_ADDRESSES=registry.getnoc.com-infrastructure-mongo:27017
-    - export NOC_CLICKHOUSE_RW_ADDRESSES=registry.getnoc.com-infrastructure-clickhouse:8123
-    - export PYTHONPATH=$PYTHONPATH:$CI_PROJECT_DIR:$CI_PROJECT_DIR/../
-  script:
-    - mkdir -p ./var/coverage ./var/report
-    - find . -type f -name "*.py" -print0 | xargs -0 python -m py_compile
-    - /usr/bin/cythonize -i speedup/*.pyx
-    - python ./commands/test.py run --coverage-report=./var/coverage --test-report=./var/report/index.html --statistics
-  tags:
-    - docker
-  artifacts:
-    paths:
-      - ./var/coverage
-      - ./var/report
-    when: always
-    expire_in: 1 week
-    untracked: false
-  allow_failure: true
+    - shell
 
 Build release image:
   stage: Build release container
@@ -156,7 +104,7 @@ Build nginx image:
     - export CONTAINER_NAME=$CI_REGISTRY_IMAGE/static:$CI_COMMIT_TAG
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker build --no-cache --build-arg IMAGE=$CI_REGISTRY_IMAGE/code:$CI_COMMIT_TAG -t ${CONTAINER_NAME} -f Dockerfile.nginx .
+    - docker build --no-cache --build-arg IMAGE=$CI_REGISTRY_IMAGE/code:$CI_COMMIT_TAG -t ${CONTAINER_NAME} -f Dockerfile.static .
     - docker push ${CONTAINER_NAME}
     - docker rmi ${CONTAINER_NAME}
   tags:
