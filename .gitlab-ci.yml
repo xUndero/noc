@@ -74,7 +74,8 @@ test_migrate:
     - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} up -d clickhouse postgres mongo
   script:
     # see docker/docker-compose.yml fro complete list of migration
-    - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} up migrate
+    - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} build migrate
+    - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} --exit-code-from migrate up migrate
   after_script:
     - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} down
     - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} rm -v
