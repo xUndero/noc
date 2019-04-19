@@ -41,10 +41,10 @@ services:
       && /usr/bin/python ./commands/migrate.py
       && /usr/bin/python ./commands/migrate-ch.py
       && /usr/bin/python ./scripts/deploy/install-packages requirements/collections.json
-      && ./noc ensure-indexes
       && ./noc collection sync
       && ./noc sync-perm
-      && ./noc sync-mibs"
+      && ./noc sync-mibs
+      && ./noc ensure-indexes"
     env_file:
       - noc.conf
 
