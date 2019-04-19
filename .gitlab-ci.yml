@@ -77,8 +77,6 @@ test_migrate:
   after_script:
     - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} down
     - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} rm -v
-  only:
-    - master
   tags:
     - shell
 
