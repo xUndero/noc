@@ -75,7 +75,7 @@ test_migrate:
   script:
     # see docker/docker-compose.yml fro complete list of migration
     - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} build migrate
-    - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} --exit-code-from migrate up migrate
+    - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} up --exit-code-from migrate migrate
   after_script:
     - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} down
     - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} rm -v
