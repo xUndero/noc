@@ -71,7 +71,7 @@ futurize:
 test_migrate:
   stage: test
   before_script:
-    - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} up clickhouse postgres mongo
+    - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} up -d clickhouse postgres mongo
   script:
     - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} up migrate
   after_script:
