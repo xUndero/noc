@@ -54,6 +54,7 @@ services:
       context: ../
       dockerfile: .docker/Dockerfile.build
     restart: "no"
+    working_dir: /opt/noc
     depends_on:
       postgres:
         condition: service_healthy
@@ -63,7 +64,11 @@ services:
         condition: service_started
       nsqd:
         condition: service_started
-    command: ./noc test run --coverage-report=var/coverage --test-report=var/test_report/index.html
+    command: ./noc test run --coverage-report=/opt/noc/var/coverage --test-report=/opt/noc/var/test_report/index.html
+    volumes:
+      - ../var:/opt/noc/var
+    environment:
+      NOC_TEST_DB: noc_tests
     env_file:
       - noc.conf
 
