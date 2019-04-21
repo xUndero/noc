@@ -6,7 +6,8 @@ WORKDIR /opt/noc
 ENV\
     DJANGO_SETTINGS_MODULE=noc.settings \
     PYTHONPATH=/opt/noc:/opt:/usr/bin/python2.7 \
-    NOC_LISTEN="auto:1200"
+    NOC_THREAD_STACK_SIZE=524288 \
+    NOC_PYTHON_INTERPRETER=/usr/bin/python
 
 COPY requirements/docker.txt /opt/noc/requirements/docker.txt
 COPY requirements/test.txt /opt/noc/requirements/test.txt
@@ -40,8 +41,3 @@ RUN pip install --no-cache --trusted-host cdn.getnoc.com --find-links https://cd
 COPY . /opt/noc
 RUN find /opt/noc/ -type f -name "*.py" -print0 | xargs -0 python -m py_compile \
     && /usr/bin/cythonize -i speedup/*.pyx
-
-EXPOSE 1200
-
-VOLUME /opt/noc
-VOLUME /usr/lib/python2.7/site-packages/django
