@@ -83,7 +83,14 @@ Test:
     - docker-compose -f .docker/docker-compose.yml -p ${CI_COMMIT_REF_SLUG} rm -v
   tags:
     - shell
-
+  artifacts:
+    paths:
+      - ./var/coverage
+      - ./var/report
+    when: always
+    expire_in: 1 week
+    untracked: false
+  allow_failure: true
 
 Build release image:
   stage: Build release container
