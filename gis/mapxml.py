@@ -122,11 +122,13 @@ def map_to_xml(m, pretty_xml=False):
         ds = l.datasource.copy()
         if ds["type"] == "postgis" and ds["dbname"] == "":
             # Use NOC's database credentials
-            ds["dbname"] = config.get("database", "name")
-            ds["host"] = config.get("database", "host")
-            ds["port"] = config.get("database", "port")
-            ds["user"] = config.get("database", "user")
-            ds["password"] = config.get("database", "password")
+            host = config.pg.addresses
+            host, port = host.split(":")
+            ds["dbname"] = config.pg.db
+            ds["host"] = host
+            ds["port"] = port
+            ds["user"] = config.pg.user
+            ds["password"] = config.pg.password
         for k in ds:
             # <Parameter>
             tt = doc.createElement("Parameter")
