@@ -84,7 +84,7 @@ class Command(BaseCommand):
             for c in partition_claimed:
                 table, part = c[0], c[1]
                 if table.startswith(".inner"):
-                    table = table.split(".", 2)[2]
+                    table = table[7:]
                 ch.execute("ALTER TABLE %s.%s DROP PARTITION '%s'" % (config.clickhouse.db, table, part))
             self.print("# Done. %d bytes to be reclaimed" % claimed_bytes)
 
