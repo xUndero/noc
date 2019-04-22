@@ -9,7 +9,7 @@
 # NOC modules
 from __future__ import absolute_import
 from noc.lib.validators import is_int
-from noc.config import config
+from noc.settings import config
 
 
 class BaseParser(object):
