@@ -11,11 +11,11 @@ from __future__ import absolute_import
 import datetime
 import difflib
 import zlib
+import struct
 # Third-party modules
 import pymongo
 import gridfs
 import gridfs.errors
-from mercurial.mdiff import patch
 import bsdiff4
 # NOC modules
 from noc.lib.nosql import get_db, ObjectId
@@ -67,12 +67,25 @@ class GridVCS(object):
 
     def apply_delta_b(self, src, delta):
         """
-        Mercurial bdiff
+        Mercurial mdiff. Slow python implementation ported from Mercurial 0.4.
+        For legacy installations support only
         :param src:
         :param delta:
         :return:
         """
-        return patch(src, delta)
+        last = pos = 0
+        r = []
+        d_len = len(delta)
+
+        while pos < d_len:
+            p1, p2, l = struct.unpack(">lll", delta[pos:pos + 12])
+            pos += 12
+            r.append(src[last:p1])
+            r.append(delta[pos:pos + l])
+            pos += l
+            last = p2
+        r.append(src[last:])
+        return "".join(r)
 
     def apply_delta_B(self, src, delta):
         """
