@@ -36,8 +36,12 @@ class Profile(BaseProfile):
         "line_comment": "#",
         "inline_comment": "##",
         "explicit_eol": ";",
-        "string_quote": "\""
+        # "string_quote": "\""
     }
+    config_normalizer = "JunOSNormalizer"
+    confdb_defaults = [
+        ("hints", "interfaces", "defaults", "admin-status", True)
+    ]
     default_parser = "noc.cm.parsers.Juniper.JUNOS.base.BaseJUNOSParser"
 
     matchers = {
@@ -186,3 +190,28 @@ class Profile(BaseProfile):
             cached=True, ignore_errors=True
         )
         return ("show " + cmd in c) and ("error: nothing matches" not in c)
+
+    @classmethod
+    def get_interface_type(cls, name):
+        if name.startswith("lo"):
+            iftype = "loopback"
+        elif name.startswith(("fxp", "me")):
+            iftype = "management"
+        elif name.startswith(("ae", "reth", "fab", "swfab")):
+            iftype = "aggregated"
+        elif name.startswith(("vlan", "vme")):
+            iftype = "SVI"
+        elif name.startswith("irb"):
+            iftype = "SVI"
+        elif name.startswith(("fc", "fe", "ge", "xe", "sxe", "xle", "et", "fte")):
+            iftype = "physical"
+        elif name.startswith(("gr", "ip", "st")):
+            iftype = "tunnel"
+        elif name.startswith("em"):
+            if cls.is_work_em:
+                iftype = "physical"
+            else:
+                iftype = "management"
+        else:
+            iftype = "unknown"
+        return iftype
