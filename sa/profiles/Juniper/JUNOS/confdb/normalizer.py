@@ -73,13 +73,6 @@ class JunOSNormalizer(BaseNormalizer):
             instance=tokens[1]
         )
 
-        yield self.rebase(
-            ("virtual-router", "default", "forwarding-instance", tokens[1], "interfaces",
-             self.interface_name(tokens[3])),
-            ("virtual-router", "default", "forwarding-instance", "default", "interfaces",
-             self.interface_name(tokens[3]))
-        )
-
     @match("routing-instances", ANY, "route-distinguisher", ANY)
     def normalize_routing_instances_rd(self, tokens):
         yield self.make_forwarding_instance_rd(
