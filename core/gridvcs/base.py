@@ -78,11 +78,11 @@ class GridVCS(object):
         d_len = len(delta)
 
         while pos < d_len:
-            p1, p2, l = struct.unpack(">lll", delta[pos:pos + 12])
+            p1, p2, p_len = struct.unpack(">lll", delta[pos:pos + 12])
             pos += 12
             r.append(src[last:p1])
-            r.append(delta[pos:pos + l])
-            pos += l
+            r.append(delta[pos:pos + p_len])
+            pos += p_len
             last = p2
         r.append(src[last:])
         return "".join(r)
