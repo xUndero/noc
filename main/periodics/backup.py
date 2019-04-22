@@ -69,7 +69,7 @@ class Task(PeriodicTask):
                 bdate = datetime.datetime(year=int(match.group("year")),
                                           month=int(match.group("month")),
                                           day=int(match.group("day")))
-            except Exception:
+            except:  # noqa
                 continue
             # Filter out actual backups
             delta = now - bdate
@@ -93,12 +93,12 @@ class Task(PeriodicTask):
         if os.path.isdir(path):
             try:
                 shutil.rmtree(path)
-            except Exception:
+            except:  # noqa
                 pass
         else:
             try:
                 os.unlink(path)
-            except Exception:
+            except:  # noqa
                 pass
 
     def subprocess_call(self, cmd, env=None):
@@ -242,6 +242,7 @@ class Task(PeriodicTask):
         return self.tar(etc_out, files)
 
     def execute(self):
+        # from django.conf import settings
 
         if not self.check_paths():
             return False

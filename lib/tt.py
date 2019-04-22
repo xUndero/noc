@@ -5,7 +5,7 @@
 # ---------------------------------------------------------------------
 
 # NOC modules
-from noc.config import config
+from noc.settings import config
 
 
 def tt_url(self):
