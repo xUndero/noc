@@ -10,7 +10,7 @@
 from __future__ import absolute_import
 import difflib
 # Third-party modules
-from core.model.fields import AutoCompleteTagsField
+from noc.core.model.fields import TagsField
 from django.db import models
 # NOC modules
 from noc.lib.app.site import site
@@ -45,7 +45,7 @@ class KBEntry(models.Model):
                                  limit_choices_to={"is_active": True})
     markup_language = models.CharField("Markup Language", max_length="16",
                                        choices=loader.choices)
-    tags = AutoCompleteTagsField("Tags", null=True, blank=True)
+    tags = TagsField("Tags", null=True, blank=True)
 
     def __unicode__(self):
         if self.id:
@@ -75,6 +75,7 @@ class KBEntry(models.Model):
         """
         Returns latest KBEntryHistory record
         """
+        from .kbentryhistory import KBEntryHistory
         d = KBEntryHistory.objects.filter(kb_entry=self).order_by("-timestamp")[:1]
         if d:
             return d[0]
@@ -149,21 +150,6 @@ class KBEntry(models.Model):
     def has_visible_attachments(self):
         return self.kbentryattachment_set.filter(is_hidden=False).exists()
 
-    def save(self, user=None, timestamp=None):
-        """
-        save model, compute body's diff and save event history
-        """
-        if self.id:
-            old_body = KBEntry.objects.get(id=self.id).body
-        else:
-            old_body = ""
-        super(KBEntry, self).save()
-        if old_body != self.body:
-            diff = "\n".join(difflib.unified_diff(self.body.splitlines(),
-                                                  old_body.splitlines()))
-            KBEntryHistory(kb_entry=self, user=user, diff=diff,
-                           timestamp=timestamp).save()
-
     def is_bookmarked(self, user=None):
         """
         Check has KBEntry any bookmarks
@@ -193,7 +179,3 @@ class KBEntry(models.Model):
         from .kbuserbookmark import KBUserBookmark
         for b in KBUserBookmark.objects.filter(kb_entry=self, user=user):
             b.delete()
-
-
-# Avoid circular references
-from .kbentryhistory import KBEntryHistory
