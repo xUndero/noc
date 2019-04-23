@@ -12,6 +12,46 @@ from noc.core.confdb.normalizer.base import BaseNormalizer, match, ANY, REST, de
 
 class JunOSNormalizer(BaseNormalizer):
 
+    @match("system", "host-name", ANY)
+    @match("groups", ANY, "system", "host-name", ANY)
+    def normalize_hostname(self, tokens):
+        if tokens[0] == "groups":
+            yield self.make_hostname(hostname=tokens[4])
+        else:
+            yield self.make_hostname(hostname=tokens[2])
+
+    @match("system", "domain-name", ANY)
+    def normalize_domain_name(self, tokens):
+        yield self.make_domain_name(domain_name=tokens[4])
+
+    @match("system", "services", "http")
+    def normalize_http_server(self, tokens):
+        yield self.make_protocols_http()
+
+    @match("system", "services", "https")
+    def normalize_https_server(self, tokens):
+        yield self.make_protocols_https()
+
+    @match("system", "login", "user", ANY, "class", ANY)
+    def normalize_username_access_level(self, tokens):
+        yield self.make_user_class(
+            username=tokens[3],
+            class_name="level-%s" % tokens[5]
+        )
+
+    @match("vlans", ANY, "vlan-id", ANY)
+    def normalize_vlan_name(self, tokens):
+        yield self.make_vlan_name(
+            vlan_id=tokens[3],
+            name=tokens[1])
+
+    # @match("vlans", ANY, "description", REST)
+    # def normalize_vlan_description(self, tokens):
+    #     yield self.make_vlan_description(
+    #         vlan_id=tokens[1],
+    #         description=" ".join(tokens[3:])
+    #     )
+
     @match("interfaces", ANY)
     def normalize_interface(self, tokens):
         if_name = self.interface_name(tokens[1])
@@ -42,7 +82,7 @@ class JunOSNormalizer(BaseNormalizer):
         )
 
     @match("interfaces", ANY, "unit", ANY, "family", "inet", "address", ANY)
-    def normalize_vlan_ip(self, tokens):
+    def normalize_sub_interface_ip(self, tokens):
         if_name = "%s.%s" % (self.interface_name(tokens[1]), tokens[3])
         yield self.defer(
             "fi.iface.%s" % self.interface_name(if_name),
@@ -111,11 +151,10 @@ class JunOSNormalizer(BaseNormalizer):
             instance=tokens[1],
             target=tokens[4][7:]
         )
-    """
+
     @match("routing-instances", ANY, "description", REST)
-    def normalize_interface_routing_instances(self, tokens):
+    def normalize_routing_instances_description(self, tokens):
         yield self.make_forwarding_instance_description(
             instance=tokens[1],
             description=" ".join(tokens[3:])
         )
-    """
