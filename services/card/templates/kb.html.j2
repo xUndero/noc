@@ -1,0 +1,10 @@
+<body>
+<div id="card-banner"><b>{{ brand }} |</b> {{ installation_name }}</div>
+<ul id="result">
+    {% for o in object.objects.filter()  %}
+    <li>
+        <a href='/api/card/view/kb/{{ o.id  }}/'>{{ o.subject }}</a>
+    </li>
+    {% endfor %}
+</ul>
+</body>
