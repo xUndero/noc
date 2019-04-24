@@ -6,8 +6,6 @@
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
-import datetime
-import difflib
 # NOC modules
 from noc.lib.app.extmodelapplication import ExtModelApplication, view
 from noc.kb.models.kbentry import KBEntry
@@ -27,32 +25,6 @@ class KBEntryApplication(ExtModelApplication):
         r = super(KBEntryApplication, self).instance_to_dict(o, fields=fields)
         del r["body"]
         return r
-
-    def can_create(self, user, obj):
-        """
-        save model, compute body's diff and save event history
-        """
-        old_body = ""
-        if hasattr(obj, "id"):
-            old_body = KBEntry.objects.filter(id=obj.id)[1:]
-        timestamp = datetime.datetime.now()
-        if old_body != obj.body:
-            diff = "\n".join(difflib.unified_diff(obj.body.splitlines(),
-                                                  old_body.splitlines()))
-            KBEntryHistory(kb_entry=self, user=user, diff=diff,
-                           timestamp=timestamp).save()
-
-        return True
-
-    def can_update(self, user, obj):
-        """
-        Check user can update object. Used to additional
-        restrictions after permissions check
-        :param user:
-        :param obj: Object instance
-        :return: True if access granted
-        """
-        return True
 
     @view(r"^(?P<id>\d+)/history/$", access="read", api=True)
     def api_get_entry_history(self, request, id):
