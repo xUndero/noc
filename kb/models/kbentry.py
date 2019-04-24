@@ -8,7 +8,9 @@
 
 # Python modules
 from __future__ import absolute_import
+import datetime
 # Third-party modules
+import difflib
 from noc.core.model.fields import TagsField
 from django.db import models
 # NOC modules
@@ -43,7 +45,7 @@ class KBEntry(models.Model):
     language = models.ForeignKey(Language, verbose_name="Language",
                                  limit_choices_to={"is_active": True})
     markup_language = models.CharField("Markup Language", max_length="16",
-                                       choices=list(loader))
+                                       choices=[(x, x) for x in loader])
     tags = TagsField("Tags", null=True, blank=True)
 
     def __unicode__(self):
@@ -54,6 +56,24 @@ class KBEntry(models.Model):
 
     def get_absolute_url(self):
         return site.reverse("kb:view:view", self.id)
+
+    def save(self, force_insert=False, force_update=False, using=None):
+        """
+        save model, compute body's diff and save event history
+        """
+        from noc.core.middleware.tls import get_user
+        from noc.kb.models.kbentryhistory import KBEntryHistory
+
+        user = get_user()
+        if self.id:
+            old_body = KBEntry.objects.get(id=self.id).body
+        else:
+            old_body = ""
+        super(KBEntry, self).save()
+        if old_body != self.body:
+            diff = "\n".join(difflib.unified_diff(self.body.splitlines(), old_body.splitlines()))
+            KBEntryHistory(kb_entry=self, user=user, diff=diff,
+                           timestamp=datetime.datetime.now().replace(microsecond=0)).save()
 
     @property
     def parser(self):
