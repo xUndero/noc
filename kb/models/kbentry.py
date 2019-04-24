@@ -43,7 +43,7 @@ class KBEntry(models.Model):
     language = models.ForeignKey(Language, verbose_name="Language",
                                  limit_choices_to={"is_active": True})
     markup_language = models.CharField("Markup Language", max_length="16",
-                                       choices=loader.choices)
+                                       choices=list(loader))
     tags = TagsField("Tags", null=True, blank=True)
 
     def __unicode__(self):
@@ -60,7 +60,7 @@ class KBEntry(models.Model):
         """
         Wiki parser class
         """
-        return loader.get_parser(self.markup_language)
+        return loader[self.markup_language]
 
     @property
     def html(self):

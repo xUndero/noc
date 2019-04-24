@@ -22,7 +22,7 @@ class KBEntryTemplate(models.Model):
     """
     KB Entry Template
     """
-    class Meta:
+    class Meta(object):
         verbose_name = "KB Entry Template"
         verbose_name_plural = "KB Entry Templates"
         app_label = "kb"
@@ -35,7 +35,7 @@ class KBEntryTemplate(models.Model):
     language = models.ForeignKey(Language, verbose_name="Language",
                                  limit_choices_to={"is_active": True})
     markup_language = models.CharField("Markup Language", max_length="16",
-                                       choices=loader.choices)
+                                       choices=list(loader))
     tags = AutoCompleteTagsField("Tags", null=True, blank=True)
 
     rx_template_var = re.compile("{{([^}]+)}}", re.MULTILINE)
