@@ -8,7 +8,7 @@ console.debug("Defining NOC.kb.kbentry2.Model");
 
 Ext.define("NOC.kb.kbentry2.Model", {
     extend: "Ext.data.Model",
-    rest_url: "/kb/kbentry2/",
+    rest_url: "/kb/kbentry/",
 
     fields: [
         {

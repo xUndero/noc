@@ -68,4 +68,3 @@ class KBEntryApplication(ExtModelApplication):
     @view(r"^most_popular/$", access="read", api=True)
     def api_get_most_popular(self, request):
         return KBEntry.most_popular()
-

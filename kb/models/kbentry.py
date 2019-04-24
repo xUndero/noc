@@ -8,7 +8,6 @@
 
 # Python modules
 from __future__ import absolute_import
-import difflib
 # Third-party modules
 from noc.core.model.fields import TagsField
 from django.db import models

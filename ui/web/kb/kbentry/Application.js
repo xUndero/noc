@@ -1,19 +1,19 @@
 //---------------------------------------------------------------------
-// inv.inv application
+// kb.kbentry application
 //---------------------------------------------------------------------
 // Copyright (C) 2007-2013 The NOC Project
 // See LICENSE for details
 //---------------------------------------------------------------------
-console.debug("Defining NOC.kb.kbentry2.Application");
+console.debug("Defining NOC.kb.kbentry.Application");
 
-Ext.define("NOC.kb.kbentry2.Application", {
+Ext.define("NOC.kb.kbentry.Application", {
     extend: "NOC.core.ModelApplication",
     layout: "card",
     requires: [
-        "NOC.kb.kbentry2.Model",
+        "NOC.kb.kbentry.Model",
         "NOC.main.language.LookupField"
     ],
-    model: "NOC.kb.kbentry2.Model",
+    model: "NOC.kb.kbentry.Model",
     search: true,
     initComponent: function() {
         var me = this;
