@@ -41,7 +41,7 @@ class Script(BaseScript):
         r = []
         try:
             self.snmp.get("1.3.6.1.4.1.27514.100.1.11.11.0")
-            r += ["SNMP | memory_usage"]
+            r += ["Qtech | OID | Memory Usage 11"]
         except self.snmp.TimeOutError:
             pass
         return r
