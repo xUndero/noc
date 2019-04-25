@@ -37,6 +37,14 @@ class Script(BaseScript):
                 return True
         except self.snmp.TimeOutError:
             return False
+    def has_snmp_memory(self):
+        r = []
+        try:
+            self.snmp.get("1.3.6.1.4.1.27514.100.1.11.11.0")
+            r += ["SNMP | memory_usage"]
+        except self.snmp.TimeOutError:
+            pass
+        return r
 
     @false_on_cli_error
     def has_stp_cli(self):
