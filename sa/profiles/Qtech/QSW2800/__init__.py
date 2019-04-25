@@ -56,7 +56,7 @@ class Profile(BaseProfile):
     matchers = {
         "is_new_metric": {
              "caps": {
-                "$in": ["SNMP | memory_usage"]
+                "$in": ["Qtech | OID | Memory Usage 11"]
                     }
         }
     }
