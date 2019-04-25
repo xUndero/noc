@@ -101,7 +101,7 @@ class KBEntry(models.Model):
         return None
 
     @classmethod
-    def last_modified(self, num=20):
+    def last_modified(cls, num=20):
         """
         Returns a list of last modified KB Entries
         """
@@ -132,7 +132,7 @@ class KBEntry(models.Model):
         return self.kbentrypreviewlog_set.count()
 
     @classmethod
-    def most_popular(self, num=20):
+    def most_popular(cls, num=20):
         """
         Returns most popular articles
         """
@@ -181,20 +181,3 @@ class KBEntry(models.Model):
         return (user and
                 KBUserBookmark.objects.filter(kb_entry=self,
                                               user=user).exists())
-
-    def set_user_bookmark(self, user):
-        """
-        Set user bookmark
-        """
-        from .kbuserbookmark import KBUserBookmark
-        if not KBUserBookmark.objects.filter(kb_entry=self,
-                                             user=user).exists():
-            KBUserBookmark(kb_entry=self, user=user).save()
-
-    def unset_user_bookmark(self, user):
-        """
-        Uset user bookmark
-        """
-        from .kbuserbookmark import KBUserBookmark
-        for b in KBUserBookmark.objects.filter(kb_entry=self, user=user):
-            b.delete()

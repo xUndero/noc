@@ -23,13 +23,13 @@ class KBEntryApplication(ExtModelApplication):
 
     def instance_to_dict(self, o, fields=None):
         r = super(KBEntryApplication, self).instance_to_dict(o, fields=fields)
-        del r["body"]
+        # del r["body"]
         return r
 
     @view(r"^(?P<id>\d+)/history/$", access="read", api=True)
     def api_get_entry_history(self, request, id):
         o = self.get_object_or_404(KBEntry, id=id)
-        return {"data": [{"timestamp": self.to_json(h.timestamp), "user": str(h.user)} for h in
+        return {"data": [{"timestamp": self.to_json(h.timestamp), "user": str(h.user), "diff": h.diff} for h in
                          KBEntryHistory.objects.filter(kb_entry=o).order_by("-timestamp")]}
 
     @view(r"^(?P<id>\d+)/html/$", access="read", api=True)
