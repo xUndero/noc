@@ -59,7 +59,7 @@ class Profile(BaseProfile):
                 "$in": ["SNMP | memory_usage"]
                     }
         }
-
+    }
 
     @classmethod
     def cmp_version(cls, v1, v2):
