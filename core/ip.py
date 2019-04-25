@@ -177,7 +177,7 @@ class IP(object):
         for p in db.iter_free(self):
             yield p
 
-    def area_spot(self, addresses, dist, sep=False):
+    def area_spot(self, addresses, dist, sep=False, exclude_special=True):
         """
         Returns a list of addresses, laying inside prefix and containing area
         aroung given addresses
@@ -188,6 +188,8 @@ class IP(object):
         :type dist: int
         :param sep: Insert None into the gaps if sep is True
         :type sep: bool
+        :param exclude_special: Excluse Broadcast & network addresses
+        :type exclude_special: bool
         :return: List containing area spot
         :rtype: list
         """
@@ -198,11 +200,11 @@ class IP(object):
         # Return all addresses except network and broadcast
         # for IPv4, when a dist is larger than network size
         if self.afi == "4" and dist >= self.size:
-            d = 0 if s_first.address in addresses else 1
+            d = 0 if s_first.address in addresses else int(exclude_special)
             if self.mask == 31:
                 return list((s_first + d).iter_address(until=s_last))
             else:
-                return list((s_first + d).iter_address(until=s_last - 1))
+                return list((s_first + d).iter_address(until=s_last - int(exclude_special)))
         # Left only addresses remaining in prefix and convert them to
         # IP instances
         addresses = set(
@@ -238,7 +240,7 @@ class IP(object):
                 break
             last = a
         # Return result
-        if self.afi == "4" and self.mask != 31:
+        if self.afi == "4" and self.mask != 31 and exclude_special:
             # Remove network and broadcast address
             ignored = [
                 IP.prefix(a.address) for a in (self.first, self.last)

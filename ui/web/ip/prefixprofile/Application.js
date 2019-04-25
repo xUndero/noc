@@ -127,6 +127,17 @@ Ext.define("NOC.ip.prefixprofile.Application", {
                     uiStyle: "medium"
                 },
                 {
+                    name: "prefix_special_address_policy",
+                    xtype: "combobox",
+                    fieldLabel: __("Network & Broadcast address"),
+                    allowBlank: false,
+                    store: [
+                        ["I", __("Include")],
+                        ["X", __("Exclude")]
+                    ],
+                    uiStyle: "medium"
+                },
+                {
                     xtype: "fieldset",
                     layout: "hbox",
                     title: __("Integration"),
