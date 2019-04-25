@@ -20,7 +20,7 @@ class KBCard(BaseCard):
 
     def get_object(self, id):
         if id == "0":
-            return KBEntry
+            return "Knowlegde DB"
         return super(KBCard, self).get_object(id)
 
     def get_template_name(self):
@@ -30,5 +30,5 @@ class KBCard(BaseCard):
 
     def get_data(self):
         return {
-            "object": self.object
+            "object": self.object if self.object != "Knowlegde DB" else KBEntry
         }
