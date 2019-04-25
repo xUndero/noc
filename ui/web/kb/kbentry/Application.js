@@ -11,15 +11,37 @@ Ext.define("NOC.kb.kbentry.Application", {
     layout: "card",
     requires: [
         "NOC.kb.kbentry.Model",
-        "NOC.main.language.LookupField"
+        "NOC.main.language.LookupField",
+        "NOC.main.ref.kbparser.LookupField"
     ],
     model: "NOC.kb.kbentry.Model",
     search: true,
     initComponent: function() {
         var me = this;
 
+        me.historyButton = Ext.create("Ext.button.Button", {
+            text: __("History"),
+            glyph: NOC.glyph.history,
+            scope: me,
+            handler: me.onHistory
+        });
+
+        me.ITEM_HISTORY = me.registerItem("NOC.kb.kbentry.HistoryPanel");
+
         Ext.apply(me, {
             columns: [
+                {
+                    xtype: "glyphactioncolumn",
+                    width: 20,
+                    sortable: false,
+                    items: [
+                        {
+                            glyph: NOC.glyph.eye,
+                            tooltip: __("Show KB"),
+                            handler: me.onShowKB
+                        }
+                    ]
+                },
                 {
                     text: __("Subject"),
                     dataIndex: "subject"
@@ -55,13 +77,31 @@ Ext.define("NOC.kb.kbentry.Application", {
                     allowBlank: false
                 },
                 {
+                    name: "markup_language",
+                    xtype: "main.ref.kbparser.LookupField",
+                    fieldLabel: __("Markup Language"),
+                    allowBlank: false
+                },
+                {
                     name: "tags",
                     xtype: "tagsfield",
                     fieldLabel: __("Tags"),
                     allowBlank: true
                 }
+            ],
+            formToolbar: [
+                me.historyButton
             ]
         });
         me.callParent();
+    },
+    onShowKB: function(view, rowIndex, colIndex, item, e, record) {
+        window.open(
+            "/api/card/view/kb/" + record.id + "/"
+        );
+    },
+    onHistory: function() {
+        var me = this;
+        me.previewItem(me.ITEM_HISTORY, me.currentRecord);
     }
 });
