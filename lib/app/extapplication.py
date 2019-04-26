@@ -150,21 +150,21 @@ class ExtApplication(Application):
                      for k, v in request.GET.lists())
         limit = q.get(self.limit_param)
         if limit:
+            if limit < 0:
+                return HttpResponse(400, "Invalid %s param" % self.limit_param)
             try:
                 limit = int(limit)
             except ValueError:
                 return HttpResponse(400, "Invalid %s param" % self.limit_param)
-        if limit < 0:
-            return HttpResponse(400, "Invalid %s param" % self.limit_param)
         # page = q.get(self.page_param)
         start = q.get(self.start_param) or 0
         if start:
+            if start < 0:
+                return HttpResponse(400, "Invalid %s param" % self.start_param)
             try:
                 start = int(start)
             except ValueError:
                 return HttpResponse(400, "Invalid %s param" % self.start_param)
-        if start < 0:
-            return HttpResponse(400, "Invalid %s param" % self.start_param)
         query = q.get(self.query_param)
         only = q.get(self.only_param)
         if only:
