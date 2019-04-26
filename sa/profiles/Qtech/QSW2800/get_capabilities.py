@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # Qtech.QSW2800.get_capabilities
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2016 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -101,4 +101,3 @@ class Script(BaseScript):
     def execute_platform_snmp(self, caps):
         for m in self.has_snmp_memory():
             caps[m] = True
-
