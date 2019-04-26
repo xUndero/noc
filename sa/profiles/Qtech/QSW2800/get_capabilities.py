@@ -95,6 +95,8 @@ class Script(BaseScript):
         if s:
             caps["Stack | Members"] = len(s) if len(s) != 1 else 0
             caps["Stack | Member Ids"] = " | ".join(s)
+        for m in self.has_snmp_memory():
+            caps[m] = True
 
     def execute_platform_snmp(self, caps):
         for m in self.has_snmp_memory():
