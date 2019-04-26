@@ -165,7 +165,7 @@ class ExtApplication(Application):
             except ValueError:
                 return HttpResponse(400, "Invalid %s param" % self.start_param)
         elif start and start < 0:
-                return HttpResponse(400, "Invalid %s param" % self.start_param)
+            return HttpResponse(400, "Invalid %s param" % self.start_param)
         query = q.get(self.query_param)
         only = q.get(self.only_param)
         if only:
