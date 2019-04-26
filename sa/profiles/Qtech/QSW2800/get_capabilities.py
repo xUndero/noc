@@ -38,11 +38,15 @@ class Script(BaseScript):
         except self.snmp.TimeOutError:
             return False
 
-    def has_snmp_memory(self):
+    def has_snmp_memory_oids(self):
+        """
+        Check box has memory usage 1.3.6.1.4.1.27514.100.1.11.11.0 enabled on Qtech
+        """
         r = []
         try:
-            self.snmp.get("1.3.6.1.4.1.27514.100.1.11.11.0")
-            r += ["Qtech | OID | Memory Usage 11"]
+            x = self.snmp.get("1.3.6.1.4.1.27514.100.1.11.11.0")
+            if x > 0:
+                r += ["Qtech | OID | Memory Usage 11"]
         except self.snmp.TimeOutError:
             pass
         return r
@@ -95,9 +99,9 @@ class Script(BaseScript):
         if s:
             caps["Stack | Members"] = len(s) if len(s) != 1 else 0
             caps["Stack | Member Ids"] = " | ".join(s)
-        for m in self.has_snmp_memory():
+        for m in self.has_snmp_memory_oids():
             caps[m] = True
 
     def execute_platform_snmp(self, caps):
-        for m in self.has_snmp_memory():
+        for m in self.has_snmp_memory_oids():
             caps[m] = True
