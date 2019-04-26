@@ -262,6 +262,7 @@ document.currentPrefix = "{{ prefix.prefix }}";
                 var $ce=addresses.shift();
                 var ca=$(".address a",$ce).html(); /* Current address */
                 var $cp=$("#at-start"); /* Current insertion point */
+                var canEditSpec={% if can_edit_special %}true{% else %}false{% endif %}
                 /* Walk through all spotted addresses */
                 $.each(SPOT,function(index,spot){
                     var value=spot[0];
@@ -284,7 +285,7 @@ document.currentPrefix = "{{ prefix.prefix }}";
                         }
                         /* Insert row */
                         var $v;
-                        if(value && !isSpecial) {
+                        if(value && !isSpecial || ( value && isSpecial && canEditSpec)) {
                             $v = $(
                                 "<tr class='free-address' style='display:none'>" +
                                 s +
@@ -302,7 +303,7 @@ document.currentPrefix = "{{ prefix.prefix }}";
                                 "</td>" +
                                 "</tr>"
                             )
-                        } else if(value && isSpecial) {
+                        } else if(value && isSpecial && !canEditSpec) {
                             $v = $(
                                 "<tr class='special-address' style='display:none'>" +
                                 s +

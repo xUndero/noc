@@ -122,7 +122,7 @@ th[class=ippool-to]
 }
 
 .special-address {
-    background-color: #e81;
+    background-color: #e81 !important;
 }
 
 .free-address-sep {

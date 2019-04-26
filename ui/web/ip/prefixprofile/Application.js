@@ -129,13 +129,18 @@ Ext.define("NOC.ip.prefixprofile.Application", {
                 {
                     name: "prefix_special_address_policy",
                     xtype: "combobox",
-                    fieldLabel: __("Network & Broadcast address"),
+                    tooltip: __("Include special addresses (Network & Broadcast for IPv4) <br/>" +
+                                    "in prefix range"),
+                    fieldLabel: __("Special addresses"),
                     allowBlank: false,
                     store: [
                         ["I", __("Include")],
                         ["X", __("Exclude")]
                     ],
-                    uiStyle: "medium"
+                    uiStyle: "medium",
+                    listeners: {
+                        render: me.addTooltip
+                    }
                 },
                 {
                     xtype: "fieldset",
