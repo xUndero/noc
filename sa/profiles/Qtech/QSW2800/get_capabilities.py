@@ -37,6 +37,7 @@ class Script(BaseScript):
                 return True
         except self.snmp.TimeOutError:
             return False
+
     def has_snmp_memory(self):
         r = []
         try:
