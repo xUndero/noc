@@ -719,7 +719,9 @@ class Prefix(models.Model):
             n_ips = Address.objects.filter(vrf=self.vrf, afi=self.afi).extra(
                 where=["address <<= %s"], params=[str(self.prefix)]).count()
             if self.effective_prefix_special_address == "X":
-                n_ips -= len(IPv4(self.prefix).special_addresses)
+                n_pfx = Prefix.objects.filter(vrf=self.vrf, afi=self.afi).extra(
+                    where=["prefix <<= %s"], params=[str(self.prefix)]).count()
+                n_ips -= len(IPv4(self.prefix).special_addresses) * n_pfx
             return float(n_ips) * 100.0 / float(size)
         else:
             return None
