@@ -169,15 +169,6 @@ class KBEntry(models.Model):
     def has_visible_attachments(self):
         return self.kbentryattachment_set.filter(is_hidden=False).exists()
 
-    def is_bookmarked(self, user=None):
-        """
-        Check has KBEntry any bookmarks
-        """
-        from .kbuserbookmark import KBUserBookmark
-        from .kbglobalbookmark import KBGlobalBookmark
-        # Check Global bookmarks
-        if KBGlobalBookmark.objects.filter(kb_entry=self).count() > 0:
-            return True
-        return (user and
-                KBUserBookmark.objects.filter(kb_entry=self,
-                                              user=user).exists())
+
+# No delete, fixed 'KBEntry' object has no attribute 'kbentryattachment_set'
+from .kbentryattachment import KBEntryAttachment  # noqa

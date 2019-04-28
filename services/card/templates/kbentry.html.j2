@@ -1,3 +1,36 @@
 <h4>{{ object.subject }}</h4>
 
 {{ object.html }}
+
+{% if object.has_visible_attachments %}
+<table class="table table-condensed table-hover">
+<tbody>
+
+    <tr>
+        <th scope="row">{{ _("Attachments") }}</th>
+        <td>
+            <table class="table">
+                <thead>
+                    <th>{{ _("Name") }}</th>
+                    <th>{{ _("Description") }}</th>
+                    <th>{{ _("Size") }}</th>
+                    <th>{{ _("Last Changed") }}</th>
+
+                </thead>
+                <tbody>
+                    {% for a in object.visible_attachments %}
+                        <tr>
+                            <td><a href="/kb/kbentry/{{ object.id }}/attachment/{{ a.name }}/">{{ a["name"] }}</a></td>
+                            <td>{{ a["description"] }}</td>
+                            <td>{{ a["size"] }}</td>
+                            <td>{{ a["mtime"] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </td>
+    <tr>
+
+</tbody>
+</table>
+{% endif %}
