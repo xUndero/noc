@@ -46,7 +46,8 @@ class GridVCS(object):
             return self.T_FILE, dst
         return self.T_BSDIFF4, delta
 
-    def apply_delta(self, type, src, delta):
+    @classmethod
+    def apply_delta(cls, type, src, delta):
         """
         Apply delta
         :param type: Delta type
@@ -54,9 +55,10 @@ class GridVCS(object):
         :param delta: Delta
         :return: Patched string
         """
-        return getattr(self, "apply_delta_%s" % type)(src, delta)
+        return getattr(cls, "apply_delta_%s" % type)(src, delta)
 
-    def apply_delta_F(self, src, delta):
+    @staticmethod
+    def apply_delta_F(src, delta):
         """
         Raw string
         :param src:
@@ -65,7 +67,8 @@ class GridVCS(object):
         """
         return delta
 
-    def apply_delta_b(self, src, delta):
+    @staticmethod
+    def apply_delta_b(src, delta):
         """
         Mercurial mdiff. Slow python implementation ported from Mercurial 0.4.
         For legacy installations support only
@@ -87,7 +90,8 @@ class GridVCS(object):
         r.append(src[last:])
         return "".join(r)
 
-    def apply_delta_B(self, src, delta):
+    @staticmethod
+    def apply_delta_B(src, delta):
         """
         BSDIFF4 diff
         :param src:
@@ -96,20 +100,24 @@ class GridVCS(object):
         """
         return bsdiff4.patch(src, delta)
 
-    def compress(self, data, method=None):
+    @classmethod
+    def compress(cls, data, method=None):
         if method:
-            return getattr(self, "compress_%s" % method)(data)
+            return getattr(cls, "compress_%s" % method)(data)
         return data
 
-    def decompress(self, data, method=None):
+    @classmethod
+    def decompress(cls, data, method=None):
         if method:
-            return getattr(self, "decompress_%s" % method)(data)
+            return getattr(cls, "decompress_%s" % method)(data)
         return data
 
-    def compress_z(self, data):
+    @staticmethod
+    def compress_z(data):
         return zlib.compress(data)
 
-    def decompress_z(self, data):
+    @staticmethod
+    def decompress_z(data):
         return zlib.decompress(data)
 
     def put(self, object, data, ts=None):
