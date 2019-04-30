@@ -30,7 +30,7 @@ class Script(BaseScript):
         r"(^vlan tagging (?P<tagged>\S+)\s*\n)?",
         re.MULTILINE)
     rx_ip = re.compile(
-        r"^\s*IP(?:v4) Address\s*\.+ (?P<ip_address>\S+)\s*\n"
+        r"^\s*IP(?:v4)? Address\s*\.+ (?P<ip_address>\S+)\s*\n"
         r"^\s*Subnet Mask\s*\.+ (?P<ip_subnet>\S+)\s*\n"
         r"(^\s*(Additional )?IP Address\s*\.+ \S+\s*\n)?"
         r"(^\s*(Additional )?Subnet Mask\s*\.+ \S+\s*\n)?"
