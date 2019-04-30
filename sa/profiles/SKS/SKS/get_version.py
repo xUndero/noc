@@ -35,7 +35,7 @@ class Script(BaseScript):
     rx_rs = re.compile(
         r"^ROM: System Bootstrap, Version (?P<bootprom>\S+),\s*"
         r"hardware version:\s*(?P<hardware>\S+)\s*\n"
-        r"^Serial num:\s*(?P<serial>\S+)", re.MULTILINE)
+        r"^Serial num:\s*(?P<serial>\S+?),?", re.MULTILINE)
 
     def execute(self):
         v = self.cli("show version", cached=True)
