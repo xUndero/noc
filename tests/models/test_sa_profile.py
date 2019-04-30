@@ -2,16 +2,17 @@
 # ----------------------------------------------------------------------
 # sa.Profile tests
 # ----------------------------------------------------------------------
-# Copyright (C) 2007-2018 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Python modules
-from __future__ import absolute_import
+# Third-party modules
+import bson
 # NOC modules
-from .base import BaseDocumentTest
 from noc.sa.models.profile import Profile
 
 
-class TestSaProfile(BaseDocumentTest):
-    model = Profile
+def test_generic_profile_id():
+    p = Profile.get_generic_profile_id()
+    assert p
+    assert isinstance(p, bson.ObjectId)
