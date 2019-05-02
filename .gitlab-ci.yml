@@ -115,22 +115,22 @@ Test migrate:
     # see docker/docker-compose.yml for complete list of migrations
     - >
      docker-compose
-       -f .docker/docker-compose.yml
-       -p ${DOCKER_COMPOSE_PROJECT}-migrate
-       build migrate
+     -f .docker/docker-compose.yml
+     -p ${DOCKER_COMPOSE_PROJECT}-migrate
+     build migrate
     - >
       docker-compose
-        -f .docker/docker-compose.yml
-        -p ${DOCKER_COMPOSE_PROJECT}-migrate
-        up
-        --exit-code-from migrate
-        migrate
+      -f .docker/docker-compose.yml
+      -p ${DOCKER_COMPOSE_PROJECT}-migrate
+      up
+      --exit-code-from migrate
+      migrate
   after_script:
     - >
       docker-compose
-        -f .docker/docker-compose.yml
-        -p ${DOCKER_COMPOSE_PROJECT}-migrate
-        down -v
+      -f .docker/docker-compose.yml
+      -p ${DOCKER_COMPOSE_PROJECT}-migrate
+      down -v
   tags:
     - shell
   allow_failure: false
@@ -142,22 +142,22 @@ Test code:
   script:
     - >
       docker-compose
-        -f .docker/docker-compose.yml
-        -p ${DOCKER_COMPOSE_PROJECT}-tests
-        build tests
+      -f .docker/docker-compose.yml
+      -p ${DOCKER_COMPOSE_PROJECT}-tests
+      build tests
     - >
       docker-compose
-        -f .docker/docker-compose.yml
-        -p ${DOCKER_COMPOSE_PROJECT}-tests
-        up
-        --exit-code-from tests
-        tests
+      -f .docker/docker-compose.yml
+      -p ${DOCKER_COMPOSE_PROJECT}-tests
+      up
+      --exit-code-from tests
+      tests
   after_script:
     - >
       docker-compose
-        -f .docker/docker-compose.yml
-        -p ${DOCKER_COMPOSE_PROJECT}-migrate
-        down -v
+      -f .docker/docker-compose.yml
+      -p ${DOCKER_COMPOSE_PROJECT}-migrate
+      down -v
   tags:
     - shell
   allow_failure: false
@@ -170,22 +170,22 @@ Test python 3:
     # see docker/docker-compose.yml for complete list of migrations
     - >
       docker-compose
-        -f .docker/docker-compose.yml
-        -p ${DOCKER_COMPOSE_PROJECT}-py3
-        build python3
+      -f .docker/docker-compose.yml
+      -p ${DOCKER_COMPOSE_PROJECT}-py3
+      build python3
     - >
       docker-compose
-        -f .docker/docker-compose.yml
-        -p ${DOCKER_COMPOSE_PROJECT}-py3
-        up
-        --exit-code-from python3
-        python3
+      -f .docker/docker-compose.yml
+      -p ${DOCKER_COMPOSE_PROJECT}-py3
+      up
+      --exit-code-from python3
+      python3
   after_script:
     - >
       docker-compose
-        -f .docker/docker-compose.yml
-        -p ${DOCKER_COMPOSE_PROJECT}-migrate
-        down -v
+      -f .docker/docker-compose.yml
+      -p ${DOCKER_COMPOSE_PROJECT}-migrate
+      down -v
   tags:
     - shell
   allow_failure: true
