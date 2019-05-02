@@ -126,6 +126,7 @@ Test migrate:
       --exit-code-from migrate
       migrate
   after_script:
+    - DOCKER_COMPOSE_PROJECT=${CI_COMMIT_REF_SLUG}-${CI_JOB_ID}
     - >
       docker-compose
       -f .docker/docker-compose.yml
@@ -153,6 +154,7 @@ Test code:
       --exit-code-from tests
       tests
   after_script:
+    - DOCKER_COMPOSE_PROJECT=${CI_COMMIT_REF_SLUG}-${CI_JOB_ID}
     - >
       docker-compose
       -f .docker/docker-compose.yml
@@ -181,6 +183,7 @@ Test python 3:
       --exit-code-from python3
       python3
   after_script:
+    - DOCKER_COMPOSE_PROJECT=${CI_COMMIT_REF_SLUG}-${CI_JOB_ID}
     - >
       docker-compose
       -f .docker/docker-compose.yml
