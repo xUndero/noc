@@ -6,10 +6,11 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
-"""
-"""
-from noc.core.profile.base import BaseProfile
+
+# Python modules
 import re
+# NOC modules
+from noc.core.profile.base import BaseProfile
 
 
 class Profile(BaseProfile):
@@ -28,7 +29,7 @@ class Profile(BaseProfile):
         (r"\{ <cr>\|configuration<K>\|data<K> \}", "\n"),
         (r"\{ <cr>\|mode<K> \}", "\n"),
         (r"\{ <cr>\|frameid\/slotid\<S\>\<Length \d+\-15\>\|spm\<K\> \}\:", "\n"),
-        (r"\{ spm\<K\>\|\<cr\>\|frameid/slotid\<S\>\<\d+,15\> \}\:", "\n"),
+        (r"\{ (?:spm\<K\>\|)?\<cr\>\|frameid/slotid\<S\>\<\d+,15\> \}\:", "\n"),
         (r"\{ <cr>\|backplane\<K\>\|frameid\/slotid\<S\>\<Length \d+\-15\> \}", "\n"),
         (r"\{ <cr>(\|\S+\<K\>)+ \}", "\n"),
         (r"\{ groupindex\<K\>\|<cr> \}\:", "\n"),
@@ -40,6 +41,7 @@ class Profile(BaseProfile):
     pattern_prompt = \
         r"^(?P<hostname>(?!>)\S+?)(?:-\d+)?(?:\(config\S*[^\)]*\))?#"
     pattern_syntax_error = r"(% Unknown command|  Incorrect command:)"
+    pattern_operation_error = "Configuration console time out, please retry to log on"
     # Found on MA5616, V800R015C10
     send_on_syntax_error = BaseProfile.send_backspaces
     command_more = " "
