@@ -2,7 +2,7 @@
 # ----------------------------------------------------------------------
 # Mongo backend
 # ----------------------------------------------------------------------
-# Copyright (C) 2007-2016 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
@@ -28,12 +28,15 @@ class MongoCache(BaseCache):
     def get_collection(cls):
         if not hasattr(cls, "_collection"):
             cls._collection = get_db()[cls.collection_name]
-            cls.ensure_indexes()
         return cls._collection
 
     @classmethod
     def ensure_indexes(cls):
-        cls._collection.ensure_index(
+        """
+        Create all necessary indexes. Called by ensure-index
+        :return:
+        """
+        get_db()[cls.collection_name].create_index(
             cls.EXPIRES_FIELD, expireAfterSeconds=0
         )
 
