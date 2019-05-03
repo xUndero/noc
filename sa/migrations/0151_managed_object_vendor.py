@@ -41,40 +41,45 @@ class Migration(object):
         # Select vendors
         vendors = set(r[0] for r in db.execute(
             "SELECT DISTINCT value FROM sa_managedobjectattribute WHERE key = 'vendor'"))
-        # Create vendors records
         pcoll = get_db()["noc.vendors"]
+        # Update inventory vendors records
         inventory_vendors = {}
         for v in pcoll.find():
             if "code" in v:
                 inventory_vendors[v["code"][0] if isinstance(v["code"], list) else v["code"]] = v["_id"]
-            elif v["name"] in OLD_VENDOR_MAP:
-                inventory_vendors[OLD_VENDOR_MAP[v["name"]]] = v["_id"]
+                continue
+            if v["name"] in OLD_VENDOR_MAP:
+                vc = OLD_VENDOR_MAP[v["name"]]
             else:
-                inventory_vendors[v["name"].split(" ")[0].upper()] = v["_id"]
-        for v in vendors.union(set(inventory_vendors)):
+                vc = v["name"].split(" ")[0]
+            inventory_vendors[vc.upper()] = v["_id"]
+            u = uuid.uuid4()
+            pcoll.update_one({
+                "_id": v["_id"]
+            }, {
+                "$set": {
+                    "code": vc,
+                    "uuid": u
+                }
+            })
+
+        # Create vendors records
+        for v in vendors:
             u = uuid.uuid4()
             vc = v.upper()
-            if v in inventory_vendors:
-                pcoll.update_one({
-                    "_id": inventory_vendors[v]
-                }, {
-                    "$set": {
-                        "code": vc,
-                        "uuid": u
-                    }
-                })
-            else:
-                pcoll.update_one({
+            if vc in inventory_vendors:
+                continue
+            pcoll.update_one({
+                "code": vc
+            }, {
+                "$set": {
                     "code": vc
-                }, {
-                    "$set": {
-                        "code": vc
-                    },
-                    "$setOnInsert": {
-                        "name": v,
-                        "uuid": u
-                    }
-                }, upsert=True)
+                },
+                "$setOnInsert": {
+                    "name": v,
+                    "uuid": u
+                }
+            }, upsert=True)
         # Get vendor record mappings
         vmap = {}  # name -> id
         for d in pcoll.find({}, {"_id": 1, "code": 1}):
