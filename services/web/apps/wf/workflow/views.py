@@ -15,10 +15,8 @@ from noc.wf.models.workflow import Workflow
 from noc.wf.models.state import State
 from noc.wf.models.transition import Transition, TransitionVertex
 from noc.core.translation import ugettext as _
-from noc.sa.interfaces.base import (
-    StringParameter, IntParameter, DictListParameter, BooleanParameter,
-    StringListParameter, NoneParameter
-)
+from noc.sa.interfaces.base import (StringParameter, IntParameter, DictListParameter,
+                                    BooleanParameter, StringListParameter)
 
 
 class WorkflowApplication(ExtDocApplication):
