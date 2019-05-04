@@ -20,4 +20,4 @@ def test_document_get_json_path(model):
     for o in model.objects.all():
         path = o.get_json_path()
         assert path
-        assert isinstance(j, six.string_types)
+        assert isinstance(path, six.string_types)
