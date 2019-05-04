@@ -36,8 +36,9 @@ class MongoCache(BaseCache):
         Create all necessary indexes. Called by ensure-index
         :return:
         """
-        get_db()[cls.collection_name].create_index(
-            cls.EXPIRES_FIELD, expireAfterSeconds=0
+        cls.get_collection().create_index(
+            cls.EXPIRES_FIELD,
+            expireAfterSeconds=0
         )
 
     def get(self, key, default=None, version=None):
