@@ -94,7 +94,7 @@ class WorkflowApplication(ExtDocApplication):
                   "ttl": IntParameter(default=0),
                   "update_expired": BooleanParameter(default=False),
                   "on_enter_handlers": StringListParameter(),
-                  "job_handler": NoneParameter() or StringParameter(),
+                  "job_handler": StringParameter(required=False),
                   "on_leave_handlers": StringListParameter(),
                   "x": IntParameter(),
                   "y": IntParameter()
