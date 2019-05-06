@@ -15,6 +15,7 @@ from mongoengine.fields import (StringField, UUIDField, IntField,
 from noc.lib.prettyjson import to_json
 
 
+@six.python_2_unicode_compatible
 class DashboardCell(EmbeddedDocument):
     name = StringField()
     # Row number
@@ -30,7 +31,6 @@ class DashboardCell(EmbeddedDocument):
     # Large devices (Desktop, > 1200px)
     lg = IntField()
 
-    @six.python_2_unicode_compatible
     def __str__(self):
         return self.name
 
@@ -46,6 +46,7 @@ class DashboardCell(EmbeddedDocument):
         }
 
 
+@six.python_2_unicode_compatible
 class DashboardLayout(Document):
     meta = {
         "collection": "noc.dashboardlayouts",
@@ -60,7 +61,6 @@ class DashboardLayout(Document):
     # @todo: Add preview
     cells = ListField(EmbeddedDocumentField(DashboardCell))
 
-    @six.python_2_unicode_compatible
     def __str__(self):
         return self.name
 
