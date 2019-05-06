@@ -27,7 +27,6 @@ from .quiz import Quiz, Q_TYPES
 id_lock = Lock()
 
 
-@six.python_2_unicode_compatible
 class SpecChange(EmbeddedDocument):
     date = DateTimeField()
     changes = StringField()
@@ -54,6 +53,7 @@ class SpecAnswer(EmbeddedDocument):
         }
 
 
+@six.python_2_unicode_compatible
 class Spec(Document):
     meta = {
         "collection": "specs",
