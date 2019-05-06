@@ -42,7 +42,8 @@ class ReportLatestChangesApplication(SimpleReport):
             {"$sort": {"_id": 1}}
         ]
         if repo == "config" and not request.user.is_superuser:
-            objects = ManagedObject.objects.filter(administrative_domain__in=UserAccess.get_domains(request.user)).values_list("id", "name")
+            objects = ManagedObject.objects.filter(
+                administrative_domain__in=UserAccess.get_domains(request.user)).values_list("id", "name")
             pipeline = [{"$match": {"object": {"$in": objects}}}] + pipeline
         # Perform query
         data = list(coll.aggregate(pipeline))
@@ -60,7 +61,7 @@ class ReportLatestChangesApplication(SimpleReport):
         return self.from_dataset(
             title="%s: %s in %d days" % (self.title, repo, days),
             columns=[
-                "ID"
+                "ID",
                 "Name",
                 TableColumn(_("Last Changed"), format="datetime")],
             data=result,
