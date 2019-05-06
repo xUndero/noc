@@ -33,6 +33,7 @@ class DashboardAccess(EmbeddedDocument):
     ])
 
 
+@six.python_2_unicode_compatible
 class Dashboard(Document):
     meta = {
         "collection": "noc.dashboards",
@@ -60,7 +61,6 @@ class Dashboard(Document):
     #
     access = ListField(EmbeddedDocumentField(DashboardAccess))
 
-    @six.python_2_unicode_compatible
     def __str__(self):
         return self.title
 
