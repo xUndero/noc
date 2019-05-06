@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # Configuration Management Object
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2018 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -11,6 +11,7 @@ from __future__ import absolute_import
 import os
 import datetime
 # Django modules
+import six
 from django.db import models
 from django.db.models import Q
 # NOC modules
@@ -22,6 +23,7 @@ from noc.main.models.notificationgroup import NotificationGroup
 from .objectnotify import ObjectNotify
 
 
+@six.python_2_unicode_compatible
 class Object(models.Model):
     class Meta(object):
         abstract = True
@@ -41,7 +43,7 @@ class Object(models.Model):
     last_pull = models.DateTimeField("Last Pull", blank=True,
                                      null=True)  # Updated by write() method
 
-    def __unicode__(self):
+    def __str__(self):
         return u"%s/%s" % (self.repo_name, self.repo_path)
 
     @property
