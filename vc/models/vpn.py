@@ -30,7 +30,6 @@ from noc.core.model.decorator import on_delete_check
 id_lock = Lock()
 
 
-@six.python_2_unicode_compatible
 class RouteTargetItem(EmbeddedDocument):
     """
     Global (managed_object is None) or object-local VRF topology settings
@@ -52,6 +51,7 @@ class RouteTargetItem(EmbeddedDocument):
     ("vc.VLAN", "vpn")
 ])
 @workflow
+@six.python_2_unicode_compatible
 class VPN(Document):
     meta = {
         "collection": "vpns",
