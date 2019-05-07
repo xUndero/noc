@@ -110,6 +110,9 @@ class Command(BaseCommand):
 
     def index_cache(self):
         from noc.core.cache.base import cache
+        from noc.main.models.datasourcecache import DataSourceCache
+        self.print("[%s] Indexing cache" % "Datasource")
+        DataSourceCache.ensure_indexes()
         if not hasattr(cache, "ensure_indexes"):
             return
         self.print("[%s] Indexing cache" % cache.__class__.__name__)
