@@ -44,7 +44,7 @@ class Person(models.Model):
     extra = models.TextField("extra", blank=True, null=True)
     rpsl = GridVCSField("rpsl_person")
 
-    def __unicode__(self):
+    def __str__(self):
         return u" %s (%s)" % (self.nic_hdl, self.person)
 
     def get_rpsl(self):
