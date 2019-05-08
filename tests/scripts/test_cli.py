@@ -34,7 +34,6 @@ class ServiceStub(object):
     def __init__(self, pool="default"):
         self.config = self.ServiceConfig(pool=pool)
 
-
 class GetDiagScript(BaseScript):
     name = "OS.Linux.get_diag"
     interface = IGetDict
