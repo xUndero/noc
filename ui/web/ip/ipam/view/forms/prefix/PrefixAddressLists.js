@@ -15,6 +15,7 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixAddressLists", {
         "NOC.ip.ipam.view.forms.prefix.PrefixAddressListsController"
     ],
     scrollable: true,
+    bodyPadding: 4,
     bubbleEvents: [
         "ipIPAMVRFListOpen",
         "ipIPAMPrefixFormEdit",
@@ -27,7 +28,6 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixAddressLists", {
             layout: "hbox",
             border: false,
             width: "100%",
-            padding: 10,
             items: [
                 {
                     layout: "hbox",
@@ -37,7 +37,7 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixAddressLists", {
                         {
                             border: false,
                             tpl: [
-                                "<span class='nav-vrf' style='padding-right: 10px;text-decoration: underline;cursor: pointer;'>{vrf__label}</span>"
+                                "<span class='nav-vrf ipam-nav'>{vrf__label}</span>"
                             ],
                             bind: {
                                 data: "{prefix}"
@@ -54,7 +54,7 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixAddressLists", {
                                 "<tpl for='.'>",
                                 "<span",
                                 "<tpl if='xindex !== xcount'>",
-                                " class='breadcrumb nav-{id}' style='padding-right: 10px;text-decoration: underline;cursor: pointer;'",
+                                " class='breadcrumb nav-{id} ipam-nav'",
                                 "</tpl>",
                                 ">{name}</span>",
                                 "</tpl>"
@@ -95,6 +95,7 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixAddressLists", {
         },
         {
             xtype: "displayfield",
+            padding: 10,
             width: "100%",
             fieldStyle: "text-align: center;",
             bind: {
@@ -104,6 +105,7 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixAddressLists", {
         {
             layout: "hbox",
             border: false,
+            bodyPadding: 10,
             width: "100%",
             bind: {
                 hidden: "{noPrefixes}"
@@ -130,7 +132,7 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixAddressLists", {
             width: "100%",
             itemSelector: "tr.prefix-row",
             tpl: [
-                "<table style='width: 100%;font-size: 12px;'>",
+                "<table class='ipam'>",
                 "  <thead style='text-align: left;'>",
                 "    <tr>",
                 "      <th></th>",
@@ -201,6 +203,7 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixAddressLists", {
         {
             layout: "hbox",
             border: false,
+            bodyPadding: 10,
             width: "100%",
             bind: {
                 hidden: "{noAddresses}"
@@ -227,7 +230,7 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixAddressLists", {
             width: "100%",
             itemSelector: "tr.address-row",
             tpl: [
-                "<table style='width: 100%;font-size: 12px;'>",
+                "<table class='ipam'>",
                 "  <thead style='text-align: left;'>",
                 "    <tr>",
                 "      <th>" + __("Address") + "</th>",
@@ -285,11 +288,19 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixAddressLists", {
             emptyText: __("WARNING!!!&nbsp;This prefix is empty! Please add nested addresses."),
         },
         {
-            xtype: "displayfield",
-            value: "<b>" + __("Address Ranges") + "</b>",
+            layout: "hbox",
+            border: false,
+            bodyPadding: 10,
+            width: "100%",
             bind: {
                 hidden: "{noRanges}"
-            }
+            },
+            items: [
+                {
+                    xtype: "displayfield",
+                    value: "<b>" + __("Address Ranges") + "</b>"
+                }
+            ]
         },
         {
             xtype: "dataview",
@@ -297,8 +308,8 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixAddressLists", {
             width: "100%",
             itemSelector: "tr.range-row",
             tpl: [
-                "<table style='width: 100%;font-size: 12px;'>",
-                "  <thead style='text-align: left;'>",
+                "<table class='ipam'>",
+                "  <thead>",
                 "    <tr>",
                 "      <th style='width: 20px;'></th>",
                 "      <th>" + __("Name") + "</th>",
@@ -310,7 +321,7 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixAddressLists", {
                 "  <tbody>",
                 "    <tpl for='.'>",
                 "    <tr class='range-row'>",
-                "      <td><div style='width: 16px; height: 16px; border-radius: 50%; background-color: {color};'></div></td>",
+                "      <td><div class='ipam-range' style='background-color: {color};'></div></td>",
                 "      <td>{name}</td>",
                 "      <td>{from_address}</td>",
                 "      <td>{to_address}</td>",
