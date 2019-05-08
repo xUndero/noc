@@ -48,6 +48,8 @@ class Command(BaseCommand):
         self.index_gridvcs()
         # Index mongo cache
         self.index_cache()
+        # Index datasource cache
+        self.index_datasource_cache()
         # @todo: Detect changes
         self.print("OK")
 
@@ -110,13 +112,15 @@ class Command(BaseCommand):
 
     def index_cache(self):
         from noc.core.cache.base import cache
-        from noc.main.models.datasourcecache import DataSourceCache
-        self.print("[%s] Indexing cache" % "Datasource")
-        DataSourceCache.ensure_indexes()
         if not hasattr(cache, "ensure_indexes"):
             return
         self.print("[%s] Indexing cache" % cache.__class__.__name__)
         cache.ensure_indexes()
+
+    def index_datasource_cache(self):
+        from noc.main.models.datasourcecache import DataSourceCache
+        self.print("[DataSource] Indexing cache")
+        DataSourceCache.ensure_indexes()
 
 
 if __name__ == "__main__":
