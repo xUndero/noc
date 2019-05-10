@@ -172,11 +172,15 @@ Ext.define("NOC.kb.kbentry.Application", {
             url: me.base_url + me.currentRecord.get("id") + "/",
             rawData: data,
             headers: {"Content-Type": null},
+            scope: me,
             success: function() {
-                console.log("success");
+                var me = this;
+                me.showItem(me.ITEM_GRID);
+                me.reloadStore();
+                NOC.info(__("Records has been saved"));
             },
             failure: function() {
-                console.log("failure");
+                NOC.error(__("Failed"));
             }
         });
     },
