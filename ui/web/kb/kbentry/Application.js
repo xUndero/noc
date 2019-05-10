@@ -16,6 +16,7 @@ Ext.define("NOC.kb.kbentry.Application", {
         "NOC.main.ref.kbparser.LookupField"
     ],
     model: "NOC.kb.kbentry.Model",
+    itemId: "kbentryApp",
     search: true,
     initComponent: function() {
         var me = this;
@@ -28,6 +29,54 @@ Ext.define("NOC.kb.kbentry.Application", {
         });
 
         me.ITEM_HISTORY = me.registerItem("NOC.kb.kbentry.HistoryPanel");
+
+        me.listForm = Ext.create({
+            xtype: "listform",
+            name: "attachments",
+            rows: 5,
+            fieldLabel: __("Attachments"),
+            onDeleteRecord: me.deleteFromList,
+            items:
+                [
+                    {
+                        layout: "hbox",
+                        border: false,
+                        items: [
+                            {
+                                xtype: "displayfield",
+                                name: "name",
+                                fieldLabel: __("File name"),
+                                allowBlank: true,
+                                flex: 3
+                            },
+                            {
+                                xtype: "filefield",
+                                name: "file",
+                                flex: 1,
+                                buttonOnly: true,
+                                hideLabel: true,
+                                buttonText: __("Select File..."),
+                                listeners: {
+                                    change: me.setAttachmentName
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        xtype: "textfield",
+                        name: "description",
+                        fieldLabel: __("Description"),
+                        width: "75%"
+                    },
+                    {
+                        xtype: "checkboxfield",
+                        name: "is_hidden",
+                        fieldLabel: __("Is Hidden"),
+                        width: "75%",
+                        allowBlank: true
+                    }
+                ]
+        });
 
         Ext.apply(me, {
             columns: [
@@ -89,52 +138,7 @@ Ext.define("NOC.kb.kbentry.Application", {
                     fieldLabel: __("Tags"),
                     allowBlank: true
                 },
-                {
-                    xtype: "listform",
-                    name: "attachments",
-                    rows: 5,
-                    fieldLabel: __("Attachments"),
-                    items:
-                        [
-                            {
-                                layout: "hbox",
-                                border: false,
-                                items: [
-                                    {
-                                        xtype: "displayfield",
-                                        name: "name",
-                                        fieldLabel: __("File name"),
-                                        allowBlank: true,
-                                        flex: 3
-                                    },
-                                    {
-                                        xtype: "filefield",
-                                        name: "file",
-                                        flex: 1,
-                                        buttonOnly: true,
-                                        hideLabel: true,
-                                        buttonText: __("Select File..."),
-                                        listeners: {
-                                            change: me.setAttachmentName
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                xtype: "textfield",
-                                name: "description",
-                                fieldLabel: __("Description"),
-                                width: "75%"
-                            },
-                            {
-                                xtype: "checkboxfield",
-                                name: "is_hidden",
-                                fieldLabel: __("Is Hidden"),
-                                width: "75%",
-                                allowBlank: true
-                            }
-                        ]
-                }
+                me.listForm
             ],
             formToolbar: [
                 me.historyButton
@@ -187,5 +191,21 @@ Ext.define("NOC.kb.kbentry.Application", {
     setAttachmentName: function(field, value) {
         var filename = value.replace(/(^.*([\\/]))?/, "");
         field.previousSibling().setValue(filename)
+    },
+    deleteFromList: function() {
+        var me = this,
+            app = me.up("[itemId=kbentryApp]"),
+            filename = me.panel.getComponent(me.currentSelection).down("[name=name]").getValue();
+        Ext.Ajax.request({
+            method: "DELETE",
+            url: app.base_url + app.currentRecord.id + "/attachment/" + filename + "/",
+            success: function() {
+                me.deleteRecord();
+                NOC.info(__("Attachment deleted"));
+            },
+            failure: function() {
+                NOC.error(__("Failed"));
+            }
+        });
     }
 });
