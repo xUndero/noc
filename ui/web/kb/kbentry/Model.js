@@ -40,6 +40,10 @@ Ext.define("NOC.kb.kbentry.Model", {
         {
             name: "tags",
             type: "auto"
+        },
+        {
+            name: "attachments",
+            type: "auto"
         }
 
     ]

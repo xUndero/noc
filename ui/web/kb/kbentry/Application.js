@@ -10,6 +10,7 @@ Ext.define("NOC.kb.kbentry.Application", {
     extend: "NOC.core.ModelApplication",
     layout: "card",
     requires: [
+        "NOC.core.ListFormField",
         "NOC.kb.kbentry.Model",
         "NOC.main.language.LookupField",
         "NOC.main.ref.kbparser.LookupField"
@@ -87,6 +88,52 @@ Ext.define("NOC.kb.kbentry.Application", {
                     xtype: "tagsfield",
                     fieldLabel: __("Tags"),
                     allowBlank: true
+                },
+                {
+                    xtype: "listform",
+                    name: "attachments",
+                    rows: 5,
+                    fieldLabel: __("Attachments"),
+                    items:
+                        [
+                            {
+                                layout: "hbox",
+                                border: false,
+                                items: [
+                                    {
+                                        xtype: "displayfield",
+                                        name: "name",
+                                        fieldLabel: __("File name"),
+                                        allowBlank: true,
+                                        flex: 3
+                                    },
+                                    {
+                                        xtype: "filefield",
+                                        name: "file",
+                                        flex: 1,
+                                        buttonOnly: true,
+                                        hideLabel: true,
+                                        buttonText: __("Select File..."),
+                                        listeners: {
+                                            change: me.setAttachmentName
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                xtype: "textfield",
+                                name: "description",
+                                fieldLabel: __("Description"),
+                                width: "75%"
+                            },
+                            {
+                                xtype: "checkboxfield",
+                                name: "is_hidden",
+                                fieldLabel: __("Is Hidden"),
+                                width: "75%",
+                                allowBlank: true
+                            }
+                        ]
                 }
             ],
             formToolbar: [
@@ -103,5 +150,38 @@ Ext.define("NOC.kb.kbentry.Application", {
     onHistory: function() {
         var me = this;
         me.previewItem(me.ITEM_HISTORY, me.currentRecord);
+    },
+    onSave: function() {
+        var me = this,
+            data = new FormData();
+        data.append("subject", me.down("[name=subject]").getValue());
+        data.append("body", me.down("[name=body]").getValue());
+        data.append("language", me.down("[name=language]").getValue());
+        data.append("markup_language", me.down("[name=markup_language]").getValue());
+        data.append("tags", me.down("[name=tags]").getValue());
+        Ext.each(me.query("[name=attachments] > form > form"), function(form, indx) {
+            var file = form.down("[name=file]");
+            if(file.getValue()) {
+                data.append("file" + indx, file.fileInputEl.dom.files[0]);
+                data.append("description" + indx, form.down("[name=description]").getValue());
+                data.append("is_hidden" + indx, form.down("[name=is_hidden]").getValue());
+            }
+        });
+        Ext.Ajax.request({
+            method: "POST",
+            url: me.base_url + me.currentRecord.get("id") + "/",
+            rawData: data,
+            headers: {"Content-Type": null},
+            success: function() {
+                console.log("success");
+            },
+            failure: function() {
+                console.log("failure");
+            }
+        });
+    },
+    setAttachmentName: function(field, value) {
+        var filename = value.replace(/(^.*([\\/]))?/, "");
+        field.previousSibling().setValue(filename)
     }
 });
