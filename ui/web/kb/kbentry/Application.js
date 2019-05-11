@@ -124,7 +124,10 @@ Ext.define("NOC.kb.kbentry.Application", {
                     name: "language",
                     xtype: "main.language.LookupField",
                     fieldLabel: __("Language"),
-                    allowBlank: false
+                    allowBlank: false,
+                    query: {
+                        "is_active": true
+                    }
                 },
                 {
                     name: "markup_language",
