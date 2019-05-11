@@ -8,5 +8,6 @@ console.debug("Defining NOC.main.language.LookupField");
 
 Ext.define("NOC.main.language.LookupField", {
     extend: "NOC.core.LookupField",
-    alias: "widget.main.language.LookupField"
+    alias: "widget.main.language.LookupField",
+    uiStyle: "medium"
 });
