@@ -175,7 +175,7 @@ Ext.define("NOC.kb.kbentry.Application", {
             }
         });
         Ext.Ajax.request({
-            method: me.currentRecord ? "POST" : "POST",
+            method: "POST",
             url: me.base_url + (me.currentRecord ? me.currentRecord.get([me.idField]) + "/" : ""),
             rawData: data,
             headers: {"Content-Type": null},
