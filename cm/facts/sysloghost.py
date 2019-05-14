@@ -2,15 +2,19 @@
 # ---------------------------------------------------------------------
 # Syslog host
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2015 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
-# NOC modules
+# Python modules
 from __future__ import absolute_import
+# Third-party modules
+import six
+# NOC modules
 from .base import BaseFact
 
 
+@six.python_2_unicode_compatible
 class SyslogHost(BaseFact):
     ATTRS = ["ip"]
     ID = ["ip"]
@@ -19,7 +23,7 @@ class SyslogHost(BaseFact):
         super(SyslogHost, self).__init__()
         self.ip = ip
 
-    def __unicode__(self):
+    def __str__(self):
         return "SyslogHost %s" % self.ip
 
     @property

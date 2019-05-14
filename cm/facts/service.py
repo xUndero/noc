@@ -2,15 +2,19 @@
 # ---------------------------------------------------------------------
 # Service host
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2015 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
-# NOC modules
+# Python modules
 from __future__ import absolute_import
+# Third-party modules
+import six
+# NOC modules
 from .base import BaseFact
 
 
+@six.python_2_unicode_compatible
 class Service(BaseFact):
     ATTRS = ["name", "enabled", "version", "port"]
     ID = ["name"]
@@ -22,7 +26,7 @@ class Service(BaseFact):
         self.version = version
         self.port = port
 
-    def __unicode__(self):
+    def __str__(self):
         return "Service %s" % self.name
 
     @property

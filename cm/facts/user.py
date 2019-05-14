@@ -2,15 +2,19 @@
 # ---------------------------------------------------------------------
 # Local user
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2015 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
-# NOC modules
+# Python modules
 from __future__ import absolute_import
+# Third-party modules
+import six
+# NOC modules
 from .base import BaseFact
 
 
+@six.python_2_unicode_compatible
 class User(BaseFact):
     ATTRS = ["name", "level", "[groups]"]
     ID = ["name"]
@@ -21,7 +25,7 @@ class User(BaseFact):
         self.level = level
         self.groups = groups
 
-    def __unicode__(self):
+    def __str__(self):
         return "User %s" % self.name
 
     @property
