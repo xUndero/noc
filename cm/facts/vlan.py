@@ -25,9 +25,9 @@ class VLAN(BaseFact):
         self.name = name
 
     def __str__(self):
-        r = "VLAN %d" % self.id
+        r = u"VLAN %d" % self.id
         if self.name and self.name != str(self.id):
-            r += " (%s)" % self.name
+            r += u" (%s)" % self.name
         return r
 
     @property

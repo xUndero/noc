@@ -26,7 +26,7 @@ class User(BaseFact):
         self.groups = groups
 
     def __str__(self):
-        return "User %s" % self.name
+        return u"User %s" % self.name
 
     @property
     def name(self):

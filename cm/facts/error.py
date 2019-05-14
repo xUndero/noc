@@ -28,9 +28,9 @@ class Error(BaseFact):
 
     def __str__(self):
         if self.obj:
-            return "Error %s: %s" % (self.type, unicode(self.obj))
+            return u"Error %s: %s" % (self.type, self.obj)
         else:
-            return "Error %s" % self.type
+            return u"Error %s" % self.type
 
     @property
     def obj(self):

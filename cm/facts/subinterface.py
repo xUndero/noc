@@ -79,7 +79,7 @@ class SubInterface(BaseFact):
         self.traffic_control_unicast = traffic_control_unicast
 
     def __str__(self):
-        return "SubInterface %s" % self.name
+        return u"SubInterface %s" % self.name
 
     @property
     def description(self):

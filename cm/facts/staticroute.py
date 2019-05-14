@@ -36,9 +36,9 @@ class StaticRoute(BaseFact):
 
     def __str__(self):
         if self.vrf:
-            return "StaticRoute %s:%s" % (self.vrf, self.prefix)
+            return u"StaticRoute %s:%s" % (self.vrf, self.prefix)
         else:
-            return "StaticRoute %s" % self.prefix
+            return u"StaticRoute %s" % self.prefix
 
     @property
     def prefix(self):
