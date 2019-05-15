@@ -2,7 +2,7 @@
 # ----------------------------------------------------------------------
 # KB card
 # ----------------------------------------------------------------------
-# Copyright (C) 2007-2018 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
@@ -10,6 +10,7 @@
 from __future__ import absolute_import
 # NOC modules
 from noc.kb.models.kbentry import KBEntry
+from noc.config import config
 from .base import BaseCard
 
 
@@ -30,5 +31,6 @@ class KBCard(BaseCard):
 
     def get_data(self):
         return {
-            "object": self.object if self.object != "Knowlegde DB" else KBEntry
+            "object": self.object if self.object != "Knowlegde DB" else KBEntry,
+            "config": config
         }
