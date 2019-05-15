@@ -2,19 +2,20 @@
 # ---------------------------------------------------------------------
 # KBEntry model
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2018 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
 # Python modules
 from __future__ import absolute_import
 import datetime
-# Third-party modules
 import difflib
-from noc.core.model.fields import TagsField
+# Third-party modules
+import six
 from django.db import models
 # NOC modules
 from noc.lib.app.site import site
+from noc.core.model.fields import TagsField
 from noc.main.models.language import Language
 from noc.services.web.apps.kb.parsers.loader import loader
 from noc.core.model.decorator import on_delete_check
@@ -29,6 +30,7 @@ from noc.core.model.decorator import on_delete_check
         ("kb.KBEntryAttachment", "kb_entry")
     ]
 )
+@six.python_2_unicode_compatible
 class KBEntry(models.Model):
     """
     KB Entry
@@ -48,7 +50,7 @@ class KBEntry(models.Model):
                                        choices=[(x, x) for x in loader])
     tags = TagsField("Tags", null=True, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         if self.id:
             return u"KB%d: %s" % (self.id, self.subject)
         else:
