@@ -104,11 +104,20 @@ services:
         condition: service_started
     command: >
       sh -c "
-      echo 'Trying to compile' &&
-      find /opt/noc/ -type f -name "*.py" -print0 | xargs -0 python3 -m py_compile &&
       for i in services/*; do
-        timeout -t 10 /usr/bin/python3 $$i/service.py;
-      done;"
+        echo $$i;
+        timeout -t 10 -s 9 /usr/bin/python3 $$i/service.py;
+      done;
+      echo 'Trying to compile' &&
+      find /opt/noc/ -type f -name '*.py' -print0 | xargs -0 python3 -m py_compile
+      && /usr/bin/python3 ./commands/migrate.py
+      && ./noc ensure-indexes
+      && /usr/bin/python3 ./commands/migrate-ch.py
+      && /usr/bin/python3 ./scripts/deploy/install-packages requirements/collections.json
+      && ./noc collection sync
+      && ./noc sync-perm
+      && ./noc sync-mibs
+      "
     env_file:
       - noc.conf
 
@@ -119,7 +128,8 @@ services:
   nsqd:
     image: nsqio/nsq:v1.1.0
     depends_on:
-      - nsqlookupd
+      nsqlookupd:
+        condition: service_started
     command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 --mem-queue-size=10000
 
   web:
