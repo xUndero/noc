@@ -4,17 +4,17 @@
 // Copyright (C) 2007-2019 The NOC Project
 // See LICENSE for details
 //---------------------------------------------------------------------
-console.debug("Defining NOC.main.groupII.Permission");
+console.debug("Defining NOC.main.group.Permission");
 
-Ext.define("NOC.main.groupII.Permission", {
+Ext.define("NOC.main.group.Permission", {
     extend: "Ext.panel.Panel",
     mixins: [
         "Ext.form.field.Base"
     ],
     requires: [
-        "NOC.main.groupII.ApplicationPermission"
+        "NOC.main.group.ApplicationPermission"
     ],
-    alias: "widget.noc.groupII.permission",
+    alias: "widget.noc.group.permission",
     defaultListenerScope: true,
     setValue: function(value) {
         var data = {};
@@ -24,7 +24,7 @@ Ext.define("NOC.main.groupII.Permission", {
             Ext.Object.each(data, function(name, module) {
                 var me = this;
                 me.add({
-                    xtype: "noc.groupII.applicationperm",
+                    xtype: "noc.group.applicationperm",
                     title: module.name + " (" + name + ")",
                     data: module.apps,
                     listeners: {

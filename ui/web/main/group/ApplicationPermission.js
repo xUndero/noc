@@ -4,11 +4,11 @@
 // Copyright (C) 2007-2019 The NOC Project
 // See LICENSE for details
 //---------------------------------------------------------------------
-console.debug("Defining NOC.main.groupII.ApplicationPermission");
+console.debug("Defining NOC.main.group.ApplicationPermission");
 
-Ext.define("NOC.main.groupII.ApplicationPermission", {
+Ext.define("NOC.main.group.ApplicationPermission", {
     extend: "Ext.panel.Panel",
-    alias: "widget.noc.groupII.applicationperm",
+    alias: "widget.noc.group.applicationperm",
     defaultListenerScope: true,
     bodyPadding: 5,
     collapsed: true,

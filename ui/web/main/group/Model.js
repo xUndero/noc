@@ -4,11 +4,11 @@
 // Copyright (C) 2007-2019 The NOC Project
 // See LICENSE for details
 //---------------------------------------------------------------------
-console.debug("Defining NOC.main.groupII.Model");
+console.debug("Defining NOC.main.group.Model");
 
-Ext.define("NOC.main.groupII.Model", {
+Ext.define("NOC.main.group.Model", {
     extend: "Ext.data.Model",
-    rest_url: "/main/groupII/",
+    rest_url: "/main/group/",
 
     fields: [
         {

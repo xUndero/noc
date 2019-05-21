@@ -4,15 +4,15 @@
 // Copyright (C) 2007-2019 The NOC Project
 // See LICENSE for details
 //---------------------------------------------------------------------
-console.debug("Defining NOC.main.groupII.Application");
+console.debug("Defining NOC.main.group.Application");
 
-Ext.define("NOC.main.groupII.Application", {
+Ext.define("NOC.main.group.Application", {
     extend: "NOC.core.ModelApplication",
     requires: [
-        "NOC.main.groupII.Model",
-        "NOC.main.groupII.Permission"
+        "NOC.main.group.Model",
+        "NOC.main.group.Permission"
     ],
-    model: "NOC.main.groupII.Model",
+    model: "NOC.main.group.Model",
     search: true,
     recordReload: true,
     maskElement: "el",
@@ -45,7 +45,7 @@ Ext.define("NOC.main.groupII.Application", {
                 },
                 {
                     name: "permissions",
-                    xtype: "noc.groupII.permission",
+                    xtype: "noc.group.permission",
                     fieldLabel: __("Permissions"),
                     allowBlank: true
                 }
@@ -56,7 +56,7 @@ Ext.define("NOC.main.groupII.Application", {
     onNewRecord: function() {
         var me = this;
         Ext.Ajax.request({
-            url: "/main/groupII/new_permissions/",
+            url: "/main/group/new_permissions/",
             method: "GET",
             scope: me,
             success: function(response) {
