@@ -5,18 +5,18 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 import bson
 # NOC modules
 from noc.lib.nosql import get_db
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
     depends_on = [("wf", "0001_default_wf")]
 
-    def forwards(self):
+    def migrate(self):
         s_map = {
             "N": bson.ObjectId("5a17f61b1bb6270001bd0328"),
             "F": bson.ObjectId("5a17f61b1bb6270001bd0328"),
@@ -53,5 +53,4 @@ class Migration(object):
         for s in s_map:
             db["noc.phonenumbers"].update_many({"status": s}, {"$set": {"state": s_map[s]}})
 
-    def backwards(self):
-        pass
+

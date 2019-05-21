@@ -8,10 +8,11 @@
 
 # NOC modules
 from noc.lib.nosql import get_db
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         db = get_db()
         scount = db.noc.pm.storages.count_documents({})
         if scount == 0:
@@ -77,5 +78,3 @@ class Migration(object):
                     }
                 )
 
-    def backwards(self):
-        pass
