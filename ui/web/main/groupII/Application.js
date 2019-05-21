@@ -61,8 +61,8 @@ Ext.define("NOC.main.groupII.Application", {
             scope: me,
             success: function(response) {
                 var me = this,
-                    data = Ext.decode(response.responseText).data.permissions;
-                me.newRecord({permissions: data})
+                    data = Ext.decode(response.responseText).data;
+                me.newRecord(data);
             },
             failure: function() {
                 NOC.error(__("Failed to get data"));
