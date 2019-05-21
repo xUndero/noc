@@ -8,8 +8,6 @@
 
 # Python modules
 from __future__ import print_function
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
@@ -23,7 +21,7 @@ class Migration(BaseMigration):
             smap[d["name"]] = str(d["_id"])
         # Create .sync
         self.db.execute("ALTER TABLE dns_dnsserver ADD sync CHAR(24)")
-        for i, ch in db.execute("SELECT id, sync_channel FROM dns_dnsserver WHERE sync_channel IS NOT NULL"):
+        for i, ch in self.db.execute("SELECT id, sync_channel FROM dns_dnsserver WHERE sync_channel IS NOT NULL"):
             if ch not in smap:
                 n = c.insert({"name": ch, "is_active": True, "description": "Converted from DNS Server settings"})
                 smap[ch] = str(n)

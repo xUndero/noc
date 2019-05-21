@@ -7,7 +7,6 @@
 # ----------------------------------------------------------------------
 
 # Third-party modules
-from south.db import db
 from django.db import models
 # NOC modules
 from noc.core.migration.base import BaseMigration
@@ -53,7 +52,8 @@ class Migration(BaseMigration):
         )
         self.db.create_index('fm_eventclassvar', ['event_class_id', 'name'], unique=True)
 
-        self.db.add_column('fm_eventclass', 'repeat_suppression', models.BooleanField("Repeat Suppression", default=False))
+        self.db.add_column('fm_eventclass', 'repeat_suppression',
+                           models.BooleanField("Repeat Suppression", default=False))
         self.db.add_column(
             'fm_eventclass', 'repeat_suppression_interval',
             models.IntegerField("Repeat Suppression interval (secs)", default=3600)

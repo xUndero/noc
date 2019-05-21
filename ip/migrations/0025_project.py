@@ -8,7 +8,6 @@
 
 # Third-party modules
 from django.db import models
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
