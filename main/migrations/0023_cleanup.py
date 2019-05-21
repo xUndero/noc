@@ -6,8 +6,6 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
@@ -17,6 +15,6 @@ class Migration(BaseMigration):
     depends_on = (("sa", "0003_task_schedule"),)
 
     def migrate(self):
-        db.execute(
+        self.db.execute(
             "UPDATE sa_taskschedule SET periodic_name='main.cleanup' WHERE periodic_name='main.cleanup_sessions'"
         )

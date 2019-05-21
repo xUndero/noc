@@ -16,7 +16,7 @@ from noc.core.migration.base import BaseMigration
 class Migration(BaseMigration):
     def migrate(self):
         # CustomFieldEnumGroup
-        db.create_table(
+        self.db.create_table(
             "main_customfieldenumgroup", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("name", models.CharField("Name", max_length=128, unique=True)),
@@ -33,7 +33,7 @@ class Migration(BaseMigration):
             pk_field_type=models.AutoField
         )
 
-        db.create_table(
+        self.db.create_table(
             "main_customfieldenumvalue", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("enum_group", models.ForeignKey(CustomFieldEnumGroup, verbose_name="Enum Group")),
@@ -42,7 +42,7 @@ class Migration(BaseMigration):
             )
         )
         # CustomField.enum_group
-        db.add_column(
+        self.db.add_column(
             "main_customfield", "enum_group",
             models.ForeignKey(CustomFieldEnumGroup, verbose_name="Enum Group", null=True, blank=True)
         )

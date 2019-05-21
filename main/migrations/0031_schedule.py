@@ -29,7 +29,7 @@ class Migration(BaseMigration):
             pk_field_type=models.AutoField
         )
         # Model "TaskSchedule"
-        db.create_table(
+        self.db.create_table(
             "main_schedule", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("periodic_name", models.CharField("Periodic Task", max_length=64)),

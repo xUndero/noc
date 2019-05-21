@@ -7,7 +7,6 @@
 # ----------------------------------------------------------------------
 
 # Third-party modules
-from south.db import db
 from django.db import models
 # NOC modules
 from noc.core.migration.base import BaseMigration
@@ -17,7 +16,7 @@ class Migration(BaseMigration):
     def migrate(self):
 
         # Adding model 'PyRule'
-        db.create_table(
+        self.db.create_table(
             'main_pyrule', (
                 ('id', models.AutoField(primary_key=True)),
                 ('name', models.CharField("Name", unique=True, max_length=64)),

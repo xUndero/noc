@@ -16,13 +16,12 @@ from noc.core.migration.base import BaseMigration
 class Migration(BaseMigration):
     def migrate(self):
         # Adding model 'Permission'
-        db.create_table(
+        self.db.create_table(
             'main_permission', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("Name", max_length=128, unique=True)),
             )
         )
-        db.send_create_signal('main', ['Permission'])
         Permission = db.mock_model(
             model_name='Permission',
             db_table='main_permission',
@@ -39,7 +38,7 @@ class Migration(BaseMigration):
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        db.create_table(
+        self.db.create_table(
             'main_permission_groups', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('permission', models.ForeignKey(Permission, null=False)),
@@ -55,7 +54,7 @@ class Migration(BaseMigration):
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        db.create_table(
+        self.db.create_table(
             'main_permission_users', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('permission', models.ForeignKey(Permission, null=False)),

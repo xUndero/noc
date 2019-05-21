@@ -6,8 +6,6 @@
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
@@ -15,7 +13,7 @@ from noc.core.migration.base import BaseMigration
 class Migration(BaseMigration):
     def migrate(self):
         # ResourceState
-        db.execute(
+        self.db.execute(
             """
             INSERT INTO main_resourcestate(id, name, description,
                 is_active, is_starting, is_default, is_provisioned, step_to_id)
@@ -33,4 +31,4 @@ class Migration(BaseMigration):
 
         """
         )
-        db.execute("SELECT setval('main_resourcestate_id_seq'::regclass, 5)")
+        self.db.execute("SELECT setval('main_resourcestate_id_seq'::regclass, 5)")

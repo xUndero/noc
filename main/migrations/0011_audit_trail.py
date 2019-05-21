@@ -25,7 +25,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'AuditTrail'
-        db.create_table(
+        self.db.create_table(
             'main_audittrail', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('user', models.ForeignKey(User, verbose_name=User)),

@@ -6,8 +6,6 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
@@ -52,4 +50,4 @@ MIME_TYPES = [
 class Migration(BaseMigration):
     def migrate(self):
         for ext, mime_type in MIME_TYPES:
-            db.execute("INSERT INTO main_mimetype(extension,mime_type) VALUES(%s,%s)", [ext, mime_type])
+            self.db.execute("INSERT INTO main_mimetype(extension,mime_type) VALUES(%s,%s)", [ext, mime_type])

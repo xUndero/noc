@@ -17,7 +17,7 @@ class Migration(BaseMigration):
     def migrate(self):
 
         # Model 'NotificationGroup'
-        db.create_table(
+        self.db.create_table(
             'main_notificationgroup', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("Name", max_length=64, unique=True)),
@@ -49,7 +49,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'NotificationGroupUser'
-        db.create_table(
+        self.db.create_table(
             'main_notificationgroupuser', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('notification_group', models.ForeignKey(NotificationGroup, verbose_name="Notification Group")),
@@ -57,10 +57,8 @@ class Migration(BaseMigration):
                 ('user', models.ForeignKey(User, verbose_name=User))
             )
         )
-        db.create_index(
-            'main_notificationgroupuser', ['notification_group_id', 'time_pattern_id', 'user_id'],
-            unique=True,
-            db_tablespace=''
+        self.db.create_index(
+            'main_notificationgroupuser', ['notification_group_id', 'time_pattern_id', 'user_id'], unique=True
         )
 
         # Mock Models
@@ -80,7 +78,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'NotificationGroupOther'
-        db.create_table(
+        self.db.create_table(
             'main_notificationgroupother', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('notification_group', models.ForeignKey(NotificationGroup, verbose_name="Notification Group")),
@@ -89,15 +87,14 @@ class Migration(BaseMigration):
                 ('params', models.CharField("Params", max_length=256))
             )
         )
-        db.create_index(
+        self.db.create_index(
             'main_notificationgroupother',
             ['notification_group_id', 'time_pattern_id', 'notification_method', 'params'],
-            unique=True,
-            db_tablespace=''
+            unique=True
         )
 
         # Model 'Notification'
-        db.create_table(
+        self.db.create_table(
             'main_notification', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('timestamp', models.DateTimeField("Timestamp", auto_now=True, auto_now_add=True)),

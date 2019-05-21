@@ -24,7 +24,7 @@ class Migration(BaseMigration):
         )
 
         # Adding model 'SystemNotification'
-        db.create_table(
+        self.db.create_table(
             'main_systemnotification', (
                 (
                     'notification_group',

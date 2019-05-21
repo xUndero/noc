@@ -17,7 +17,7 @@ from noc.core.migration.base import BaseMigration
 class Migration(BaseMigration):
     def migrate(self):
 
-        db.delete_table('main_refbookdata')
+        self.db.delete_table('main_refbookdata')
 
         # Mock Models
         RefBook = db.mock_model(
@@ -29,11 +29,11 @@ class Migration(BaseMigration):
         )
 
         # Model 'RefBookData'
-        db.create_table(
+        self.db.create_table(
             'main_refbookdata', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('ref_book', models.ForeignKey(RefBook, verbose_name="Ref Book")), ('value', TextArrayField("Value"))
             )
         )
 
-        db.execute("UPDATE main_refbook SET next_update='now'")
+        self.db.execute("UPDATE main_refbook SET next_update='now'")

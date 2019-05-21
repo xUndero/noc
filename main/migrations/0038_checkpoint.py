@@ -23,7 +23,7 @@ class Migration(BaseMigration):
             pk_field_type=models.AutoField
         )
 
-        db.create_table(
+        self.db.create_table(
             "main_checkpoint", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("timestamp", models.DateTimeField("Timestamp")),

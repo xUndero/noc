@@ -16,7 +16,7 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        db.create_table(
+        self.db.create_table(
             "main_prefixtable", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("name", models.CharField("Name", max_length=128, unique=True)),
@@ -32,7 +32,7 @@ class Migration(BaseMigration):
             pk_field_type=models.AutoField
         )
 
-        db.create_table(
+        self.db.create_table(
             "main_prefixtableprefix", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("table", models.ForeignKey(PrefixTable, verbose_name="Prefix Table")),

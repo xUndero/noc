@@ -5,8 +5,7 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
@@ -38,7 +37,7 @@ class Migration(BaseMigration):
             pk_field_type=models.AutoField
         )
         # Adding model 'UserProfile'
-        db.create_table(
+        self.db.create_table(
             'main_userprofile', (
                 ('id', models.AutoField(primary_key=True)),
                 (
@@ -48,7 +47,7 @@ class Migration(BaseMigration):
                 ('user', models.ForeignKey(User, unique=True)),
             )
         )
-        db.send_create_signal('main', ['UserProfile'])
+        self.db.send_create_signal('main', ['UserProfile'])
         UserProfile = db.mock_model(
             model_name='UserProfile',
             db_table='main_userprofile',
@@ -58,7 +57,7 @@ class Migration(BaseMigration):
         )
 
         # Adding model 'UserProfileContact'
-        db.create_table(
+        self.db.create_table(
             'main_userprofilecontact', (
                 ('user_profile', models.ForeignKey(UserProfile, verbose_name="User Profile")),
                 ('notification_method', models.CharField("Method", max_length=16)),
@@ -68,7 +67,7 @@ class Migration(BaseMigration):
             )
         )
         # Creating unique_together for [user_profile, time_pattern, notification_method, params] on UserProfileContact.
-        db.create_index(
+        self.db.create_index(
             'main_userprofilecontact', ['user_profile_id', 'time_pattern_id', 'notification_method', 'params'],
             unique=True
         )

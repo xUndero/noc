@@ -6,14 +6,12 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        if db.execute("SELECT COUNT(*) FROM main_systemnotification WHERE name=%s",
+        if self.db.execute("SELECT COUNT(*) FROM main_systemnotification WHERE name=%s",
                       ["sa.version_inventory"])[0][0] == 0:
-            db.execute("INSERT INTO main_systemnotification(name) VALUES(%s)", ["sa.version_inventory"])
+            self.db.execute("INSERT INTO main_systemnotification(name) VALUES(%s)", ["sa.version_inventory"])

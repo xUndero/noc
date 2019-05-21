@@ -5,10 +5,8 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
-from south.db import db
 from django.db import models
 # NOC modules
 from noc.core.model.fields import BinaryField
@@ -19,7 +17,7 @@ class Migration(BaseMigration):
     def migrate(self):
 
         # Model 'DatabaseStorage'
-        db.create_table(
+        self.db.create_table(
             'main_databasestorage', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("Name", max_length=256, unique=True)), ('data', BinaryField("Data")),
