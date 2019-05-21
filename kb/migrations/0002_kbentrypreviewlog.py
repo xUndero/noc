@@ -5,15 +5,17 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+
+    def migrate(self):
 
         # Mock Models
         KBEntry = db.mock_model(
@@ -40,8 +42,3 @@ class Migration(object):
                 ("user", models.ForeignKey(User, verbose_name=User))
             )
         )
-
-        db.send_create_signal("kb", ["KBEntryPreviewLog"])
-
-    def backwards(self):
-        db.delete_table("kb_kbentrypreviewlog")

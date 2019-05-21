@@ -5,15 +5,17 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+
+    def migrate(self):
         # Mock Models
         Language = db.mock_model(
             model_name="Language",
@@ -57,10 +59,3 @@ class Migration(object):
                 ("kbcategory", models.ForeignKey(KBCategory, null=False))
             )
         )
-
-        db.send_create_signal("kb", ["KBEntryTemplate"])
-
-    def backwards(self):
-        db.delete_table("kb_kbentrytemplate")
-
-        db.delete_table("kb_kbentrytemplate_categories")

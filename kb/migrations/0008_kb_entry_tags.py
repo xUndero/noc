@@ -8,12 +8,11 @@
 
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
 
-    def forwards(self):
+    def migrate(self):
         db.execute("ALTER TABLE kb_kbentry ALTER COLUMN tags TYPE text[] USING regexp_split_to_array(tags, ',')")
-
-    def backwards(self):
-        pass

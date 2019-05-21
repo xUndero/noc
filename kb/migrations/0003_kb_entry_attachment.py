@@ -10,10 +10,13 @@
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+
+    def migrate(self):
         # Mock Models
         KBEntry = db.mock_model(
             model_name="KBEntry",
@@ -34,8 +37,3 @@ class Migration(object):
             )
         )
         db.create_index("kb_kbentryattachment", ["kb_entry_id", "name"], unique=True, db_tablespace="")
-
-        db.send_create_signal("kb", ["KBEntryAttachment"])
-
-    def backwards(self):
-        db.delete_table("kb_kbentryattachment")

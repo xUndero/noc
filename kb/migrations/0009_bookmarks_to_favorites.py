@@ -13,11 +13,12 @@ import six
 from south.db import db
 # NOC modules
 from noc.lib.nosql import get_db
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
 
-    def forwards(self):
+    def migrate(self):
         favs = defaultdict(list)
         mdb = get_db()
         fav_coll = mdb["noc.favorites"]
@@ -30,6 +31,3 @@ class Migration(object):
                 print({"user": u, "app": "kb.kbentry", "favorite_app": False, "favorites": fav})
                 fav_coll.insert_one({"user": u, "app": "kb.kbentry", "favorite_app": False,
                                      "favorites": fav + global_bookmarks})
-
-    def backward(self):
-        pass

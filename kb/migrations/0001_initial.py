@@ -5,17 +5,19 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     depends_on = (("main", "0004_language"),)
 
-    def forwards(self):
+    def migrate(self):
 
         # Model "KBCategory"
         db.create_table(
@@ -93,11 +95,3 @@ class Migration(object):
                 ("user", models.ForeignKey(User, verbose_name=User)), ("diff", models.TextField("Diff"))
             )
         )
-
-        db.send_create_signal("kb", ["KBCategory", "KBEntry", "KBEntryHistory"])
-
-    def backwards(self):
-        db.delete_table("kb_kbentryhistory")
-        db.delete_table("kb_kbentry_categories")
-        db.delete_table("kb_kbcategory")
-        db.delete_table("kb_kbentry")
