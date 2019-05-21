@@ -11,6 +11,7 @@ from __future__ import absolute_import
 # Third-party modules
 import six
 # NOC modules
+from noc.lib.nosql import get_db
 from .db import db
 
 
@@ -26,6 +27,10 @@ class BaseMigration(object):
     def get_name(cls):
         parts = cls.__module__.split(".")
         return u"%s.%s" % (parts[1], parts[3])
+
+    @property
+    def mongo_db(self):
+        return get_db()
 
     def migrate(self):
         """
