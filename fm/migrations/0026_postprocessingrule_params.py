@@ -40,15 +40,15 @@ class Migration(BaseMigration):
             pk_field_type=models.AutoField
         )
 
-        db.add_column(
+        self.db.add_column(
             "fm_eventpostprocessingrule", "managed_object_selector",
             models.ForeignKey(ManagedObjectSelector, verbose_name="Managed Object Selector", null=True, blank=True)
         )
-        db.add_column(
+        self.db.add_column(
             "fm_eventpostprocessingrule", "time_pattern",
             models.ForeignKey(TimePattern, verbose_name="Time Pattern", null=True, blank=True)
         )
-        db.add_column(
+        self.db.add_column(
             "fm_eventpostprocessingrule", "notification_group",
             models.ForeignKey(NotificationGroup, verbose_name="Notification Group", null=True, blank=True)
         )

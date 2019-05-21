@@ -6,16 +6,14 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        db.create_unique('fm_eventarchivationrule', ['event_class_id', 'action'])
+        self.db.create_index('fm_eventarchivationrule', ['event_class_id', 'action'], unique=True)
         try:
-            db.delete_unique('fm_eventarchivationrule', ['event_class_id'])
+            self.db.create_index('fm_eventarchivationrule', ['event_class_id'], unique=True)
         except Exception:
             pass

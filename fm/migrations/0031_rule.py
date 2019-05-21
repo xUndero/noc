@@ -19,9 +19,9 @@ class Migration(BaseMigration):
 
     def migrate(self):
         PyRule = db.mock_model(model_name="PyRule", db_table="main_pyrule")
-        db.add_column("fm_eventclass", "rule", models.ForeignKey(PyRule, verbose_name="pyRule", null=True, blank=True))
-        db.add_column(
+        self.db.add_column("fm_eventclass", "rule", models.ForeignKey(PyRule, verbose_name="pyRule", null=True, blank=True))
+        self.db.add_column(
             "fm_eventpostprocessingrule", "rule",
             models.ForeignKey(PyRule, verbose_name="pyRule", null=True, blank=True)
         )
-        db.delete_column("fm_eventclass", "trigger")
+        self.db.delete_column("fm_eventclass", "trigger")

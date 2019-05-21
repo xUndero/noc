@@ -22,7 +22,7 @@ class Migration(BaseMigration):
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        db.add_column("fm_event", "status", models.CharField("Status", max_length=1, default="U"))
-        db.add_column("fm_event", "active_till", models.DateTimeField("Active Till", blank=True, null=True))
-        db.add_column("fm_event", "close_timestamp", models.DateTimeField("Close Timestamp", blank=True, null=True))
-        db.add_column("fm_event", "root", models.ForeignKey(Event, blank=True, null=True))
+        self.db.add_column("fm_event", "status", models.CharField("Status", max_length=1, default="U"))
+        self.db.add_column("fm_event", "active_till", models.DateTimeField("Active Till", blank=True, null=True))
+        self.db.add_column("fm_event", "close_timestamp", models.DateTimeField("Close Timestamp", blank=True, null=True))
+        self.db.add_column("fm_event", "root", models.ForeignKey(Event, blank=True, null=True))

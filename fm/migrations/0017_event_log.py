@@ -27,7 +27,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'EventLog'
-        db.create_table(
+        self.db.create_table(
             'fm_eventlog', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('event', models.ForeignKey(Event, verbose_name=Event)),

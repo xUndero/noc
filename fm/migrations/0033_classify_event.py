@@ -6,8 +6,6 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
@@ -57,4 +55,4 @@ class Migration(BaseMigration):
         DROP FUNCTION classify_event(INTEGER, INTEGER, INTEGER, INTEGER, CHAR, VARCHAR, TEXT, TEXT[][])"""
 
     def migrate(self):
-        db.execute(self.CREATE_CLASSIFY_EVENT)
+        self.db.execute(self.CREATE_CLASSIFY_EVENT)

@@ -15,10 +15,10 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        db.delete_table('fm_eventcorrelationrule')
+        self.db.delete_table('fm_eventcorrelationrule')
 
         # Model 'EventCorrelationRule'
-        db.create_table(
+        self.db.create_table(
             'fm_eventcorrelationrule', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("Name", max_length=64, unique=True)),
@@ -53,14 +53,14 @@ class Migration(BaseMigration):
         )
 
         # Model 'EventCorrelationMatchedClass'
-        db.create_table(
+        self.db.create_table(
             'fm_eventcorrelationmatchedclass', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('rule', models.ForeignKey(EventCorrelationRule, verbose_name="Rule")),
                 ('event_class', models.ForeignKey(EventClass, verbose_name="Event Class"))
             )
         )
-        db.create_index('fm_eventcorrelationmatchedclass', ['rule_id', 'event_class_id'], unique=True, db_tablespace='')
+        self.db.create_index('fm_eventcorrelationmatchedclass', ['rule_id', 'event_class_id'], unique=True)
 
         # Mock Models
         EventCorrelationRule = db.mock_model(
@@ -72,11 +72,11 @@ class Migration(BaseMigration):
         )
 
         # Model 'EventCorrelationMatchedVar'
-        db.create_table(
+        self.db.create_table(
             'fm_eventcorrelationmatchedvar', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('rule', models.ForeignKey(EventCorrelationRule, verbose_name="Rule")),
                 ('var', models.CharField("Variable Name", max_length=256))
             )
         )
-        db.create_index('fm_eventcorrelationmatchedvar', ['rule_id', 'var'], unique=True, db_tablespace='')
+        self.db.create_index('fm_eventcorrelationmatchedvar', ['rule_id', 'var'], unique=True)

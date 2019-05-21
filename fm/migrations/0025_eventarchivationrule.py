@@ -25,7 +25,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'EventArchivationRule'
-        db.create_table(
+        self.db.create_table(
             'fm_eventarchivationrule', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('event_class', models.ForeignKey(EventClass, verbose_name="Event Class", unique=True)),

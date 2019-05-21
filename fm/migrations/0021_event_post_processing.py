@@ -39,7 +39,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'EventPostProcessingRule'
-        db.create_table(
+        self.db.create_table(
             'fm_eventpostprocessingrule', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('event_class', models.ForeignKey(EventClass, verbose_name="Event Class")),
@@ -74,7 +74,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'EventPostProcessingRE'
-        db.create_table(
+        self.db.create_table(
             'fm_eventpostprocessingre', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('rule', models.ForeignKey(EventPostProcessingRule, verbose_name="Event Post-Processing Rule")),

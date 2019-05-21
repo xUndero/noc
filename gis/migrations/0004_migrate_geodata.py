@@ -12,7 +12,6 @@ import json
 # Third-party modules
 from pymongo.errors import BulkWriteError
 from pymongo import InsertOne
-from south.db import db
 # NOC modules
 from noc.lib.nosql import get_db, ObjectId
 from noc.core.migration.base import BaseMigration
@@ -20,13 +19,13 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        if db.execute("""
+        if self.db.execute("""
                 select count(*) from pg_class where relname='gis_geodata'
                 """)[0][0] == 0:
             return  # No PostGIS
         c = get_db().noc.geodata
         bulk = []
-        for layer, label, object, data in db.execute("""
+        for layer, label, object, data in self.db.execute("""
             SELECT layer, label, object, ST_AsGeoJSON(data)
             FROM gis_geodata
         """):

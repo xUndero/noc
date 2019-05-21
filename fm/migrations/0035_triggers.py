@@ -58,7 +58,7 @@ class Migration(BaseMigration):
             pk_field_type=models.AutoField
         )
 
-        db.create_table(
+        self.db.create_table(
             "fm_eventtrigger", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("name", models.CharField("Name", max_length=64, unique=True)),
@@ -78,7 +78,7 @@ class Migration(BaseMigration):
             )
         )
 
-        db.create_table(
+        self.db.create_table(
             "fm_alarmtrigger", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("name", models.CharField("Name", max_length=64, unique=True)),

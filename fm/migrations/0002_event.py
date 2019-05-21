@@ -17,7 +17,7 @@ class Migration(BaseMigration):
     def migrate(self):
 
         # Model 'EventPriority'
-        db.create_table(
+        self.db.create_table(
             'fm_eventpriority', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("Name", max_length=32, unique=True)),
@@ -26,7 +26,7 @@ class Migration(BaseMigration):
             )
         )
         # Model 'EventCategory'
-        db.create_table(
+        self.db.create_table(
             'fm_eventcategory', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("Name", max_length=32, unique=True)),
@@ -50,7 +50,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'EventClass'
-        db.create_table(
+        self.db.create_table(
             'fm_eventclass', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("Name", max_length=64)),
@@ -72,7 +72,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'EventClassificationRule'
-        db.create_table(
+        self.db.create_table(
             'fm_eventclassificationrule', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('event_class', models.ForeignKey(EventClass, verbose_name="Event Class")),
@@ -91,7 +91,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'EventClassificationRE'
-        db.create_table(
+        self.db.create_table(
             'fm_eventclassificationre', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('rule', models.ForeignKey(EventClassificationRule, verbose_name="Event Classification Rule")),
@@ -117,7 +117,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'Event'
-        db.create_table(
+        self.db.create_table(
             'fm_event', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('timestamp', models.DateTimeField("Timestamp")),
@@ -141,7 +141,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'EventData'
-        db.create_table(
+        self.db.create_table(
             'fm_eventdata', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('event', models.ForeignKey(Event, verbose_name=Event)),
@@ -157,4 +157,4 @@ class Migration(BaseMigration):
                 )
             )
         )
-        db.create_index('fm_eventdata', ['event_id', 'key', 'type'], unique=True, db_tablespace='')
+        self.db.create_index('fm_eventdata', ['event_id', 'key', 'type'], unique=True)

@@ -6,13 +6,11 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        db.create_index("fm_event", ["status"])
-        db.create_index("fm_event", ["timestamp"])
+        self.db.create_index("fm_event", ["status"])
+        self.db.create_index("fm_event", ["timestamp"])

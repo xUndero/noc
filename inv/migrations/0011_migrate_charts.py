@@ -10,7 +10,6 @@
 import datetime
 import logging
 # Third-party applications
-from south.db import db
 from bson import ObjectId
 # NOC modules
 from noc.lib.nosql import get_db
@@ -25,7 +24,7 @@ class Migration(BaseMigration):
         segments = mdb.noc.networksegments
         cstate = mdb.noc.inv.networkchartstate
         msettings = mdb.noc.mapsettings
-        for cid, name, description, selector_id in db.execute(
+        for cid, name, description, selector_id in self.db.execute(
                 "SELECT id, name, description, selector_id FROM inv_networkchart"):
             logger.info("Migrating chart '%s'", name)
             # Create segment
@@ -65,5 +64,5 @@ class Migration(BaseMigration):
                     }
                 )
         #
-        db.drop_table("inv_networkchart")
+        self.db.delete_table("inv_networkchart")
         cstate.drop()

@@ -6,8 +6,6 @@
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
@@ -25,8 +23,8 @@ class Migration(BaseMigration):
     def migrate(self):
         for tn, description, subject, body in [("inv.discovery.new_vlans_report", "Discovery's New VLANs Report",
                                                 NEW_VLANS_REPORT_SUBJECT, NEW_VLANS_REPORT_BODY)]:
-            db.execute("INSERT INTO main_template(name, subject, body) VALUES(%s, %s, %s)", [tn, subject, body])
-            db.execute(
+            self.db.execute("INSERT INTO main_template(name, subject, body) VALUES(%s, %s, %s)", [tn, subject, body])
+            self.db.execute(
                 """
                 INSERT INTO main_systemtemplate(name, description, template_id)
                 SELECT %s, %s, id

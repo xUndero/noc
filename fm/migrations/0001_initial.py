@@ -17,7 +17,7 @@ class Migration(BaseMigration):
     def migrate(self):
 
         # Model 'MIB'
-        db.create_table(
+        self.db.create_table(
             'fm_mib', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("Name", max_length=64, unique=True)),
@@ -32,7 +32,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'MIBData'
-        db.create_table(
+        self.db.create_table(
             'fm_mibdata', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('mib', models.ForeignKey(MIB, verbose_name=MIB)),

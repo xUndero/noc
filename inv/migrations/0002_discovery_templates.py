@@ -6,8 +6,6 @@
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
@@ -49,8 +47,8 @@ class Migration(BaseMigration):
             ("inv.discovery.address_collision_report", "Discovery's Address Collision Report",
              ADDRESS_COLLISION_REPORT_SUBJECT, ADDRESS_COLLISION_REPORT_BODY)
         ]:
-            db.execute("INSERT INTO main_template(name, subject, body) VALUES(%s, %s, %s)", [tn, subject, body])
-            db.execute(
+            self.db.execute("INSERT INTO main_template(name, subject, body) VALUES(%s, %s, %s)", [tn, subject, body])
+            self.db.execute(
                 """
                 INSERT INTO main_systemtemplate(name, description, template_id)
                 SELECT %s, %s, id
