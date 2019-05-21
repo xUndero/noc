@@ -12,10 +12,11 @@ from south.db import db
 from django.db import models
 # NOC modules
 from noc.core.model.fields import BinaryField
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
 
         # Model 'DatabaseStorage'
         db.create_table(
@@ -25,8 +26,3 @@ class Migration(object):
                 ('size', models.IntegerField("Size")), ('mtime', models.DateTimeField("MTime"))
             )
         )
-
-        db.send_create_signal('main', ['DatabaseStorage'])
-
-    def backwards(self):
-        db.delete_table('main_databasestorage')

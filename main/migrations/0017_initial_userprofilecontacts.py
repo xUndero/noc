@@ -5,14 +5,15 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         # Create Any time pattern if not exists
         if db.execute("SELECT COUNT(*) FROM main_timepattern WHERE name=%s", ["Any"])[0][0] == 0:
             db.execute("INSERT INTO main_timepattern(name,description) values(%s,%s)", ["Any", "Always match"])
@@ -32,6 +33,3 @@ class Migration(object):
                     """INSERT INTO main_userprofilecontact(user_profile_id,time_pattern_id,notification_method,params)
                     VALUES(%s,%s,%s,%s)""", [profile_id, time_pattern_id, "mail", email]
                 )
-
-    def backwards(self):
-        pass

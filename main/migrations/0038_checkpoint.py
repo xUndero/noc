@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         User = db.mock_model(
             model_name="User",
             db_table="auth_user",
@@ -31,8 +32,3 @@ class Migration(object):
                 ("private", models.BooleanField("Private", default=False))
             )
         )
-
-        db.send_create_signal("main", ["Checkpoint"])
-
-    def backwards(self):
-        db.delete_table("main_checkpoint")

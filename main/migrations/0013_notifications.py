@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
 
         # Model 'NotificationGroup'
         db.create_table(
@@ -107,13 +108,3 @@ class Migration(object):
                 ('actual_till', models.DateTimeField("Actual Till", null=True, blank=True))
             )
         )
-
-        db.send_create_signal(
-            'main', ['NotificationGroup', 'NotificationGroupUser', 'NotificationGroupOther', 'Notification']
-        )
-
-    def backwards(self):
-        db.delete_table('main_notification')
-        db.delete_table('main_notificationgroupother')
-        db.delete_table('main_notificationgroupuser')
-        db.delete_table('main_notificationgroup')

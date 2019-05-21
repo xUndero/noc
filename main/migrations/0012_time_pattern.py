@@ -5,16 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
-
+class Migration(BaseMigration):
+    def migrate(self):
         # Model 'TimePattern'
         db.create_table(
             'main_timepattern', (
@@ -42,8 +42,3 @@ class Migration(object):
             )
         )
         db.create_index('main_timepatternterm', ['time_pattern_id', 'term'], unique=True, db_tablespace='')
-        db.send_create_signal('main', ['TimePattern', 'TimePatternTerm'])
-
-    def backwards(self):
-        db.delete_table('main_timepatternterm')
-        db.delete_table('main_timepattern')

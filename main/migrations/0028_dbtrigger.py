@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         PyRule = db.mock_model(
             model_name='PyRule',
             db_table='main_pyrule',
@@ -75,7 +76,3 @@ class Migration(object):
                 ),
             )
         )
-        db.send_create_signal('main', ['DBTrigger'])
-
-    def backwards(self):
-        db.delete_table('main_dbtrigger')

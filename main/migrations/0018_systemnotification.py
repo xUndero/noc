@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         NotificationGroup = db.mock_model(
             model_name='NotificationGroup',
             db_table='main_notificationgroup',
@@ -33,8 +34,3 @@ class Migration(object):
                 ('name', models.CharField("Name", unique=True, max_length=64)),
             )
         )
-        db.send_create_signal('main', ['SystemNotification'])
-
-    def backwards(self):
-        # Deleting model 'SystemNotification'
-        db.delete_table('main_systemnotification')

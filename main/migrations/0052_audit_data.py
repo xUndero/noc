@@ -16,14 +16,16 @@ from pymongo.errors import BulkWriteError
 from pymongo import InsertOne
 # NOC modules
 from noc.lib.nosql import get_db
+from noc.core.migration.base import BaseMigration
 
 logger = logging.getLogger("south")
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     rx_field = re.compile("^[a-zA-Z0-9_]+$")
 
-    def forwards(self):
+    def migrate(self):
         def q(s):
             if s is None:
                 return None
@@ -123,6 +125,3 @@ class Migration(object):
             else:
                 break
         db.drop_table("main_audittrail")
-
-    def backwards(self):
-        pass

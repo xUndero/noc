@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         # CustomFieldEnumGroup
         db.create_table(
             "main_customfieldenumgroup", (
@@ -45,9 +46,3 @@ class Migration(object):
             "main_customfield", "enum_group",
             models.ForeignKey(CustomFieldEnumGroup, verbose_name="Enum Group", null=True, blank=True)
         )
-        db.send_create_signal("main", ["CustomFieldEnumGroup", "CustomFieldEnumValue"])
-
-    def backwards(self):
-        db.delete_column("main_customfield", "enum_group_id")
-        db.delete_table("main_customfieldenumvaluep")
-        db.delete_table("main_customfieldenumgroup")

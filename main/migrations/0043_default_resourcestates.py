@@ -5,14 +5,15 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         # ResourceState
         db.execute(
             """
@@ -33,6 +34,3 @@ class Migration(object):
         """
         )
         db.execute("SELECT setval('main_resourcestate_id_seq'::regclass, 5)")
-
-    def backwards(self):
-        pass

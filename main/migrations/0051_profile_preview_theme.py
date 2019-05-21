@@ -10,14 +10,13 @@
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         db.add_column(
             "main_userprofile", "preview_theme",
             models.CharField("Preview Theme", max_length=32, null=True, blank=True)
         )
-
-    def backwards(self):
-        db.drop_column("main_userprofile", "preview_theme_id")

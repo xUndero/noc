@@ -5,10 +5,12 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
+
 
 MIME_TYPES = [
     (".pdf", "application/pdf"), (".sig", "application/pgp-signature"), (".spl", "application/futuresplash"),
@@ -47,10 +49,7 @@ MIME_TYPES = [
 ]
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         for ext, mime_type in MIME_TYPES:
             db.execute("INSERT INTO main_mimetype(extension,mime_type) VALUES(%s,%s)", [ext, mime_type])
-
-    def backwards(self):
-        pass

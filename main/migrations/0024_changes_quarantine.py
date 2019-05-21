@@ -5,18 +5,17 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
 # NOC modules
 from noc.core.model.fields import PickledField
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
-
+class Migration(BaseMigration):
+    def migrate(self):
         # Model 'Language'
         db.create_table(
             'main_changesquarantine', (
@@ -44,9 +43,3 @@ class Migration(object):
                 ('description', models.TextField("Description", null=True, blank=True)),
             )
         )
-
-        db.send_create_signal('main', ['ChangesQuarantine', 'ChangesQuarantineRule'])
-
-    def backwards(self):
-        db.delete_table('main_changesquarantine')
-        db.delete_table('main_changesquarantinerule')

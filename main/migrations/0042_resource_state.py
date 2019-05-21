@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         # ResourceState
         ResourceState = db.mock_model(
             model_name="ResourceState",
@@ -34,7 +35,3 @@ class Migration(object):
                 ("step_to", models.ForeignKey(ResourceState, blank=True, null=True))
             )
         )
-        db.send_create_signal("main", ["ResourceState"])
-
-    def backwards(self):
-        db.delete_table("main_resourcestate")

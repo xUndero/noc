@@ -10,10 +10,12 @@
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         TimePattern = db.mock_model(
             model_name='TimePattern',
             db_table='main_timepattern',
@@ -65,17 +67,8 @@ class Migration(object):
                 ('id', models.AutoField(primary_key=True)),
             )
         )
-        db.send_create_signal('main', ['UserProfileContact'])
         # Creating unique_together for [user_profile, time_pattern, notification_method, params] on UserProfileContact.
         db.create_index(
             'main_userprofilecontact', ['user_profile_id', 'time_pattern_id', 'notification_method', 'params'],
             unique=True
         )
-
-    def backwards(self):
-
-        # Deleting model 'UserProfileContact'
-        db.delete_table('main_userprofilecontact')
-
-        # Deleting model 'UserProfile'
-        db.delete_table('main_userprofile')
