@@ -10,10 +10,11 @@
 import bson
 # NOC modules
 from noc.lib.nosql import get_db
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         db = get_db()
         # Workflow
         db["workflows"].insert_many(
@@ -259,5 +260,3 @@ class Migration(object):
             ]
         )
 
-    def backwards(self):
-        pass
