@@ -29,6 +29,8 @@ class Migration(BaseMigration):
                 ('description', models.TextField("Description", null=True, blank=True))
             )
         )
+
+        # Mock Models
         AdministrativeDomain = db.mock_model(
             model_name='AdministrativeDomain',
             db_table='sa_administrativedomain',
@@ -78,6 +80,8 @@ class Migration(BaseMigration):
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
+
+        # M2M field 'ManagedObject.groups'
         self.db.create_table(
             'sa_managedobject_groups', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
@@ -85,6 +89,8 @@ class Migration(BaseMigration):
                 ('objectgroup', models.ForeignKey(ObjectGroup, null=False))
             )
         )
+
+        # Mock Models
         User = db.mock_model(
             model_name='User',
             db_table='auth_user',
@@ -106,6 +112,8 @@ class Migration(BaseMigration):
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
+
+        # Model 'UserAccess'
         self.db.create_table(
             'sa_useraccess', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),

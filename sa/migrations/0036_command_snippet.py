@@ -22,6 +22,8 @@ class Migration(BaseMigration):
             pk_field_name="id",
             pk_field_type=models.AutoField
         )
+
+        # Model "ReduceTask"
         self.db.create_table(
             "sa_commandsnippet", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),

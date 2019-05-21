@@ -8,6 +8,7 @@
 
 # Python modules
 import itertools
+import operator
 # Third-party modules
 import bson
 import psycopg2
@@ -102,3 +103,19 @@ class Migration(BaseMigration):
             # Store back
             wb_metrics = psycopg2.Binary(dumps(metrics, HIGHEST_PROTOCOL))
             self.db.execute("UPDATE sa_managedobjectprofile SET metrics=%s WHERE id=%s", [wb_metrics, p_id])
+
+    @staticmethod
+    def has_thresholds(metric):
+        return (
+            metric.get("low_error", False) or metric.get("low_warn", False) or metric.get("high_warn", False) or
+            metric.get("high_error", False) or metric.get("low_error", False) == 0 or
+            metric.get("low_warn", False) == 0 or metric.get("high_warn", False) == 0 or
+            metric.get("high_error", False) == 0 or metric.get("threshold_profile")
+        )
+
+    @classmethod
+    @cachetools.cachedmethod(operator.attrgetter("_ac_cache"))
+    def get_alarm_class_id(cls, name):
+        db = get_db()
+        ac_coll = db["noc.alarmclasses"]
+        return ac_coll.find_one({"name": name}, {"_id": 1})["_id"]

@@ -23,6 +23,8 @@ class Migration(BaseMigration):
                 ('script_params', PickledField("Params", null=True, blank=True))
             )
         )
+
+        # Mock Models
         ReduceTask = db.mock_model(
             model_name='ReduceTask',
             db_table='sa_reducetask',
@@ -37,6 +39,8 @@ class Migration(BaseMigration):
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
+
+        # Model 'MapTask'
         self.db.create_table(
             'sa_maptask', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),

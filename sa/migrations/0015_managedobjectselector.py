@@ -21,6 +21,8 @@ class Migration(BaseMigration):
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
+
+        # Model 'ManagedObjectSelector'
         self.db.create_table(
             'sa_managedobjectselector', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
@@ -70,6 +72,8 @@ class Migration(BaseMigration):
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
+
+        # M2M field 'ManagedObjectSelector.filter_groups'
         self.db.create_table(
             'sa_managedobjectselector_filter_groups', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),

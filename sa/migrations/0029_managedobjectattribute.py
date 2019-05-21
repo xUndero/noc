@@ -20,6 +20,8 @@ class Migration(BaseMigration):
             pk_field_name="id",
             pk_field_type=models.AutoField
         )
+
+        # Model "MapTask"
         self.db.create_table(
             "sa_managedobjectattribute", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
