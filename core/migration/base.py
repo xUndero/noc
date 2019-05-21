@@ -6,13 +6,18 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
+# Python modules
+from __future__ import absolute_import
 # Third-party modules
 import six
+# NOC modules
+from .db import db
 
 
 @six.python_2_unicode_compatible
 class BaseMigration(object):
     depends_on = []
+    db = db
 
     def __str__(self):
         return self.get_name()
