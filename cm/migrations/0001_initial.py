@@ -5,15 +5,17 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
+
 # Third-party modules
 from django.db import models
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
 
         # Model 'ObjectCategory'
         db.create_table(
@@ -64,10 +66,3 @@ class Migration(object):
             )
         )
         db.create_index('cm_object', ['handler_class_name', 'repo_path'], unique=True, db_tablespace='')
-
-        db.send_create_signal('cm', ['ObjectCategory', 'Object'])
-
-    def backwards(self):
-        db.delete_table('cm_object_categories')
-        db.delete_table('cm_object')
-        db.delete_table('cm_objectcategory')

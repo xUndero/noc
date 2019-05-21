@@ -5,8 +5,7 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Python modules
 import os
 import stat
@@ -16,6 +15,7 @@ from south.db import db
 from django.db import models
 # NOC modules
 from noc.config import config
+from noc.core.migration.base import BaseMigration
 
 TYPES = {
     "config": "config",
@@ -25,8 +25,8 @@ TYPES = {
 }
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         repo_root = config.path.repo
         for ot in TYPES:
             db.add_column("cm_%s" % ot, "last_modified", models.DateTimeField("Last Modified", blank=True, null=True))
@@ -37,7 +37,3 @@ class Migration(object):
                     if os.path.exists(path):
                         lm = datetime.datetime.fromtimestamp(os.stat(path)[stat.ST_MTIME])
                         db.execute("UPDATE cm_%s SET last_modified=%%s WHERE id=%%s" % ot, [lm, id])
-
-    def backwards(self):
-        for ot in TYPES:
-            db.delete_column("cm_%s" % ot, "last_modified")

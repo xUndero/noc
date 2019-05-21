@@ -5,16 +5,18 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     depends_on = (("sa", "0006_default_activator"),)
 
-    def forwards(self):
+    def migrate(self):
         a_id = db.execute("SELECT id FROM sa_activator LIMIT 1")[0][0]
         for handler_class_name, repo_path, profile_name, scheme, address, port, user, password, super_password, path\
                 in db.execute(
@@ -34,6 +36,3 @@ class Migration(object):
                 db.execute("INSERT INTO cm_prefixlist(repo_path) VALUES(%s)", [repo_path])
             else:
                 raise Exception("Unsupported handler_class_name='%s'" % handler_class_name)
-
-    def backwards(self):
-        pass

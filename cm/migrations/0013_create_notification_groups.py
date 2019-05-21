@@ -5,13 +5,15 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     def create_notification_group(self, name, emails):
         db.execute("INSERT INTO main_notificationgroup(name) values(%s)", [name])
         ng_id = db.execute("SELECT id FROM main_notificationgroup WHERE name=%s", [name])[0][0]
@@ -30,7 +32,7 @@ class Migration(object):
                 )
         return ng_id
 
-    def forwards(self):
+    def migrate(self):
         if db.execute("SELECT COUNT(*) FROM main_timepattern WHERE name=%s", ["Any"])[0][0] == 0:
             db.execute("INSERT INTO main_timepattern(name,description) values(%s,%s)", ["Any", "Always match"])
         self.time_pattern_id = db.execute("SELECT id FROM main_timepattern WHERE name=%s", ["Any"])[0][0]
@@ -39,6 +41,3 @@ class Migration(object):
             emails = [x.strip() for x in on_emails.split()]
             ng_id = self.create_notification_group("cm_autocreated_%d" % on_id, emails)
             db.execute("UPDATE cm_objectnotify SET notification_group_id=%s WHERE id=%s", [ng_id, on_id])
-
-    def backwards(self):
-        pass

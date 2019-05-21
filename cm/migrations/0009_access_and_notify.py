@@ -5,18 +5,20 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 OBJECT_TYPES = ["config", "dns", "prefixlist", "rpsl"]
 OBJECT_TYPE_CHOICES = [(x, x) for x in OBJECT_TYPES]
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
+
         db.delete_column("cm_objectcategory", "notify_immediately")
         db.delete_column("cm_objectcategory", "notify_delayed")
 
@@ -106,16 +108,3 @@ class Migration(object):
                 ('notify_delayed', models.BooleanField("Notify Delayed")),
             )
         )
-
-        db.send_create_signal('cm', ['ObjectLocation', 'ObjectAccess', 'ObjectNotify'])
-
-    def backwards(self):
-        for ot in OBJECT_TYPES:
-            db.delete_column("cm_%s" % ot, "location_id")
-        db.delete_table('cm_objectnotify')
-        db.delete_table('cm_objectaccess')
-        db.add_column(
-            "cm_objectcategory", "notify_immediately", models.TextField("Notify Immediately", blank=True, null=True)
-        )
-        db.add_column("cm_objectcategory", "notify_delayed", models.TextField("Notify Delayed", blank=True, null=True))
-        db.delete_table('cm_objectlocation')

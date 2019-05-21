@@ -5,16 +5,18 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     depends_on = (("sa", "0008_copy_objects"),)
 
-    def forwards(self):
+    def migrate(self):
         db.execute("DROP INDEX cm_config_managed_object_id")
         db.execute("CREATE UNIQUE INDEX cm_config_managed_object_id ON cm_config(managed_object_id)")
         db.delete_column("cm_objectnotify", "category_id")
@@ -30,6 +32,3 @@ class Migration(object):
         db.execute("DELETE FROM cm_objectcategory")
         db.drop_table("cm_objectcategory")
         db.drop_table("cm_objectlocation")
-
-    def backwards(self):
-        pass

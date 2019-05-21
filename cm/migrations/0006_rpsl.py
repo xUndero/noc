@@ -5,16 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
-
+class Migration(BaseMigration):
+    def migrate(self):
         # Model 'RPSL'
         db.create_table(
             'cm_rpsl', (
@@ -48,9 +48,3 @@ class Migration(object):
                 ('objectcategory', models.ForeignKey(ObjectCategory, null=False))
             )
         )
-
-        db.send_create_signal('cm', ['RPSL'])
-
-    def backwards(self):
-        db.delete_table('cm_rpsl')
-        db.delete_table('cm_rpsl_categories')

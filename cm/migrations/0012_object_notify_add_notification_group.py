@@ -5,17 +5,19 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     depends_on = (("main", "0017_initial_userprofilecontacts"),)
 
-    def forwards(self):
+    def migrate(self):
         NotificationGroup = db.mock_model(
             model_name='NotificationGroup',
             db_table='main_notificationgroup',
@@ -27,6 +29,3 @@ class Migration(object):
             "cm_objectnotify", "notification_group",
             models.ForeignKey(NotificationGroup, verbose_name="Notification Group", null=True, blank=True)
         )
-
-    def backwards(self):
-        db.drop_column("cm_objectnotify", "notification_group")

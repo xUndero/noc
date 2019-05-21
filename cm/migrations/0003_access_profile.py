@@ -5,18 +5,18 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
 # NOC modules
 from noc.lib.url import URL
 from noc.core.script.scheme import TELNET, SSH
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         db.add_column(
             "cm_object", "scheme",
             models.IntegerField("Scheme", blank=True, null=True, choices=[(0, "telnet"), (1, "ssh")])
@@ -40,12 +40,3 @@ class Migration(object):
                 "WHERE id=%s", [scheme, u.host, u.port, u.user, u.password, u.path, id]
             )
         db.delete_column("cm_object", "stream_url")
-
-    def backwards(self):
-        db.delete_column("cm_object", "scheme")
-        db.delete_column("cm_object", "address")
-        db.delete_column("cm_object", "port")
-        db.delete_column("cm_object", "user")
-        db.delete_column("cm_object", "password")
-        db.delete_column("cm_object", "super_password")
-        db.delete_column("cm_object", "remote_path")

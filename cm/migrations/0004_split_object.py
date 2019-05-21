@@ -5,19 +5,20 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
 # NOC modules
 from noc.core.script.scheme import SCHEME_CHOICES
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     depends_on = (("sa", "0005_activator"),)
 
-    def forwards(self):
+    def migrate(self):
         Activator = db.mock_model(
             model_name="Activator",
             db_table="sa_activator",
@@ -142,14 +143,3 @@ class Migration(object):
                 ("objectcategory", models.ForeignKey(ObjectCategory, null=False))
             )
         )
-
-        db.send_create_signal("cm", ["Config", "PrefixList", "DNS"])
-
-    def backwards(self):
-        db.delete_table("cm_config_categories")
-        db.delete_table("cm_prefixlist_categories")
-        db.delete_table("cm_dns_categories")
-
-        db.delete_table("cm_dns")
-        db.delete_table("cm_prefixlist")
-        db.delete_table("cm_config")
