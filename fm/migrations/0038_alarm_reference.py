@@ -7,7 +7,6 @@
 # ----------------------------------------------------------------------
 
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 
@@ -37,7 +36,7 @@ class Migration(BaseMigration):
             del doc["events"]
             collection.save(doc)
 
-        db = get_db()
+        db = self.mongo_db
         active_alarms = db.noc.alarms.active
         archived_alarms = db.noc.alarms.archive
         active_events = db.noc.events.active

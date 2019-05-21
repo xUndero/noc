@@ -12,7 +12,6 @@ import bson
 # NOC modules
 from noc.core.migration.base import BaseMigration
 from noc.core.bi.decorator import bi_hash
-from noc.lib.nosql import get_db
 
 MONGO_CHUNK = 500
 
@@ -20,7 +19,7 @@ MONGO_CHUNK = 500
 class Migration(BaseMigration):
     def migrate(self):
         # Update mongodb collections
-        mdb = get_db()
+        mdb = self.mongo_db
         for coll_name in ["noc.alarmclasses"]:
             coll = mdb[coll_name]
             updates = []

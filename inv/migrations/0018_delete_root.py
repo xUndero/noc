@@ -7,13 +7,12 @@
 # ----------------------------------------------------------------------
 
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        db = get_db()
+        db = self.mongo_db
         # Get root model id
         rm = db["noc.objectmodels"].find_one({"name": "Root"})
         if not rm:

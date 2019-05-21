@@ -10,14 +10,13 @@
 import uuid
 import datetime
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
         now = datetime.datetime.now()
-        sc = get_db()["noc.synccaches"]
+        sc = self.mongo_db["noc.synccaches"]
         for zone_id, sync_id in self.db.execute("""SELECT z.id, s.sync
                  FROM
                      dns_dnszone z JOIN dns_dnszoneprofile p ON (z.profile_id = p.id)

@@ -7,13 +7,12 @@
 # ---------------------------------------------------------------------
 
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        db = get_db()
+        db = self.mongo_db
         c = db.noc.inv.discovery_id
         for r in c.find({"first_chassis_mac": {"$exists": True}, "last_chassis_mac": {"$exists": True}}):
             c.update(

@@ -9,7 +9,6 @@
 # Python modules
 from __future__ import print_function
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 
@@ -19,7 +18,7 @@ class Migration(BaseMigration):
     LOST_N_FOUND_UUID = "b0fae773-b214-4edf-be35-3468b53b03f2"
 
     def migrate(self):
-        db = get_db()
+        db = self.mongo_db
         # Initialize container models
         om = db.noc.objectmodels
         root = om.find_one({"name": "Root"})

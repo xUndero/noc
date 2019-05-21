@@ -10,7 +10,6 @@
 import bson
 import bson.int64
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.model.fields import DocumentReferenceField
 from noc.core.bi.decorator import bi_hash
 # NOC modules
@@ -22,7 +21,7 @@ class Migration(BaseMigration):
     depends_on = [("wf", "0001_default_wf")]
 
     def migrate(self):
-        coll = get_db()["addressprofiles"]
+        coll = self.mongo_db["addressprofiles"]
         default_id = bson.ObjectId()
         wf = bson.ObjectId("5a01d980b6f529000100d37a")
         profiles = [

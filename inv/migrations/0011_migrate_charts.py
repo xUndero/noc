@@ -12,7 +12,6 @@ import logging
 # Third-party applications
 from bson import ObjectId
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 logger = logging.getLogger(__name__)
@@ -20,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 class Migration(BaseMigration):
     def migrate(self):
-        mdb = get_db()
+        mdb = self.mongo_db
         segments = mdb.noc.networksegments
         cstate = mdb.noc.inv.networkchartstate
         msettings = mdb.noc.mapsettings

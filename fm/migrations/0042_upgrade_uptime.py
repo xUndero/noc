@@ -12,14 +12,13 @@ from __future__ import print_function
 from pymongo.errors import BulkWriteError
 from pymongo import UpdateOne
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.lib.dateutils import total_seconds
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        db = get_db()
+        db = self.mongo_db
         bulk = []
         for d in db.noc.fm.uptimes.find({}):
             bulk += [

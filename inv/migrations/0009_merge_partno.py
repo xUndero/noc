@@ -7,13 +7,12 @@
 # ---------------------------------------------------------------------
 
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        db = get_db()
+        db = self.mongo_db
         for om in db.noc.objectmodels.find():
             if "data" not in om:
                 continue

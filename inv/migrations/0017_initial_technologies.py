@@ -13,7 +13,6 @@ import bson
 from bson.int64 import Int64
 from pymongo import UpdateOne
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 
@@ -144,4 +143,4 @@ class Migration(BaseMigration):
                 upsert=True
             )
         ]
-        get_db().technologies.bulk_write(bulk)
+        self.mongo_db.technologies.bulk_write(bulk)

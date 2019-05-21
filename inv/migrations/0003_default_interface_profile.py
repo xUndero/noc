@@ -8,14 +8,13 @@
 
 # NOC modules
 from noc.core.migration.base import BaseMigration
-from noc.lib.nosql import get_db
 
 DEFAULT_NAME = "default"
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        c = get_db().noc.interface_profiles
+        c = self.mongo_db.noc.interface_profiles
         if not c.count_documents({"name": DEFAULT_NAME}):
             c.insert_one(
                 {
