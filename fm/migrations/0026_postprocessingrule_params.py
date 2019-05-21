@@ -5,17 +5,19 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     depends_on = (("main", "0015_notification_link"),)
 
-    def forwards(self):
+    def migrate(self):
         ManagedObjectSelector = db.mock_model(
             model_name='ManagedObjectSelector',
             db_table='sa_managedobjectselector',
@@ -50,8 +52,3 @@ class Migration(object):
             "fm_eventpostprocessingrule", "notification_group",
             models.ForeignKey(NotificationGroup, verbose_name="Notification Group", null=True, blank=True)
         )
-
-    def backwards(self):
-        db.delete_column("fm_eventpostprocessingrule", "notification_group_id")
-        db.delete_column("fm_eventpostprocessingrule", "time_pattern_id")
-        db.delete_column("fm_eventpostprocessingrule", "managed_object_selector_id")

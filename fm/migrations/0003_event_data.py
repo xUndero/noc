@@ -5,10 +5,11 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 EVENT_PRIORITY = [
     (0, "DEFAULT", "Unclassified event"),
@@ -29,8 +30,8 @@ EVENT_CATEGORY = [
 ]
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         for priority, name, description in EVENT_PRIORITY:
             db.execute(
                 "INSERT INTO fm_eventpriority(name,priority,description) VALUES(%s,%s,%s)",
@@ -45,6 +46,3 @@ class Migration(object):
             last_modified) VALUES('DEFAULT',%s,%s,'','Unclassified event','Unclassified event','now')""",
             [default_category_id, default_priority_id]
         )
-
-    def backwards(self):
-        pass

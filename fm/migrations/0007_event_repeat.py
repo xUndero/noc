@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         # Mock Models
         Event = db.mock_model(
             model_name='Event',
@@ -67,9 +68,3 @@ class Migration(object):
                            VALUES(%s,%s,true,false)""", [id, v]
                     )
         db.delete_column('fm_eventclass', 'variables')
-
-    def backwards(self):
-        db.delete_table('fm_eventrepeat')
-        db.delete_column('fm_eventclass', 'repeat_suppression')
-        db.delete_column('fm_eventclass', 'repeat_suppression_interval')
-        db.delete_table('fm_eventclassvar')

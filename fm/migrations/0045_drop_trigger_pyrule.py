@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         db.add_column("fm_alarmtrigger", "handler", models.CharField("Handler", max_length=128, null=True, blank=True))
         db.add_column(
             "fm_alarmtrigger", "description", models.CharField("Description", max_length=256, null=True, blank=True)
@@ -49,6 +50,3 @@ class Migration(object):
         # drop pyrule
         db.drop_column("fm_eventtrigger", "pyrule_id")
         db.drop_column("fm_alarmtrigger", "pyrule_id")
-
-    def backwards(self):
-        pass

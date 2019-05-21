@@ -8,14 +8,12 @@
 
 # NOC modules
 from noc.lib.nosql import get_db
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         db = get_db()
         for c in [db.noc.events.active, db.noc.events.archive]:
             # @todo: Set start_timestamp = timestamp
             c.update_many({"repeats": {"$exists": False}}, {"$set": {"repeats": 1}})
-
-    def backwards(self):
-        pass

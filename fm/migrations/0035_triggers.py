@@ -5,17 +5,19 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     depends_on = (("main", "0037_template"),)
 
-    def forwards(self):
+    def migrate(self):
         Template = db.mock_model(
             model_name="Template",
             db_table="main_template",
@@ -95,9 +97,3 @@ class Migration(object):
                 ("pyrule", models.ForeignKey(PyRule, verbose_name="pyRule", null=True, blank=True))
             )
         )
-
-        db.send_create_signal("main", ["EventTrigger", "AlarmTrigger"])
-
-    def backwards(self):
-        db.delete_table("fm_eventtrigger")
-        db.delete_table("fm_alarmtrigger")

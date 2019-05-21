@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
 
         # Model 'EventPriority'
         db.create_table(
@@ -157,19 +158,3 @@ class Migration(object):
             )
         )
         db.create_index('fm_eventdata', ['event_id', 'key', 'type'], unique=True, db_tablespace='')
-
-        db.send_create_signal(
-            'fm', [
-                'EventPriority', 'EventCategory', 'EventClass', 'EventClassificationRule', 'EventClassificationRE',
-                'Event', 'EventData'
-            ]
-        )
-
-    def backwards(self):
-        db.delete_table('fm_eventdata')
-        db.delete_table('fm_event')
-        db.delete_table('fm_eventclassificationre')
-        db.delete_table('fm_eventclassificationrule')
-        db.delete_table('fm_eventclass')
-        db.delete_table('fm_eventcategory')
-        db.delete_table('fm_eventpriority')

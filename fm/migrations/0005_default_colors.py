@@ -5,10 +5,12 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
+
 
 COLORS = {
     "CRITICAL": ("#BB0000", "#FFDDCC"),
@@ -21,8 +23,8 @@ COLORS = {
 }
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         for p, colors in COLORS.items():
             font, bg = colors
             r = db.execute("SELECT id,font_color,background_color FROM fm_eventpriority WHERE name=%s", [p])
@@ -32,6 +34,3 @@ class Migration(object):
                     db.execute("UPDATE fm_eventpriority SET font_color=%s WHERE id=%s", [font, pid])
                 if not dbf:
                     db.execute("UPDATE fm_eventpriority SET background_color=%s WHERE id=%s", [bg, pid])
-
-    def backwards(self):
-        pass

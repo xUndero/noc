@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         db.add_column(
             "fm_eventclassificationrule", "action",
             models.CharField(
@@ -21,6 +22,3 @@ class Migration(object):
             )
         )
         db.execute("UPDATE fm_eventclassificationrule SET action='D' WHERE drop_event=TRUE")
-
-    def backwards(self):
-        db.delete_column("fm_eventclassificationrule", "action")

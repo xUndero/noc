@@ -5,16 +5,17 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Python modules
 import datetime
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         if db.execute("SELECT COUNT(*) FROM main_pyrule WHERE name=%s", ["refresh_config"])[0][0] == 0:
             db.execute(
                 """INSERT INTO main_pyrule(name, interface, description, text, changed)
@@ -29,6 +30,3 @@ class Migration(object):
                    VALUES(%s, %s, %s, %s)
                    """, ["Refresh Config", True, r"Config \| Config Changed", r_id]
         )
-
-    def backwards(self):
-        pass

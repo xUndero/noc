@@ -5,14 +5,15 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         db.delete_table("fm_eventrepeat")
         db.delete_table("fm_eventlog")
         db.delete_table("fm_eventdata")
@@ -30,6 +31,3 @@ class Migration(object):
         db.delete_table("fm_eventclassvar")
         db.delete_table("fm_eventclass")
         db.delete_table("fm_eventcategory")
-
-    def backwards(self):
-        pass

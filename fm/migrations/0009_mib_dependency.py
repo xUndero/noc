@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
 
         # Mock Models
         MIB = db.mock_model(
@@ -29,8 +30,3 @@ class Migration(object):
             )
         )
         db.create_index('fm_mibdependency', ['mib_id', 'requires_mib_id'], unique=True, db_tablespace='')
-
-        db.send_create_signal('fm', ['MIBDependency'])
-
-    def backwards(self):
-        db.delete_table('fm_mibdependency')
