@@ -5,19 +5,19 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Python modules
 from __future__ import print_function
 # Third-party modules
 from pymongo.errors import BulkWriteError
 from pymongo import InsertOne
 # NOC modules
+from noc.core.migration.base import BaseMigration
 from noc.lib.nosql import get_db
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         uc = get_db()["noc.objectuplinks"]
         dc = get_db()["noc.objectdata"]
         bulk = []
@@ -31,6 +31,3 @@ class Migration(object):
             except BulkWriteError as e:
                 print(("Bulk write error: '%s'", e.details))
                 print("Stopping check")
-
-    def backwards(self):
-        pass

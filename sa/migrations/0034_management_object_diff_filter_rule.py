@@ -1,19 +1,18 @@
-# -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------
 # managedobject diff filter rule
 # ----------------------------------------------------------------------
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
-from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         PyRule = db.mock_model(
             model_name="PyRule",
             db_table="main_pyrule",
@@ -21,10 +20,7 @@ class Migration(object):
             pk_field_name="id",
             pk_field_type=models.AutoField
         )
-        db.add_column(
+        self.db.add_column(
             "sa_managedobject", "config_diff_filter_rule",
             models.ForeignKey(PyRule, verbose_name="Config Notification Filter pyRule", null=True, blank=True)
         )
-
-    def backwards(self):
-        db.delete_column("sa_managedobject", "config_diff_filter_rule_id")

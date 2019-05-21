@@ -5,18 +5,14 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
-"""
-"""
-# Third-party modules
-from south.db import db
+
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
     depends_on = (("cm", "0016_no_objectgroup"),)
 
-    def forwards(self):
+    def migrate(self):
         for t in ["sa_managedobject_groups", "sa_managedobjectselector_filter_groups", "sa_objectgroup"]:
-            db.drop_table(t)
-
-    def backwards(self):
-        pass
+            self.db.drop_table(t)

@@ -1,20 +1,19 @@
-# -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------
 # auth profile
 # ----------------------------------------------------------------------
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from django.db import models
-from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
-        db.create_table(
+class Migration(BaseMigration):
+    def migrate(self):
+        self.db.create_table(
             "sa_authprofile", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("name", models.CharField("Name", max_length=64, unique=True)),
@@ -36,11 +35,7 @@ class Migration(object):
             pk_field_type=models.AutoField
         )
 
-        db.add_column(
+        self.db.add_column(
             "sa_managedobject", "auth_profile",
             models.ForeignKey(AuthProfile, verbose_name="Auth Profile", null=True, blank=True)
         )
-
-    def backwards(self):
-        db.drop_column("sa_managedobject", "auth_profile_id")
-        db.delete_table("sa_authprofile")

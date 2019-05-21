@@ -7,15 +7,15 @@
 # ----------------------------------------------------------------------
 
 # Third-party modules
-from south.db import db
 import bson
 # NOC modules
+from noc.core.migration.base import BaseMigration
 from noc.lib.nosql import get_db
 from noc.core.model.fields import DocumentReferenceField
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         p_id = bson.ObjectId()
         get_db()["capsprofiles"].insert_one(
             {
@@ -49,13 +49,10 @@ class Migration(object):
             }
         )
         # Create MOP.caps_profile field
-        db.add_column(
+        self.db.add_column(
             "sa_managedobjectprofile", "caps_profile", DocumentReferenceField("sa.CapsProfile", null=True, blank=True)
         )
         # Set default caps profile
-        db.execute("UPDATE sa_managedobjectprofile SET caps_profile = %s", [str(p_id)])
+        self.db.execute("UPDATE sa_managedobjectprofile SET caps_profile = %s", [str(p_id)])
         # Make field required
-        db.execute("ALTER TABLE sa_managedobjectprofile ALTER caps_profile SET NOT NULL")
-
-    def backwards(self):
-        pass
+        self.db.execute("ALTER TABLE sa_managedobjectprofile ALTER caps_profile SET NOT NULL")

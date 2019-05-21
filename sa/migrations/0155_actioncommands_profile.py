@@ -5,14 +5,14 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # NOC modules
+from noc.core.migration.base import BaseMigration
 from noc.lib.nosql import get_db
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         # Get profile record mappings
         pcoll = get_db()["noc.profiles"]
         acoll = get_db()["noc.actioncommands"]
@@ -22,6 +22,3 @@ class Migration(object):
         # Update
         for p in pmap:
             acoll.update_many({"profile": p}, {"$set": {"profile": pmap[p]}})
-
-    def backwards(self):
-        pass

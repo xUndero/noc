@@ -5,14 +5,14 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # NOC modules
+from noc.core.migration.base import BaseMigration
 from noc.lib.nosql import get_db
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         def convert(doc):
             def convert_caps(ci):
                 return {
@@ -41,6 +41,3 @@ class Migration(object):
             chunk, data = data[:CHUNK], data[CHUNK:]
             new_caps.insert(chunk)
         # old_caps.drop()
-
-    def backwards(self):
-        pass

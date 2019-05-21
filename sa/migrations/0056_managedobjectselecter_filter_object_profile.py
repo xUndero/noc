@@ -1,19 +1,18 @@
-# -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------
 # managedobjectselector filter_object_profile
 # ----------------------------------------------------------------------
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from django.db import models
-from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         ManagedObjectProfile = db.mock_model(
             model_name='ManagedObjectProfile',
             db_table='sa_managedobjectprofile',
@@ -21,10 +20,7 @@ class Migration(object):
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        db.add_column(
+        self.db.add_column(
             "sa_managedobjectselector", "filter_object_profile",
             models.ForeignKey(ManagedObjectProfile, verbose_name="Filter by Object Profile", null=True, blank=True)
         )
-
-    def backwards(self):
-        db.delete_column("sa_managedobjectselector", "filter_object_profile_id")
