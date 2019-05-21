@@ -12,7 +12,6 @@ import bson
 # NOC modules
 from noc.core.migration.base import BaseMigration
 from noc.core.bi.decorator import bi_hash
-from noc.lib.nosql import get_db
 
 PG_CHUNK = 500
 MONGO_CHUNK = 500
@@ -43,7 +42,7 @@ class Migration(BaseMigration):
                     """ % (table, ",\n".join(chunk))
                 )
         # Update mongodb collections
-        mdb = get_db()
+        mdb = self.mongo_db
         for coll_name in ["noc.profiles", "noc.services", "noc.serviceprofiles"]:
             coll = mdb[coll_name]
             updates = []

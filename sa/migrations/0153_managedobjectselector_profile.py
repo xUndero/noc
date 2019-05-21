@@ -9,13 +9,12 @@
 # NOC modules
 from noc.core.migration.base import BaseMigration
 from noc.core.model.fields import DocumentReferenceField
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
     def migrate(self):
         # Get profile record mappings
-        pcoll = get_db()["noc.profiles"]
+        pcoll = self.mongo_db["noc.profiles"]
         pmap = {}  # name -> id
         for d in pcoll.find({}, {"_id": 1, "name": 1}):
             pmap[d["name"]] = str(d["_id"])

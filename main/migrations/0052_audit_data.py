@@ -14,7 +14,6 @@ import datetime
 from pymongo.errors import BulkWriteError
 from pymongo import InsertOne
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 logger = logging.getLogger("south")
@@ -56,7 +55,7 @@ class Migration(BaseMigration):
 
         delta = datetime.timedelta(days=5 * 365)
         user_cache = dict(self.db.execute("SELECT id, username FROM auth_user"))
-        collection = get_db()["noc.audittrail"]
+        collection = self.mongo_db["noc.audittrail"]
         left = self.db.execute("SELECT COUNT(*) FROM main_audittrail")[0][0]
         logger.info("Migration audit trail")
         last_id = 0

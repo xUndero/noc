@@ -11,7 +11,6 @@ import uuid
 # NOC modules
 from noc.core.migration.base import BaseMigration
 from noc.core.model.fields import DocumentReferenceField
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
@@ -19,7 +18,7 @@ class Migration(BaseMigration):
         # Select profile names
         profiles = set(r[0] for r in self.db.execute("SELECT DISTINCT profile_name FROM sa_managedobject"))
         # Create profile records
-        pcoll = get_db()["noc.profiles"]
+        pcoll = self.mongo_db["noc.profiles"]
         for p in profiles:
             u = uuid.uuid4()
             pcoll.update_many({"name": p}, {"$set": {"name": p}, "$setOnInsert": {"uuid": u}}, upsert=True)

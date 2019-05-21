@@ -8,13 +8,12 @@
 
 # NOC modules
 from noc.core.migration.base import BaseMigration
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
     depends_on = [("phone", "0002_migrate_termination_groups")]
 
     def migrate(self):
-        db = get_db()
+        db = self.mongo_db
         coll = db["resourcegroups"]
         coll.update_many({"_legacy_id": {"$exists": True}}, {"$unset": {"_legacy_id": ""}})

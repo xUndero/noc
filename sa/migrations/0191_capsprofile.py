@@ -10,14 +10,13 @@
 import bson
 # NOC modules
 from noc.core.migration.base import BaseMigration
-from noc.lib.nosql import get_db
 from noc.core.model.fields import DocumentReferenceField
 
 
 class Migration(BaseMigration):
     def migrate(self):
         p_id = bson.ObjectId()
-        get_db()["capsprofiles"].insert_one(
+        self.mongo_db["capsprofiles"].insert_one(
             {
                 "_id": p_id,
                 "name": "default",

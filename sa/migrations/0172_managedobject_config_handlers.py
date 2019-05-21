@@ -12,7 +12,6 @@ import re
 from django.db import models
 # NOC modules
 from noc.core.migration.base import BaseMigration
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
@@ -20,7 +19,7 @@ class Migration(BaseMigration):
     rx_strip_decorator = re.compile(r"^@pyrule\s*", re.MULTILINE)
 
     def migrate(self):
-        new_coll = get_db()["pyrules"]
+        new_coll = self.mongo_db["pyrules"]
         #  Create handler fields
         self.db.add_column(
             "sa_managedobject", "config_filter_handler",

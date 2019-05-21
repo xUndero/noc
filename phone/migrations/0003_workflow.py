@@ -9,7 +9,6 @@
 # Third-party modules
 import bson
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 
@@ -25,7 +24,7 @@ class Migration(BaseMigration):
             "O": bson.ObjectId("5a17f7fc1bb6270001bd0359"),
             "C": bson.ObjectId("5a17f7391bb6270001bd033e")
         }
-        db = get_db()
+        db = self.mongo_db
         db["noc.phonerangeprofiles"].update_many(
             {},
             {

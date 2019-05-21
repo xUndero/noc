@@ -8,7 +8,6 @@
 
 # NOC modules
 from noc.core.migration.base import BaseMigration
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
@@ -21,7 +20,7 @@ class Migration(BaseMigration):
             if h:
                 handlers.add(h)
         if handlers:
-            coll = get_db()["handlers"]
+            coll = self.mongo_db["handlers"]
             for h in handlers:
                 name = h.split(".")[-2]
                 coll.insert({"_id": h, "name": name, "allow_config_filter": True})
@@ -30,7 +29,7 @@ class Migration(BaseMigration):
             if h:
                 handlers.add(h)
         if handlers:
-            coll = get_db()["handlers"]
+            coll = self.mongo_db["handlers"]
             for h in handlers:
                 name = h.split(".")[-2]
                 coll.insert({"_id": h, "name": name, "allow_config_validation": True})

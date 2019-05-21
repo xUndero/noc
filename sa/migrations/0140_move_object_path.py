@@ -13,13 +13,12 @@ from pymongo.errors import BulkWriteError
 from pymongo import UpdateOne
 # NOC modules
 from noc.core.migration.base import BaseMigration
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        uc = get_db()["noc.cache.objectpaths"]
-        dc = get_db()["noc.objectdata"]
+        uc = self.mongo_db["noc.cache.objectpaths"]
+        dc = self.mongo_db["noc.objectdata"]
         bulk = []
         for d in uc.find():
             bulk += [

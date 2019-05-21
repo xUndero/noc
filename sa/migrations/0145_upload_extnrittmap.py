@@ -8,12 +8,11 @@
 
 # NOC modules
 from noc.core.migration.base import BaseMigration
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        collection = get_db()["noc.extnrittmap"]
+        collection = self.mongo_db["noc.extnrittmap"]
         mappings = [
             (d["managed_object"], str(d["tt_system"]), str(d["queue"]), str(d["remote_id"])) for d in collection.find()
         ]

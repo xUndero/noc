@@ -12,7 +12,6 @@ from pymongo import InsertOne
 # NOC modules
 from noc.core.migration.base import BaseMigration
 from noc.core.bi.decorator import bi_hash
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
@@ -58,4 +57,4 @@ class Migration(BaseMigration):
                 )
             ]
         # Apply groups
-        get_db().resourcegroups.bulk_write(bulk)
+        self.mongo_db.resourcegroups.bulk_write(bulk)

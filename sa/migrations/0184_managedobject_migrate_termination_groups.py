@@ -8,7 +8,6 @@
 
 # NOC modules
 from noc.core.migration.base import BaseMigration
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
@@ -27,7 +26,7 @@ class Migration(BaseMigration):
                 "WHERE service_terminator_id IS NOT NULL"
             )
         ]
-        mdb = get_db()
+        mdb = self.mongo_db
         rg_map = dict(
             (x["_legacy_id"], str(x["_id"]))
             for x in mdb.resourcegroups.find({

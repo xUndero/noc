@@ -8,7 +8,6 @@
 
 # NOC modules
 from noc.core.migration.base import BaseMigration
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
@@ -23,7 +22,7 @@ class Migration(BaseMigration):
 
             return {"_id": doc["object"], "caps": [convert_caps(c) for c in doc["caps"]]}
 
-        db = get_db()
+        db = self.mongo_db
         caps = db["noc.sa.objectcapabilities"]
         if not caps.count_documents({}):
             return

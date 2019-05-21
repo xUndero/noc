@@ -14,7 +14,6 @@ from django.db import models
 # NOC modules
 from noc.core.migration.base import BaseMigration
 from noc.core.model.fields import DocumentReferenceField
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
@@ -22,8 +21,8 @@ class Migration(BaseMigration):
         #
         # Platform and version
         #
-        pcoll = get_db()["noc.platforms"]
-        fcoll = get_db()["noc.firmwares"]
+        pcoll = self.mongo_db["noc.platforms"]
+        fcoll = self.mongo_db["noc.firmwares"]
 
         data = self.db.execute(
             """

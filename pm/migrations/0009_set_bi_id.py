@@ -11,7 +11,6 @@ from pymongo import UpdateOne
 import bson
 # NOC modules
 from noc.core.bi.decorator import bi_hash
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 MONGO_CHUNK = 500
@@ -20,7 +19,7 @@ MONGO_CHUNK = 500
 class Migration(BaseMigration):
     def migrate(self):
         # Update mongodb collections
-        mdb = get_db()
+        mdb = self.mongo_db
         for coll_name in ["noc.metrictypes"]:
             coll = mdb[coll_name]
             updates = []

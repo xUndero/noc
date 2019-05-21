@@ -7,13 +7,12 @@
 # ----------------------------------------------------------------------
 
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        db = get_db()
+        db = self.mongo_db
         coll = db["extstorages"]
         coll.update_many({"enable_config_mirror": True}, {"$set": {"type": "config_mirror"}})
         coll.update_many({"enable_beef": True}, {"$set": {"type": "beef"}})

@@ -7,13 +7,12 @@
 # ----------------------------------------------------------------------
 
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        db = get_db()
+        db = self.mongo_db
         scount = db.noc.pm.storages.count_documents({})
         if scount == 0:
             db.noc.pm.storages.insert_one(

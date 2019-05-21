@@ -8,13 +8,12 @@
 
 # NOC modules
 from noc.core.migration.base import BaseMigration
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
     def migrate(self):
         # Get first segment
-        ns = get_db().noc.networksegments.find_one({}, sort=[("name", 1)])
+        ns = self.mongo_db.noc.networksegments.find_one({}, sort=[("name", 1)])
         self.db.execute("""
             UPDATE sa_managedobject
             SET segment=%s

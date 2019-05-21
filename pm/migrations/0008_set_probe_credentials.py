@@ -9,7 +9,6 @@
 # Python modules
 import os
 # NOC modules
-from noc.lib.nosql import get_db
 from noc.core.migration.base import BaseMigration
 
 
@@ -18,7 +17,7 @@ class Migration(BaseMigration):
 
     def migrate(self):
         PROBEUSER = "noc-probe"
-        mdb = get_db()
+        mdb = self.mongo_db
         # Check probe has no storage and credentials
         if mdb.noc.pm.probe.count_documents({}) != 1:
             return

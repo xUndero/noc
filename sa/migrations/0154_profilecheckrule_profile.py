@@ -8,14 +8,13 @@
 
 # NOC modules
 from noc.core.migration.base import BaseMigration
-from noc.lib.nosql import get_db
 
 
 class Migration(BaseMigration):
     def migrate(self):
         # Get profile record mappings
-        pcoll = get_db()["noc.profiles"]
-        pcrcoll = get_db()["noc.profilecheckrules"]
+        pcoll = self.mongo_db["noc.profiles"]
+        pcrcoll = self.mongo_db["noc.profilecheckrules"]
         pmap = {}  # name -> id
         for d in pcoll.find({}, {"_id": 1, "name": 1}):
             pmap[d["name"]] = d["_id"]

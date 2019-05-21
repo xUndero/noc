@@ -11,7 +11,6 @@ import uuid
 # NOC modules
 from noc.core.migration.base import BaseMigration
 from noc.core.model.fields import DocumentReferenceField
-from noc.lib.nosql import get_db
 
 OLD_VENDOR_MAP = {
     "Alcatel-Lucent": "ALU",
@@ -41,7 +40,7 @@ class Migration(BaseMigration):
         # Select vendors
         vendors = set(r[0] for r in self.db.execute(
             "SELECT DISTINCT value FROM sa_managedobjectattribute WHERE key = 'vendor'"))
-        pcoll = get_db()["noc.vendors"]
+        pcoll = self.mongo_db["noc.vendors"]
         # Update inventory vendors records
         inventory_vendors = {}
         for v in pcoll.find():
