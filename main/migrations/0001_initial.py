@@ -5,14 +5,15 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         # Create plpgsql language when necessary
         if db.execute("SELECT COUNT(*) FROM pg_language WHERE lanname='plpgsql'")[0][0] == 0:
             db.execute("CREATE LANGUAGE plpgsql")
@@ -27,6 +28,3 @@ class Migration(object):
                     True, True, True
                 ]
             )
-
-    def backwards(self):
-        pass
