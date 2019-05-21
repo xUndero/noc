@@ -19,7 +19,7 @@ class Migration(BaseMigration):
             model_name='VRF', db_table='ip_vrf', db_tablespace='', pk_field_name='id', pk_field_type=models.AutoField
         )
         # Adding model 'IPv4AddressRange'
-        db.create_table(
+        self.db.create_table(
             'ip_ipv4addressrange', (
                 ('id', models.AutoField(primary_key=True)),
                 ('vrf', models.ForeignKey(VRF, verbose_name="VRF")),
@@ -37,4 +37,4 @@ class Migration(BaseMigration):
         )
 
         # Creating unique_together for [vrf, name] on IPv4AddressRange.
-        db.create_unique('ip_ipv4addressrange', ['vrf_id', 'name'])
+        self.db.create_index('ip_ipv4addressrange', ['vrf_id', 'name'], unique=True)

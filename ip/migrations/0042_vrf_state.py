@@ -6,8 +6,6 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.model.fields import DocumentReferenceField
 from noc.core.migration.base import BaseMigration
@@ -25,18 +23,18 @@ class Migration(BaseMigration):
 
     def migrate(self):
         # Make legacy Address.state_id field nullable
-        db.execute("ALTER TABLE ip_vrf ALTER state_id DROP NOT NULL")
+        self.db.execute("ALTER TABLE ip_vrf ALTER state_id DROP NOT NULL")
         # Create new Address.state
-        db.add_column("ip_vrf", "state", DocumentReferenceField("wf.State", null=True, blank=True))
+        self.db.add_column("ip_vrf", "state", DocumentReferenceField("wf.State", null=True, blank=True))
         # Fill Address.state
         for i in range(1, 6):
-            db.execute(
+            self.db.execute(
                 """UPDATE ip_vrf
                 SET state = %s
                 WHERE state_id = %s
                 """, [self.RSMAP[i], i]
             )
-        db.execute(
+        self.db.execute(
             """
             UPDATE ip_vrf
             SET state = %s

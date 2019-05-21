@@ -31,5 +31,5 @@ class Migration(BaseMigration):
             pk_field_type=models.AutoField
         )
 
-        db.add_column("ip_prefix", "ipv6_transition", models.OneToOneField(Prefix, null=True, blank=True))
-        db.add_column("ip_address", "ipv6_transition", models.OneToOneField(Address, null=True, blank=True))
+        self.db.add_column("ip_prefix", "ipv6_transition", models.OneToOneField(Prefix, null=True, blank=True))
+        self.db.add_column("ip_address", "ipv6_transition", models.OneToOneField(Address, null=True, blank=True))

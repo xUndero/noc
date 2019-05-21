@@ -6,18 +6,13 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        db.execute(SQL)
-
-    def backwards(self):
-        db.execute("DROP FUNCTION free_ip(INTEGER,CIDR)")
+        self.db.execute(SQL)
 
 
 SQL = """CREATE OR REPLACE

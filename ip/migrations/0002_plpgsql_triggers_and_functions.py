@@ -6,8 +6,6 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
@@ -17,22 +15,22 @@ class Migration(BaseMigration):
 
     def migrate(self):
         if not self.has_column("ip_ipv4block", "prefix_cidr"):
-            db.execute("ALTER TABLE ip_ipv4block ADD prefix_cidr CIDR")
-            db.execute("UPDATE ip_ipv4block SET prefix_cidr=prefix::cidr")
-            db.execute("ALTER TABLE ip_ipv4block ALTER prefix_cidr SET NOT NULL")
-            db.execute("CREATE INDEX x_ip_ipv4block_prefix_cidr ON ip_ipv4block(prefix_cidr)")
+            self.db.execute("ALTER TABLE ip_ipv4block ADD prefix_cidr CIDR")
+            self.db.execute("UPDATE ip_ipv4block SET prefix_cidr=prefix::cidr")
+            self.db.execute("ALTER TABLE ip_ipv4block ALTER prefix_cidr SET NOT NULL")
+            self.db.execute("CREATE INDEX x_ip_ipv4block_prefix_cidr ON ip_ipv4block(prefix_cidr)")
         if not self.has_column("ip_ipv4blockaccess", "prefix_cidr"):
-            db.execute("ALTER TABLE ip_ipv4blockaccess ADD prefix_cidr CIDR")
-            db.execute("UPDATE ip_ipv4blockaccess SET prefix_cidr=prefix::cidr")
-            db.execute("ALTER TABLE ip_ipv4blockaccess ALTER prefix_cidr SET NOT NULL")
-        db.execute(RAW_SQL_CREATE)
+            self.db.execute("ALTER TABLE ip_ipv4blockaccess ADD prefix_cidr CIDR")
+            self.db.execute("UPDATE ip_ipv4blockaccess SET prefix_cidr=prefix::cidr")
+            self.db.execute("ALTER TABLE ip_ipv4blockaccess ALTER prefix_cidr SET NOT NULL")
+        self.db.execute(RAW_SQL_CREATE)
         if not self.has_trigger("ip_ipv4block", "t_ip_ipv4block_modify"):
-            db.execute(t_ip_ipv4block_modify)
+            self.db.execute(t_ip_ipv4block_modify)
         if not self.has_trigger("ip_ipv4blockaccess", "t_ip_ipv4blockaccess_modify"):
-            db.execute(t_ip_ipv4blockaccess_modify)
+            self.db.execute(t_ip_ipv4blockaccess_modify)
 
     def has_column(self, table, name):
-        return db.execute(
+        return self.db.execute(
             """SELECT COUNT(*)>0
             FROM pg_attribute a JOIN pg_class p ON (p.oid=a.attrelid)
             WHERE p.relname='%s'
@@ -41,7 +39,7 @@ class Migration(BaseMigration):
         )[0][0]
 
     def has_trigger(self, table, name):
-        return db.execute(
+        return self.db.execute(
             """SELECT COUNT(*)>0
             FROM pg_trigger t JOIN pg_class p ON (p.oid=t.tgrelid)
             WHERE p.relname='%s'

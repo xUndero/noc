@@ -20,7 +20,7 @@ class Migration(BaseMigration):
     def migrate(self):
 
         # Model "KBCategory"
-        db.create_table(
+        self.db.create_table(
             "kb_kbcategory", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("name", models.CharField("Name", max_length=64, unique=True))
@@ -37,7 +37,7 @@ class Migration(BaseMigration):
         )
 
         # Model "KBEntry"
-        db.create_table(
+        self.db.create_table(
             "kb_kbentry", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("subject", models.CharField("Subject", max_length=256)), ("body", models.TextField("Body")),
@@ -62,7 +62,7 @@ class Migration(BaseMigration):
         )
 
         # M2M field "KBEntry.categories"
-        db.create_table(
+        self.db.create_table(
             "kb_kbentry_categories", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("kbentry", models.ForeignKey(KBEntry, null=False)),
@@ -87,7 +87,7 @@ class Migration(BaseMigration):
         )
 
         # Model "KBEntryHistory"
-        db.create_table(
+        self.db.create_table(
             "kb_kbentryhistory", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("kb_entry", models.ForeignKey(KBEntry, verbose_name="KB Entry")),

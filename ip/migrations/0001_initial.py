@@ -20,7 +20,7 @@ class Migration(BaseMigration):
     def migrate(self):
 
         # Model 'VRFGroup'
-        db.create_table(
+        self.db.create_table(
             'ip_vrfgroup', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("VRF Group", unique=True, max_length=64)),
@@ -38,7 +38,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'VRF'
-        db.create_table(
+        self.db.create_table(
             'ip_vrf', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("VRF name", unique=True, max_length=64)),
@@ -61,7 +61,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'IPv4BlockAccess'
-        db.create_table(
+        self.db.create_table(
             'ip_ipv4blockaccess', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('user', models.ForeignKey(User, verbose_name=User)), ('vrf', models.ForeignKey(VRF, verbose_name=VRF)),
@@ -69,7 +69,7 @@ class Migration(BaseMigration):
                 ('tt', models.IntegerField("TT", blank=True, null=True))
             )
         )
-        db.create_index('ip_ipv4blockaccess', ['user_id', 'vrf_id', 'prefix'], unique=True, db_tablespace='')
+        self.db.create_index('ip_ipv4blockaccess', ['user_id', 'vrf_id', 'prefix'], unique=True)
 
         # Mock Models
         VRF = db.mock_model(
@@ -87,7 +87,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'IPv4Block'
-        db.create_table(
+        self.db.create_table(
             'ip_ipv4block', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('description', models.CharField("Description", max_length=64)),
@@ -97,7 +97,7 @@ class Migration(BaseMigration):
                 ('tt', models.IntegerField("TT", blank=True, null=True))
             )
         )
-        db.create_index('ip_ipv4block', ['prefix', 'vrf_id'], unique=True, db_tablespace='')
+        self.db.create_index('ip_ipv4block', ['prefix', 'vrf_id'], unique=True)
 
         # Mock Models
         VRF = db.mock_model(
@@ -112,7 +112,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'IPv4Address'
-        db.create_table(
+        self.db.create_table(
             'ip_ipv4address', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('vrf', models.ForeignKey(VRF, verbose_name=VRF)), ('fqdn', models.CharField("FQDN", max_length=64)),
@@ -123,4 +123,4 @@ class Migration(BaseMigration):
                 ('tt', models.IntegerField("TT", blank=True, null=True))
             )
         )
-        db.create_index('ip_ipv4address', ['vrf_id', 'ip'], unique=True, db_tablespace='')
+        self.db.create_index('ip_ipv4address', ['vrf_id', 'ip'], unique=True)

@@ -34,7 +34,7 @@ class Migration(BaseMigration):
         )
 
         # Model "KBEntryPreviewLog"
-        db.create_table(
+        self.db.create_table(
             "kb_kbentrypreviewlog", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("kb_entry", models.ForeignKey(KBEntry, verbose_name="KB Entry")),

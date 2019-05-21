@@ -25,6 +25,6 @@ class Migration(BaseMigration):
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        db.add_column("ip_ipv4address", "mac", MACField("MAC", null=True, blank=True))
-        db.add_column("ip_ipv4address", "managed_object", models.ForeignKey(ManagedObject, null=True, blank=True))
-        db.add_column("ip_ipv4address", "auto_update_mac", models.BooleanField("Auto Update MAC", default=False))
+        self.db.add_column("ip_ipv4address", "mac", MACField("MAC", null=True, blank=True))
+        self.db.add_column("ip_ipv4address", "managed_object", models.ForeignKey(ManagedObject, null=True, blank=True))
+        self.db.add_column("ip_ipv4address", "auto_update_mac", models.BooleanField("Auto Update MAC", default=False))

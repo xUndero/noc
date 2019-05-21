@@ -7,7 +7,6 @@
 # ----------------------------------------------------------------------
 
 # Third-party modules
-from south.db import db
 from django.db import models
 # NOC modules
 from noc.core.migration.base import BaseMigration
@@ -15,7 +14,7 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        db.add_column(
+        self.db.add_column(
             "ip_prefix", "source",
             models.CharField(
                 "Source",
@@ -26,7 +25,7 @@ class Migration(BaseMigration):
                 default="M"
             )
         )
-        db.add_column(
+        self.db.add_column(
             "ip_address", "source",
             models.CharField(
                 "Source",
@@ -37,6 +36,6 @@ class Migration(BaseMigration):
                 default="M"
             )
         )
-        db.add_column(
+        self.db.add_column(
             "ip_address", "subinterface", models.CharField("SubInterface", max_length=128, null=True, blank=True)
         )

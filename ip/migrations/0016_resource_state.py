@@ -25,10 +25,10 @@ class Migration(BaseMigration):
             pk_field_name="id",
             pk_field_type=models.AutoField
         )
-        db.add_column("ip_vrf", "state", models.ForeignKey(ResourceState, verbose_name="State", null=True, blank=True))
-        db.add_column(
+        self.db.add_column("ip_vrf", "state", models.ForeignKey(ResourceState, verbose_name="State", null=True, blank=True))
+        self.db.add_column(
             "ip_prefix", "state", models.ForeignKey(ResourceState, verbose_name="State", null=True, blank=True)
         )
-        db.add_column(
+        self.db.add_column(
             "ip_address", "state", models.ForeignKey(ResourceState, verbose_name="State", null=True, blank=True)
         )

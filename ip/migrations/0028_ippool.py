@@ -30,7 +30,7 @@ class Migration(BaseMigration):
             pk_field_type=models.AutoField
         )
         # Adding model "IPv4AddressRange"
-        db.create_table(
+        self.db.create_table(
             "ip_ippool", (
                 ("id", models.AutoField(primary_key=True)),
                 ("termination_group", models.ForeignKey(TerminationGroup, verbose_name="Termination Group")),

@@ -7,7 +7,6 @@
 # ----------------------------------------------------------------------
 
 # Third-party modules
-from south.db import db
 from noc.core.model.fields import TagsField
 # NOC modules
 from noc.core.migration.base import BaseMigration
@@ -20,10 +19,10 @@ class Migration(BaseMigration):
     def migrate(self):
         # Create temporary tags fields
         for m in self.TAG_MODELS:
-            db.add_column(m, "tmp_tags", TagsField("Tags", null=True, blank=True))
+            self.db.add_column(m, "tmp_tags", TagsField("Tags", null=True, blank=True))
         # Migrate data
         for m in self.TAG_MODELS:
-            db.execute(
+            self.db.execute(
                 """
             UPDATE %s
             SET tmp_tags = string_to_array(regexp_replace(tags, ',$', ''), ',')

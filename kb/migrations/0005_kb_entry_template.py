@@ -26,7 +26,7 @@ class Migration(BaseMigration):
         )
 
         # Model "KBEntryTemplate"
-        db.create_table(
+        self.db.create_table(
             "kb_kbentrytemplate", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("name", models.CharField("Name", max_length=128, unique=True)),
@@ -52,7 +52,7 @@ class Migration(BaseMigration):
         )
 
         # M2M field "KBEntryTemplate.categories"
-        db.create_table(
+        self.db.create_table(
             "kb_kbentrytemplate_categories", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("kbentrytemplate", models.ForeignKey(KBEntryTemplate, null=False)),

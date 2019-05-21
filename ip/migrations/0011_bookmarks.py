@@ -30,7 +30,7 @@ class Migration(BaseMigration):
             pk_field_type=models.AutoField
         )
         # Adding model 'IPv4BlockBookmark'
-        db.create_table(
+        self.db.create_table(
             'ip_ipv4blockbookmark', (
                 ('id', models.AutoField(primary_key=True)), ('user', models.ForeignKey(User, verbose_name="User")),
                 ('prefix', models.ForeignKey(IPv4Block, verbose_name="Prefix"))
@@ -38,4 +38,4 @@ class Migration(BaseMigration):
         )
 
         # Creating unique_together for [user,prefix]
-        db.create_unique('ip_ipv4blockbookmark', ['user_id', 'prefix_id'])
+        self.db.create_index('ip_ipv4blockbookmark', ['user_id', 'prefix_id'], unique=True)

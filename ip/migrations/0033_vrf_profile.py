@@ -9,7 +9,6 @@
 # Third-party modules
 import bson
 import bson.int64
-from south.db import db
 # NOC modules
 from noc.lib.nosql import get_db
 from noc.core.model.fields import DocumentReferenceField
@@ -44,7 +43,7 @@ class Migration(BaseMigration):
         ]
         # Convert styles
         style_profiles = {None: default_id}
-        for style_id, in db.execute("SELECT DISTINCT style_id FROM ip_vrf"):
+        for style_id, in self.db.execute("SELECT DISTINCT style_id FROM ip_vrf"):
             if not style_id:
                 continue
             p_id = bson.ObjectId()
@@ -63,15 +62,15 @@ class Migration(BaseMigration):
         # Insert profiles to database
         coll.insert_many(profiles)
         # Create Prefix.profile field
-        db.add_column("ip_vrf", "profile", DocumentReferenceField("vc.VPNProfile", null=True, blank=True))
+        self.db.add_column("ip_vrf", "profile", DocumentReferenceField("vc.VPNProfile", null=True, blank=True))
         # Migrate profile styles
         for style_id in style_profiles:
             if style_id:
                 cond = "style_id = %s" % style_id
             else:
                 cond = "style_id IS NULL"
-            db.execute("UPDATE ip_vrf SET profile = %%s WHERE %s" % cond, [str(style_profiles[style_id])])
+            self.db.execute("UPDATE ip_vrf SET profile = %%s WHERE %s" % cond, [str(style_profiles[style_id])])
         # Make Prefix.profile not nullable
-        db.execute("ALTER TABLE ip_vrf ALTER profile SET NOT NULL")
+        self.db.execute("ALTER TABLE ip_vrf ALTER profile SET NOT NULL")
         # Drop Prefix.style
-        db.drop_column("ip_vrf", "style_id")
+        self.db.delete_column("ip_vrf", "style_id")

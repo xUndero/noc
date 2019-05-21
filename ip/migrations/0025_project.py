@@ -26,4 +26,4 @@ class Migration(BaseMigration):
             pk_field_type=models.AutoField
         )
         for t in ["ip_vrf", "ip_prefix", "ip_address"]:
-            db.add_column(t, "project", models.ForeignKey(Project, verbose_name="Project", null=True, blank=True))
+            self.db.add_column(t, "project", models.ForeignKey(Project, verbose_name="Project", null=True, blank=True))
