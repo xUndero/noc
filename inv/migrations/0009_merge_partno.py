@@ -5,14 +5,14 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
-"""
-"""
+
 # NOC modules
 from noc.lib.nosql import get_db
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         db = get_db()
         for om in db.noc.objectmodels.find():
             if "data" not in om:
@@ -37,6 +37,3 @@ class Migration(object):
             if order_part_no:
                 so["data.asset.order_part_no"] = order_part_no
             db.noc.objectmodels.update({"_id": om["_id"]}, {"$set": so, "$unset": uso})
-
-    def backwards(self):
-        pass

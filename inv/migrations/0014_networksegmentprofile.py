@@ -10,10 +10,11 @@
 import bson
 # NOC modules
 from noc.lib.nosql import get_db
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         db = get_db()
         coll = db["noc.networksegmentprofiles"]
         result = coll.insert_one(
@@ -37,6 +38,3 @@ class Migration(object):
             profile_id = result.inserted_id
 
         db["noc.networksegments"].update_many({}, {"$set": {"profile": profile_id}})
-
-    def backwards(self):
-        pass

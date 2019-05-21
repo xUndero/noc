@@ -5,17 +5,19 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     depends_on = (('sa', '0056_managedobjectselecter_filter_object_profile'),)
 
-    def forwards(self):
+    def migrate(self):
         ManagedObjectSelector = db.mock_model(
             model_name="ManagedObjectSelector",
             db_table="sa_managedobjectselector",
@@ -32,6 +34,3 @@ class Migration(object):
                 ('selector', models.ForeignKey(ManagedObjectSelector))
             )
         )
-
-    def backwards(self):
-        db.delete_table("inv_networkchart")

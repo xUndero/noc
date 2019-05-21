@@ -7,13 +7,14 @@
 # ---------------------------------------------------------------------
 
 # NOC modules
+from noc.core.migration.base import BaseMigration
 from noc.lib.nosql import get_db
 
 DEFAULT_NAME = "default"
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         c = get_db().noc.interface_profiles
         if not c.count_documents({"name": DEFAULT_NAME}):
             c.insert_one(
@@ -24,6 +25,3 @@ class Migration(object):
                     "link_events": "A"
                 }
             )
-
-    def backwards(self):
-        pass
