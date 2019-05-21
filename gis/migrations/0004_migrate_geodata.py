@@ -10,10 +10,10 @@
 from __future__ import print_function
 import json
 # Third-party modules
+import bson
 from pymongo.errors import BulkWriteError
 from pymongo import InsertOne
 # NOC modules
-from noc.lib.nosql import get_db, ObjectId
 from noc.core.migration.base import BaseMigration
 
 
@@ -23,14 +23,15 @@ class Migration(BaseMigration):
                 select count(*) from pg_class where relname='gis_geodata'
                 """)[0][0] == 0:
             return  # No PostGIS
-        c = get_db().noc.geodata
+        c = self.mongo_db.noc.geodata
         bulk = []
         for layer, label, object, data in self.db.execute("""
             SELECT layer, label, object, ST_AsGeoJSON(data)
             FROM gis_geodata
         """):
             data = json.loads(data)
-            bulk += [InsertOne({"layer": ObjectId(layer), "object": ObjectId(object), "label": label, "data": data})]
+            bulk += [InsertOne({"layer": bson.ObjectId(layer), "object": bson.ObjectId(object),
+                                "label": label, "data": data})]
         if bulk:
             print("Commiting changes to database")
             try:

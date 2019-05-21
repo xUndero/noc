@@ -24,7 +24,7 @@ class Migration(BaseMigration):
 
     def migrate(self):
         current = itertools.count()
-        db = get_db()
+        db = self.mongo_db
         # Migrate profiles
         p_coll = db["noc.sla_profiles"]
         tp_coll = db["thresholdprofiles"]

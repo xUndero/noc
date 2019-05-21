@@ -27,7 +27,7 @@ class Migration(BaseMigration):
         self.db.execute("ALTER TABLE sa_managedobjectprofile ALTER metrics TYPE BYTEA USING metrics::bytea")
         #
         current = itertools.count()
-        mdb = get_db()
+        mdb = self.mongo_db
         # Migrate profiles
         tp_coll = mdb["thresholdprofiles"]
         settings = self.db.execute("SELECT id, name, metrics FROM sa_managedobjectprofile")
