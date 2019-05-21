@@ -6,8 +6,6 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
@@ -18,10 +16,10 @@ class Migration(BaseMigration):
     def migrate(self):
         # Drop old tags
         for m in self.TAG_MODELS:
-            db.drop_column(m, "tags")
+            self.db.delete_column(m, "tags")
         # Rename new tags
         for m in self.TAG_MODELS:
-            db.rename_column(m, "tmp_tags", "tags")
+            self.db.rename_column(m, "tmp_tags", "tags")
         # Create indexes
         for m in self.TAG_MODELS:
-            db.execute("CREATE INDEX x_%s_tags ON \"%s\" USING GIN(\"tags\")" % (m, m))
+            self.db.execute("CREATE INDEX x_%s_tags ON \"%s\" USING GIN(\"tags\")" % (m, m))

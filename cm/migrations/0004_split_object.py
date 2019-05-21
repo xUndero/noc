@@ -28,7 +28,7 @@ class Migration(BaseMigration):
         )
 
         # Model "Config"
-        db.create_table(
+        self.db.create_table(
             "cm_config", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("repo_path", models.CharField("Repo Path", max_length=128, unique=True)),
@@ -66,7 +66,7 @@ class Migration(BaseMigration):
         )
 
         # M2M field "Config.categories"
-        db.create_table(
+        self.db.create_table(
             "cm_config_categories", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("config", models.ForeignKey(Config, null=False)),
@@ -74,7 +74,7 @@ class Migration(BaseMigration):
             )
         )
         # Model "PrefixList"
-        db.create_table(
+        self.db.create_table(
             "cm_prefixlist", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("repo_path", models.CharField("Repo Path", max_length=128, unique=True)),
@@ -103,7 +103,7 @@ class Migration(BaseMigration):
         )
 
         # M2M field "PrefixList.categories"
-        db.create_table(
+        self.db.create_table(
             "cm_prefixlist_categories", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("prefixlist", models.ForeignKey(PrefixList, null=False)),
@@ -111,7 +111,7 @@ class Migration(BaseMigration):
             )
         )
         # Model "DNS"
-        db.create_table(
+        self.db.create_table(
             "cm_dns", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("repo_path", models.CharField("Repo Path", max_length=128, unique=True)),
@@ -136,7 +136,7 @@ class Migration(BaseMigration):
         )
 
         # M2M field "DNS.categories"
-        db.create_table(
+        self.db.create_table(
             "cm_dns_categories", (
                 ("id", models.AutoField(verbose_name="ID", primary_key=True, auto_created=True)),
                 ("dns", models.ForeignKey(DNS, null=False)),

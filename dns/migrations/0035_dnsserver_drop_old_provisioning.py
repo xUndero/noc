@@ -6,8 +6,6 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
@@ -15,4 +13,4 @@ from noc.core.migration.base import BaseMigration
 class Migration(BaseMigration):
     def migrate(self):
         for c in ["generator_name", "location", "provisioning", "autozones_path"]:
-            db.delete_column("dns_dnsserver", c)
+            self.db.delete_column("dns_dnsserver", c)

@@ -17,7 +17,7 @@ class Migration(BaseMigration):
     def migrate(self):
 
         # Model 'DNSZoneProfile'
-        db.create_table(
+        self.db.create_table(
             'dns_dnszoneprofile', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("Name", max_length=32, unique=True)),
@@ -42,7 +42,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'DNSZone'
-        db.create_table(
+        self.db.create_table(
             'dns_dnszone', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("Domain", max_length=64, unique=True)),
@@ -53,7 +53,7 @@ class Migration(BaseMigration):
             )
         )
         # Model 'DNSZoneRecordType'
-        db.create_table(
+        self.db.create_table(
             'dns_dnszonerecordtype', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('type', models.CharField("Type", max_length=16, unique=True)),
@@ -77,7 +77,7 @@ class Migration(BaseMigration):
         )
 
         # Model 'DNSZoneRecord'
-        db.create_table(
+        self.db.create_table(
             'dns_dnszonerecord', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('zone', models.ForeignKey(DNSZone, verbose_name="Zone")),

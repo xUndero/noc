@@ -22,11 +22,11 @@ class Migration(BaseMigration):
         for d in c.find():
             smap[d["name"]] = str(d["_id"])
         # Create .sync
-        db.execute("ALTER TABLE dns_dnsserver ADD sync CHAR(24)")
+        self.db.execute("ALTER TABLE dns_dnsserver ADD sync CHAR(24)")
         for i, ch in db.execute("SELECT id, sync_channel FROM dns_dnsserver WHERE sync_channel IS NOT NULL"):
             if ch not in smap:
                 n = c.insert({"name": ch, "is_active": True, "description": "Converted from DNS Server settings"})
                 smap[ch] = str(n)
             print(smap)
-            db.execute("UPDATE dns_dnsserver SET sync=%s WHERE id=%s", [smap[ch], i])
-        db.drop_column("dns_dnsserver", "sync_channel")
+            self.db.execute("UPDATE dns_dnsserver SET sync=%s WHERE id=%s", [smap[ch], i])
+        self.db.delete_column("dns_dnsserver", "sync_channel")

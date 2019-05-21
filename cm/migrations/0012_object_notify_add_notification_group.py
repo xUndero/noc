@@ -25,7 +25,7 @@ class Migration(BaseMigration):
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        db.add_column(
+        self.db.add_column(
             "cm_objectnotify", "notification_group",
             models.ForeignKey(NotificationGroup, verbose_name="Notification Group", null=True, blank=True)
         )

@@ -7,7 +7,6 @@
 # ----------------------------------------------------------------------
 
 # Third-party modules
-from south.db import db
 from django.db import models
 # NOC modules
 from noc.core.migration.base import BaseMigration
@@ -15,12 +14,12 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        db.rename_column("dns_dnszonerecord", "left", "name")
-        db.rename_column("dns_dnszonerecord", "right", "content")
-        db.execute(
+        self.db.rename_column("dns_dnszonerecord", "left", "name")
+        self.db.rename_column("dns_dnszonerecord", "right", "content")
+        self.db.execute(
             """
             ALTER TABLE dns_dnszonerecord
             ALTER COLUMN content TYPE VARCHAR(256)
             """
         )
-        db.add_column("dns_dnszonerecord", "type", models.CharField("Type", max_length=16, default=""))
+        self.db.add_column("dns_dnszonerecord", "type", models.CharField("Type", max_length=16, default=""))

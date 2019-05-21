@@ -6,15 +6,13 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-# Third-party modules
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        for id, content in db.execute("""
+        for id, content in self.db.execute("""
                 SELECT r.id, r.right
                 FROM dns_dnszonerecord r
                 JOIN dns_dnszonerecordtype t ON (r.type_id = t.id)
@@ -26,7 +24,7 @@ class Migration(BaseMigration):
                 prio = int(prio)
             except ValueError:
                 continue
-            db.execute(
+            self.db.execute(
                 """
                 UPDATE dns_dnszonerecord
                 SET

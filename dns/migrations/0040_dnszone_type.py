@@ -8,14 +8,13 @@
 
 # Third-party modules
 from django.db import models
-from south.db import db
 # NOC modules
 from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
     def migrate(self):
-        db.add_column(
+        self.db.add_column(
             "dns_dnszone", "type",
             models.CharField(
                 "Type",
@@ -26,5 +25,5 @@ class Migration(BaseMigration):
                 choices=[("F", "Forward"), ("4", "Reverse IPv4"), ("6", "Reverse IPv6")]
             )
         )
-        db.execute("UPDATE dns_dnszone SET type = '4' WHERE name ILIKE '%%.in-addr.arpa'")
-        db.execute("UPDATE dns_dnszone SET type = '6' WHERE name ILIKE '%%.ip6.int' OR name ILIKE '.ip6.arpa'")
+        self.db.execute("UPDATE dns_dnszone SET type = '4' WHERE name ILIKE '%%.in-addr.arpa'")
+        self.db.execute("UPDATE dns_dnszone SET type = '6' WHERE name ILIKE '%%.ip6.int' OR name ILIKE '.ip6.arpa'")

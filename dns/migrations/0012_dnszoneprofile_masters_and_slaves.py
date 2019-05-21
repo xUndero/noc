@@ -32,7 +32,7 @@ class Migration(BaseMigration):
         )
 
         # M2M field 'DNSZoneProfile.masters'
-        db.create_table(
+        self.db.create_table(
             'dns_dnszoneprofile_masters', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('dnszoneprofile', models.ForeignKey(DNSZoneProfile, null=False)),
@@ -56,16 +56,16 @@ class Migration(BaseMigration):
         )
 
         # M2M field 'DNSZoneProfile.slaves'
-        db.create_table(
+        self.db.create_table(
             'dns_dnszoneprofile_slaves', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('dnszoneprofile', models.ForeignKey(DNSZoneProfile, null=False)),
                 ('dnsserver', models.ForeignKey(DNSServer, null=False))
             )
         )
-        db.execute(
+        self.db.execute(
             """INSERT INTO dns_dnszoneprofile_masters(dnszoneprofile_id,dnsserver_id)
                SELECT dnszoneprofile_id,dnsserver_id
                FROM dns_dnszoneprofile_ns_servers"""
         )
-        db.delete_table('dns_dnszoneprofile_ns_servers')
+        self.db.delete_table('dns_dnszoneprofile_ns_servers')

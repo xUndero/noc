@@ -22,7 +22,8 @@ class Migration(BaseMigration):
             pk_field_name="id",
             pk_field_type=models.AutoField
         )
-        db.add_column(
+        self.db.add_column(
             "dns_dnszoneprofile", "notification_group", models.ForeignKey(NotificationGroup, blank=True, null=True)
         )
-        db.add_column("dns_dnszone", "notification_group", models.ForeignKey(NotificationGroup, blank=True, null=True))
+        self.db.add_column(
+            "dns_dnszone", "notification_group", models.ForeignKey(NotificationGroup, blank=True, null=True))

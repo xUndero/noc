@@ -7,7 +7,6 @@
 # ----------------------------------------------------------------------
 
 # Third-party modules
-from south.db import db
 from noc.core.model.fields import AutoCompleteTagsField
 # NOC modules
 from noc.core.migration.base import BaseMigration
@@ -19,4 +18,4 @@ class Migration(BaseMigration):
 
     def migrate(self):
         for m in self.TAG_MODELS:
-            db.add_column(m, "tags", AutoCompleteTagsField("Tags", null=True, blank=True))
+            self.db.add_column(m, "tags", AutoCompleteTagsField("Tags", null=True, blank=True))

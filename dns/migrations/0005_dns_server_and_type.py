@@ -17,7 +17,7 @@ class Migration(BaseMigration):
     def migrate(self):
 
         # Model 'DNSServer'
-        db.create_table(
+        self.db.create_table(
             'dns_dnsserver', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('name', models.CharField("Name", max_length=64, unique=True)),
@@ -40,7 +40,7 @@ class Migration(BaseMigration):
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        db.create_table(
+        self.db.create_table(
             'dns_dnszoneprofile_ns_servers', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('dnszoneprofile', models.ForeignKey(DNSZoneProfile, null=False)),
