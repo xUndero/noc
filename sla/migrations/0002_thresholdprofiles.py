@@ -5,8 +5,7 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Python modules
 import itertools
 import operator
@@ -15,14 +14,15 @@ import bson
 import cachetools
 # NOC modules
 from noc.lib.nosql import get_db
+from noc.core.migration.base import BaseMigration
 
 SAVE_FIELDS = {"_id", "metric_type", "enable_periodic", "enable_box", "is_stored"}
 
 
-class Migration(object):
+class Migration(BaseMigration):
     _ac_cache = cachetools.TTLCache(maxsize=5, ttl=60)
 
-    def forwards(self):
+    def migrate(self):
         current = itertools.count()
         db = get_db()
         # Migrate profiles
@@ -101,9 +101,6 @@ class Migration(object):
                 metric["threshold_profile"] = tp_id
             # Store back
             p_coll.update_one({"_id": doc.pop("_id")}, {"$set": doc})
-
-    def backwards(self):
-        pass
 
     @staticmethod
     def has_thresholds(metric):
