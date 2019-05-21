@@ -24,6 +24,9 @@ class DB(object):
     def add_column(self, table_name, field_name, field_def):
         south_db.add_column(table_name, field_name, field_def)
 
+    def alter_column(self, table_name, field_name, field_def):
+        south_db.alter_column(table_name, field_name, field_def)
+
     def delete_column(self, table_name, field_name):
         south_db.delete_column(table_name, field_name)
 

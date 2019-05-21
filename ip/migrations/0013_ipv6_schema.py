@@ -7,7 +7,6 @@
 # ----------------------------------------------------------------------
 
 # Third-party modules
-from south.db import db
 from django.db import models
 # NOC modules
 from noc.core.model.fields import AutoCompleteTagsField, CIDRField, INETField, MACField
@@ -37,7 +36,7 @@ class Migration(BaseMigration):
                 default="V"
             )
         )
-        db.alter_column(
+        self.db.alter_column(
             "ip_vrfgroup", "description", models.TextField("Description", blank=True, null=True, default="V")
         )
         self.db.add_column("ip_vrfgroup", "tags", AutoCompleteTagsField("Tags", null=True, blank=True))
@@ -45,7 +44,8 @@ class Migration(BaseMigration):
         self.db.add_column("ip_vrf", "is_active", models.BooleanField("Is Active", default=True))
         self.db.add_column("ip_vrf", "afi_ipv4", models.BooleanField("IPv4", default=True))
         self.db.add_column("ip_vrf", "afi_ipv6", models.BooleanField("IPv6", default=False))
-        db.alter_column("ip_vrf", "description", models.TextField("Description", blank=True, null=True, default="V"))
+        self.db.alter_column("ip_vrf", "description",
+                             models.TextField("Description", blank=True, null=True, default="V"))
         self.db.add_column("ip_vrf", "style", models.ForeignKey(Style, verbose_name="Style", blank=True, null=True))
         self.db.add_column("ip_vrf", "allocated_till", models.DateField("Allocated till", null=True, blank=True))
         # Prefix
