@@ -5,17 +5,18 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from django.db import models
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
     depends_on = (("project", "0001_initial"),)
 
-    def forwards(self):
+    def migrate(self):
         # Create .state
         Project = db.mock_model(
             model_name="Project",
@@ -26,7 +27,3 @@ class Migration(object):
         )
         for t in ["ip_vrf", "ip_prefix", "ip_address"]:
             db.add_column(t, "project", models.ForeignKey(Project, verbose_name="Project", null=True, blank=True))
-
-    def backwards(self):
-        for t in ["ip_vrf", "ip_prefix", "ip_address"]:
-            db.drop_column(t, "project_id")

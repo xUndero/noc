@@ -5,13 +5,14 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
     GET_PARENT_SQL = """
         SELECT id
         FROM   ip_prefix
@@ -23,7 +24,7 @@ class Migration(object):
         LIMIT 1
     """
 
-    def forwards(self):
+    def migrate(self):
         # VRF Group
         db.execute("UPDATE ip_vrfgroup SET address_constraint='G' WHERE unique_addresses=TRUE")
         # IPv4 Block
@@ -109,6 +110,3 @@ class Migration(object):
                 """,
                 [name, vrf_id, "4", from_ip, to_ip, description, is_locked, fqdn_action, fqdn_template, reverse_nses]
             )
-
-    def backwards(self):
-        pass

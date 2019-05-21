@@ -5,16 +5,18 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     depends_on = (("peer", "0017_default_maintainer"),)
 
-    def forwards(self):
+    def migrate(self):
         if db.execute("SELECT COUNT(*) FROM ip_vrfgroup")[0][0] == 0:
             db.execute("INSERT INTO ip_vrfgroup(name) VALUES(%s)", ["default"])
         if db.execute("SELECT COUNT(*) FROM peer_as WHERE asn=%s", [0])[0][0] == 0:

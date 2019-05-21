@@ -5,16 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 # NOC modules
 from noc.core.model.fields import CIDRField
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         db.delete_column("ip_ipv4block", "prefix")
         db.add_column("ip_ipv4block", "prefix", CIDRField("prefix", null=True))
         db.execute("UPDATE ip_ipv4block SET prefix=prefix_cidr")
@@ -30,9 +30,6 @@ class Migration(object):
         db.execute("DROP TRIGGER t_ip_ipv4blockaccess_modify ON ip_ipv4blockaccess")
         db.execute("DROP FUNCTION f_trigger_ip_ipv4blockaccess()")
         db.execute(RAW_SQL)
-
-    def backwards(self):
-        pass
 
 
 RAW_SQL = """

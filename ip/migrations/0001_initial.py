@@ -5,17 +5,19 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from django.db import models
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     depends_on = (("peer", "0001_initial"),)
 
-    def forwards(self):
+    def migrate(self):
 
         # Model 'VRFGroup'
         db.create_table(
@@ -122,12 +124,3 @@ class Migration(object):
             )
         )
         db.create_index('ip_ipv4address', ['vrf_id', 'ip'], unique=True, db_tablespace='')
-
-        db.send_create_signal('ip', ['VRFGroup', 'VRF', 'IPv4BlockAccess', 'IPv4Block', 'IPv4Address'])
-
-    def backwards(self):
-        db.delete_table('ip_ipv4address')
-        db.delete_table('ip_ipv4block')
-        db.delete_table('ip_ipv4blockaccess')
-        db.delete_table('ip_vrf')
-        db.delete_table('ip_vrfgroup')

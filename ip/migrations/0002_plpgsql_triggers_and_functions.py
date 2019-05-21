@@ -5,16 +5,17 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
     depends_on = (("sa", "0002_trigger"),)
 
-    def forwards(self):
+    def migrate(self):
         if not self.has_column("ip_ipv4block", "prefix_cidr"):
             db.execute("ALTER TABLE ip_ipv4block ADD prefix_cidr CIDR")
             db.execute("UPDATE ip_ipv4block SET prefix_cidr=prefix::cidr")
@@ -29,11 +30,6 @@ class Migration(object):
             db.execute(t_ip_ipv4block_modify)
         if not self.has_trigger("ip_ipv4blockaccess", "t_ip_ipv4blockaccess_modify"):
             db.execute(t_ip_ipv4blockaccess_modify)
-
-    def backwards(self):
-        db.execute(RAW_SQL_DROP)
-        db.execute("ALTER TABLE ip_ipv4block DROP COLUMN prefix_cidr")
-        db.execute("ALTER TABLE ip_ipv4blockaccess DROP COLUMN prefix_cidr")
 
     def has_column(self, table, name):
         return db.execute(
@@ -136,15 +132,4 @@ t_ip_ipv4blockaccess_modify = """
 CREATE TRIGGER t_ip_ipv4blockaccess_modify
 BEFORE INSERT OR UPDATE ON ip_ipv4blockaccess
 FOR EACH ROW EXECUTE PROCEDURE f_trigger_ip_ipv4blockaccess();
-"""
-
-RAW_SQL_DROP = """
-DROP TRIGGER IF EXISTS t_ip_ipv4block_modify ON ip_ipv4block;
-DROP TRIGGER IF EXISTS t_ip_ipv4blockaccess_modify ON ip_ipv4blockaccess;
-DROP FUNCTION f_trigger_ip_ipv4block();
-DROP FUNCTION f_trigger_ip_ipv4blockaccess();
-DROP FUNCTION ip_ipv4_block_depth(INTEGER,CIDR,CIDR);
-DROP FUNCTION ip_ipv4_block_depth_in_vrf_group(INTEGER,CIDR,CIDR);
-DROP FUNCTION hostname(TEXT);
-DROP FUNCTION domainname(TEXT);
 """

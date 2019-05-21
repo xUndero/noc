@@ -14,12 +14,15 @@ from south.db import db
 from noc.lib.nosql import get_db
 from noc.core.model.fields import DocumentReferenceField
 from noc.core.bi.decorator import bi_hash
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     depends_on = [("wf", "0001_default_wf")]
 
-    def forwards(self):
+    def migrate(self):
         coll = get_db()["prefixprofiles"]
         default_id = bson.ObjectId()
         wf = bson.ObjectId("5a01d980b6f529000100d37a")
@@ -64,6 +67,3 @@ class Migration(object):
         db.execute("ALTER TABLE ip_prefix ALTER profile SET NOT NULL")
         # Drop Prefix.style
         db.drop_column("ip_prefix", "style_id")
-
-    def backwards(self):
-        pass

@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         IPv4Block = db.mock_model(
             model_name='IPv4Block',
             db_table='ip_ipv4block',
@@ -35,11 +36,6 @@ class Migration(object):
                 ('prefix', models.ForeignKey(IPv4Block, verbose_name="Prefix"))
             )
         )
-        db.send_create_signal('ip', ['IPv4BlockBookmark'])
 
         # Creating unique_together for [user,prefix]
         db.create_unique('ip_ipv4blockbookmark', ['user_id', 'prefix_id'])
-
-    def backwards(self):
-        db.delete_unique('ip_ipv4blockbookmark', ['user_id', 'prefix_id'])
-        db.delete_table('ip_ipv4blockbookmark')

@@ -5,15 +5,15 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 # NOC modules
 from noc.core.model.fields import DocumentReferenceField
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
     depends_on = [("wf", "0001_default_wf")]
 
     RSMAP = {
@@ -25,7 +25,7 @@ class Migration(object):
     }
     WF_FREE = "5a17f61b1bb6270001bd0328"
 
-    def forwards(self):
+    def migrate(self):
         # Make legacy Address.state_id field nullable
         db.execute("ALTER TABLE ip_address ALTER state_id DROP NOT NULL")
         # Create new Address.state
@@ -45,6 +45,3 @@ class Migration(object):
             WHERE state_id > 5
             """, [self.WF_FREE]
         )
-
-    def backwards(self):
-        pass

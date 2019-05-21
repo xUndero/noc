@@ -5,19 +5,19 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
 # NOC modules
 from noc.core.model.fields import AutoCompleteTagsField, CIDRField, INETField, MACField
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
     depends_on = (("main", "0027_style"),)
 
-    def forwards(self):
+    def migrate(self):
         AFI_CHOICES = [("4", "IPv4"), ("6", "IPv6")]
         # Style
         Style = db.mock_model(
@@ -180,8 +180,6 @@ class Migration(object):
             )
         )
         db.create_index("ip_prefixbookmark", ["user_id", "prefix_id"], unique=True, db_tablespace="")
-
-        db.send_create_signal("ip", ["Prefix", "Address", "PrefixBookmark"])
 
     def backwards(self):
         pass

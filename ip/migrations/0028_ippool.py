@@ -5,17 +5,19 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
+
     depends_on = (("sa", "0082_termination_group"),)
 
-    def forwards(self):
+    def migrate(self):
         AFI_CHOICES = [("4", "IPv4"), ("6", "IPv6")]
         VRF = db.mock_model(
             model_name="VRF", db_table="ip_vrf", db_tablespace="", pk_field_name="id", pk_field_type=models.AutoField
@@ -39,7 +41,3 @@ class Migration(object):
                 ("to_address", models.IPAddressField("To Address"))
             )
         )
-        db.send_create_signal("ip", ["IPPool"])
-
-    def backwards(self):
-        db.delete_table("ip_ippool")
