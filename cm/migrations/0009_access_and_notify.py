@@ -30,7 +30,7 @@ class Migration(BaseMigration):
             )
         )
 
-        ObjectLocation = db.mock_model(
+        ObjectLocation = self.db.mock_model(
             model_name='ObjectLocation',
             db_table='cm_objectlocation',
             db_tablespace='',
@@ -47,21 +47,21 @@ class Migration(BaseMigration):
             self.db.execute("ALTER TABLE cm_%s ALTER location_id SET NOT NULL" % ot)
 
         # Mock Models
-        ObjectCategory = db.mock_model(
+        ObjectCategory = self.db.mock_model(
             model_name='ObjectCategory',
             db_table='cm_objectcategory',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        ObjectLocation = db.mock_model(
+        ObjectLocation = self.db.mock_model(
             model_name='ObjectLocation',
             db_table='cm_objectlocation',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        User = db.mock_model(
+        User = self.db.mock_model(
             model_name='User',
             db_table='auth_user',
             db_tablespace='',
@@ -81,14 +81,14 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        ObjectCategory = db.mock_model(
+        ObjectCategory = self.db.mock_model(
             model_name='ObjectCategory',
             db_table='cm_objectcategory',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        ObjectLocation = db.mock_model(
+        ObjectLocation = self.db.mock_model(
             model_name='ObjectLocation',
             db_table='cm_objectlocation',
             db_tablespace='',

@@ -34,14 +34,14 @@ class Migration(BaseMigration):
             )
         )
         # Mock Models
-        EventPriority = db.mock_model(
+        EventPriority = self.db.mock_model(
             model_name='EventPriority',
             db_table='fm_eventpriority',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        EventCategory = db.mock_model(
+        EventCategory = self.db.mock_model(
             model_name='EventCategory',
             db_table='fm_eventcategory',
             db_tablespace='',
@@ -63,7 +63,7 @@ class Migration(BaseMigration):
             )
         )
         # Mock Models
-        EventClass = db.mock_model(
+        EventClass = self.db.mock_model(
             model_name='EventClass',
             db_table='fm_eventclass',
             db_tablespace='',
@@ -82,7 +82,7 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        EventClassificationRule = db.mock_model(
+        EventClassificationRule = self.db.mock_model(
             model_name='EventClassificationRule',
             db_table='fm_eventclassificationrule',
             db_tablespace='',
@@ -101,14 +101,14 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        ManagedObject = db.mock_model(
+        ManagedObject = self.db.mock_model(
             model_name='ManagedObject',
             db_table='sa_managedobject',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        Event = db.mock_model(
+        Event = self.db.mock_model(
             model_name='Event',
             db_table='fm_event',
             db_tablespace='',
@@ -132,7 +132,7 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        Event = db.mock_model(
+        Event = self.db.mock_model(
             model_name='Event',
             db_table='fm_event',
             db_tablespace='',

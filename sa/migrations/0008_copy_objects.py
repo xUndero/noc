@@ -36,7 +36,7 @@ class Migration(BaseMigration):
             self.db.execute("INSERT INTO sa_objectgroup(name,description) VALUES(%s,%s)", [name, description])
             category2group[id] = self.db.execute("SELECT id FROM sa_objectgroup WHERE name=%s", [name])[0][0]
         #
-        ManagedObject = db.mock_model(
+        ManagedObject = self.db.mock_model(
             model_name='ManagedObject',
             db_table='sa_managedobject',
             db_tablespace='',
@@ -79,14 +79,14 @@ class Migration(BaseMigration):
         self.db.execute("ALTER TABLE cm_config ALTER managed_object_id SET NOT NULL")
 
         # Migrate ObjectNotify
-        ObjectGroup = db.mock_model(
+        ObjectGroup = self.db.mock_model(
             model_name='ObjectGroup',
             db_table='sa_objectgroup',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        AdministrativeDomain = db.mock_model(
+        AdministrativeDomain = self.db.mock_model(
             model_name='AdministrativeDomain',
             db_table='sa_administrativedomain',
             db_tablespace='',

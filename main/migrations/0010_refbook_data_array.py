@@ -20,7 +20,7 @@ class Migration(BaseMigration):
         self.db.delete_table('main_refbookdata')
 
         # Mock Models
-        RefBook = db.mock_model(
+        RefBook = self.db.mock_model(
             model_name='RefBook',
             db_table='main_refbook',
             db_tablespace='',

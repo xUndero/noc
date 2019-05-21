@@ -29,10 +29,10 @@ class Migration(BaseMigration):
             )
         )
         # Mock Models
-        RPSL = db.mock_model(
+        RPSL = self.db.mock_model(
             model_name='RPSL', db_table='cm_rpsl', db_tablespace='', pk_field_name='id', pk_field_type=models.AutoField
         )
-        ObjectCategory = db.mock_model(
+        ObjectCategory = self.db.mock_model(
             model_name='ObjectCategory',
             db_table='cm_objectcategory',
             db_tablespace='',

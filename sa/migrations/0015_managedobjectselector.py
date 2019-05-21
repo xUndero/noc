@@ -14,7 +14,7 @@ from noc.core.migration.base import BaseMigration
 class Migration(BaseMigration):
     def migrate(self):
         # Mock Models
-        AdministrativeDomain = db.mock_model(
+        AdministrativeDomain = self.db.mock_model(
             model_name='AdministrativeDomain',
             db_table='sa_administrativedomain',
             db_tablespace='',
@@ -58,14 +58,14 @@ class Migration(BaseMigration):
             )
         )
         # Mock Models
-        ManagedObjectSelector = db.mock_model(
+        ManagedObjectSelector = self.db.mock_model(
             model_name='ManagedObjectSelector',
             db_table='sa_managedobjectselector',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        ObjectGroup = db.mock_model(
+        ObjectGroup = self.db.mock_model(
             model_name='ObjectGroup',
             db_table='sa_objectgroup',
             db_tablespace='',
@@ -82,7 +82,7 @@ class Migration(BaseMigration):
             )
         )
         # Mock Models
-        ManagedObjectSelector = db.mock_model(
+        ManagedObjectSelector = self.db.mock_model(
             model_name='ManagedObjectSelector',
             db_table='sa_managedobjectselector',
             db_tablespace='',

@@ -97,4 +97,4 @@ class Migration(BaseMigration):
         self.db.add_column("sa_managedobjectprofile", "periodic_discovery_interval", models.IntegerField(default=300))
         # Drop deprecated columns
         for n in self.DROP_COLUMNS:
-            self.db.drop_column("sa_managedobjectprofile", n)
+            self.db.delete_column("sa_managedobjectprofile", n)

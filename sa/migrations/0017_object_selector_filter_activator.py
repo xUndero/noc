@@ -13,7 +13,7 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        Activator = db.mock_model(
+        Activator = self.db.mock_model(
             model_name='Activator',
             db_table='sa_activator',
             db_tablespace='',

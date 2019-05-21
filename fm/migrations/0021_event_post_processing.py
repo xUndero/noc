@@ -16,21 +16,21 @@ from noc.core.migration.base import BaseMigration
 class Migration(BaseMigration):
     def migrate(self):
         # Mock Models
-        EventClass = db.mock_model(
+        EventClass = self.db.mock_model(
             model_name='EventClass',
             db_table='fm_eventclass',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        EventPriority = db.mock_model(
+        EventPriority = self.db.mock_model(
             model_name='EventPriority',
             db_table='fm_eventpriority',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        EventCategory = db.mock_model(
+        EventCategory = self.db.mock_model(
             model_name='EventCategory',
             db_table='fm_eventcategory',
             db_tablespace='',
@@ -65,7 +65,7 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        EventPostProcessingRule = db.mock_model(
+        EventPostProcessingRule = self.db.mock_model(
             model_name='EventPostProcessingRule',
             db_table='fm_eventpostprocessingrule',
             db_tablespace='',

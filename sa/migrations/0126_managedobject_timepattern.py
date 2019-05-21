@@ -14,7 +14,7 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        TimePattern = db.mock_model(
+        TimePattern = self.db.mock_model(
             model_name="TimePattern",
             db_table="main_timepattern",
             db_tablespace="",

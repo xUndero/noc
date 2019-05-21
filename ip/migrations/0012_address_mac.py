@@ -18,7 +18,7 @@ class Migration(BaseMigration):
     depends_on = (("sa", "0007_managed_object"),)
 
     def migrate(self):
-        ManagedObject = db.mock_model(
+        ManagedObject = self.db.mock_model(
             model_name="ManagedObject",
             db_table="sa_managedobject",
             db_tablespace='',

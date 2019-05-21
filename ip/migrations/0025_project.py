@@ -18,7 +18,7 @@ class Migration(BaseMigration):
 
     def migrate(self):
         # Create .state
-        Project = db.mock_model(
+        Project = self.db.mock_model(
             model_name="Project",
             db_table="project_project",
             db_tablespace="",

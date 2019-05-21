@@ -29,7 +29,7 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        VRFGroup = db.mock_model(
+        VRFGroup = self.db.mock_model(
             model_name='VRFGroup',
             db_table='ip_vrfgroup',
             db_tablespace='',
@@ -49,14 +49,14 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        User = db.mock_model(
+        User = self.db.mock_model(
             model_name='User',
             db_table='auth_user',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        VRF = db.mock_model(
+        VRF = self.db.mock_model(
             model_name='VRF', db_table='ip_vrf', db_tablespace='', pk_field_name='id', pk_field_type=models.AutoField
         )
 
@@ -72,13 +72,13 @@ class Migration(BaseMigration):
         self.db.create_index('ip_ipv4blockaccess', ['user_id', 'vrf_id', 'prefix'], unique=True)
 
         # Mock Models
-        VRF = db.mock_model(
+        VRF = self.db.mock_model(
             model_name='VRF', db_table='ip_vrf', db_tablespace='', pk_field_name='id', pk_field_type=models.AutoField
         )
-        AS = db.mock_model(
+        AS = self.db.mock_model(
             model_name='AS', db_table='peer_as', db_tablespace='', pk_field_name='id', pk_field_type=models.AutoField
         )
-        User = db.mock_model(
+        User = self.db.mock_model(
             model_name='User',
             db_table='auth_user',
             db_tablespace='',
@@ -100,10 +100,10 @@ class Migration(BaseMigration):
         self.db.create_index('ip_ipv4block', ['prefix', 'vrf_id'], unique=True)
 
         # Mock Models
-        VRF = db.mock_model(
+        VRF = self.db.mock_model(
             model_name='VRF', db_table='ip_vrf', db_tablespace='', pk_field_name='id', pk_field_type=models.AutoField
         )
-        User = db.mock_model(
+        User = self.db.mock_model(
             model_name='User',
             db_table='auth_user',
             db_tablespace='',

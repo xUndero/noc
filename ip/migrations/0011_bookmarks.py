@@ -15,14 +15,14 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        IPv4Block = db.mock_model(
+        IPv4Block = self.db.mock_model(
             model_name='IPv4Block',
             db_table='ip_ipv4block',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        User = db.mock_model(
+        User = self.db.mock_model(
             model_name='User',
             db_table='auth_user',
             db_tablespace='',

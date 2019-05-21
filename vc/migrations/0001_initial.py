@@ -37,7 +37,8 @@ class Migration(BaseMigration):
             'vc_vc', (
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
                 ('vc_domain', models.ForeignKey(VCDomain, verbose_name="VC Domain")),
-                ('type', models.CharField("Type", max_length=1)), ('l1', models.IntegerField("Label 1")),
+                ('type', models.CharField("Type", max_length=1)),
+                ('l1', models.IntegerField("Label 1")),
                 ('l2', models.IntegerField("Label 2", default=0)),
                 ('description', models.CharField("Description", max_length=256))
             )

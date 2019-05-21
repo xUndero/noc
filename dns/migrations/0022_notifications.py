@@ -15,7 +15,7 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        NotificationGroup = db.mock_model(
+        NotificationGroup = self.db.mock_model(
             model_name="NotificationGroup",
             db_table="main_notificationgroup",
             db_tablespace="",

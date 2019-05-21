@@ -17,14 +17,14 @@ class Migration(BaseMigration):
     ]
 
     def migrate(self):
-        Shard = db.mock_model(
+        Shard = self.db.mock_model(
             model_name="Shard",
             db_table="main_shard",
             db_tablespace="",
             pk_field_name="id",
             pk_field_type=models.AutoField
         )
-        PrefixTable = db.mock_model(
+        PrefixTable = self.db.mock_model(
             model_name="PrefixTable",
             db_table="main_prefixtable",
             db_tablespace="",

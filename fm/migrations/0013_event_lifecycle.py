@@ -15,7 +15,7 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        Event = db.mock_model(
+        Event = self.db.mock_model(
             model_name='Event',
             db_table='fm_event',
             db_tablespace='',

@@ -16,8 +16,8 @@ from noc.core.model.fields import DocumentReferenceField
 class Migration(BaseMigration):
     def migrate(self):
         # ManagedObject profile
-        self.db.drop_column("sa_managedobjectprofile", "sync_ipam")
-        self.db.drop_column("sa_managedobjectprofile", "fqdn_template")
+        self.db.delete_column("sa_managedobjectprofile", "sync_ipam")
+        self.db.delete_column("sa_managedobjectprofile", "fqdn_template")
         self.db.add_column(
             "sa_managedobjectprofile", "fqdn_suffix",
             models.CharField("FQDN suffix", max_length=256, null=True, blank=True)

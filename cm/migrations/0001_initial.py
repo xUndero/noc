@@ -42,14 +42,14 @@ class Migration(BaseMigration):
             )
         )
         # Mock Models
-        Object = db.mock_model(
+        Object = self.db.mock_model(
             model_name='Object',
             db_table='cm_object',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        ObjectCategory = db.mock_model(
+        ObjectCategory = self.db.mock_model(
             model_name='ObjectCategory',
             db_table='cm_objectcategory',
             db_tablespace='',

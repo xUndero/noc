@@ -23,14 +23,14 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        PeeringPointType = db.mock_model(
+        PeeringPointType = self.db.mock_model(
             model_name='PeeringPointType',
             db_table='peer_peeringpointtype',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        LGQueryType = db.mock_model(
+        LGQueryType = self.db.mock_model(
             model_name='LGQueryType',
             db_table='peer_lgquerytype',
             db_tablespace='',

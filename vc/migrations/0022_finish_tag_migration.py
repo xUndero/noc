@@ -16,7 +16,7 @@ class Migration(BaseMigration):
     def migrate(self):
         # Drop old tags
         for m in self.TAG_MODELS:
-            self.db.drop_column(m, "tags")
+            self.db.delete_column(m, "tags")
         # Rename new tags
         for m in self.TAG_MODELS:
             self.db.rename_column(m, "tmp_tags", "tags")

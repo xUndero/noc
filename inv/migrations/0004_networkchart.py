@@ -18,7 +18,7 @@ class Migration(BaseMigration):
     depends_on = (('sa', '0056_managedobjectselecter_filter_object_profile'),)
 
     def migrate(self):
-        ManagedObjectSelector = db.mock_model(
+        ManagedObjectSelector = self.db.mock_model(
             model_name="ManagedObjectSelector",
             db_table="sa_managedobjectselector",
             db_tablespace="",

@@ -14,7 +14,7 @@ from noc.core.migration.base import BaseMigration
 class Migration(BaseMigration):
     def migrate(self):
         # Adding field 'UserAccess.selector'
-        ManagedObjectSelector = db.mock_model(model_name="ManagedObjectSelector", db_table="sa_managedobjectselector")
+        ManagedObjectSelector = self.db.mock_model(model_name="ManagedObjectSelector", db_table="sa_managedobjectselector")
         self.db.add_column(
             'sa_useraccess', 'selector',
             models.ForeignKey(ManagedObjectSelector, verbose_name="Object Selector", null=True, blank=True)

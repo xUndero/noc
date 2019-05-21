@@ -19,10 +19,10 @@ class Migration(BaseMigration):
 
     def migrate(self):
         AFI_CHOICES = [("4", "IPv4"), ("6", "IPv6")]
-        VRF = db.mock_model(
+        VRF = self.db.mock_model(
             model_name="VRF", db_table="ip_vrf", db_tablespace="", pk_field_name="id", pk_field_type=models.AutoField
         )
-        TerminationGroup = db.mock_model(
+        TerminationGroup = self.db.mock_model(
             model_name="TerminationGroup",
             db_table="sa_terminationgroup",
             db_tablespace="",

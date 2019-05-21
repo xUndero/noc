@@ -15,14 +15,14 @@ from noc.core.migration.base import BaseMigration
 class Migration(BaseMigration):
     def migrate(self):
         # Mock Models
-        ManagedObjectSelector = db.mock_model(
+        ManagedObjectSelector = self.db.mock_model(
             model_name="ManagedObjectSelector",
             db_table="sa_managedobjectselector",
             db_tablespace="",
             pk_field_name="id",
             pk_field_type=models.AutoField
         )
-        NotificationGroup = db.mock_model(
+        NotificationGroup = self.db.mock_model(
             model_name="NotificationGroup",
             db_table="main_notificationgroup",
             db_tablespace="",

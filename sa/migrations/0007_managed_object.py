@@ -31,14 +31,14 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        AdministrativeDomain = db.mock_model(
+        AdministrativeDomain = self.db.mock_model(
             model_name='AdministrativeDomain',
             db_table='sa_administrativedomain',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        Activator = db.mock_model(
+        Activator = self.db.mock_model(
             model_name='Activator',
             db_table='sa_activator',
             db_tablespace='',
@@ -66,14 +66,14 @@ class Migration(BaseMigration):
             )
         )
         # Mock Models
-        ManagedObject = db.mock_model(
+        ManagedObject = self.db.mock_model(
             model_name='ManagedObject',
             db_table='sa_managedobject',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        ObjectGroup = db.mock_model(
+        ObjectGroup = self.db.mock_model(
             model_name='ObjectGroup',
             db_table='sa_objectgroup',
             db_tablespace='',
@@ -91,21 +91,21 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        User = db.mock_model(
+        User = self.db.mock_model(
             model_name='User',
             db_table='auth_user',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        AdministrativeDomain = db.mock_model(
+        AdministrativeDomain = self.db.mock_model(
             model_name='AdministrativeDomain',
             db_table='sa_administrativedomain',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        ObjectGroup = db.mock_model(
+        ObjectGroup = self.db.mock_model(
             model_name='ObjectGroup',
             db_table='sa_objectgroup',
             db_tablespace='',

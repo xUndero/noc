@@ -15,7 +15,7 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        PyRule = db.mock_model(
+        PyRule = self.db.mock_model(
             model_name='PyRule',
             db_table='main_pyrule',
             db_tablespace='',

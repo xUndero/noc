@@ -18,7 +18,7 @@ EVENT_STATUS_CHOICES = [("U", "Unclassified"), ("A", "Active"), ("C", "Closed")]
 class Migration(BaseMigration):
     def migrate(self):
         # Mock Models
-        Event = db.mock_model(
+        Event = self.db.mock_model(
             model_name='Event',
             db_table='fm_event',
             db_tablespace='',

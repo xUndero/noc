@@ -16,7 +16,7 @@ class Migration(BaseMigration):
     depends_on = [("vc", "0001_initial")]
 
     def migrate(self):
-        VCDomain = db.mock_model(
+        VCDomain = self.db.mock_model(
             model_name="VCDomain",
             db_table="vc_vcdomain",
             db_tablespace="",

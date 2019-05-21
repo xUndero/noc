@@ -34,7 +34,7 @@ class Migration(BaseMigration):
             """ % table)
         else:
             # Drop column
-            self.db.drop_column(table, "project")
+            self.db.delete_column(table, "project")
 
     def migrate(self):
         self.migrate_project("vc_vc")

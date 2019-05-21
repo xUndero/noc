@@ -33,7 +33,7 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        DNSZoneProfile = db.mock_model(
+        DNSZoneProfile = self.db.mock_model(
             model_name='DNSZoneProfile',
             db_table='dns_dnszoneprofile',
             db_tablespace='',
@@ -61,14 +61,14 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        DNSZone = db.mock_model(
+        DNSZone = self.db.mock_model(
             model_name='DNSZone',
             db_table='dns_dnszone',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        DNSZoneRecordType = db.mock_model(
+        DNSZoneRecordType = self.db.mock_model(
             model_name='DNSZoneRecordType',
             db_table='dns_dnszonerecordtype',
             db_tablespace='',

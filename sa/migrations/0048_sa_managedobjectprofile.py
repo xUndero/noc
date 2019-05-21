@@ -15,7 +15,7 @@ class Migration(BaseMigration):
     depends_on = [("main", "0027_style")]
 
     def migrate(self):
-        Style = db.mock_model(
+        Style = self.db.mock_model(
             model_name="Style",
             db_table="main_style",
             db_tablespace="",

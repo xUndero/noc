@@ -25,7 +25,7 @@ class Migration(BaseMigration):
             )
         )
         # CustomFieldEnumValue
-        CustomFieldEnumGroup = db.mock_model(
+        CustomFieldEnumGroup = self.db.mock_model(
             model_name="CustomFieldEnumGroup",
             db_table="main_customfieldenumgroup",
             db_tablespace="",

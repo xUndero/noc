@@ -17,7 +17,7 @@ class Migration(BaseMigration):
     def migrate(self):
 
         # Mock Models
-        Language = db.mock_model(
+        Language = self.db.mock_model(
             model_name='Language',
             db_table='main_language',
             db_tablespace='',
@@ -43,7 +43,7 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        RefBook = db.mock_model(
+        RefBook = self.db.mock_model(
             model_name='RefBook',
             db_table='main_refbook',
             db_tablespace='',
@@ -68,14 +68,14 @@ class Migration(BaseMigration):
         self.db.create_index('main_refbookfield', ['ref_book_id', 'name'], unique=True)
 
         # Mock Models
-        RefBook = db.mock_model(
+        RefBook = self.db.mock_model(
             model_name='RefBook',
             db_table='main_refbook',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        RefBookField = db.mock_model(
+        RefBookField = self.db.mock_model(
             model_name='RefBookField',
             db_table='main_refbookfield',
             db_tablespace='',

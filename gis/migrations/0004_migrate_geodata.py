@@ -39,5 +39,3 @@ class Migration(BaseMigration):
             except BulkWriteError as e:
                 print(("Bulk write error: '%s'", e.details))
                 print("Stopping check")
-        # Leave table for further analisys
-        # db.drop_table("gis_geodata")

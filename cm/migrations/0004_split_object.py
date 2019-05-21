@@ -19,7 +19,7 @@ class Migration(BaseMigration):
     depends_on = (("sa", "0005_activator"),)
 
     def migrate(self):
-        Activator = db.mock_model(
+        Activator = self.db.mock_model(
             model_name="Activator",
             db_table="sa_activator",
             db_tablespace="",
@@ -50,14 +50,14 @@ class Migration(BaseMigration):
             )
         )
         # Mock Models
-        Config = db.mock_model(
+        Config = self.db.mock_model(
             model_name="Config",
             db_table="cm_config",
             db_tablespace="",
             pk_field_name="id",
             pk_field_type=models.AutoField
         )
-        ObjectCategory = db.mock_model(
+        ObjectCategory = self.db.mock_model(
             model_name="ObjectCategory",
             db_table="cm_objectcategory",
             db_tablespace="",
@@ -87,14 +87,14 @@ class Migration(BaseMigration):
             )
         )
         # Mock Models
-        PrefixList = db.mock_model(
+        PrefixList = self.db.mock_model(
             model_name="PrefixList",
             db_table="cm_prefixlist",
             db_tablespace="",
             pk_field_name="id",
             pk_field_type=models.AutoField
         )
-        ObjectCategory = db.mock_model(
+        ObjectCategory = self.db.mock_model(
             model_name="ObjectCategory",
             db_table="cm_objectcategory",
             db_tablespace="",
@@ -124,10 +124,10 @@ class Migration(BaseMigration):
             )
         )
         # Mock Models
-        DNS = db.mock_model(
+        DNS = self.db.mock_model(
             model_name="DNS", db_table="cm_dns", db_tablespace="", pk_field_name="id", pk_field_type=models.AutoField
         )
-        ObjectCategory = db.mock_model(
+        ObjectCategory = self.db.mock_model(
             model_name="ObjectCategory",
             db_table="cm_objectcategory",
             db_tablespace="",

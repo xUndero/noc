@@ -58,5 +58,5 @@ class Migration(BaseMigration):
                 "WHERE service_terminator_id = %s", [rg_map[tg_id], rg_map[tg_id], tg_id]
             )
         # Finally remove columns
-        self.db.drop_column("sa_managedobject", "termination_group_id")
-        self.db.drop_column("sa_managedobject", "service_terminator_id")
+        self.db.delete_column("sa_managedobject", "termination_group_id")
+        self.db.delete_column("sa_managedobject", "service_terminator_id")

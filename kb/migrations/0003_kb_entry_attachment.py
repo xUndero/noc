@@ -17,7 +17,7 @@ class Migration(BaseMigration):
 
     def migrate(self):
         # Mock Models
-        KBEntry = db.mock_model(
+        KBEntry = self.db.mock_model(
             model_name="KBEntry",
             db_table="kb_kbentry",
             db_tablespace="",

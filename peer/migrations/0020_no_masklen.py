@@ -20,4 +20,4 @@ class Migration(BaseMigration):
                 remote_ip += "/%d" % masklen
             self.db.execute("UPDATE peer_peer SET local_ip=%s,remote_ip=%s WHERE id=%s", [local_ip, remote_ip, peer_id])
         self.db.execute("COMMIT")
-        self.db.drop_column("peer_peer", "masklen")
+        self.db.delete_column("peer_peer", "masklen")

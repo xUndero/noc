@@ -18,7 +18,7 @@ class Migration(BaseMigration):
 
     def migrate(self):
         # Create .state
-        ResourceState = db.mock_model(
+        ResourceState = self.db.mock_model(
             model_name="ResourceState",
             db_table="main_resourcestate",
             db_tablespace="",

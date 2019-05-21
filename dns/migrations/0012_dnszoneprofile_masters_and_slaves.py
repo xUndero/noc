@@ -16,14 +16,14 @@ from noc.core.migration.base import BaseMigration
 class Migration(BaseMigration):
     def migrate(self):
         # Mock Models
-        DNSZoneProfile = db.mock_model(
+        DNSZoneProfile = self.db.mock_model(
             model_name='DNSZoneProfile',
             db_table='dns_dnszoneprofile',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        DNSServer = db.mock_model(
+        DNSServer = self.db.mock_model(
             model_name='DNSServer',
             db_table='dns_dnsserver',
             db_tablespace='',
@@ -40,14 +40,14 @@ class Migration(BaseMigration):
             )
         )
         # Mock Models
-        DNSZoneProfile = db.mock_model(
+        DNSZoneProfile = self.db.mock_model(
             model_name='DNSZoneProfile',
             db_table='dns_dnszoneprofile',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        DNSServer = db.mock_model(
+        DNSServer = self.db.mock_model(
             model_name='DNSServer',
             db_table='dns_dnsserver',
             db_tablespace='',

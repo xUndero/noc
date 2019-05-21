@@ -17,7 +17,7 @@ class Migration(BaseMigration):
     ]
 
     def migrate(self):
-        Shard = db.mock_model(
+        Shard = self.db.mock_model(
             model_name="Shard",
             db_table="main_shard",
             db_tablespace="",

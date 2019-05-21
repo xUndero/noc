@@ -15,7 +15,7 @@ from noc.core.model.fields import AutoCompleteTagsField
 class Migration(BaseMigration):
     def migrate(self):
         # Mock models
-        ManagedObjectSelector = db.mock_model(
+        ManagedObjectSelector = self.db.mock_model(
             model_name="ManagedObjectSelector",
             db_table="sa_managedobjectselector",
             db_tablespace="",

@@ -15,21 +15,21 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        TimePattern = db.mock_model(
+        TimePattern = self.db.mock_model(
             model_name='TimePattern',
             db_table='main_timepattern',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        Language = db.mock_model(
+        Language = self.db.mock_model(
             model_name='Language',
             db_table='main_language',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        User = db.mock_model(
+        User = self.db.mock_model(
             model_name='User',
             db_table='auth_user',
             db_tablespace='',
@@ -47,8 +47,7 @@ class Migration(BaseMigration):
                 ('user', models.ForeignKey(User, unique=True)),
             )
         )
-        self.db.send_create_signal('main', ['UserProfile'])
-        UserProfile = db.mock_model(
+        UserProfile = self.db.mock_model(
             model_name='UserProfile',
             db_table='main_userprofile',
             db_tablespace='',

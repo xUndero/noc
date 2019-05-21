@@ -12,4 +12,4 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        self.db.drop_column("sa_managedobjectselector", "filter_repo_path")
+        self.db.delete_column("sa_managedobjectselector", "filter_repo_path")

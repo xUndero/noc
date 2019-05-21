@@ -15,7 +15,7 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        User = db.mock_model(
+        User = self.db.mock_model(
             model_name="User",
             db_table="auth_user",
             db_tablespace="",

@@ -23,7 +23,7 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        LIR = db.mock_model(
+        LIR = self.db.mock_model(
             model_name='LIR', db_table='peer_lir', db_tablespace='', pk_field_name='id', pk_field_type=models.AutoField
         )
 
@@ -57,7 +57,7 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        PeeringPointType = db.mock_model(
+        PeeringPointType = self.db.mock_model(
             model_name='PeeringPointType',
             db_table='peer_peeringpointtype',
             db_tablespace='',
@@ -87,21 +87,21 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        PeerGroup = db.mock_model(
+        PeerGroup = self.db.mock_model(
             model_name='PeerGroup',
             db_table='peer_peergroup',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        PeeringPoint = db.mock_model(
+        PeeringPoint = self.db.mock_model(
             model_name='PeeringPoint',
             db_table='peer_peeringpoint',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        AS = db.mock_model(
+        AS = self.db.mock_model(
             model_name='AS', db_table='peer_as', db_tablespace='', pk_field_name='id', pk_field_type=models.AutoField
         )
 

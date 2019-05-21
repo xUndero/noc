@@ -15,7 +15,7 @@ from noc.core.migration.base import BaseMigration
 
 class Migration(BaseMigration):
     def migrate(self):
-        Prefix = db.mock_model(
+        Prefix = self.db.mock_model(
             model_name="Prefix",
             db_table="ip_prefix",
             db_tablespace="",
@@ -23,7 +23,7 @@ class Migration(BaseMigration):
             pk_field_type=models.AutoField
         )
 
-        Address = db.mock_model(
+        Address = self.db.mock_model(
             model_name="Address",
             db_table="ip_address",
             db_tablespace="",

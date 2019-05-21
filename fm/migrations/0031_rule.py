@@ -18,7 +18,7 @@ class Migration(BaseMigration):
     depends_on = (("main", "0022_pyrule_is_builtin"),)
 
     def migrate(self):
-        PyRule = db.mock_model(model_name="PyRule", db_table="main_pyrule")
+        PyRule = self.db.mock_model(model_name="PyRule", db_table="main_pyrule")
         self.db.add_column("fm_eventclass", "rule", models.ForeignKey(PyRule, verbose_name="pyRule", null=True, blank=True))
         self.db.add_column(
             "fm_eventpostprocessingrule", "rule",

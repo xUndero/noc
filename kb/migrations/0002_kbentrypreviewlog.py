@@ -18,14 +18,14 @@ class Migration(BaseMigration):
     def migrate(self):
 
         # Mock Models
-        KBEntry = db.mock_model(
+        KBEntry = self.db.mock_model(
             model_name="KBEntry",
             db_table="kb_kbentry",
             db_tablespace="",
             pk_field_name="id",
             pk_field_type=models.AutoField
         )
-        User = db.mock_model(
+        User = self.db.mock_model(
             model_name="User",
             db_table="auth_user",
             db_tablespace="",

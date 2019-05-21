@@ -18,7 +18,7 @@ class Migration(BaseMigration):
     depends_on = (("main", "0017_initial_userprofilecontacts"),)
 
     def migrate(self):
-        NotificationGroup = db.mock_model(
+        NotificationGroup = self.db.mock_model(
             model_name='NotificationGroup',
             db_table='main_notificationgroup',
             db_tablespace='',

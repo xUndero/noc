@@ -25,14 +25,14 @@ class Migration(BaseMigration):
         )
 
         # Mock Models
-        ReduceTask = db.mock_model(
+        ReduceTask = self.db.mock_model(
             model_name='ReduceTask',
             db_table='sa_reducetask',
             db_tablespace='',
             pk_field_name='id',
             pk_field_type=models.AutoField
         )
-        ManagedObject = db.mock_model(
+        ManagedObject = self.db.mock_model(
             model_name='ManagedObject',
             db_table='sa_managedobject',
             db_tablespace='',

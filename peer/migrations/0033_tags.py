@@ -16,4 +16,4 @@ class Migration(BaseMigration):
 
     def migrate(self):
         for m in self.TAG_MODELS:
-            db.add_column(m, "tags", AutoCompleteTagsField("Tags", null=True, blank=True))
+            self.db.add_column(m, "tags", AutoCompleteTagsField("Tags", null=True, blank=True))

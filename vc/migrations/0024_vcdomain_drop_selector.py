@@ -14,4 +14,4 @@ class Migration(BaseMigration):
     depends_on = [("sa", "0072_managedobject_set_vcdomain")]
 
     def migrate(self):
-        self.db.drop_column("vc_vcdomain", "selector_id")
+        self.db.delete_column("vc_vcdomain", "selector_id")

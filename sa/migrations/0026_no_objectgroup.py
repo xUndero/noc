@@ -11,8 +11,11 @@ from noc.core.migration.base import BaseMigration
 
 
 class Migration(BaseMigration):
-    depends_on = (("cm", "0016_no_objectgroup"),)
+    depends_on = [
+        ("cm", "0016_no_objectgroup")
+    ]
 
     def migrate(self):
-        for t in ["sa_managedobject_groups", "sa_managedobjectselector_filter_groups", "sa_objectgroup"]:
-            self.db.drop_table(t)
+        self.db.delete_table("sa_managedobject_groups")
+        self.db.delete_table("sa_managedobjectselector_filter_groups")
+        self.db.delete_table("sa_objectgroup")

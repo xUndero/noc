@@ -23,7 +23,7 @@ class Migration(BaseMigration):
                 ("description", models.TextField("Description", null=True, blank=True))
             )
         )
-        TerminationGroup = db.mock_model(
+        TerminationGroup = self.db.mock_model(
             model_name="TerminationGroup",
             db_table="sa_terminationgroup",
             db_tablespace="",

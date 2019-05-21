@@ -15,7 +15,7 @@ from noc.core.model.fields import TagsField
 
 class Migration(BaseMigration):
     def migrate(self):
-        AdministrativeDomain = db.mock_model(
+        AdministrativeDomain = self.db.mock_model(
             model_name="AdministrativeDomain",
             db_table="sa_administrativedomain",
             db_tablespace="",

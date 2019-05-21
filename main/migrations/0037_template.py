@@ -24,7 +24,7 @@ class Migration(BaseMigration):
             )
         )
 
-        Template = db.mock_model(
+        Template = self.db.mock_model(
             model_name="Template",
             db_table="main_template",
             db_tablespace="",

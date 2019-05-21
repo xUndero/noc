@@ -17,7 +17,7 @@ class Migration(BaseMigration):
     depends_on = [("main", "0035_prefix_table")]
 
     def migrate(self):
-        PrefixTable = db.mock_model(
+        PrefixTable = self.db.mock_model(
             model_name="PrefixTable",
             db_table="main_prefixtable",
             db_tablespace="",

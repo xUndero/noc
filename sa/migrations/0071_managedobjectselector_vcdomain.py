@@ -16,10 +16,10 @@ class Migration(BaseMigration):
     depends_on = [("ip", "0001_initial"), ("vc", "0001_initial")]
 
     def migrate(self):
-        VRF = db.mock_model(
+        VRF = self.db.mock_model(
             model_name='VRF', db_table='ip_vrf', db_tablespace='', pk_field_name='id', pk_field_type=models.AutoField
         )
-        VCDomain = db.mock_model(
+        VCDomain = self.db.mock_model(
             model_name='VCDomain',
             db_table='vc_vcdomain',
             db_tablespace='',

@@ -7,6 +7,7 @@
 # ----------------------------------------------------------------------
 
 # NOC modules
+from noc.core.model.fields import INETField
 from noc.core.migration.base import BaseMigration
 
 

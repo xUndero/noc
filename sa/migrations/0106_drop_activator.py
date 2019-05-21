@@ -15,6 +15,6 @@ class Migration(BaseMigration):
 
     def migrate(self):
         self.db.delete_column("sa_managedobjectselector", "filter_activator_id")
-        self.db.drop_table("sa_activator")
-        self.db.drop_table("sa_collector")
-        self.db.drop_table("main_shard")
+        self.db.delete_table("sa_activator")
+        self.db.delete_table("sa_collector")
+        self.db.delete_table("main_shard")

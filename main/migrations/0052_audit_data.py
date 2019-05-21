@@ -11,7 +11,6 @@ import logging
 import re
 import datetime
 # Third-party modules
-from south.db import db
 from pymongo.errors import BulkWriteError
 from pymongo import InsertOne
 # NOC modules
@@ -56,14 +55,14 @@ class Migration(BaseMigration):
                 yield last.split(sep, 1)
 
         delta = datetime.timedelta(days=5 * 365)
-        user_cache = dict(db.execute("SELECT id, username FROM auth_user"))
+        user_cache = dict(self.db.execute("SELECT id, username FROM auth_user"))
         collection = get_db()["noc.audittrail"]
-        left = db.execute("SELECT COUNT(*) FROM main_audittrail")[0][0]
+        left = self.db.execute("SELECT COUNT(*) FROM main_audittrail")[0][0]
         logger.info("Migration audit trail")
         last_id = 0
         while True:
             bulk = []
-            for a_id, user_id, timestamp, model, db_table, op, subject, body in db.execute("""
+            for a_id, user_id, timestamp, model, db_table, op, subject, body in self.db.execute("""
                     SELECT id, user_id, "timestamp", model, db_table, operation, subject, body
                     FROM main_audittrail
                     WHERE id > %s
@@ -124,4 +123,4 @@ class Migration(BaseMigration):
                     break
             else:
                 break
-        db.drop_table("main_audittrail")
+        self.db.delete_table("main_audittrail")

@@ -17,7 +17,7 @@ class Migration(BaseMigration):
 
     def migrate(self):
         # Mock Models
-        Language = db.mock_model(
+        Language = self.db.mock_model(
             model_name="Language",
             db_table="main_language",
             db_tablespace="",
@@ -36,14 +36,14 @@ class Migration(BaseMigration):
             )
         )
         # Mock Models
-        KBEntryTemplate = db.mock_model(
+        KBEntryTemplate = self.db.mock_model(
             model_name="KBEntryTemplate",
             db_table="kb_kbentrytemplate",
             db_tablespace="",
             pk_field_name="id",
             pk_field_type=models.AutoField
         )
-        KBCategory = db.mock_model(
+        KBCategory = self.db.mock_model(
             model_name="KBCategory",
             db_table="kb_kbcategory",
             db_tablespace="",
