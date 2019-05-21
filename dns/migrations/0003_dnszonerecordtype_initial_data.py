@@ -5,12 +5,13 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Python modules
 from __future__ import print_function
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 RECORD_TYPES = [
     ("A", True),
@@ -49,8 +50,8 @@ RECORD_TYPES = [
 ]
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         rt = []
         for rtype, is_visible in RECORD_TYPES:
             if db.execute("SELECT COUNT(*) FROM dns_dnszonerecordtype WHERE type=%s", [rtype])[0][0] > 0:
@@ -60,6 +61,3 @@ class Migration(object):
             print("Creating DNS Zone record types: %s" % ", ".join(sorted([x[0] for x in rt])))
             for rtype, is_visible in rt:
                 db.execute("INSERT INTO dns_dnszonerecordtype(type, is_visible) VALUES(%s, %s)", [rtype, is_visible])
-
-    def backwards(self):
-        pass

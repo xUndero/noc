@@ -5,18 +5,18 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
-"""
-"""
+
 # Python modules
 from __future__ import print_function
 # Third-party modules
 from south.db import db
 # NOC modules
 from noc.lib.nosql import get_db
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         c = get_db()["noc.sync"]
         smap = {}  # name -> id
         for d in c.find():
@@ -30,6 +30,3 @@ class Migration(object):
             print(smap)
             db.execute("UPDATE dns_dnsserver SET sync=%s WHERE id=%s", [smap[ch], i])
         db.drop_column("dns_dnsserver", "sync_channel")
-
-    def backwards(self):
-        db.drop_column("dns_dnsserver", "sync")

@@ -5,14 +5,15 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         for id, content in db.execute("""
                 SELECT r.id, r.right
                 FROM dns_dnszonerecord r
@@ -34,6 +35,3 @@ class Migration(object):
                 WHERE id = %s
             """, [prio, rest, id]
             )
-
-    def backwards(self):
-        pass

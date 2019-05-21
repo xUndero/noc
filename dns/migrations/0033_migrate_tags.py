@@ -5,18 +5,18 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 # NOC modules
 from noc.core.model.fields import TagsField
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
+class Migration(BaseMigration):
     TAG_MODELS = ["dns_dnszone", "dns_dnszonerecord"]
 
-    def forwards(self):
+    def migrate(self):
         # Create temporary tags fields
         for m in self.TAG_MODELS:
             db.add_column(m, "tmp_tags", TagsField("Tags", null=True, blank=True))
@@ -29,6 +29,3 @@ class Migration(object):
             WHERE tags != ''
             """ % m
             )
-
-    def backwards(self):
-        pass

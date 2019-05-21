@@ -5,15 +5,16 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
-"""
-"""
+
 # Third-party modules
 from south.db import db
 from django.db import models
+# NOC modules
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         NotificationGroup = db.mock_model(
             model_name="NotificationGroup",
             db_table="main_notificationgroup",
@@ -25,7 +26,3 @@ class Migration(object):
             "dns_dnszoneprofile", "notification_group", models.ForeignKey(NotificationGroup, blank=True, null=True)
         )
         db.add_column("dns_dnszone", "notification_group", models.ForeignKey(NotificationGroup, blank=True, null=True))
-
-    def backwards(self):
-        db.delete_column("dns_dnszoneprofile", "notification_group_id")
-        db.delete_column("dns_dnszone", "notification_group_id")

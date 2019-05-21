@@ -5,8 +5,7 @@
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
-"""
-"""
+
 # Python modules
 import uuid
 import datetime
@@ -14,10 +13,11 @@ import datetime
 from south.db import db
 # NOC modules
 from noc.lib.nosql import get_db
+from noc.core.migration.base import BaseMigration
 
 
-class Migration(object):
-    def forwards(self):
+class Migration(BaseMigration):
+    def migrate(self):
         now = datetime.datetime.now()
         sc = get_db()["noc.synccaches"]
         for zone_id, sync_id in db.execute("""SELECT z.id, s.sync
@@ -40,6 +40,3 @@ class Migration(object):
                         "expire": now
                     }
                 )
-
-    def backwards(self):
-        pass
