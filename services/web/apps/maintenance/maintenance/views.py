@@ -39,8 +39,6 @@ class MaintenanceApplication(ExtDocApplication):
             if obj:
                 mos = obj.values_list("id", flat=True)
                 return Maintenance.objects.filter(affected_objects__object__in=mos)
-            else:
-                return self.model.objects.all()
         else:
             return self.model.objects.all()
 
