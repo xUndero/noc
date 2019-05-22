@@ -39,7 +39,7 @@ Ext.define("NOC.main.group.Permission", {
     getValue: function() {
         var data = [];
         Ext.each(this.getRefItems(), function(panel) {
-            Ext.Object.each(panel.getRefItems()[0].getData(), function(name, title) {
+            Ext.Object.each(panel.getData(), function(name, title) {
                 Ext.each(title.perms, function(p) {
                     if(p.status) {
                         data.push(p.id.replace(/-/g, ":"));
