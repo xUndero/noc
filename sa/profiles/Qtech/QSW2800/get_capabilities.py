@@ -15,8 +15,7 @@ from noc.sa.profiles.Generic.get_capabilities import false_on_cli_error
 class Script(BaseScript):
     name = "Qtech.QSW2800.get_capabilities"
 
-    rx_iface = re.compile(
-        "^\s*(?P<ifname>Ethernet\d+/\d+)\s+is\s+(?:up|down)", re.MULTILINE)
+    rx_iface = re.compile(r"^\s*(?P<ifname>Ethernet\d+/\d+)\s+is\s+(?:up|down)", re.MULTILINE)
     rx_oam = re.compile(r"Doesn\'t (support efmoam|enable EFMOAM!)")
 
     @false_on_cli_error
@@ -24,7 +23,7 @@ class Script(BaseScript):
         """
         Check box has lldp enabled
         """
-        cmd = self.cli("show lldp")
+        cmd = self.cli("show lldp", cached=True)
         return "LLDP has been enabled globally" in cmd
 
     def has_lldp_snmp(self):
@@ -65,7 +64,7 @@ class Script(BaseScript):
         """
         Check box has OAM enabled
         """
-        v = self.cli("show interface | include Ethernet")
+        v = self.cli("show interface", cached=True)
         for match in self.rx_iface.finditer(v):
             try:
                 cmd = self.cli("show ethernet-oam local interface %s" % match.group("ifname"))
