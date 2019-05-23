@@ -107,12 +107,13 @@ class Script(BaseScript):
         if s:
             caps["Stack | Members"] = len(s) if len(s) != 1 else 0
             caps["Stack | Member Ids"] = " | ".join(s)
-        f = self.has_snmp_enterprises()
-        if f:
-            caps["SNMP | OID | EnterpriseID"] = f
-            m = self.has_snmp_memory_oids(f)
-            if m:
-                caps["Qtech | OID | Memory Usage 11"] = True
+        if self.has_snmp():
+            f = self.has_snmp_enterprises()
+            if f:
+                caps["SNMP | OID | EnterpriseID"] = f
+                m = self.has_snmp_memory_oids(f)
+                if m:
+                    caps["Qtech | OID | Memory Usage 11"] = True
 
     def execute_platform_snmp(self, caps):
         f = self.has_snmp_enterprises()
