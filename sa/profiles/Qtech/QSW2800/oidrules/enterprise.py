@@ -23,6 +23,6 @@ class EnterpriseRule(OIDRule):
                     yield tuple(gen), self.type, self.scale, path
             else:
                 path = ["Usage"]
-                gen=gen = mib[self.expand(self.oid, {"enterprise": script.capabilities["SNMP | OID | EnterpriseID"]})]
+                gen = mib[self.expand(self.oid, {"enterprise": script.capabilities["SNMP | OID | EnterpriseID"]})]
                 if gen:
                    yield gen, self.type, self.scale, path
