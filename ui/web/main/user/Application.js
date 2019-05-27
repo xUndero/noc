@@ -68,12 +68,14 @@ Ext.define("NOC.main.user.Application", {
                     fieldLabel: __("Username"),
                     autoFocus: true,
                     allowBlank: false,
-                    uiStyle: "large"
+                    uiStyle: "large",
+                    validator: me.usernameValidator
                 },
                 {
                     name: "email",
                     xtype: "textfield",
                     fieldLabel: __("e-mail Address"),
+                    vtype: "email",
                     allowBlank: true,
                     uiStyle: "large"
                 },
@@ -211,15 +213,16 @@ Ext.define("NOC.main.user.Application", {
     ],
     updatePassword: function() {
         var me = this,
+            errMsg = __("Password mismatch"),
             passwordFieldset = me.down("[itemId=password]"),
-            passwd = me.form.findField("password").getValue(),
-            passwd1 = me.form.findField("password1").getValue();
-        if(passwd === passwd1) {
+            passwdField = me.form.findField("password"),
+            passwd1Field = me.form.findField("password1");
+        if(passwdField.getValue() === passwd1Field.getValue() && passwdField.getValue().length) {
             passwordFieldset.unsetActiveError();
             Ext.Ajax.request({
                 url: "/main/user/" + me.currentRecord.id + "/password/",
                 method: "POST",
-                jsonData: {password: passwd},
+                jsonData: {password: passwdField.getValue()},
                 scope: me,
                 success: function(response) {
                     var data = Ext.decode(response.responseText);
@@ -231,8 +234,13 @@ Ext.define("NOC.main.user.Application", {
                     NOC.error(__("Failed to set password"));
                 }
             });
+        } else if(!passwdField.getValue().length) {
+            errMsg = __("Password empty");
+            passwdField.markInvalid(errMsg);
+            passwd1Field.markInvalid(errMsg);
         } else {
-            passwordFieldset.setActiveError(__("Password mismatch"));
+            passwdField.markInvalid(errMsg);
+            passwd1Field.markInvalid(errMsg);
         }
     },
     editRecord: function(record) {
@@ -284,5 +292,10 @@ Ext.define("NOC.main.user.Application", {
             scope: me
         });
         me.callParent();
+    },
+    usernameValidator: function(value) {
+        var tn = value.match(/^[\w.@+-]+$/, ''),
+            errMsg = __("Invalid username");
+        return tn ? true : errMsg;
     }
 });
