@@ -23,7 +23,7 @@ class Script(BaseScript):
         r"(?P<oper_status>Up|Down|Not Present)",
         re.MULTILINE | re.IGNORECASE)
 
-    def execute(self, interface=None):
+    def execute_cli(self, interface=None):
         r = []
         v = self.cli("show interfaces status", cached=True)
         for match in self.rx_port.finditer(v):
