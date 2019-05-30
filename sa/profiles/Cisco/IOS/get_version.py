@@ -49,12 +49,12 @@ class Script(BaseScript):
         r"^cisco (?P<part_no>\S+) \(\S+\) processor( "
         r"\(revision(?P<revision>.+?)\))? with",
         re.IGNORECASE | re.MULTILINE)
-    IGNORED_SERIAL = {
+    IGNORED_SERIAL = set([
         "H22L714"
-    }
-    IGNORED_NAMES = {
+    ])
+    IGNORED_NAMES = set([
         "c7201"
-    }
+    ])
 
     def clear_platform(self, platform):
         """
@@ -99,6 +99,7 @@ class Script(BaseScript):
                         if p.endswith("-CHASSIS"):
                             p = p[:-8]
                         platform = p
+                    s = self.snmp.get(mib["ENTITY-MIB::entPhysicalSerialNum.1"])
             version = match.group("version")
             # WS-C4500X-32 do not have ',' in version string
             n = version.find(" RELEASE SOFTWARE")
