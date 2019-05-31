@@ -111,7 +111,7 @@ class Script(BaseScript):
                         # '2651XM chassis, Hw Serial#: 2297211811, Hw Revision: 0x301'
                         match1 = self.rx_old_platform.search(p)
                         if match1:
-                            p = match.group("platform")
+                            p = match1.group("platform")
                         platform = p
             version = match.group("version")
             # WS-C4500X-32 do not have ',' in version string
