@@ -92,13 +92,13 @@ class Script(BaseScript):
                     # CISCO-ENTITY-MIB::entPhysicalModelName
                     p = self.snmp.get(mib["ENTITY-MIB::entPhysicalModelName.1"])
                     # WS-C4500X-32 return '  ', WS-C4900M return 'MIDPLANE'
-                    if p is None or p.strip() in ["", "MIDPLANE"]:
+                    if p is None or p.strip() in ["", "MIDPLANE"] or "\xff" in p:
                         # Found in WS-C4500X-32 and WS-C4900M
                         p = self.snmp.get(mib["ENTITY-MIB::entPhysicalModelName.1000"])
                         s = self.snmp.get(mib["ENTITY-MIB::entPhysicalSerialNum.1000"])
                         if p is None:
-                            # Found on C2600
-                            p = self.snmp.get(mib["ENTITY-MIB::entPhysicalModelName.1"])
+                            # Found on C2600 series
+                            p = self.snmp.get(mib["ENTITY-MIB::entPhysicalDescr.1"])
                             s = self.snmp.get(mib["ENTITY-MIB::entPhysicalSerialNum.1"])
                     else:
                         s = self.snmp.get(mib["ENTITY-MIB::entPhysicalSerialNum.1"])
