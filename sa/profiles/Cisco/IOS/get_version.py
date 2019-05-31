@@ -31,6 +31,7 @@ class Script(BaseScript):
     rx_platform = re.compile(
         r"^cisco (?P<platform>\S+) \(\S+\) processor( \(revision.+?\))? with",
         re.IGNORECASE | re.MULTILINE)
+    rx_old_platform = re.compile(r"^(?P<platform>\S+) chassis")
     rx_invalid_platforms = re.compile(
         r"IOS[\-\s]XE|EGR|Catalyst( \S+)? L3 Switch|s\d+\S+")
     rx_item = re.compile(
@@ -95,13 +96,22 @@ class Script(BaseScript):
                         # Found in WS-C4500X-32 and WS-C4900M
                         p = self.snmp.get(mib["ENTITY-MIB::entPhysicalModelName.1000"])
                         s = self.snmp.get(mib["ENTITY-MIB::entPhysicalSerialNum.1000"])
+                        if p is None:
+                            # Found on C2600
+                            p = self.snmp.get(mib["ENTITY-MIB::entPhysicalModelName.1"])
+                            s = self.snmp.get(mib["ENTITY-MIB::entPhysicalSerialNum.1"])
                     else:
                         s = self.snmp.get(mib["ENTITY-MIB::entPhysicalSerialNum.1"])
                     if p:
+                        p = p.strip()  # Cisco 3845 return 'CISCO3845         '
                         if p.startswith("CISCO"):
                             p = p[5:]
                         if p.endswith("-CHASSIS"):
                             p = p[:-8]
+                        # '2651XM chassis, Hw Serial#: 2297211811, Hw Revision: 0x301'
+                        match1 = self.rx_old_platform.search(p)
+                        if match1:
+                            p = match.group("platform")
                         platform = p
             version = match.group("version")
             # WS-C4500X-32 do not have ',' in version string
