@@ -20,7 +20,7 @@ from django.http import HttpResponse
 from noc.sa.models.managedobject import ManagedObject
 from noc.inv.models.interface import Interface
 from noc.inv.models.platform import Platform
-# from noc.inv.models.networksegment import NetworkSegment
+from noc.inv.models.networksegment import NetworkSegment
 from noc.lib.app.reportdatasources.report_metrics import ReportInterfaceMetrics, ReportCPUMetrics,\
     ReportMemoryMetrics, ReportPingMetrics
 from noc.sa.models.useraccess import UserAccess
@@ -33,7 +33,7 @@ from noc.sa.models.administrativedomain import AdministrativeDomain
 
 def get_column_width(name):
     excel_column_format = {"ID": 6, "OBJECT_NAME": 38, "OBJECT_STATUS": 10, "OBJECT_PROFILE": 17,
-                           "OBJECT_PLATFORM": 25, "AVAIL": 6, "ADMIN_DOMAIN": 25, "PHYS_INTERFACE_COUNT": 5}
+                           "OBJECT_PLATFORM": 25, "AVAIL": 6, "OBJECT_ADM_DOMAIN": 25, "PHYS_INTERFACE_COUNT": 5}
     if name.startswith("Up") or name.startswith("Down") or name.startswith("-"):
         return 8
     elif name.startswith("ADM_PATH"):
@@ -158,7 +158,7 @@ class ReportMetricsDetailApplication(ExtApplication):
         else:
             to_date = datetime.datetime.strptime(to_date, "%d.%m.%Y") + datetime.timedelta(days=1)
 
-        interval = (to_date - from_date).days
+        # interval = (to_date - from_date).days
         ts_from_date = time.mktime(from_date.timetuple())
         ts_to_date = time.mktime(to_date.timetuple())
 
@@ -212,9 +212,11 @@ class ReportMetricsDetailApplication(ExtApplication):
             "iface_description": ('', 'iface_description', "''"),
             "iface_speed": ('speed', 'iface_speed', "max(speed)"),
             "load_in": ('load_in', 'l_in', "round(quantile(0.90)(load_in), 0)"),
-            "load_in_p": ('load_in', 'l_in_p', "round(quantile(0.90)(load_in), 0) / max(speed)"),
+            "load_in_p": ('load_in', 'l_in_p',
+                          "replaceOne(toString(round(quantile(0.90)(load_in) / max(speed), 4) * 100), '.', ',')"),
             "load_out": ('load_out', 'l_out', "round(quantile(0.90)(load_out), 0)"),
-            "load_out_p": ('load_out', 'l_out_p', "round(quantile(0.90)(load_out), 0) / max(speed)"),
+            "load_out_p": ('load_out', 'l_out_p',
+                           "replaceOne(toString(round(quantile(0.90)(load_out) / max(speed), 4) * 100), '.', ',')"),
             "errors_in": ('errors_in', 'err_in', "quantile(0.90)(errors_in)"),
             "errors_out": ('errors_out', 'err_out', "quantile(0.90)(errors_out)"),
             "cpu_usage": ('usage', 'cpu_usage', "quantile(0.90)(usage)"),
@@ -228,10 +230,11 @@ class ReportMetricsDetailApplication(ExtApplication):
             report_map[reporttype]["q_select"][
                 (columns_order.index(c), field, alias)] = func
 
-        mo_attrs = namedtuple("MOATTRs", object_columns)
+        mo_attrs = namedtuple("MOATTRs", [c for c in cols if c.startswith("object")])
         moss = {}
         for row in mos.values_list("bi_id", "name", "address", "platform", "administrative_domain__name", "segment"):
-            x = mo_attrs(*[row[1], row[2], str(Platform.get_by_id(row[3]) if row[3] else ""), row[4], row[5]])
+            x = mo_attrs(*[row[1], row[2], str(Platform.get_by_id(row[3]) if row[3] else ""),
+                           row[4], str(NetworkSegment.get_by_id(row[5])) if row[5] else ""])
             moss[row[0]] = [getattr(x, y) for y in object_columns]
         if reporttype in ["load_interfaces", "errors"]:
             ifaces = Interface._get_collection()
@@ -274,9 +277,10 @@ class ReportMetricsDetailApplication(ExtApplication):
             else:
                 res += data
             if "interface_load_url" in columns_filter:
-                d_url["biid"] = row[1]
+                d_url["biid"] = bi_id
                 d_url["oname"] = mo[2].replace("#", "%23")
-                res += [url % d_url, interval]
+                # res += [url % d_url, interval]
+                res += [url % d_url]
             r += [res]
 
         if o_format == "csv":
@@ -291,21 +295,21 @@ class ReportMetricsDetailApplication(ExtApplication):
             wb = xlsxwriter.Workbook(response)
             cf1 = wb.add_format({"bottom": 1, "left": 1, "right": 1, "top": 1})
             ws = wb.add_worksheet("Alarms")
-            # max_column_data_length = {}
+            max_column_data_length = {}
             for rn, x in enumerate(r):
                 for cn, c in enumerate(x):
-                    # if rn and (r[0][cn] not in max_column_data_length
-                    #           or len(str(c)) > max_column_data_length[r[0][cn]]):
-                    #    max_column_data_length[r[0][cn]] = len(str(c))
+                    if rn and (r[0][cn] not in max_column_data_length
+                               or len(str(c)) > max_column_data_length[r[0][cn]]):
+                        max_column_data_length[r[0][cn]] = len(str(c))
                     ws.write(rn, cn, c, cf1)
             ws.autofilter(0, 0, rn, cn)
             ws.freeze_panes(1, 0)
-            # for cn, c in enumerate(r[0]):
-            #     # Set column width
-            #     width = get_column_width(c)
-            #     if enable_autowidth and width < max_column_data_length[c]:
-            #         width = max_column_data_length[c]
-            #     ws.set_column(cn, cn, width=width)
+            for cn, c in enumerate(r[0]):
+                # Set column width
+                width = get_column_width(c)
+                if enable_autowidth and width < max_column_data_length[c]:
+                    width = max_column_data_length[c]
+                ws.set_column(cn, cn, width=width)
             wb.close()
             response.seek(0)
             response = HttpResponse(response.getvalue(), content_type="application/vnd.ms-excel")
