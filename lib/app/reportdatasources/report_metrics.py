@@ -23,6 +23,10 @@ class ReportMetrics(BaseReportColumn):
         # (List#, Name, Alias): TypeNormalizer or (TypeNormalizer, DefaultValue)
     }
     # KEY_FIELDS = OrderedDict([("iface_name", "path")])
+    CUSTOM_FILTER = {
+        "having": [],
+        "where": [],
+    }
     KEY_FIELDS = None
 
     def __init__(self, mos_ids, f_date, to_date, columns=None):
@@ -43,41 +47,35 @@ class ReportMetrics(BaseReportColumn):
     def get_mo_filter(ids, use_dictionary=False):
         return "managed_object IN (%s)" % ", ".join([str(c) for c in ids])
 
-    def get_filter_cond(self):
-        return {"q_where": [], "q_having": []}
+    def get_custom_conditions(self):
+        return self.CUSTOM_FILTER
 
-    def get_query_ch(self, ids, from_date, to_date):
-        def update_dict(d1, d2):
-            for k in d2:
-                if k in d1:
-                    d1[k] += d2[k]
-                else:
-                    d1[k] = d2[k]
+    def get_query_ch(self, from_date, to_date):
         ts_from_date = time.mktime(from_date.timetuple())
         ts_to_date = time.mktime(to_date.timetuple())
+        custom_conditions = self.get_custom_conditions()
         def_map = {"q_select": [],
                    "q_where": ["%s",  # mo_filter
                                "(date >= toDate(%d)) AND (ts >= toDateTime(%d) AND ts <= toDateTime(%d))" %
-                               (ts_from_date, ts_from_date, ts_to_date)],
+                               (ts_from_date, ts_from_date, ts_to_date)] + custom_conditions["where"][:],
                    "q_group": self.KEY_FIELDS,
+                   "q_having": custom_conditions["having"][:],
                    "q_order_by": self.KEY_FIELDS}
-        condition = self.get_filter_cond()
-        if condition["q_having"]:
-            update_dict(def_map, condition["q_having"])
         for num, field, alias in sorted(self.SELECT_QUERY_MAP, key=lambda x: x[0]):
             func = self.SELECT_QUERY_MAP[(num, field, alias)] or "avg(%s)" % field
             def_map["q_select"] += ["%s AS %s" % (func, alias or "a_" + field)]
-        query = " ".join(["select %s" % ",".join(def_map["q_select"]),
-                          "from %s" % self.TABLE_NAME,
-                          "where %s" % " and ".join(def_map["q_where"]),
-                          "group by %s" % ",".join(def_map["q_group"]),
-                          "order by %s" % ",".join(def_map["q_order_by"])])
+        query = " ".join(["SELECT %s" % ",".join(def_map["q_select"]),
+                          "FROM %s" % self.TABLE_NAME,
+                          "WHERE %s" % " AND ".join(def_map["q_where"]),
+                          "GROUP BY %s" % ",".join(def_map["q_group"]),
+                          "HAVING %s" % " AND ".join(def_map["q_having"]) if def_map["q_having"] else "",
+                          "ORDER BY %s" % ",".join(def_map["q_order_by"])])
         return query
 
     def do_query(self):
         mo_ids = self.sync_ids[:]
         f_date, to_date = self.from_date, self.to_date
-        query = self.get_query_ch("", f_date, to_date)
+        query = self.get_query_ch(f_date, to_date)
         while mo_ids:
             chunk, mo_ids = mo_ids[:self.CHUNK_SIZE], mo_ids[self.CHUNK_SIZE:]
             for row in self.ch_client.execute(query % self.get_mo_filter(chunk)):

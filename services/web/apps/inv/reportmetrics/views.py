@@ -19,6 +19,7 @@ from django.http import HttpResponse
 # NOC modules
 from noc.sa.models.managedobject import ManagedObject
 from noc.inv.models.interface import Interface
+from noc.inv.models.interfaceprofile import InterfaceProfile
 from noc.inv.models.platform import Platform
 from noc.inv.models.networksegment import NetworkSegment
 from noc.lib.app.reportdatasources.report_metrics import ReportInterfaceMetrics, ReportCPUMetrics,\
@@ -26,9 +27,9 @@ from noc.lib.app.reportdatasources.report_metrics import ReportInterfaceMetrics,
 from noc.sa.models.useraccess import UserAccess
 from noc.lib.app.extapplication import ExtApplication, view
 from noc.sa.interfaces.base import StringParameter, BooleanParameter
-from noc.core.translation import ugettext as _
 from noc.sa.models.managedobjectselector import ManagedObjectSelector
 from noc.sa.models.administrativedomain import AdministrativeDomain
+from noc.core.translation import ugettext as _
 
 
 def get_column_width(name):
@@ -60,7 +61,7 @@ class ReportMetricsDetailApplication(ExtApplication):
               "reporttype": StringParameter(required=True, choices=["load_interfaces", "load_cpu", "ping"]),
               "administrative_domain": StringParameter(required=False),
               # "pool": StringParameter(required=False),
-              # "segment": StringParameter(required=False),
+              "segment": StringParameter(required=False),
               "selector": StringParameter(required=False),
               "interface_profile": StringParameter(required=False),
               "exclude_zero": BooleanParameter(required=False),
@@ -68,8 +69,8 @@ class ReportMetricsDetailApplication(ExtApplication):
               "columns": StringParameter(required=False),
               "o_format": StringParameter(choices=["csv", "xlsx"])})
     def api_report(self, request, reporttype=None, from_date=None, to_date=None, object_profile=None,
-                   filter_default=None, exclude_zero=None, interface_profile=None, allow_archive=False,
-                   selector=None, administrative_domain=None, columns=None, o_format=None, enable_autowidth=False,
+                   filter_default=None, exclude_zero=None, interface_profile=None, selector=None,
+                   administrative_domain=None, columns=None, o_format=None, enable_autowidth=False,
                    **kwargs):
 
         def translate_row(row, cmap):
@@ -209,7 +210,10 @@ class ReportMetricsDetailApplication(ExtApplication):
         }
 
         query_map = {
-            "iface_description": ('', 'iface_description', "''"),
+            # "iface_description": ('', 'iface_description', "''"),
+            "iface_description": (
+                '', 'iface_description',
+                "dictGetString('interfaceattributes','description' , (managed_object, arrayStringConcat(path)))"),
             "iface_speed": ('speed', 'iface_speed', "max(speed)"),
             "load_in": ('load_in', 'l_in', "round(quantile(0.90)(load_in), 0)"),
             "load_in_p": ('load_in', 'l_in_p',
@@ -251,6 +255,13 @@ class ReportMetricsDetailApplication(ExtApplication):
         url = report_map[reporttype].get("url", "")
         report_metric = self.metric_source[reporttype](tuple(sorted(moss)), from_date, to_date, columns=None)
         report_metric.SELECT_QUERY_MAP = report_map[reporttype]["q_select"]
+        if exclude_zero and reporttype == "load_interfaces":
+            report_metric.CUSTOM_FILTER["having"] += ["max(load_in) != 0 AND max(load_out) != 0"]
+        interface_profile = InterfaceProfile.objects.filter(id=interface_profile).first()
+        if interface_profile:
+            report_metric.CUSTOM_FILTER["having"] += [
+                "dictGetString('interfaceattributes', 'profile', "
+                "(managed_object, arrayStringConcat(path))) = '%s'" % interface_profile.name]
         # OBJECT_PLATFORM, ADMIN_DOMAIN, SEGMENT, OBJECT_HOSTNAM
         for row in report_metric.do_query():
             bi_id, data = row[0], row[1:]
@@ -298,8 +309,8 @@ class ReportMetricsDetailApplication(ExtApplication):
             max_column_data_length = {}
             for rn, x in enumerate(r):
                 for cn, c in enumerate(x):
-                    if rn and (r[0][cn] not in max_column_data_length
-                               or len(str(c)) > max_column_data_length[r[0][cn]]):
+                    if rn and (r[0][cn] not in max_column_data_length or
+                               len(str(c)) > max_column_data_length[r[0][cn]]):
                         max_column_data_length[r[0][cn]] = len(str(c))
                     ws.write(rn, cn, c, cf1)
             ws.autofilter(0, 0, rn, cn)

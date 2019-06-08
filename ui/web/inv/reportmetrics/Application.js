@@ -10,6 +10,7 @@ Ext.define("NOC.inv.reportmetrics.Application", {
     extend: "NOC.core.Application",
     requires: [
         "NOC.inv.networksegment.TreeCombo",
+        "NOC.inv.interfaceprofile.LookupField",
         "NOC.sa.administrativedomain.TreeCombo",
         "NOC.sa.managedobjectselector.LookupField"
     ],
@@ -119,6 +120,8 @@ Ext.define("NOC.inv.reportmetrics.Application", {
         me.adm_domain = null;
         me.segment = null;
         me.selector = null;
+        me.interface_profile = null;
+        me.exclude_zero = null;
 
         me.formPanel = Ext.create("Ext.form.Panel", {
             autoScroll: true,
@@ -217,6 +220,35 @@ Ext.define("NOC.inv.reportmetrics.Application", {
                         }
                     }
                 },
+                {
+                    name: "Interface Profile Filter",
+                    xtype: "inv.interfaceprofile.LookupField",
+                    fieldLabel: __("By Interface Profile"),
+                    listWidth: 1,
+                    listAlign: 'left',
+                    labelAlign: "left",
+                    width: 500,
+                    allowBlank: true,
+                    listeners: {
+                        scope: me,
+                        select: function(combo, record) {
+                            me.interface_profile = record.get("id")
+                        }
+                    }
+                },
+                {
+                    name: "exclude_zero",
+                    xtype: "checkboxfield",
+                    boxLabel: __("Filter interface has zero load"),
+                    allowBlank: false,
+                    defaultValue: false,
+                    listeners: {
+                        scope: me,
+                        change: function(value) {
+                            me.exclude_zero = value.getValue()
+                        }
+                    }
+                },
                 me.formatButton,
                 me.columnsGrid
             ],
@@ -271,6 +303,13 @@ Ext.define("NOC.inv.reportmetrics.Application", {
 
         if(me.selector) {
             url.push("&selector=" + me.selector);
+        }
+
+        if(me.interface_profile) {
+            url.push("&interface_profile=" + me.interface_profile);
+        }
+        if(me.exclude_zero != null) {
+            url.push("&exclude_zero=" + me.exclude_zero);
         }
 
         me.columnsStore.each(function(record) {
