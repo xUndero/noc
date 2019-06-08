@@ -217,10 +217,14 @@ class ReportMetricsDetailApplication(ExtApplication):
             "iface_speed": ('speed', 'iface_speed', "max(speed)"),
             "load_in": ('load_in', 'l_in', "round(quantile(0.90)(load_in), 0)"),
             "load_in_p": ('load_in', 'l_in_p',
-                          "replaceOne(toString(round(quantile(0.90)(load_in) / max(speed), 4) * 100), '.', ',')"),
+                          "replaceOne(toString(round(quantile(0.90)(load_in) / "
+                          "if(max(speed) = 0, dictGetUInt32('interfaceattributes', 'in_speed', "
+                          "(managed_object, arrayStringConcat(path))), max(speed)), 4) * 100), '.', ',')"),
             "load_out": ('load_out', 'l_out', "round(quantile(0.90)(load_out), 0)"),
             "load_out_p": ('load_out', 'l_out_p',
-                           "replaceOne(toString(round(quantile(0.90)(load_out) / max(speed), 4) * 100), '.', ',')"),
+                           "replaceOne(toString(round(quantile(0.90)(load_out) / "
+                           "if(max(speed) = 0, dictGetUInt32('interfaceattributes', 'in_speed', "
+                           "(managed_object, arrayStringConcat(path))), max(speed)), 4) * 100), '.', ',')"),
             "errors_in": ('errors_in', 'err_in', "quantile(0.90)(errors_in)"),
             "errors_out": ('errors_out', 'err_out', "quantile(0.90)(errors_out)"),
             "cpu_usage": ('usage', 'cpu_usage', "quantile(0.90)(usage)"),
@@ -240,25 +244,25 @@ class ReportMetricsDetailApplication(ExtApplication):
             x = mo_attrs(*[row[1], row[2], str(Platform.get_by_id(row[3]) if row[3] else ""),
                            row[4], str(NetworkSegment.get_by_id(row[5])) if row[5] else ""])
             moss[row[0]] = [getattr(x, y) for y in object_columns]
-        if reporttype in ["load_interfaces", "errors"]:
-            ifaces = Interface._get_collection()
-            xx = set(mos.values_list("id", flat=True))
-            for iface in ifaces.find(
-                    {"type": "physical"},
-                    {"managed_object": 1, "name": 1, "description": 1, "in_speed": 1, "out_speed": 1}):
-                if iface["managed_object"] not in xx:
-                    continue
-                iface_dict[(iface["managed_object"],
-                            iface["name"])] = (iface.get("description", ""),
-                                               iface.get("in_speed", 0), iface.get("out_speed", 0))
+        # if reporttype in ["load_interfaces", "errors"]:
+        #     ifaces = Interface._get_collection()
+        #     xx = set(mos.values_list("id", flat=True))
+        #     for iface in ifaces.find(
+        #             {"type": "physical"},
+        #             {"managed_object": 1, "name": 1, "description": 1, "in_speed": 1, "out_speed": 1}):
+        #         if iface["managed_object"] not in xx:
+        #             continue
+        #         iface_dict[(iface["managed_object"],
+        #                     iface["name"])] = (iface.get("description", ""),
+        #                                        iface.get("in_speed", 0), iface.get("out_speed", 0))
 
         url = report_map[reporttype].get("url", "")
         report_metric = self.metric_source[reporttype](tuple(sorted(moss)), from_date, to_date, columns=None)
         report_metric.SELECT_QUERY_MAP = report_map[reporttype]["q_select"]
         if exclude_zero and reporttype == "load_interfaces":
             report_metric.CUSTOM_FILTER["having"] += ["max(load_in) != 0 AND max(load_out) != 0"]
-        interface_profile = InterfaceProfile.objects.filter(id=interface_profile).first()
         if interface_profile:
+            interface_profile = InterfaceProfile.objects.filter(id=interface_profile).first()
             report_metric.CUSTOM_FILTER["having"] += [
                 "dictGetString('interfaceattributes', 'profile', "
                 "(managed_object, arrayStringConcat(path))) = '%s'" % interface_profile.name]
