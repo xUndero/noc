@@ -218,12 +218,12 @@ class ReportMetricsDetailApplication(ExtApplication):
             "load_in": ('load_in', 'l_in', "round(quantile(0.90)(load_in), 0)"),
             "load_in_p": ('load_in', 'l_in_p',
                           "replaceOne(toString(round(quantile(0.90)(load_in) / "
-                          "if(max(speed) = 0, dictGetUInt32('interfaceattributes', 'in_speed', "
+                          "if(max(speed) = 0, dictGetUInt64('interfaceattributes', 'in_speed', "
                           "(managed_object, arrayStringConcat(path))), max(speed)), 4) * 100), '.', ',')"),
             "load_out": ('load_out', 'l_out', "round(quantile(0.90)(load_out), 0)"),
             "load_out_p": ('load_out', 'l_out_p',
                            "replaceOne(toString(round(quantile(0.90)(load_out) / "
-                           "if(max(speed) = 0, dictGetUInt32('interfaceattributes', 'in_speed', "
+                           "if(max(speed) = 0, dictGetUInt64('interfaceattributes', 'in_speed', "
                            "(managed_object, arrayStringConcat(path))), max(speed)), 4) * 100), '.', ',')"),
             "errors_in": ('errors_in', 'err_in', "quantile(0.90)(errors_in)"),
             "errors_out": ('errors_out', 'err_out', "quantile(0.90)(errors_out)"),
