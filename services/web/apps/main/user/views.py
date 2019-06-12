@@ -19,6 +19,7 @@ from noc.lib.app.extmodelapplication import ExtModelApplication, view
 from noc.main.models.permission import Permission
 from noc.sa.interfaces.base import StringParameter
 from noc.core.translation import ugettext as _
+from noc.aaa.models.user import User
 
 
 class UsernameParameter(StringParameter):

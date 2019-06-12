@@ -150,6 +150,7 @@ LOCALE_PATHS = ["locale"]
 
 # SOUTH_AUTO_FREEZE_APP = False
 
+AUTH_USER_MODEL = "main.User"
 AUTH_PROFILE_MODULE = "main.UserProfile"
 SKIP_SOUTH_TESTS = True
 SOUTH_TESTS_MIGRATE = True
