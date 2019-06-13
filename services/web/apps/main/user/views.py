@@ -43,8 +43,11 @@ class UserApplication(ExtModelApplication):
     query_condition = "icontains"
     query_fields = ["username"]
     default_ordering = ["username"]
-
-    clean_fields = {"username": UsernameParameter()}
+    clean_fields = {
+        "username": UsernameParameter(),
+        "first_name": StringParameter(default=""),
+        "last_name": StringParameter(default=""),
+        "email": StringParameter(default="")}
 
     @classmethod
     def apps_permissions_list(cls):
