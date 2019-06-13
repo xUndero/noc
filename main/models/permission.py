@@ -7,7 +7,7 @@
 # ---------------------------------------------------------------------
 
 # Python modules
-from __future__ import print_function, absolute_import
+from __future__ import print_function
 from threading import Lock
 import operator
 # Third-party modules
@@ -16,7 +16,7 @@ from django.db.models import Model, CharField, ManyToManyField
 from django.contrib.auth.models import Group
 import cachetools
 # NOC modules
-from .user import User
+from noc.aaa.models.user import User
 
 perm_lock = Lock()
 id_lock = Lock()
