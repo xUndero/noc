@@ -34,7 +34,7 @@ class IsolatorClass(object):
     """
     name = None
 
-    @cachetools.func.ttl_cache(maxsize=20, ttl=600)
+    @cachetools.cachedmethod(cachetools.TTLCache(maxsize=20, ttl=600))
     def get_stat(self, num, value):
         # print("%s a %s, %s" % (self.name, num, value))
         if hasattr(self, "_%s_%s" % (num, self.name)):
