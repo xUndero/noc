@@ -12,7 +12,7 @@ import datetime
 import six
 from django.db import models
 # NOC modules
-from noc.main.models.user import User
+from noc.aaa.models.user import User
 
 
 @six.python_2_unicode_compatible

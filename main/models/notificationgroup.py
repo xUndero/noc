@@ -17,7 +17,7 @@ import six
 from django.db import models
 import cachetools
 # NOC modules
-from noc.main.models.user import User
+from noc.aaa.models.user import User
 from noc.settings import LANGUAGE_CODE
 from noc.lib.timepattern import TimePatternList
 from noc.core.service.pub import pub

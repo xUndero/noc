@@ -16,7 +16,7 @@ import six
 from django.db import models, connection
 import cachetools
 # NOC modules
-from noc.main.models.user import User
+from noc.aaa.models.user import User
 from noc.project.models.project import Project
 from noc.peer.models.asn import AS
 from noc.vc.models.vc import VC

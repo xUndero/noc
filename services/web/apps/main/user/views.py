@@ -10,7 +10,6 @@
 from __future__ import absolute_import
 import re
 # Third-party modules
-from django.contrib.auth.models import User
 from django.conf import settings
 from django.http import HttpResponse
 # NOC modules

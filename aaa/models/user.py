@@ -8,26 +8,27 @@
 
 # Third-party modules
 import six
-from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import RegexValidator
-from django.utils.translation import ugettext_lazy as _
+from django.core.validators import MaxLengthValidator
 
 
 @six.python_2_unicode_compatible
 class User(AbstractUser):
     class Meta(AbstractUser.Meta):
-        app_label = "main"
+        verbose_name = "User"
+        verbose_name_plural = "Users"
+        app_label = "aaa"
+        # Point to django's auth_user table
         db_table = "auth_user"
         abstract = False
         ordering = ["username"]
 
-    username = models.CharField(_('username'), max_length=75, unique=True,
-        help_text=_('Required. 30 characters or fewer. Letters, digits and '
-                    '@/./+/-/_ only.'),
-        validators=[
-            RegexValidator(r'^[\w.@+-]+$', _('Enter a valid username.'), 'invalid')
-        ])
-
     def __str__(self):
         return self.username
+
+
+# Enlarge username field size and replace validators
+User._meta.get_field("username").max_length = User._meta.get_field("email").max_length
+User._meta.get_field("username").validators = [
+    v for v in User._meta.get_field("username").validators if not isinstance(v, MaxLengthValidator)
+] + [MaxLengthValidator(User._meta.get_field("username").max_length)]

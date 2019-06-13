@@ -46,7 +46,7 @@ class BaseAuthBackend(object):
     def ensure_user(self, username, is_active=True,
                     first_name=None, last_name=None, email=None,
                     **kwargs):
-        from noc.main.models.user import User
+        from noc.aaa.models.user import User
 
         changed = False
         try:

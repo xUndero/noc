@@ -16,7 +16,7 @@ from mongoengine.fields import (StringField, DateTimeField, ListField,
 # Third-party modules
 from django.contrib.auth.models import Group
 # NOC modules
-from noc.main.models.user import User
+from noc.aaa.models.user import User
 from noc.lib.nosql import ForeignKeyField
 
 DAL_NONE = -1

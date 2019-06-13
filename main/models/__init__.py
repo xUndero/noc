@@ -10,6 +10,7 @@
 
 # Python modules
 from __future__ import absolute_import
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
+from .user import User  # Cannot be moved, as referred from settings.py
 from .userprofile import UserProfile  # Cannot be moved, as referred from settings.py
 

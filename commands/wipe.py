@@ -118,7 +118,7 @@ class Command(BaseCommand):
             :return: ManagedObject
             :rtype: ManagedObject
             """
-            from noc.main.models.user import User
+            from noc.aaa.models.user import User
 
             # Try to get object by id
             if is_int(u_id):

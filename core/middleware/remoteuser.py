@@ -13,7 +13,7 @@ import operator
 from django.utils.functional import SimpleLazyObject
 import cachetools
 # NOC modules
-from noc.main.models.user import User
+from noc.aaa.models.user import User
 from noc.core.perf import metrics
 from noc.core.debug import ErrorReport
 

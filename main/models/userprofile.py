@@ -13,7 +13,7 @@ import six
 from django.db import models
 # NOC modules
 from noc import settings
-from noc.main.models.user import User
+from noc.aaa.models.user import User
 from noc.core.middleware.tls import get_user
 from noc.core.model.decorator import on_delete_check
 

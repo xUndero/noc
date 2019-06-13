@@ -12,7 +12,7 @@ from __future__ import absolute_import
 from django.db import models
 import six
 # NOC modules
-from noc.main.models.user import User
+from noc.aaa.models.user import User
 from .template import Template
 
 
