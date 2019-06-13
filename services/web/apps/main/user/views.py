@@ -101,7 +101,8 @@ class UserApplication(ExtModelApplication):
         """
         r = super(UserApplication, self).apply_bulk_fields(data=data)
         for x in r:
-            del x["password"]
+            if "password" in x:
+                del x["password"]
         return r
 
     def update_m2m(self, o, name, values):
