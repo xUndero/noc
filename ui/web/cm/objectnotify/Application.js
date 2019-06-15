@@ -11,6 +11,7 @@ Ext.define("NOC.cm.objectnotify.Application", {
     requires: [
         "NOC.cm.objectnotify.Model",
         "NOC.core.combotree.ComboTree",
+        "NOC.cm.objectnotify.LookupField",
         "NOC.main.notificationgroup.LookupField"
     ],
     model: "NOC.cm.objectnotify.Model",
@@ -18,23 +19,7 @@ Ext.define("NOC.cm.objectnotify.Application", {
     maskElement: "el",
     initComponent: function() {
         var me = this;
-        me.typeField = Ext.create({
-            xtype: "combo",
-            name: "type",
-            fieldLabel: __("Type"),
-            queryMode: "local",
-            valueField: "value",
-            editable: false,
-            store: {
-                fields: ["value", "text"],
-                data: [
-                    {"value": "dns", "text": __("DNS")},
-                    {"value": "prefix-list", "text": __("Prefix List")},
-                    {"value": "rpsl", "text": __("RPSL")}
-                ]
-            },
-            uiStyle: "medium"
-        });
+        me.typeField = Ext.create({xtype: "cm.objectnotify.LookupField"});
         Ext.apply(me, {
             columns: [
                 {
@@ -69,7 +54,12 @@ Ext.define("NOC.cm.objectnotify.Application", {
                 }
             ],
             fields: [
-                me.typeField,
+                {
+                    xtype: "cm.objectnotify.LookupField",
+                    fieldLabel: __("Type"),
+                    name: "type",
+                    uiStyle: "medium"
+                },
                 {
                     xtype: "noc.core.combotree",
                     restUrl: "/sa/administrativedomain/",
@@ -122,6 +112,12 @@ Ext.define("NOC.cm.objectnotify.Application", {
             name: "administrative_domain",
             ftype: "tree",
             lookup: "sa.administrativedomain"
+        },
+        {
+            title: __("By Type"),
+            name: "type",
+            ftype: "lookup",
+            lookup: "cm.objectnotify"
         }
     ],
     type_render: function(value) {
