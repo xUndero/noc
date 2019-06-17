@@ -74,7 +74,7 @@ class Workflow(Document):
     def get_by_bi_id(cls, id):
         return Workflow.objects.filter(bi_id=id).first()
 
-    @cachetools.cached(_default_state_cache, key=lambda x: str(x.id), lock=lambda _: id_lock)
+    @cachetools.cached(_default_state_cache, key=lambda x: str(x.id), lock=id_lock)
     def get_default_state(self):
         from .state import State
         return State.objects.filter(workflow=self.id, is_default=True).first()
