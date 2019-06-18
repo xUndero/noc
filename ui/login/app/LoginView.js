@@ -134,12 +134,7 @@ Ext.define('NOC.LoginView', {
         if(true !== o.result) {
             failureFunc();
         } else {
-            var param = Ext.urlDecode(location.search);
-            if('uri' in param) {
-                document.location = param.uri;
-            } else {
-                document.location = '/';
-            }
+            document.location = '/' + location.hash;
         }
     }
 
