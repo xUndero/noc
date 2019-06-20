@@ -26,7 +26,11 @@ Ext.define("NOC.sa.managedobject.Application", {
         "NOC.ip.vrf.LookupField",
         "NOC.main.ref.stencil.LookupField",
         "NOC.sa.authprofile.LookupField",
-        "NOC.inv.networksegment.LookupField",
+
+        "NOC.core.combotree.ComboTree",
+
+        "NOC.inv.networksegment.TreeCombo",
+
         "NOC.main.timepattern.LookupField",
         "NOC.main.remotesystem.LookupField",
         "NOC.fm.ttsystem.LookupField",
@@ -746,7 +750,14 @@ Ext.define("NOC.sa.managedobject.Application", {
                                 },
                                 {
                                     name: "segment",
-                                    xtype: "inv.networksegment.LookupField",
+
+                                    xtype: "noc.core.combotree",
+                                    restUrl: "/inv/networksegment/",
+
+                                    // xtype: "inv.networksegment.TreeCombo",
+                                    // listAlign: "left",
+                                    // labelAlign: "left",
+
                                     fieldLabel: __("Segment"),
                                     allowBlank: false,
                                     tabIndex: 100,
