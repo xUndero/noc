@@ -14,6 +14,7 @@ import sys
 
 
 VAR_LABELS = "CI_MERGE_REQUEST_LABELS"
+VAR_CI = "CI"
 ERR_OK = 0
 ERR_NO_LABELS = 1
 ERR_MISSED = 2
@@ -31,13 +32,13 @@ def die(code, msg, *args):
 
 
 def get_labels():
-    if VAR_LABELS not in os.environ:
+    if VAR_LABELS not in os.environ and VAR_CI not in os.environ:
         die(
             ERR_NO_LABELS,
             "%s environment variable is not defined. Must be called within Gitlab CI",
             VAR_LABELS
         )
-    return os.environ[VAR_LABELS].split(",")
+    return os.environ.get(VAR_LABELS, "").split(",")
 
 
 def go_url(anchor):
