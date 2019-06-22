@@ -1,11 +1,120 @@
 ---
 stages:
+  - labels
   - lint
   - test
   - Build docs
   - Build release container
   - Build additional release containers
   - Upload docs
+
+pri label:
+  stage: labels
+  image: registry.getnoc.com/infrastructure/noc-lint:master
+  script:
+    python ./scripts/check-labels.py --pri
+  only:
+    - merge_requests
+  tags:
+    - docker
+
+comp label:
+  stage: labels
+  image: registry.getnoc.com/infrastructure/noc-lint:master
+  script:
+    python ./scripts/check-labels.py --comp
+  only:
+    - merge_requests
+  tags:
+    - docker
+
+kind label:
+  stage: labels
+  image: registry.getnoc.com/infrastructure/noc-lint:master
+  script:
+    python ./scripts/check-labels.py --kind
+  only:
+    - merge_requests
+  tags:
+    - docker
+
+core label:
+  stage: labels
+  image: registry.getnoc.com/infrastructure/noc-lint:master
+  script:
+    python ./scripts/check-labels.py --core
+  only:
+    refs:
+      - merge_requests
+    changes:
+      - core/
+  tags:
+    - docker
+
+documentation label:
+  stage: labels
+  image: registry.getnoc.com/infrastructure/noc-lint:master
+  script:
+    python ./scripts/check-labels.py --documentation
+  only:
+    refs:
+      - merge_requests
+    changes:
+      - docs/
+  tags:
+    - docker
+
+ui label:
+  stage: labels
+  image: registry.getnoc.com/infrastructure/noc-lint:master
+  script:
+    python ./scripts/check-labels.py --ui
+  only:
+    refs:
+      - merge_requests
+    changes:
+      - ui/
+  tags:
+    - docker
+
+profiles label:
+  stage: labels
+  image: registry.getnoc.com/infrastructure/noc-lint:master
+  script:
+    python ./scripts/check-labels.py --profiles
+  only:
+    refs:
+      - merge_requests
+    changes:
+      - sa/profiles/
+  tags:
+    - docker
+
+migration label:
+  stage: labels
+  image: registry.getnoc.com/infrastructure/noc-lint:master
+  script:
+    python ./scripts/check-labels.py --migration
+  only:
+    refs:
+      - merge_requests
+    changes:
+      - "*/migrations/*.py"
+  tags:
+    - docker
+
+tests label:
+  stage: labels
+  image: registry.getnoc.com/infrastructure/noc-lint:master
+  script:
+    python ./scripts/check-labels.py --migration
+  only:
+    refs:
+      - merge_requests
+    changes:
+      - tests/
+  tags:
+    - docker
 
 flake8:
   stage: lint
