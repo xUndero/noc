@@ -56,7 +56,7 @@ estimated complexity to reviewers and testers:
   to review and up to 15 minutes to test
 * `comp::low` - Changes which can take up to 1 hour to test
 * `comp::medium` - Changes which can take up to 1 day to test
-* `comp::high` - More complicated changes
+* `comp::high` - Most complicated changes
 
 Use `comp::medium` label if unsure
 
