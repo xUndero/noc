@@ -10,12 +10,16 @@ Merge Request Labels
     :depth: 1
     :class: singlecol
 
-NOC development process is organized around `Merge Requests<https://docs.gitlab.com/ee/user/project/merge_requests/>`_
-and is relying on `Labels<https://docs.gitlab.com/ee/user/project/labels.html>`_
+NOC development process is organized around `Merge Requests <https://docs.gitlab.com/ee/user/project/merge_requests/>`_
+and is relying on `Labels <https://docs.gitlab.com/ee/user/project/labels.html>`_
 
-`pri::*`, `comp::*` and `kind::*` labels
+:ref:`pri::* <dev-mr-labels-pri>`, :ref:`comp::* <dev-mr-labels-comp>`
+and :ref:`kind::* <dev-mr-labels-pri>` labels are required for every MR
+to denote priority, complexity and kind of changes. Depending
+of change additional :ref:`affected subsystems labels<dev-mr-labels-affected>`
+may be required.
 
-.. _dev-mr-labels-affected
+.. _dev-mr-labels-affected:
 
 Affected Subsystems Labels
 --------------------------
@@ -28,7 +32,7 @@ Following labels shows subsystems affected by MR. Any combination of labels is p
 * `migration` - Database migrations
 * `tests` - Unittests
 
-.. _dev-mr-labels-pri
+.. _dev-mr-labels-pri:
 
 Priority
 --------
@@ -45,7 +49,7 @@ MR must be assigned with one of `pri::*` labels:
 
 Use `pri::p3` label if no other reasons present.
 
-.. _dev-mr-labels-comp
+.. _dev-mr-labels-comp:
 
 Complexity
 ----------
@@ -60,7 +64,7 @@ estimated complexity to reviewers and testers:
 
 Use `comp::medium` label if unsure
 
-.. _dev-mr-labels-kind
+.. _dev-mr-labels-kind:
 
 Kind
 ----
@@ -73,3 +77,11 @@ MR must be assigned with one of `kind::*` labels to denote changes type
 * `kind::bug` - Bugfix
 * `kind::cleanup` - Code cleanup. Non-functional changes not affecting existing behavior,
   like code formatting
+
+.. _dev-mr-labels-backport:
+
+Backport
+--------
+`backport` label means MR to be cherry-picked and backported
+to previous generations. `backport` label is applicable only
+to `kind::bug` label according to :ref:`releases-policy`
