@@ -8,31 +8,11 @@ stages:
   - Build additional release containers
   - Upload docs
 
-pri label:
+check labels:
   stage: labels
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
-    python ./scripts/check-labels.py --pri
-  only:
-    - merge_requests
-  tags:
-    - docker
-
-comp label:
-  stage: labels
-  image: registry.getnoc.com/infrastructure/noc-lint:master
-  script:
-    python ./scripts/check-labels.py --comp
-  only:
-    - merge_requests
-  tags:
-    - docker
-
-kind label:
-  stage: labels
-  image: registry.getnoc.com/infrastructure/noc-lint:master
-  script:
-    python ./scripts/check-labels.py --kind
+    python ./scripts/check-labels.py --pri --comp --kind --backport
   only:
     - merge_requests
   tags:
@@ -60,7 +40,7 @@ documentation label:
     refs:
       - merge_requests
     changes:
-      - docs/
+      - docs/**
   tags:
     - docker
 
