@@ -21,6 +21,7 @@ ERR_FAIL = 1
 PRI_LABELS = ["pri::p1", "pri::p2", "pri::p3", "pri::p4"]
 COMP_LABELS = ["comp::trivial", "comp::low", "comp::medium", "comp::high"]
 KIND_LABELS = ["kind::feature", "kind::improvement", "kind::bug", "kind::cleanup"]
+BACKPORT = "backport"
 
 
 def get_labels():
@@ -125,6 +126,19 @@ def check_affected(labels, name):
     return []
 
 
+def check_backport(labels):
+    if BACKPORT not in labels:
+        return []
+    kind = [x for x in labels if x.startswith("kind::")]
+    if len(kind) != 1:
+        return []  # Already have problems
+    if kind[0] != "kind::bug":
+        return [
+            "'%s' cannot be used with '%s'.\n"
+            "Use only with 'kind::bug'" % (BACKPORT, kind[0])
+        ]
+
+
 def check(labels):
     """
     Perform all checks
@@ -141,6 +155,8 @@ def check(labels):
     for area in ["core", "documentation", "ui", "profiles", "migration", "tests"]:
         if "--%s" % area in sys.argv:
             problems += check_affected(labels, area)
+    if "--backport" in sys.argv:
+        problems += check_backport(labels)
     return problems
 
 
