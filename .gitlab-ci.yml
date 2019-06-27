@@ -284,3 +284,8 @@ upload docs:
     refs:
       - master
       - /^release-\d+\.\d+/
+
+dependency_scanning:
+  stage: lint
+  tags:
+    - shell
