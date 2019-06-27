@@ -7,6 +7,9 @@ stages:
   - Build additional release containers
   - Upload docs
 
+include:
+  template: Dependency-Scanning.gitlab-ci.yml
+
 flake8:
   stage: lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
