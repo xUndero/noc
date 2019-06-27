@@ -12,6 +12,8 @@ flake8:
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
     - set -x
+    - env
+    - git --no-pager diff --name-only $CI_COMMIT_BEFORE_SHA $CI_COMMIT_SHA
     - FLIST=$(git --no-pager diff --name-only $(git branch -q -r --contains) $(git merge-base origin/HEAD HEAD) |egrep ".py$" | grep -v ".docker/"|| true)
     - >
       if [ ! -z "$FLIST" ];
