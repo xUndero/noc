@@ -1,6 +1,5 @@
 ---
 stages:
-  - labels
   - lint
   - test
   - Build docs
@@ -9,90 +8,14 @@ stages:
   - Upload docs
 
 check labels:
-  stage: labels
+  stage: lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
-    python ./scripts/check-labels.py --pri --comp --kind --backport
+    - set -x
+    - FLIST=$(git --no-pager diff --name-only $CI_COMMIT_SHA $(git merge-base origin/master $CI_COMMIT_SHA))
+    - python ./scripts/check-labels.py $FLIST
   only:
     - merge_requests
-  tags:
-    - docker
-
-core label:
-  stage: labels
-  image: registry.getnoc.com/infrastructure/noc-lint:master
-  script:
-    python ./scripts/check-labels.py --core
-  only:
-    refs:
-      - merge_requests
-    changes:
-      - core/
-  tags:
-    - docker
-
-documentation label:
-  stage: labels
-  image: registry.getnoc.com/infrastructure/noc-lint:master
-  script:
-    python ./scripts/check-labels.py --documentation
-  only:
-    refs:
-      - merge_requests
-    changes:
-      - docs/**
-  tags:
-    - docker
-
-ui label:
-  stage: labels
-  image: registry.getnoc.com/infrastructure/noc-lint:master
-  script:
-    python ./scripts/check-labels.py --ui
-  only:
-    refs:
-      - merge_requests
-    changes:
-      - ui/
-  tags:
-    - docker
-
-profiles label:
-  stage: labels
-  image: registry.getnoc.com/infrastructure/noc-lint:master
-  script:
-    python ./scripts/check-labels.py --profiles
-  only:
-    refs:
-      - merge_requests
-    changes:
-      - sa/profiles/
-  tags:
-    - docker
-
-migration label:
-  stage: labels
-  image: registry.getnoc.com/infrastructure/noc-lint:master
-  script:
-    python ./scripts/check-labels.py --migration
-  only:
-    refs:
-      - merge_requests
-    changes:
-      - "*/migrations/*.py"
-  tags:
-    - docker
-
-tests label:
-  stage: labels
-  image: registry.getnoc.com/infrastructure/noc-lint:master
-  script:
-    python ./scripts/check-labels.py --migration
-  only:
-    refs:
-      - merge_requests
-    changes:
-      - tests/
   tags:
     - docker
 

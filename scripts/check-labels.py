@@ -116,16 +116,6 @@ def check_kind(labels):
     return []
 
 
-def check_affected(labels, name):
-    n = sum(1 for x in labels if x == name)
-    if not n:
-        return [
-            "'%s' label is not set.\n"
-            "Refer to %s for details." % (name, go_url("dev-mr-labels-affected"))
-        ]
-    return []
-
-
 def check_backport(labels):
     if BACKPORT not in labels:
         return []
@@ -139,6 +129,30 @@ def check_backport(labels):
         ]
 
 
+def check_affected(labels):
+    # Get required labels
+    should_have = set()
+    for f in sys.argv[1:]:
+        parts = f.split(os.sep)
+        if parts[0] == "core":
+            should_have.add("core")
+        elif parts[0] == "docs":
+            should_have.add("documentation")
+        elif parts[0] == "ui":
+            should_have.add("ui")
+        elif parts[0] == "sa" and parts[1] == "profiles":
+            should_have.add("profiles")
+        elif len(parts) > 1 and parts[1] == "migrations":
+            should_have.add("migration")
+        elif parts[0] == "tests":
+            should_have.add("tests")
+    return [
+        "'%s' label is not set.\n"
+        "Refer to %s for details." % (l, go_url("dev-mr-labels-affected"))
+        for l in should_have if l not in labels
+    ]
+
+
 def check(labels):
     """
     Perform all checks
@@ -146,17 +160,11 @@ def check(labels):
     :return: List of policy violations
     """
     problems = []
-    if "--pri" in sys.argv:
-        problems += check_pri(labels)
-    if "--comp" in sys.argv:
-        problems += check_comp(labels)
-    if "--kind" in sys.argv:
-        problems += check_kind(labels)
-    for area in ["core", "documentation", "ui", "profiles", "migration", "tests"]:
-        if "--%s" % area in sys.argv:
-            problems += check_affected(labels, area)
-    if "--backport" in sys.argv:
-        problems += check_backport(labels)
+    problems += check_pri(labels)
+    problems += check_comp(labels)
+    problems += check_kind(labels)
+    problems += check_backport(labels)
+    problems += check_affected(labels)
     return problems
 
 
