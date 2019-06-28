@@ -15,8 +15,8 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.PrefixPanel", {
         "NOC.peer.as.LookupField",
         "NOC.vc.vc.LookupField",
         "NOC.project.project.LookupField",
-        "NOC.main.user.LookupField",
-        "NOC.main.group.LookupField"
+        "NOC.aaa.user.LookupField",
+        "NOC.aaa.group.LookupField"
     ],
     currentPrefixId: null,
     restUrl: "/ip/prefix/",

@@ -13,8 +13,8 @@ Ext.define("NOC.ip.ipam.view.forms.prefix.AddressPanel", {
         "NOC.ip.addressprofile.LookupField",
         "NOC.project.project.LookupField",
         "NOC.sa.managedobject.LookupField",
-        "NOC.main.user.LookupField",
-        "NOC.main.group.LookupField"
+        "NOC.aaa.user.LookupField",
+        "NOC.aaa.group.LookupField"
     ],
     currentAddressId: null,
     restUrl: "/ip/address/",
