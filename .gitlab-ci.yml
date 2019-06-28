@@ -288,5 +288,7 @@ upload docs:
 
 dependency_scanning:
   stage: Security
+  variables:
+    PIP_DEPENDENCY_PATH: "requirements/node.txt"
   tags:
     - shell
