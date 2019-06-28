@@ -146,12 +146,15 @@ class Script(BaseScript):
         return ports
 
     def get_pvc(self, interfaces, slot_n):
-        v = self.cli("display pvc 0/%d" % slot_n)
+        try:
+            v = self.cli("display pvc 0/%d" % slot_n)
+        except self.CLISyntaxError:
+            return self.get_svc(interfaces, slot_n)
         for match in self.rx_pvc.finditer(v):
             port = int(match.group("port"))
             ifname = "0/%d/%d" % (slot_n, port)
             sub = {
-                "name": "%s.%d" % (ifname, int(match.group("vpi"))),
+                "name": "%s-%d.%d" % (ifname, int(match.group("vpi")), int(match.group("vci"))),
                 "admin_status": match.group("admin_status") == "up",
                 "enabled_afi": ["BRIDGE", "ATM"],
                 "vpi": int(match.group("vpi")),
@@ -235,7 +238,19 @@ class Script(BaseScript):
             else:
                 interfaces[ifname]["subinterfaces"] += [sub]
 
-    def execute(self):
+    def get_port_vlans(self, ifname):
+        untagged, tagged = 0, []
+        v = self.cli("display port vlan %s" % ifname)
+        m = self.rx_vlan.search(v)
+        if m:
+            if m.group("untagged") and m.group("untagged") != "-":
+                untagged = int(m.group("untagged"))
+            for t in self.rx_tagged.finditer(m.group("tagged")):
+                if int(t.group("tagged")) != untagged:
+                    tagged += [int(t.group("tagged"))]
+        return untagged, tagged
+
+    def execute_cli(self, **kwargs):
         interfaces = {}
         stp_ports = self.get_stp()
 
@@ -262,7 +277,7 @@ class Script(BaseScript):
         _, boards = self.profile.get_board(self)
 
         for b in boards:
-            slot = b["num"]
+            slot = int(b["num"])
             try:
                 v = self.cli("display board 0/%d" % slot)
             except self.CLISyntaxError:
@@ -282,13 +297,13 @@ class Script(BaseScript):
             #   --------------------------------------------------------
             b_type = {p["type"] for p in six.itervalues(ports)}
             b_type = b_type.pop() if b_type else b["type"]
-
             if b_type in {"10GE", "GE", "FE", "GE-Optic", "GE-Elec", "FE-Elec"}:
                 for match in self.rx_ether.finditer(v):
                     ifname = "0/%d/%d" % (slot, int(match.group("port")))
                     admin_status = match.group("admin_status") == "active"
                     oper_status = match.group("oper_status") == "online"
                     ifindex = self.snmp_index("Eth", 0, slot, int(match.group("port")))
+                    untagged, tagged = self.get_port_vlans(ifname)
                     interfaces[ifname] = {
                         "name": ifname,
                         "type": "physical",
@@ -300,15 +315,19 @@ class Script(BaseScript):
                             "name": ifname,
                             "admin_status": admin_status,
                             "oper_status": oper_status,
+                            "tagged_vlans": tagged,
                             "enabled_afi": ["BRIDGE"]
                         }]
                     }
+                    if untagged:
+                        interfaces[ifname]["subinterfaces"][0]["untagged_vlan"] = untagged
                     if ifname in stp_ports:
                         interfaces[ifname]["enabled_protocols"] += ["STP"]
                     if ifname in portchannel_members:
                         ai, is_lacp = portchannel_members[ifname]
                         interfaces[ifname]["aggregated_interface"] = ai
                         interfaces[ifname]["enabled_protocols"] += ["LACP"]
+
             if b_type in {"ADSL", "VDSL"}:
                 for p_name, p in six.iteritems(ports):
                     if p["type"] == "VDSL":
@@ -325,8 +344,7 @@ class Script(BaseScript):
 
                 self.get_pvc(interfaces, slot)
 
-            if b_type in {"GPON"}:
-                # if p_type in ["gpon"]:  # For feature use
+            if b_type in {"GPON"}:  # For feature use
                 for p_name, p in six.iteritems(ports):
                     if self.is_gpon_uplink:
                         ifindex = self.snmp_index("XG-PON", 0, slot, int(p["num"]))
@@ -341,7 +359,6 @@ class Script(BaseScript):
                         "oper_status": p["state"],
                         "subinterfaces": [{
                             "name": p_name,
-                            "type": "physical",
                             "admin_status": True,
                             "oper_status": p["state"],
                             "enabled_afi": ["BRIDGE"]

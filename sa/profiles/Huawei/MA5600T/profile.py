@@ -152,7 +152,10 @@ class Profile(BaseProfile):
         "null": "null",
         "loop": "loopback",
         "vlan": "SVI",
-        "seri": "physical"
+        "seri": "physical",
+        "adsl": "physical",
+        "gpon": "physical",
+        "vdsl": "physical"
     }
 
     @classmethod
