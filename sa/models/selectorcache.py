@@ -91,7 +91,8 @@ class SelectorCache(Document):
         selectors = cls.get_active_selectors()
         if not selectors:
             return set()
-        apps.do_pending_operations()  # Resolve ForeignKey models
+        apps.do_pending_operations(ManagedObject)  # Resolve ForeignKey models
+        apps.do_pending_operations(AdministrativeDomain)  # Resolve ForeignKey models
         sql = []
         params = []
         for s in selectors:
