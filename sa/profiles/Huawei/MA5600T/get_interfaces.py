@@ -67,7 +67,7 @@ class Script(BaseScript):
         re.MULTILINE)
     rx_ports = re.compile(
         r"^\s*(?P<port>\d+)\s+(?P<type>ADSL|VDSL|GPON|10GE|GE|FE|GE-Optic|GE-Elec|FE-Elec)\s+.+?"
-        r"(?P<state>[Oo]nline|[Oo]ffline|Activating|Activated|Registered)",
+        r"(?P<state>[Oo]nline|[Oo]ffline|Activating|Activated|Registered)?",
         re.MULTILINE)
 
     # SmartAX MA5600T&MA5603T Multi-Service Access Module
@@ -119,29 +119,43 @@ class Script(BaseScript):
         return index
 
     def get_stp(self):
+        """
+        Getting stp status on port
+        :return:
+        """
         try:
             v = self.cli("display stp")
         except self.CLISyntaxError:
             return []
-        r = []
+        r = set()
         for match in self.rx_stp.finditer(v):
             port = match.group("port").replace(" ", "")
             if port not in r:
-                r += [port]
+                r.add(port)
         return r
 
     def get_ports(self, v, slot_n=0):
         """
-
+        Parse output like:
+          -------------------------------------------------------------
+            Port   Port   min-distance   max-distance   Optical-module
+                   type       (km)           (km)           status
+          -------------------------------------------------------------
+            0     GPON        0              20             Online
+            1     GPON        0              20             Online
+            2     GPON        0              20             Online
+            3     GPON        0              20             Online
+        on old version column "Optical-module status" not exists, that state is True.
         :param v:
         :param slot_n:
         :return:
         """
         ports = {}
         for match in self.rx_ports.finditer(v):
+            state = match.group("state")
             ports["0/%d/%s" % (slot_n, match.group("port"))] = {
                 "num": match.group("port"),
-                "state": match.group("state").lower() in ["online", "activated", "registered"],
+                "state": state.lower() in {"online", "activated", "registered"} if state else True,
                 "type": match.group("type")}
         return ports
 
@@ -172,7 +186,11 @@ class Script(BaseScript):
         :param slot_n:
         :return:
         """
-        v = self.cli("display service-port board 0/%d" % slot_n)
+        try:
+            v = self.cli("display service-port board 0/%d" % slot_n)
+        except self.CLISyntaxError:
+            self.logger.error("[Huawei.MA5600T] Not supported service-port board command")
+            return
         if "No service virtual port can be operated" in v:
             # return self.get_pvc(interfaces, slot_n)
             return
