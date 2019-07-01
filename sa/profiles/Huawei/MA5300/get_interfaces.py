@@ -43,7 +43,7 @@ class Script(BaseScript):
         r"^(?:Adsl|Ethernet|GigabitEthernet)(?P<card>\d+)/\d+/(?P<port>\d+)",
         re.MULTILINE)
     rx_tagged = re.compile(
-        r"^\s*Tagged\s+Ports:(?P<tagged>.+)Untagged",
+        r"^\s*(?:Description:\s+\S+\s+)?Tagged\s+Ports:(?P<tagged>.+)Untagged",
         re.MULTILINE | re.DOTALL)
     rx_untagged = re.compile(
         r"^\s*Untagged\s+Ports:(?P<untagged>.+)", re.MULTILINE | re.DOTALL)
