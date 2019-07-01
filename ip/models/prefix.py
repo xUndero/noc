@@ -16,6 +16,7 @@ import six
 from django.db import models, connection
 import cachetools
 # NOC modules
+from noc.core.model.base import NOCModel
 from noc.aaa.models.user import User
 from noc.project.models.project import Project
 from noc.peer.models.asn import AS
@@ -46,7 +47,7 @@ id_lock = Lock()
     ("ip.Address", "prefix")
 ])
 @six.python_2_unicode_compatible
-class Prefix(models.Model):
+class Prefix(NOCModel):
     """
     Allocated prefix
     """
@@ -62,11 +63,13 @@ class Prefix(models.Model):
         related_name="children_set",
         verbose_name=_("Parent"),
         null=True,
-        blank=True)
+        blank=True,
+        on_delete=models.CASCADE)
     vrf = CachedForeignKey(
         VRF,
         verbose_name=_("VRF"),
-        default=VRF.get_global
+        default=VRF.get_global,
+        on_delete=models.CASCADE
     )
     afi = models.CharField(
         _("Address Family"),
@@ -85,7 +88,7 @@ class Prefix(models.Model):
     asn = CachedForeignKey(
         AS, verbose_name=_("AS"),
         help_text=_("Autonomous system granted with prefix"),
-        null=True, blank=True
+        null=True, blank=True, on_delete=models.CASCADE
     )
     project = CachedForeignKey(
         Project, verbose_name="Project",
@@ -253,12 +256,12 @@ class Prefix(models.Model):
         if self.is_root and self.parent:
             raise ValidationError("Root prefix cannot have parent")
 
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
         """
         Save prefix
         """
         self.clean()
-        super(Prefix, self).save(**kwargs)
+        super(Prefix, self).save(*args, **kwargs)
         # Rebuild tree if necessary
         # Reconnect children children prefixes
         c = connection.cursor()

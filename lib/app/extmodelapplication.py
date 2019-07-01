@@ -46,6 +46,8 @@ class ExtModelApplication(ExtApplication):
     pk_field_name = None  # Set by constructor
     clean_fields = {"id": IntParameter()}  # field name -> Parameter instance
     custom_fields = {}  # name -> handler, populated automatically
+    # m2m fields
+    custom_m2m_fields = {}  # Name -> Model
     secret_fields = None  # Set of sensitive fields. "secret" permission is required to show of modify
     order_map = {}  # field name -> SQL query for ordering
     lookup_default = [{"id": "Leave unchanged", "label": "Leave unchanged"}]
@@ -74,8 +76,10 @@ class ExtModelApplication(ExtApplication):
                 self.field_defaults[f.name] = f.default
         # m2m fields
         self.m2m_fields = {}  # Name -> Model
+        if self.custom_m2m_fields:
+            self.m2m_fields.update(self.custom_m2m_fields)
         for f in self.model._meta.many_to_many:
-            self.m2m_fields[f.name] = f.rel.to
+            self.m2m_fields[f.name] = f.remote_field.model
         # Find field_* and populate custom fields
         self.custom_fields = {}
         for fn in [n for n in dir(self) if n.startswith("field_")]:
@@ -122,8 +126,8 @@ class ExtModelApplication(ExtApplication):
         elif isinstance(field, TextArrayField):
             return StringListParameter(required=not field.null)
         elif isinstance(field, related.ForeignKey):
-            self.fk_fields[field.name] = field.rel.to
-            return ModelParameter(field.rel.to,
+            self.fk_fields[field.name] = field.remote_field.model
+            return ModelParameter(field.remote_field.model,
                                   required=not field.null)
         else:
             return None
@@ -252,7 +256,7 @@ class ExtModelApplication(ExtApplication):
                 if not is_document(model):
                     extra_where = "%s.\"%s\" IN (SELECT \"%s\" FROM %s)" % (
                         self.model._meta.db_table, self.model._meta.pk.name,
-                        model._meta.get_field_by_name(fn)[0].attname,
+                        model._meta.get_field(fn).attname,
                         model._meta.db_table
                     )
                     if None in nq:

@@ -14,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.template import Template, Context
 # NOC modules
-from noc.core.model.hacks import tuck_up_pants
+from noc.core.model.base import NOCModel
 from noc.config import config
 from noc.core.model.fields import TagsField, CIDRField
 from noc.core.ip import IP
@@ -24,10 +24,9 @@ from .afi import AFI_CHOICES
 from .vrf import VRF
 
 
-@tuck_up_pants
 @datastream
 @six.python_2_unicode_compatible
-class AddressRange(models.Model):
+class AddressRange(NOCModel):
     class Meta(object):
         verbose_name = _("Address Range")
         db_table = "ip_addressrange"
@@ -36,7 +35,7 @@ class AddressRange(models.Model):
 
     name = models.CharField(_("Name"), max_length=64, unique=True)
     is_active = models.BooleanField(_("Is Active"), default=True)
-    vrf = models.ForeignKey(VRF, verbose_name=_("VRF"))
+    vrf = models.ForeignKey(VRF, verbose_name=_("VRF"), on_delete=models.CASCADE)
     afi = models.CharField(
         _("Address Family"),
         max_length=1,
@@ -110,7 +109,7 @@ class AddressRange(models.Model):
             check_ipv6(self.from_address)
             check_ipv6(self.to_address)
 
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
         def generate_fqdns():
             # Prepare FQDN template
             t = Template(self.fqdn_template)
@@ -151,7 +150,7 @@ class AddressRange(models.Model):
         if not created:
             # Get old values
             old = AddressRange.objects.get(id=self.id)
-        super(AddressRange, self).save(**kwargs)
+        super(AddressRange, self).save(*args, **kwargs)
         if created:
             # New
             if self.action == "G":

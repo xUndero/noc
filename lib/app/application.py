@@ -12,17 +12,17 @@ import logging
 import os
 import datetime
 import functools
+from collections import OrderedDict
 # Third-party modules
 from django.template import RequestContext
 from django.http import (HttpResponse, HttpResponseRedirect,
                          HttpResponseForbidden, HttpResponseNotFound)
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.db import connection
 from django.shortcuts import get_object_or_404
 from django.utils.html import escape
 from django.template import loader
 from django import forms
-from django.utils.datastructures import SortedDict
 from django.utils.timezone import get_current_timezone
 from django.views.static import serve as serve_static
 from django.http import Http404
@@ -303,9 +303,18 @@ class Application(six.with_metaclass(ApplicationBase, object)):
                 )
             )
         else:
-            return render_to_response(self.get_template_path(template),
-                                      dict if dict else kwargs,
-                                      context_instance=RequestContext(request, {"app": self}))
+            ctx = {
+                "app": self
+            }
+            if dict:
+                ctx.update(dict)
+            else:
+                ctx.update(kwargs)
+            return render(
+                request,
+                self.get_template_path(template),
+                ctx
+            )
 
     def render_template(self, template, dict=None, **kwargs):
         """
@@ -473,7 +482,7 @@ class Application(six.with_metaclass(ApplicationBase, object)):
                 result += [{id_field: r, name_field: r}]
         return self.render_json(result)
 
-    def get_views(self):
+    def iter_views(self):
         """
         Iterator returning application views
         """
@@ -490,7 +499,7 @@ class Application(six.with_metaclass(ApplicationBase, object)):
         prefix = self.get_app_id().replace(".", ":")
         p = {"%s:launch" % prefix}
         # View permissions from HasPerm
-        for view in self.get_views():
+        for view in self.iter_views():
             if isinstance(view.access, HasPerm):
                 p.add(view.access.get_permission(self))
         # mrt_config permissions
@@ -571,7 +580,7 @@ class Application(six.with_metaclass(ApplicationBase, object)):
             else:
                 raise ValueError("Invalid field type: '%s'" % f.type)
             fields += [(str(f.name), ff)]
-        form.base_fields.update(SortedDict(fields))
+        form.base_fields.update(OrderedDict(fields))
         return form
 
     def apply_custom_fields(self, o, v, table):
