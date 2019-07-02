@@ -24,9 +24,7 @@ class Profile(BaseProfile):
         (r"^Proceed with reload\?\s*\[confirm\]", "y\n"),
     ]
     pattern_unprivileged_prompt = r"^\S+?>"
-    pattern_syntax_error = (
-        r"% Invalid input detected at|% Ambiguous command:|% Incomplete command."
-    )
+    pattern_syntax_error = r"% Invalid input detected at|% Ambiguous command:|% Incomplete command."
     pattern_operation_error = "Command authorization failed."
     command_disable_pager = "terminal length 0"
     command_super = "enable"
@@ -34,9 +32,7 @@ class Profile(BaseProfile):
     command_leave_config = "end"
     command_exit = "exit"
     command_save_config = "copy running-config startup-config\n"
-    pattern_prompt = (
-        r"^(?P<hostname>[a-zA-Z0-9/.]\S{0,35})(?:[-_\d\w]+)?(?:\(config[^\)]*\))?#"
-    )
+    pattern_prompt = r"^(?P<hostname>[a-zA-Z0-9/.]\S{0,35})(?:[-_\d\w]+)?(?:\(config[^\)]*\))?#"
     can_strip_hostname_to = 20
     requires_netmask_conversion = True
     convert_mac = BaseProfile.convert_mac_to_cisco
@@ -72,34 +68,24 @@ class Profile(BaseProfile):
     def cmp_version(self, x, y):
         """12(25)SEC2"""
         return cmp(
-            [int(z) for z in self.rx_ver.findall(x)[0]],
-            [int(z) for z in self.rx_ver.findall(y)[0]],
+            [int(z) for z in self.rx_ver.findall(x)[0]], [int(z) for z in self.rx_ver.findall(y)[0]]
         )
 
     def convert_interface_name(self, interface):
         interface = str(interface)
         if " efp_id " in interface:
             l, r = interface.split(" efp_id ", 1)
-            return "%s.SI.%d" % (
-                self.convert_interface_name_cisco(l.strip()),
-                int(r.strip()),
-            )
+            return "%s.SI.%d" % (self.convert_interface_name_cisco(l.strip()), int(r.strip()))
         if "+Efp" in interface:
             l, r = interface.split("+Efp", 1)
-            return "%s.SI.%d" % (
-                self.convert_interface_name_cisco(l.strip()),
-                int(r.strip()),
-            )
+            return "%s.SI.%d" % (self.convert_interface_name_cisco(l.strip()), int(r.strip()))
         if " point-to-point" in interface:
             interface = interface.replace(" point-to-point", "")
         if ".ServiceInstance." in interface:
             interface = interface.replace(".ServiceInstance.", ".SI.")
         if ".SI." in interface:
             l, r = interface.split(".SI.", 1)
-            return "%s.SI.%d" % (
-                self.convert_interface_name_cisco(l.strip()),
-                int(r.strip()),
-            )
+            return "%s.SI.%d" % (self.convert_interface_name_cisco(l.strip()), int(r.strip()))
         if isinstance(interface, six.string_types):
             il = interface.lower()
         else:
