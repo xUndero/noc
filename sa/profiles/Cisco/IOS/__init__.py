@@ -67,9 +67,9 @@ class Profile(BaseProfile):
 
     def cmp_version(self, x, y):
         """12(25)SEC2"""
-        return cmp(
-            [int(z) for z in self.rx_ver.findall(x)[0]], [int(z) for z in self.rx_ver.findall(y)[0]]
-        )
+        a = [int(z) for z in self.rx_ver.findall(x)[0]]
+        b = [int(z) for z in self.rx_ver.findall(y)[0]]
+        return (a > b) - (a < b)
 
     def convert_interface_name(self, interface):
         interface = str(interface)
