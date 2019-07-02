@@ -233,7 +233,7 @@ Build docs:
   artifacts:
     paths:
       - build/docs/en
-    expire_in: 1 day
+    expire_in: 2 hours
   only:
     changes:
       - docs/**
@@ -251,7 +251,7 @@ Build Master Docs:
   artifacts:
     paths:
       - build/docs/en
-    expire_in: 1 day
+    expire_in: 2 hours
   only:
     refs:
       - master
