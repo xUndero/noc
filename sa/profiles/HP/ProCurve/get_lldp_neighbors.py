@@ -48,9 +48,9 @@ class Script(BaseScript):
     rx_port_id = re.compile(
         r"^\s*PortType\s*:\s*(\S+)\s*\n^\s*PortId\s*:\s*(.+?)\s*\n", re.MULTILINE
     )
-    rx_sys_name = re.compile(r"^\s*SysName\s*:\s*(.+?)\s*$", re.MULTILINE)
-    rx_sys_descr = re.compile(r"^\s*System Descr\s*:\s*(.+?)\s*$", re.MULTILINE)
-    rx_port_descr = re.compile(r"^\s*PortDescr\s*:\s*(.+?)\s*$", re.MULTILINE)
+    rx_sys_name = re.compile(r"^\s*SysName\s*:\s*(?P<sys_name>.+)\s*\n", re.MULTILINE)
+    rx_sys_descr = re.compile(r"^\s*System Descr\s*:\s*(?P<sys_descr>.+)\s*\n", re.MULTILINE)
+    rx_port_descr = re.compile(r"^\s*PortDescr\s*:\s*(?P<port_descr>.+)\s*\n", re.MULTILINE)
     rx_cap = re.compile(r"^\s*System Capabilities Enabled\s*:(.*?)$", re.MULTILINE)
 
     def execute(self):
@@ -113,15 +113,15 @@ class Script(BaseScript):
             # Get remote system name
             match = self.rx_sys_name.search(v)
             if match:
-                n["remote_system_name"] = match.group(1)
+                n["remote_system_name"] = match.group("sys_name")
             # Get remote system description
             match = self.rx_sys_descr.search(v)
             if match:
-                n["remote_system_description"] = match.group(1)
+                n["remote_system_description"] = match.group("sys_descr")
             # Get remote port description
             match = self.rx_port_descr.search(v)
             if match:
-                n["remote_port_description"] = match.group(1)
+                n["remote_port_description"] = match.group("port_descr")
             # Get capabilities
             caps = 0
             match = self.rx_cap.search(v)
