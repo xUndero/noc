@@ -160,7 +160,7 @@ Ext.define("NOC.inv.networksegmentprofile.Application", {
                 },
                 {
                     name: "uplink_policy",
-                    type: "gridfield",
+                    xtype: "gridfield",
                     fieldLabel: __("Uplink Policy"),
                     columns: [
                         {

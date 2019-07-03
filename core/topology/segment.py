@@ -107,10 +107,12 @@ class SegmentTopology(BaseTopology):
         :return:
         """
         s = next(
-            sorted(
-                (IP.prefix(self.G.node[i].get("address")), i)
-                for i in self.G.node
-                if self.G.node[i].get("role") == "segment"
+            iter(
+                sorted(
+                    (IP.prefix(self.G.node[i].get("address")), i)
+                    for i in self.G.node
+                    if self.G.node[i].get("role") == "segment"
+                )
             )
         )
         return [s[1]]
