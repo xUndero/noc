@@ -99,7 +99,7 @@ pylint:
   tags:
     - docker
 
-pylint3:
+pylint3k:
   stage: lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
