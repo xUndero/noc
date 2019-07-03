@@ -22,6 +22,8 @@ import six
 from noc.sa.models.managedobject import ManagedObject
 from noc.inv.models.interface import Interface
 from noc.inv.models.link import Link
+from noc.core.log import PrefixLoggerAdapter
+from noc.core.ip import IP
 from .base import BaseTopology
 
 logger = logging.getLogger(__name__)
@@ -29,6 +31,7 @@ logger = logging.getLogger(__name__)
 
 class SegmentTopology(BaseTopology):
     def __init__(self, segment, node_hints=None, link_hints=None, force_spring=False):
+        self.logger = PrefixLoggerAdapter(logger, segment.name)
         self.segment = segment
         self.segment_siblings = self.segment.get_siblings()
         self._uplinks_cache = {}
@@ -51,7 +54,82 @@ class SegmentTopology(BaseTopology):
 
     @cachetools.cachedmethod(operator.attrgetter("_uplinks_cache"))
     def get_uplinks(self):
+        self.logger.info("Searching for uplinks")
+        for policy in self.segment.profile.iter_uplink_policy():
+            uplinks = getattr(self, "get_uplinks_%s" % policy)()
+            if uplinks:
+                self.logger.info(
+                    "[%s] %d uplinks found: %s",
+                    policy,
+                    len(uplinks),
+                    ", ".join(str(x) for x in uplinks),
+                )
+                return uplinks
+            self.logger.info("[%s] No uplinks found. Skipping", policy)
+        self.logger.info("Failed to find uplinks")
+        return []
+
+    def get_uplinks_seghier(self):
+        """
+        Find uplinks basing on segment hierarchy. Any object with parent segment
+        is uplink
+        :return:
+        """
         return [i for i in self.G.node if self.G.node[i].get("role") == "uplink"]
+
+    def get_uplinks_molevel(self):
+        """
+        Find uplinks basing on Managed Object's level. Top-leveled objects are returned.
+        :return:
+        """
+        max_level = max(
+            self.G.node[i].get("level")
+            for i in self.G.node
+            if self.G.node[i].get("type") == "managedobject"
+        )
+        return [
+            i
+            for i in self.G.node
+            if self.G.node[i].get("type") == "managedobject"
+            and self.G.node[i].get("level") == max_level
+        ]
+
+    def get_uplinks_seg(self):
+        """
+        All segment objects are uplinks
+        :return:
+        """
+        return [i for i in self.G.node if self.G.node[i].get("role") == "segment"]
+
+    def get_uplinks_minaddr(self):
+        """
+        Segment's Object with lesser address is uplink
+        :return:
+        """
+        s = next(
+            sorted(
+                (self.G.node[i].get("address"), i)
+                for i in self.G.node
+                if self.G.node[i].get("role") == "segment"
+            )
+        )
+        return [s[1]]
+
+    def get_uplinks_maxaddr(self):
+        """
+        Segment's Object with greater address is uplink
+        :return:
+        """
+        s = next(
+            reversed(
+                sorted(
+                    (self.G.node[i].get("address"), i)
+                    for i in self.G.node
+                    if self.G.node[i].get("role") == "segment"
+                )
+            )
+        )
+        return [s[1]]
 
     def load(self):
         """

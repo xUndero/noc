@@ -32,6 +32,7 @@ from noc.core.bi.decorator import bi_sync
 from noc.main.models.remotesystem import RemoteSystem
 
 id_lock = Lock()
+DEFAULT_UPLINK_POLICY = "seghier"
 
 
 class SegmentTopologySettings(EmbeddedDocument):
@@ -59,6 +60,19 @@ class SegmentTopologySettings(EmbeddedDocument):
     # Custom method name for *custom*
     # or handler for *handler*
     handler = StringField()
+    is_active = BooleanField(default=True)
+
+
+class UplinkPolicySettings(EmbeddedDocument):
+    method = StringField(
+        choices=[
+            ("seghier", "Segment Hierarchy"),
+            ("molevel", "Object Level"),
+            ("seg", "All Segment Objects"),
+            ("minaddr", "Lesser Management Address"),
+            ("maxaddr", "Greater Management Address"),
+        ]
+    )
     is_active = BooleanField(default=True)
 
 
@@ -96,6 +110,8 @@ class NetworkSegmentProfile(Document):
     # List of enabled topology method
     # in order of preference (most preferable first)
     topology_methods = ListField(EmbeddedDocumentField(SegmentTopologySettings))
+    # List of uplink policies (most preferable first)
+    uplink_policy = ListField(EmbeddedDocumentField(UplinkPolicySettings))
     # Enable VLAN discovery for appropriative management objects
     enable_vlan = BooleanField(default=False)
     # Default VLAN profile for discovered VLANs
@@ -157,3 +173,16 @@ class NetworkSegmentProfile(Document):
         except ValueError:
             return False
         return i1 <= i2
+
+    def iter_uplink_policy(self):
+        """
+        Yields all enabled uplinks policies in order of preference
+        :return:
+        """
+        n = 0
+        for p in self.uplink_policy:
+            if p.is_active:
+                yield p.method
+                n += 1
+        if not n:
+            yield DEFAULT_UPLINK_POLICY
