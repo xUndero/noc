@@ -38,7 +38,6 @@ class Profile(BaseProfile):
         "brv": "SVI",  # No comment
         "eth": "physical",  # No comment
         "wla": "physical",  # No comment
-
     }
 
     @classmethod
