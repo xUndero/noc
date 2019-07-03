@@ -11,18 +11,24 @@ from __future__ import absolute_import
 import operator
 import cachetools
 from threading import Lock
+
 # Third-party modules
 import six
 from mongoengine.document import Document, EmbeddedDocument
-from mongoengine.fields import (StringField, BooleanField, IntField,
-                                ListField, EmbeddedDocumentField,
-                                LongField)
+from mongoengine.fields import (
+    StringField,
+    BooleanField,
+    IntField,
+    ListField,
+    EmbeddedDocumentField,
+    LongField,
+)
+
 # NOC modules
-from noc.lib.nosql import ForeignKeyField
+from noc.lib.nosql import ForeignKeyField, PlainReferenceField
 from noc.main.models.style import Style
 from noc.core.model.decorator import on_delete_check, on_save
 from noc.core.bi.decorator import bi_sync
-from noc.lib.nosql import PlainReferenceField
 from noc.main.models.remotesystem import RemoteSystem
 
 id_lock = Lock()
@@ -47,7 +53,7 @@ class SegmentTopologySettings(EmbeddedDocument):
             ("fdp", "FDP"),
             ("bfd", "BFD"),
             ("mac", "MAC"),
-            ("nri", "NRI")
+            ("nri", "NRI"),
         ]
     )
     # Custom method name for *custom*
@@ -57,18 +63,13 @@ class SegmentTopologySettings(EmbeddedDocument):
 
 
 @bi_sync
-@on_delete_check(check=[
-    ("inv.NetworkSegment", "profile"),
-    ("inv.NetworkSegmentProfile", "autocreated_profile")
-])
+@on_delete_check(
+    check=[("inv.NetworkSegment", "profile"), ("inv.NetworkSegmentProfile", "autocreated_profile")]
+)
 @on_save
 @six.python_2_unicode_compatible
 class NetworkSegmentProfile(Document):
-    meta = {
-        "collection": "noc.networksegmentprofiles",
-        "strict": False,
-        "auto_create_index": False
-    }
+    meta = {"collection": "noc.networksegmentprofiles", "strict": False, "auto_create_index": False}
 
     name = StringField(unique=True)
     description = StringField(required=False)
@@ -86,11 +87,7 @@ class NetworkSegmentProfile(Document):
     enable_lost_redundancy = BooleanField(default=False)
     # Horizontal transit policy
     horizontal_transit_policy = StringField(
-        choices=[
-            ("E", "Always Enable"),
-            ("C", "Calculate"),
-            ("D", "Disable")
-        ], default="D"
+        choices=[("E", "Always Enable"), ("C", "Calculate"), ("D", "Disable")], default="D"
     )
     # Default profile for autocreated children segments
     # (i.e. during autosegmentation)
@@ -118,28 +115,30 @@ class NetworkSegmentProfile(Document):
         return self.name
 
     @classmethod
-    @cachetools.cachedmethod(operator.attrgetter("_id_cache"),
-                             lock=lambda _: id_lock)
+    @cachetools.cachedmethod(operator.attrgetter("_id_cache"), lock=lambda _: id_lock)
     def get_by_id(cls, id):
         return NetworkSegmentProfile.objects.filter(id=id).first()
 
     @classmethod
-    @cachetools.cachedmethod(operator.attrgetter("_bi_id_cache"),
-                             lock=lambda _: id_lock)
+    @cachetools.cachedmethod(operator.attrgetter("_bi_id_cache"), lock=lambda _: id_lock)
     def get_by_bi_id(cls, id):
         return NetworkSegmentProfile.objects.filter(bi_id=id).first()
 
     def on_save(self):
         if hasattr(self, "_changed_fields") and "discovery_interval" in self._changed_fields:
             from .networksegment import NetworkSegment
+
             for ns in NetworkSegment.objects.filter(profile=self.id):
                 ns.ensure_discovery_jobs()
 
     def get_topology_methods(self):
         ml = getattr(self, "_topology_methods", None)
         if not ml:
-            ml = [m.method for m in self.topology_methods
-                  if m.is_active and m not in ("custom", "handler")]
+            ml = [
+                m.method
+                for m in self.topology_methods
+                if m.is_active and m not in ("custom", "handler")
+            ]
             self._topology_methods = ml
         return ml
 

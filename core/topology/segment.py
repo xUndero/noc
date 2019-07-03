@@ -12,10 +12,12 @@ import operator
 import logging
 import itertools
 from collections import defaultdict
+
 # Third-party modules
 import networkx as nx
 import cachetools
 import six
+
 # NOC modules
 from noc.sa.models.managedobject import ManagedObject
 from noc.inv.models.interface import Interface
@@ -26,8 +28,7 @@ logger = logging.getLogger(__name__)
 
 
 class SegmentTopology(BaseTopology):
-    def __init__(self, segment, node_hints=None, link_hints=None,
-                 force_spring=False):
+    def __init__(self, segment, node_hints=None, link_hints=None, force_spring=False):
         self.segment = segment
         self.segment_siblings = self.segment.get_siblings()
         self._uplinks_cache = {}
@@ -56,6 +57,7 @@ class SegmentTopology(BaseTopology):
         """
         Load all managed objects from segment
         """
+
         def get_bandwidth(if_list):
             """
             Calculate bandwidth for list of interfaces
@@ -83,44 +85,33 @@ class SegmentTopology(BaseTopology):
                 return 0
 
         # Get all links, belonging to segment
-        links = list(Link.objects.filter(
-            linked_segments__in=[s.id for s in self.segment_siblings])
-        )
+        links = list(Link.objects.filter(linked_segments__in=[s.id for s in self.segment_siblings]))
         # All linked interfaces from map
-        all_ifaces = list(
-            itertools.chain.from_iterable(
-                link.interface_ids for link in links
+        all_ifaces = list(itertools.chain.from_iterable(link.interface_ids for link in links))
+        # Bulk fetch all interfaces data
+        ifs = dict(
+            (i["_id"], i)
+            for i in Interface._get_collection().find(
+                {"_id": {"$in": all_ifaces}},
+                {
+                    "_id": 1,
+                    "managed_object": 1,
+                    "name": 1,
+                    "bandwidth": 1,
+                    "in_speed": 1,
+                    "out_speed": 1,
+                },
             )
         )
-        # Bulk fetch all interfaces data
-        ifs = dict((i["_id"], i) for i in Interface._get_collection().find(
-            {
-                "_id": {
-                    "$in": all_ifaces
-                }
-            },
-            {
-                "_id": 1,
-                "managed_object": 1,
-                "name": 1,
-                "bandwidth": 1,
-                "in_speed": 1,
-                "out_speed": 1
-            }
-        ))
         # Bulk fetch all managed objects
         segment_mos = set(self.segment.managed_objects.values_list("id", flat=True))
         all_mos = list(
-            set(i["managed_object"] for i in six.itervalues(ifs) if "managed_object" in i) |
-            segment_mos
+            set(i["managed_object"] for i in six.itervalues(ifs) if "managed_object" in i)
+            | segment_mos
         )
-        mos = dict(
-            (mo.id, mo)
-            for mo in ManagedObject.objects.filter(id__in=all_mos)
-        )
+        mos = dict((mo.id, mo) for mo in ManagedObject.objects.filter(id__in=all_mos))
         self.segment_objects = set(
-            mo_id for mo_id in all_mos
-            if mos[mo_id].segment.id == self.segment.id
+            mo_id for mo_id in all_mos if mos[mo_id].segment.id == self.segment.id
         )
         for mo in six.itervalues(mos):
             self.add_object(mo)
@@ -147,24 +138,20 @@ class SegmentTopology(BaseTopology):
                 # Create virtual links to cloud
                 pseudo_links = [(link, mo) for mo in mo_ifaces]
                 # Create virtual cloud interface
-                mo_ifaces[link] = [{
-                    "name": "cloud"
-                }]
+                mo_ifaces[link] = [{"name": "cloud"}]
                 is_pmp = True
             # Link all pairs
             for mo0, mo1 in pseudo_links:
                 mo0_id = str(mo0.id)
                 mo1_id = str(mo1.id)
                 # Create virtual ports for mo0
-                self.G.node[mo0_id]["ports"] += [{
-                    "id": pn,
-                    "ports": [i["name"] for i in mo_ifaces[mo0]]
-                }]
+                self.G.node[mo0_id]["ports"] += [
+                    {"id": pn, "ports": [i["name"] for i in mo_ifaces[mo0]]}
+                ]
                 # Create virtual ports for mo1
-                self.G.node[mo1_id]["ports"] += [{
-                    "id": pn + 1,
-                    "ports": [i["name"] for i in mo_ifaces[mo1]]
-                }]
+                self.G.node[mo1_id]["ports"] += [
+                    {"id": pn + 1, "ports": [i["name"] for i in mo_ifaces[mo1]]}
+                ]
                 # Calculate bandwidth
                 t_in_bw, t_out_bw = get_bandwidth(mo_ifaces[mo0])
                 d_in_bw, d_out_bw = get_bandwidth(mo_ifaces[mo1])
@@ -175,18 +162,22 @@ class SegmentTopology(BaseTopology):
                     link_id = "%s-%s-%s" % (link.id, pn, pn + 1)
                 else:
                     link_id = str(link.id)
-                self.add_link(mo0_id, mo1_id, {
-                    "id": link_id,
-                    "type": "link",
-                    "method": link.discovery_method,
-                    "ports": [pn, pn + 1],
-                    # Target to source
-                    "in_bw": in_bw,
-                    # Source to target
-                    "out_bw": out_bw,
-                    # Max bandwidth
-                    "bw": max(in_bw, out_bw)
-                })
+                self.add_link(
+                    mo0_id,
+                    mo1_id,
+                    {
+                        "id": link_id,
+                        "type": "link",
+                        "method": link.discovery_method,
+                        "ports": [pn, pn + 1],
+                        # Target to source
+                        "in_bw": in_bw,
+                        # Source to target
+                        "out_bw": out_bw,
+                        # Max bandwidth
+                        "bw": max(in_bw, out_bw),
+                    },
+                )
                 pn += 2
 
     def max_uplink_path_len(self):
@@ -208,6 +199,7 @@ class SegmentTopology(BaseTopology):
 
         :returns: ObjectUplinks items
         """
+
         def get_node_uplinks(node):
             role = self.G.node[node].get("role", "cloud")
             if role == "uplink":
@@ -235,7 +227,8 @@ class SegmentTopology(BaseTopology):
         # Get uplinks for cloud nodes
         cloud_uplinks = dict(
             (o, [int(u) for u in get_node_uplinks(o)])
-            for o in self.G.node if self.G.node[o]["type"] == "cloud"
+            for o in self.G.node
+            if self.G.node[o]["type"] == "cloud"
         )
         # All objects including neighbors
         all_objects = set(o for o in self.G.node if self.G.node[o]["type"] == "managedobject")
@@ -273,9 +266,7 @@ class SegmentTopology(BaseTopology):
                 neighbors.remove(mo)
             # Recalculated result
             yield ObjectUplinks(
-                object_id=mo,
-                uplinks=obj_uplinks[mo],
-                rca_neighbors=list(sorted(neighbors))
+                object_id=mo, uplinks=obj_uplinks[mo], rca_neighbors=list(sorted(neighbors))
             )
 
 
@@ -289,6 +280,4 @@ def update_uplinks(segment_id):
         return
 
     st = SegmentTopology(segment)
-    ObjectData.update_uplinks(
-        st.iter_uplinks()
-    )
+    ObjectData.update_uplinks(st.iter_uplinks())
