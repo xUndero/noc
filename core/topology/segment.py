@@ -108,7 +108,7 @@ class SegmentTopology(BaseTopology):
         """
         s = next(
             sorted(
-                (self.G.node[i].get("address"), i)
+                (IP.prefix(self.G.node[i].get("address")), i)
                 for i in self.G.node
                 if self.G.node[i].get("role") == "segment"
             )
@@ -123,7 +123,7 @@ class SegmentTopology(BaseTopology):
         s = next(
             reversed(
                 sorted(
-                    (self.G.node[i].get("address"), i)
+                    (IP.prefix(self.G.node[i].get("address")), i)
                     for i in self.G.node
                     if self.G.node[i].get("role") == "segment"
                 )
