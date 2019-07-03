@@ -148,6 +148,7 @@ caniusepython3:
   tags:
     - docker
   allow_failure: true
+  when: manual
 
 futurize:
   stage: lint
