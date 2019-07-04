@@ -18,7 +18,9 @@ class Script(BaseScript):
 
     def execute(self):
 
-        res = self.http.get("/cgi-bin/admin/param.cgi?action=list", json=False, cached=True, use_basic=True)
+        res = self.http.get(
+            "/cgi-bin/admin/param.cgi?action=list", json=False, cached=True, use_basic=True
+        )
         r = {}
         for x in res.splitlines():
             if not x:
@@ -28,11 +30,10 @@ class Script(BaseScript):
             except ValueError:
                 continue
             r[k] = v
-
         interfaces = []
         ifname = "eth0"
         status = "Up"
-#        enabled_afi = ["IPv4"]
+        # enabled_afi = ["IPv4"]
         mac = r["root.Network.eth0.MACAddress"]
         ip = r["root.Network.eth0.IPAddress"]
         mask = r["root.Network.eth0.SubnetMask"]
@@ -43,13 +44,15 @@ class Script(BaseScript):
             "type": "physical",
             "admin_status": status == "Up",
             "oper_status": status == "Up",
-            "subinterfaces": [{
-                "name": ifname,
-                "admin_status": status == "Up",
-                "oper_status": status == "Up",
-                "ipv4_addresses": [ip_addr],
-                "mac": mac
-            }]
+            "subinterfaces": [
+                {
+                    "name": ifname,
+                    "admin_status": status == "Up",
+                    "oper_status": status == "Up",
+                    "ipv4_addresses": [ip_addr],
+                    "mac": mac,
+                }
+            ],
         }
         interfaces += [iface]
         return [{"interfaces": interfaces}]
