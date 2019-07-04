@@ -22,7 +22,10 @@ class Script(BaseScript):
         for x in res.splitlines():
             if not x:
                 continue
-            k, v = x.split("=")
+            try:
+                k, v = x.split("=")
+            except ValueError:
+                continue
             r[k] = v
 
         ver = {
