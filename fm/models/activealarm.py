@@ -743,7 +743,7 @@ class ActiveAlarm(Document):
         self.root = root_alarm.id
         try:
             bulk = self._get_path_summary_bulk()
-        except ValueError as e:
+        except ValueError:
             return  # Loop detected
         bulk += [UpdateOne({"_id": self.id}, {"$set": {"root": root_alarm.id}})]
         self.log_message("Alarm %s has been marked as root cause" % root_alarm.id, bulk=bulk)
