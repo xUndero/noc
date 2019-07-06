@@ -16,6 +16,7 @@ def check_pg():
 
     try:
         c = connection.cursor()
+        print c
     except psycopg2.OperationalError as why:
         sys.stderr.write("ERROR: %s\n" % why)
         sys.exit(1)
