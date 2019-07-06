@@ -7,6 +7,7 @@
 # ---------------------------------------------------------------------
 
 # Python modules
+from __future__ import print_function
 import sys
 
 
@@ -16,7 +17,7 @@ def check_pg():
 
     try:
         c = connection.cursor()
-        print c
+        print(c)
     except psycopg2.OperationalError as why:
         sys.stderr.write("ERROR: %s\n" % why)
         sys.exit(1)
