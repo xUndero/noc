@@ -58,7 +58,7 @@ class Migration(BaseMigration):
         # Save data
         self.db.execute("DELETE FROM vc_vcdomainprovisioningconfig")
         for vc_domain_id, c in six.iteritems(pc):
-            for selector_id, v in six.iteritems(x):
+            for selector_id, v in six.iteritems(c):
                 self.db.execute(
                     """
                     INSERT INTO vc_vcdomainprovisioningconfig
