@@ -17,7 +17,7 @@ from mongoengine.fields import StringField, DateTimeField, ListField, IntField, 
 
 # NOC modules
 from noc.config import config
-from core.mongo.fields import PlainReferenceListField
+from noc.core.mongo.fields import PlainReferenceListField
 from noc.core.model.decorator import on_delete, on_save
 from noc.core.datastream.decorator import datastream
 

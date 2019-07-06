@@ -14,7 +14,7 @@ from mongoengine.document import Document
 from mongoengine.fields import StringField, ListField, BooleanField
 
 # NOC modules
-from core.mongo.fields import ForeignKeyField
+from noc.core.mongo.fields import ForeignKeyField
 from noc.aaa.models.user import User
 
 logger = logging.getLogger(__name__)

@@ -16,7 +16,7 @@ from mongoengine.document import Document
 from mongoengine.fields import StringField, IntField, DateTimeField
 
 # NOC modules
-from core.mongo.fields import ForeignKeyField, PlainReferenceField
+from noc.core.mongo.fields import ForeignKeyField, PlainReferenceField
 from .interface import Interface
 from noc.sa.models.managedobject import ManagedObject
 from noc.vc.models.vcdomain import VCDomain

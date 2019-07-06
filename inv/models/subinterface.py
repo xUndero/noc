@@ -23,7 +23,7 @@ from noc.core.datastream.decorator import datastream
 from .forwardinginstance import ForwardingInstance
 from .interface import Interface
 from .interfaceprofile import InterfaceProfile
-from core.mongo.fields import PlainReferenceField, ForeignKeyField
+from noc.core.mongo.fields import PlainReferenceField, ForeignKeyField
 
 
 SUBINTERFACE_AFI = (
