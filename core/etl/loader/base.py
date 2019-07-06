@@ -579,7 +579,7 @@ class BaseLoader(object):
 
     def update_document_clean_map(self):
         from mongoengine.fields import BooleanField, ReferenceField
-        from noc.lib.nosql import PlainReferenceField, ForeignKeyField
+        from noc.core.mongo.fields import PlainReferenceField, ForeignKeyField
 
         for fn, ft in six.iteritems(self.model._fields):
             if fn not in self.clean_map:
