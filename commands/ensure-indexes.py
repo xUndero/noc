@@ -8,6 +8,7 @@
 
 # Python modules
 from __future__ import print_function
+
 # NOC modules
 from noc.core.management.base import BaseCommand
 from noc.models import get_model, iter_model_id, is_document
@@ -19,7 +20,7 @@ from noc.config import config
 
 class Command(BaseCommand):
     def handle(self, host=None, port=None, *args, **options):
-        from noc.lib.nosql import get_db
+        from noc.core.mongo.connection import get_db
 
         db = get_db()
         collections = set(db.list_collection_names())
