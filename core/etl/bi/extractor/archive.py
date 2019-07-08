@@ -111,7 +111,7 @@ class ArchivingExtractor(BaseExtractor):
             try:
                 r = coll.insert_many(data[collection_name])
             except BulkWriteError as e:
-                print (e.details)
+                print(e.details)
                 return None
             return r
 
