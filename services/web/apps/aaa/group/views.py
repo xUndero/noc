@@ -86,7 +86,6 @@ class GroupsApplication(ExtModelApplication):
         return r
 
     def update_m2m(self, o, name, values):
-        print("Update m2m", values)
         if values is None:
             return  # Do not touch
         if name == "permissions":

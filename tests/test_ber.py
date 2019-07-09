@@ -48,7 +48,7 @@ def test_decode_real(raw, value):
 @pytest.mark.parametrize("raw, value", [("B", float("nan")), ("C", float("-0"))])
 def test_decode_real_error(raw, value):
     decoder = BERDecoder()
-    with pytest.raises(StandardError):
+    with pytest.raises(Exception):
         assert decoder.parse_real(raw) == value
 
 
