@@ -8,24 +8,28 @@
 
 # Third-party modules
 import pytest
+
 # NOC modules
 from noc.main.models.language import Language
 
 
-@pytest.mark.parametrize("name,rec_name,native_name", [
-    ("English", u"English", u"English"),
-    ("Russian", u"Russian", u"Русский")
-])
+@pytest.mark.parametrize(
+    "name,rec_name,native_name",
+    [("English", "English", "English"), ("Russian", "Russian", "Русский")],
+)
 def test_default_language(name, rec_name, native_name):
     lang = Language.objects.get(name=name)
     assert lang.name == rec_name
     assert lang.native_name == native_name
 
 
-@pytest.mark.parametrize("data", [
-    {"name": "Tengwar", "native_name": "Quenya", "is_active": False},
-    {"name": "Klingon", "native_name": "Klingon", "is_active": True}
-])
+@pytest.mark.parametrize(
+    "data",
+    [
+        {"name": "Tengwar", "native_name": "Quenya", "is_active": False},
+        {"name": "Klingon", "native_name": "Klingon", "is_active": True},
+    ],
+)
 def test_insert(data):
     lang = Language(**data)
     lang.save()
