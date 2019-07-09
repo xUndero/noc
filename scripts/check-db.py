@@ -16,8 +16,7 @@ def check_pg():
     from django.db import connection
 
     try:
-        c = connection.cursor()
-        print(c)
+        connection.cursor()
     except psycopg2.OperationalError as why:
         sys.stderr.write("ERROR: %s\n" % why)
         sys.exit(1)

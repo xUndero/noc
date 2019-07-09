@@ -10,7 +10,7 @@
 from collections import defaultdict
 import zlib
 
-# Django modules
+# Third-party modules
 from django.http import HttpResponse
 
 # Third-party modules
