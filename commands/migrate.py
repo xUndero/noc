@@ -16,6 +16,7 @@ class Command(BaseCommand):
     """
     Perform database migrations
     """
+
     help = "migrate database"
 
     def handle(self, *args, **options):
