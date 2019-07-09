@@ -15,7 +15,7 @@ from noc.main.models.language import Language
 
 @pytest.mark.parametrize(
     "name,rec_name,native_name",
-    [("English", "English", "English"), ("Russian", "Russian", "Русский")],
+    [("English", "English", u"English"), ("Russian", "Russian", u"Русский")],
 )
 def test_default_language(name, rec_name, native_name):
     lang = Language.objects.get(name=name)
