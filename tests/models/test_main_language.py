@@ -6,6 +6,9 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
+# Python modules
+from __future__ import unicode_literals
+
 # Third-party modules
 import pytest
 
@@ -15,7 +18,7 @@ from noc.main.models.language import Language
 
 @pytest.mark.parametrize(
     "name,rec_name,native_name",
-    [("English", "English", u"English"), ("Russian", "Russian", u"Русский")],
+    [("English", "English", "English"), ("Russian", "Russian", "Русский")],
 )
 def test_default_language(name, rec_name, native_name):
     lang = Language.objects.get(name=name)
