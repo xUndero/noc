@@ -102,7 +102,13 @@ class ReportLatestChangesApplication(SimpleReport):
                 ]
         return self.from_dataset(
             title="%s: %s in %d days" % (self.title, repo, days),
-            columns=["ID", "Name", "Address", "Profile", TableColumn(_("Last Changed"), format="datetime")],
+            columns=[
+                "ID",
+                "Name",
+                "Address",
+                "Profile",
+                TableColumn(_("Last Changed"), format="datetime"),
+            ],
             data=result,
             enumerate=True,
         )
