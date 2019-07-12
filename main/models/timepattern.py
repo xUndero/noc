@@ -20,10 +20,12 @@ from django.db import models
 from noc.core.model.base import NOCModel
 from noc.lib.timepattern import TimePattern as TP
 from noc.core.model.decorator import on_delete_check
+from noc.core.datastream.decorator import datastream
 
 id_lock = Lock()
 
 
+@datastream
 @on_delete_check(
     check=[
         # ("fm.EscalationItem", "administrative_domain")
@@ -88,6 +90,14 @@ class TimePattern(NOCModel):
         """
         return self.time_pattern.match(d)
 
+    def iter_changed_datastream(self, changed_fields=None):
+        from noc.sa.models.managedobject import ManagedObject
+
+        for mo in ManagedObject.objects.filter(time_pattern=self):
+            for c in mo.iter_changed_datastream(
+                changed_fields={"time_pattern_term"}
+            ):
+                yield c
 
 # Avoid circular references
 # No delete, fixed 'TimePattern' object has no attribute 'timepatternterm_set'

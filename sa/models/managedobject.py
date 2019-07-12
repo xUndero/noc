@@ -531,7 +531,9 @@ class ManagedObject(NOCModel):
     def iter_changed_datastream(self, changed_fields=None):
         if (
             config.datastream.enable_managedobject
-            and "managed_object_profile" not in changed_fields
+            and not changed_fields.intersection(
+                {"time_pattern_term", "managed_object_profile"}
+            )
         ):
             yield "managedobject", self.id
         if config.datastream.enable_cfgping and changed_fields.intersection(
@@ -544,6 +546,7 @@ class ManagedObject(NOCModel):
                 "ping_count",
                 "ping_timeout_ms",
                 "report_ping_attempts",
+                "time_pattern_term",
                 "event_processing_policy",
             }
         ):
