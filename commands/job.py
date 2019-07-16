@@ -20,10 +20,12 @@ import sys
 from pymongo import UpdateOne
 
 # NOC modules
+from noc.core.mongo.connection import connect
 from noc.core.management.base import BaseCommand
 from noc.core.scheduler.scheduler import Scheduler
 from noc.main.models.pool import Pool
 
+connect()
 
 SHARDING_SCHEDULER = {"discovery", "correlator", "escalator"}
 

@@ -14,9 +14,12 @@ import datetime
 
 # NOC modules
 from noc.config import config
+from noc.core.mongo.connection import connect
 from noc.core.management.base import BaseCommand
 from noc.core.clickhouse.connect import connection
 from noc.main.models.chpolicy import CHPolicy
+
+connect()
 
 PartInfo = namedtuple("PartInfo", ["name", "rows", "bytes", "min_date", "max_date"])
 PartitionInfo = namedtuple(

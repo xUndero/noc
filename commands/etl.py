@@ -14,8 +14,11 @@ import yaml
 import ujson
 
 # NOC modules
+from noc.core.mongo.connection import connect
 from noc.core.management.base import BaseCommand
 from noc.main.models.remotesystem import RemoteSystem
+
+connect()
 
 
 class Command(BaseCommand):

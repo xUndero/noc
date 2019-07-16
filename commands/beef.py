@@ -20,11 +20,14 @@ import ujson
 import yaml
 
 # NOC modules
+from noc.core.mongo.connection import connect
 from noc.core.management.base import BaseCommand
 from noc.core.script.beef import Beef
 from noc.sa.models.managedobjectselector import ManagedObjectSelector
 from noc.dev.models.spec import Spec
 from noc.main.models.extstorage import ExtStorage
+
+connect()
 
 
 class Command(BaseCommand):

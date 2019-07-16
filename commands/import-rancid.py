@@ -21,6 +21,7 @@ import pytz
 
 # NOC modules
 from noc.core.management.base import BaseCommand, CommandError
+from noc.core.mongo.connection import connect
 from noc.sa.models.administrativedomain import AdministrativeDomain
 from noc.main.models.pool import Pool
 from noc.sa.models.managedobjectprofile import ManagedObjectProfile
@@ -29,6 +30,8 @@ from noc.sa.models.managedobject import ManagedObject
 from noc.core.gridvcs.manager import GridVCS
 from noc.core.script.scheme import TELNET, SSH
 import noc.settings
+
+connect()
 
 
 class Command(BaseCommand):
