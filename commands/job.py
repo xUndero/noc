@@ -25,8 +25,6 @@ from noc.core.management.base import BaseCommand
 from noc.core.scheduler.scheduler import Scheduler
 from noc.main.models.pool import Pool
 
-connect()
-
 SHARDING_SCHEDULER = {"discovery", "correlator", "escalator"}
 
 
@@ -49,6 +47,7 @@ class Command(BaseCommand):
 
     @staticmethod
     def scheduler(s):
+        connect()
         scheduler, pool = "scheduler", "default"
         if "." in s:
             scheduler, pool = s.split(".")

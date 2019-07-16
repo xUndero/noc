@@ -27,8 +27,6 @@ from noc.sa.models.managedobjectselector import ManagedObjectSelector
 from noc.dev.models.spec import Spec
 from noc.main.models.extstorage import ExtStorage
 
-connect()
-
 
 class Command(BaseCommand):
     CLI_ENCODING = "quopri"
@@ -105,6 +103,7 @@ class Command(BaseCommand):
         build_test_case_parser.add_argument("--test-path", type=unicode, help="Path name")
 
     def handle(self, cmd, *args, **options):
+        connect()
         return getattr(self, "handle_%s" % cmd.replace("-", "_"))(*args, **options)
 
     def handle_collect(self, storage, path, spec, force, objects, *args, **options):

@@ -19,8 +19,6 @@ from noc.core.management.base import BaseCommand
 from noc.core.clickhouse.connect import connection
 from noc.main.models.chpolicy import CHPolicy
 
-connect()
-
 PartInfo = namedtuple("PartInfo", ["name", "rows", "bytes", "min_date", "max_date"])
 PartitionInfo = namedtuple(
     "PartitionInfo", ["table_name", "partition", "rows", "bytes", "min_date", "max_date"]
@@ -44,6 +42,7 @@ class Command(BaseCommand):
         getattr(self, "handle_%s" % cmd)(*args, **options)
 
     def handle_apply(self, host=None, port=None, dry_run=True, *args, **options):
+        connect()
         read_only = dry_run
         ch = connection(host, port, read_only=read_only)
         today = datetime.date.today()

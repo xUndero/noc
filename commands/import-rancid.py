@@ -31,8 +31,6 @@ from noc.core.gridvcs.manager import GridVCS
 from noc.core.script.scheme import TELNET, SSH
 import noc.settings
 
-connect()
-
 
 class Command(BaseCommand):
     """
@@ -233,6 +231,7 @@ class Command(BaseCommand):
         return r
 
     def handle(self, *args, **options):
+        connect()
         if options["verbosity"] >= 2:
             self.logger.setLevel(logging.DEBUG)
         else:

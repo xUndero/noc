@@ -18,8 +18,6 @@ from noc.core.mongo.connection import connect
 from noc.core.management.base import BaseCommand
 from noc.main.models.remotesystem import RemoteSystem
 
-connect()
-
 
 class Command(BaseCommand):
     CONF = "etc/etl.yml"
@@ -68,6 +66,7 @@ class Command(BaseCommand):
             return yaml.safe_load(f)
 
     def handle(self, cmd, *args, **options):
+        connect()
         return getattr(self, "handle_%s" % cmd)(*args, **options)
 
     def handle_load(self, *args, **options):

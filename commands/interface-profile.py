@@ -18,8 +18,6 @@ from noc.inv.models.interfaceclassificationrule import InterfaceClassificationRu
 from noc.sa.models.managedobjectselector import ManagedObjectSelector
 from noc.lib.text import split_alnum
 
-connect()
-
 
 class Command(BaseCommand):
     help = "Show Links"
@@ -38,6 +36,7 @@ class Command(BaseCommand):
         apply_parser.add_argument("mos", nargs=argparse.REMAINDER, help="List of object to showing")
 
     def handle(self, cmd, *args, **options):
+        connect()
         if "mos" in options:
             moo = options["mos"]
         else:
