@@ -574,7 +574,7 @@ class ManagedObjectProfile(NOCModel):
 
         for mo in ManagedObject.objects.filter(object_profile=self):
             for c in mo.iter_changed_datastream(
-                changed_fields={"managed_object_profile"}.union(changed_fields)
+                changed_fields={"object_profile__%s" % f for f in changed_fields}
             ):
                 yield c
 

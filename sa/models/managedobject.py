@@ -529,39 +529,56 @@ class ManagedObject(NOCModel):
             return None
 
     def iter_changed_datastream(self, changed_fields=None):
-        if (
-            config.datastream.enable_managedobject
-            and not changed_fields.intersection(
-                {"time_pattern_term", "managed_object_profile"}
-            )
-        ):
+        if config.datastream.enable_managedobject:
             yield "managedobject", self.id
         if config.datastream.enable_cfgping and changed_fields.intersection(
             {
-                "report_ping_rtt",
-                "enable_ping",
-                "ping_interval",
-                "ping_policy",
-                "ping_size",
-                "ping_count",
-                "ping_timeout_ms",
-                "report_ping_attempts",
-                "time_pattern_term",
+                "name",
+                "bi_id",
+                "is_managed",
+                "pool",
+                "address",
+                "time_pattern",
                 "event_processing_policy",
+                "object_profile__enable_ping",
+                "object_profile__ping_interval",
+                "object_profile__ping_policy",
+                "object_profile__ping_size",
+                "object_profile__ping_count",
+                "object_profile__ping_timeout_ms",
+                "object_profile__report_ping_rtt",
+                "object_profile__report_ping_attempts",
+                "object_profile__event_processing_policy",
             }
         ):
             yield "cfgping", self.id
         if config.datastream.enable_cfgsyslog and changed_fields.intersection(
             {
+                "name",
+                "bi_id",
+                "is_managed",
+                "pool",
+                "address",
                 "event_processing_policy",
-                "syslog_archive_policy",
-                "syslog_source_type",
-                "syslog_source_ip",
+                "object_profile__event_processing_policy",
+                "object_profile__syslog_archive_policy",
+                "object_profile__syslog_source_type",
+                "object_profile__syslog_source_ip",
             }
         ):
             yield "cfgsyslog", self.id
         if config.datastream.enable_cfgtrap and changed_fields.intersection(
-            {"event_processing_policy", "trap_source_type", "trap_source_ip"}
+            {
+                "name",
+                "bi_id",
+                "is_managed",
+                "pool",
+                "address",
+                "event_processing_policy",
+                "object_profile__event_processing_policy",
+                "object_profile__trap_source_type",
+                "object_profile__trap_source_ip",
+            }
         ):
             yield "cfgtrap", self.id
 
