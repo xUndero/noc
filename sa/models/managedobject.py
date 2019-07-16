@@ -540,15 +540,6 @@ class ManagedObject(NOCModel):
                 "address",
                 "time_pattern",
                 "event_processing_policy",
-                "object_profile__enable_ping",
-                "object_profile__ping_interval",
-                "object_profile__ping_policy",
-                "object_profile__ping_size",
-                "object_profile__ping_count",
-                "object_profile__ping_timeout_ms",
-                "object_profile__report_ping_rtt",
-                "object_profile__report_ping_attempts",
-                "object_profile__event_processing_policy",
             }
         ):
             yield "cfgping", self.id
@@ -560,10 +551,9 @@ class ManagedObject(NOCModel):
                 "pool",
                 "address",
                 "event_processing_policy",
-                "object_profile__event_processing_policy",
-                "object_profile__syslog_archive_policy",
-                "object_profile__syslog_source_type",
-                "object_profile__syslog_source_ip",
+                "syslog_archive_policy",
+                "syslog_source_type",
+                "syslog_source_ip",
             }
         ):
             yield "cfgsyslog", self.id
@@ -575,9 +565,8 @@ class ManagedObject(NOCModel):
                 "pool",
                 "address",
                 "event_processing_policy",
-                "object_profile__event_processing_policy",
-                "object_profile__trap_source_type",
-                "object_profile__trap_source_ip",
+                "trap_source_type",
+                "trap_source_ip",
             }
         ):
             yield "cfgtrap", self.id
