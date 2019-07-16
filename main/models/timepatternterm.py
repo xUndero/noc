@@ -16,7 +16,7 @@ from django.db import models
 # NOC modules
 from noc.core.model.base import NOCModel
 from noc.lib.timepattern import TimePattern as TP
-from noc.core.model.decorator import on_init, on_delete_check
+from noc.core.model.decorator import on_init
 from noc.core.datastream.decorator import datastream
 from .timepattern import TimePattern
 
@@ -62,7 +62,5 @@ class TimePatternTerm(NOCModel):
         from noc.sa.models.managedobject import ManagedObject
 
         for mo in ManagedObject.objects.filter(time_pattern=self.time_pattern):
-            for c in mo.iter_changed_datastream(
-                changed_fields=changed_fields
-            ):
+            for c in mo.iter_changed_datastream(changed_fields=changed_fields):
                 yield c

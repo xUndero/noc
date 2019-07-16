@@ -88,6 +88,7 @@ class TimePattern(NOCModel):
         """
         return self.time_pattern.match(d)
 
+
 # Avoid circular references
 # No delete, fixed 'TimePattern' object has no attribute 'timepatternterm_set'
 from .timepatternterm import TimePatternTerm  # noqa
