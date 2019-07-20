@@ -6,8 +6,10 @@
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
+# Python modules
 import re
 import six
+import time
 
 # NOC modules
 from noc.core.script.base import BaseScript
@@ -112,7 +114,12 @@ class Script(BaseScript):
         for ont_id in r:
             # if r[ont_id]["status"] != "active":
             #     continue
-            v = self.cli("display ont info %s %s %s %s" % tuple(ont_id.split("/")))
+            try:
+                v = self.cli("display ont info %s %s %s %s" % tuple(ont_id.split("/")))
+            except self.CLIOperationError:
+                self.logger.info("Configuration saving, skip command")
+                time.sleep(10)
+                continue
             parts = self.splitter.split(v)
             parse_result = parse_kv(self.detail_map, parts[1])
             try:

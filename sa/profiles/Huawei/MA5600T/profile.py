@@ -41,7 +41,8 @@ class Profile(BaseProfile):
     pattern_unprivileged_prompt = r"^(?P<hostname>(?!>)\S+?)>"
     pattern_prompt = r"^(?P<hostname>(?!>)\S+?)(?:-\d+)?(?:\(config\S*[^\)]*\))?#"
     pattern_syntax_error = r"(% Unknown command|  Incorrect command:)"
-    pattern_operation_error = "Configuration console time out, please retry to log on"
+    pattern_operation_error = r"(Configuration console time out, please retry to log on|" \
+                              r"It will take several minutes to save configuration file, please wait)"
     # Found on MA5616, V800R015C10
     send_on_syntax_error = BaseProfile.send_backspaces
     command_more = " "
