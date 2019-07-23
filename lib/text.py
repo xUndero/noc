@@ -27,6 +27,7 @@ def parse_table(
     footer=None,
     n_row_delim="",
     expand_tabs=True,
+    strip_line=False,
 ):
     """
     Parse string containing table an return a list of table rows.
@@ -56,12 +57,15 @@ def parse_table(
     :type n_row_delim: string
     :param expand_tabs: Apply expandtabs() to each line
     :type expand_tabs: bool
+    :param strip_line: Strip line (when
     """
     r = []
     columns = []
     if footer is not None:
         rx_footer = re.compile(footer)
     for line in s.splitlines():
+        if strip_line:
+            line = line.strip()
         if expand_tabs:
             # Replace tabs with spaces with step 8
             line = line.expandtabs()
