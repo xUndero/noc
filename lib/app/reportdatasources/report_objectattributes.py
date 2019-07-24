@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------
 # ReportObjectAttrubuteResolver datasource
 # ----------------------------------------------------------------------
@@ -27,7 +26,7 @@ class ReportObjectAttributes(BaseReportColumn):
         :return: Dict tuple MO attributes mo_id -> (attrs_list)
         :rtype: dict
         """
-        attr_list = ["Serial Number", "HW version", "Boot PROM", "Patch Version", ]
+        attr_list = ["Serial Number", "HW version", "Boot PROM", "Patch Version"]
         cursor = connection.cursor()
 
         base_select = "select %s "
