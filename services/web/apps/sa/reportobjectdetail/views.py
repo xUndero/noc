@@ -187,7 +187,9 @@ class ReportObjectDetailApplication(ExtApplication):
             "object_profile",
             "object_vendor",
             "object_platform",
+            "object_attr_hwversion",
             "object_version",
+            "object_attr_bootprom",
             "object_serial",
             "object_attr_patch",
             "auth_profile",
@@ -215,7 +217,9 @@ class ReportObjectDetailApplication(ExtApplication):
             "OBJECT_PROFILE",
             "OBJECT_VENDOR",
             "OBJECT_PLATFORM",
+            "OBJECT_HWVERSION",
             "OBJECT_VERSION",
+            "OBJECT_BOOTPROM",
             "OBJECT_SERIAL",
             "OBJECT_ATTR_PATCH",
             "AUTH_PROFILE",
@@ -244,7 +248,6 @@ class ReportObjectDetailApplication(ExtApplication):
                     continue
         else:
             cmap = list(range(len(cols)))
-
         r = [translate_row(header_row, cmap)]
         mos = self.get_report_object(
             request.user, is_managed, administrative_domain, selector, pool, segment, ids
@@ -351,11 +354,11 @@ class ReportObjectDetailApplication(ExtApplication):
             if container_lookup:
                 mo_continer = next(container_lookup)
             else:
-                mo_continer = ('',)
+                mo_continer = ("",)
             if roa:
-                serial, hw_ver, patch = next(roa)[0]  # noqa
+                serial, hw_ver, boot_prom, patch = next(roa)[0]  # noqa
             else:
-                serial, hw_ver, patch = "", "", ""  # noqa
+                serial, hw_ver, boot_prom, patch = "", "", "", ""  # noqa
             r += [
                 translate_row(
                     row(
@@ -369,7 +372,9 @@ class ReportObjectDetailApplication(ExtApplication):
                             o_profile,
                             Vendor.get_by_id(vendor) if vendor else "",
                             Platform.get_by_id(platform) if platform else "",
+                            hw_ver,
                             Firmware.get_by_id(version) if version else "",
+                            boot_prom,
                             # Serial
                             mo_serials[0].get("serial", "") or serial,
                             patch or "",
