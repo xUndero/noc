@@ -26,10 +26,10 @@ class Profile(BaseProfile):
     INTERFACE_TYPES = {
         "oo": "management",
         "fa": "physical",  # FastEthernet
-        "gi": "physical",  # GigabitEthernet
-        "te": "physical",  # GigabitEthernet
+        "gi": "physical",  # gigabitethernet
+        "te": "physical",  # gigabitethernet
         "Lo": "loopback",  # Loopback
-        "po": "aggregated",  # Port-channel/Portgroup
+        "Po": "aggregated",  # Port-channel/Portgroup
         "vl": "SVI",  # vlan
         "Vl": "SVI",  # Vlan
     }
