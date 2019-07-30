@@ -27,7 +27,7 @@ class ReportDiscoveryCapsApplication(SimpleReport):
             pool = forms.ChoiceField(
                 label=_("Managed Objects Pool"),
                 required=True,
-                choices=list(Pool.objects.order_by("name").scalar("id", "name")),
+                choices=list(Pool.objects.order_by("name").scalar("id", "name")) + [(None, "-" * 9)],
             )
             obj_profile = forms.ModelChoiceField(
                 label=_("Managed Objects Profile"),

@@ -38,7 +38,7 @@ class ReportFilterApplication(SimpleReport):
                 label=_("Managed Objects Pool"),
                 required=False,
                 help_text="Pool for choice",
-                choices=list(Pool.objects.order_by("name").scalar("id", "name")),
+                choices=list(Pool.objects.order_by("name").scalar("id", "name")) + [(None, "-" * 9)],
             )
             selector = forms.ModelChoiceField(
                 label=_("Managed Objects Selector"),
