@@ -6,8 +6,6 @@
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
-from collections import namedtuple
-
 # NOC modules
 from noc.core.confdb.normalizer.base import BaseNormalizer, match, ANY, REST
 from noc.core.confdb.syntax import DEF, BOOL, CHOICES
@@ -695,7 +693,7 @@ class BDNormalizer(BaseNormalizer):
         yield self.make_image_wdr_mode(profile_name="default", mode=tokens[5])
 
     @match("root", "ImageSource", "I0", "Sensor", "Backlight", ANY)
-    def normalize_image_wdr(self, tokens):
+    def normalize_image_blc(self, tokens):
         yield self.make_image_blc_enable(profile_name="default", enabled=tokens[5] == "on")
 
     @match("root", "ImageSource", "I0", "Sensor", "Sharpness", ANY)
