@@ -57,7 +57,7 @@ def parse_table(
     :type n_row_delim: string
     :param expand_tabs: Apply expandtabs() to each line
     :type expand_tabs: bool
-    :param strip_rows: Strip rest rows in colomn, if allow_wrap set to True
+    :param strip_rows: Apply strip() to rest rows in column, if allow_wrap set to True
     :type strip_rows: bool
     """
     r = []
