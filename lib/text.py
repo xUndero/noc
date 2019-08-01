@@ -8,10 +8,10 @@
 
 # Python modules
 import re
-from itertools import izip_longest
 
 # Third-party modules
 import six
+from six.moves import zip_longest
 from numpy import array
 
 rx_header_start = re.compile(r"^\s*[-=]+[\s\+]+[-=]+")
@@ -534,7 +534,7 @@ def parse_table_header(v):
     head = []
     empty_header = None
     header = {}
-    for num, lines in enumerate(izip_longest(*v, fillvalue="-")):
+    for num, lines in enumerate(zip_longest(*v, fillvalue="-")):
         #
         if empty_header is None:
             empty_header = (" ",) * len(lines)
