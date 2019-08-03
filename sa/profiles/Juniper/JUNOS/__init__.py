@@ -39,7 +39,7 @@ class Profile(BaseProfile):
     config_normalizer = "JunOSNormalizer"
     confdb_defaults = [
         ("hints", "interfaces", "defaults", "admin-status", True),
-        ("hints", "protocols", "ntp", "mode", "client"),
+        ("hints", "protocols", "ntp", "mode", "server"),
         ("hints", "protocols", "ntp", "version", "3"),
     ]
     default_parser = "noc.cm.parsers.Juniper.JUNOS.base.BaseJUNOSParser"

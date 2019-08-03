@@ -31,7 +31,7 @@ class Profile(BaseProfile):
     config_tokenizer = "routeros"
     config_normalizer = "RouterOSNormalizer"
     confdb_defaults = [
-        ("hints", "protocols", "ntp", "mode", "client"),
+        ("hints", "protocols", "ntp", "mode", "server"),
         ("hints", "protocols", "ntp", "version", "3"),
     ]
 
