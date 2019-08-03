@@ -16,6 +16,4 @@ class Profile(BaseProfile):
     config_tokenizer = "indent"
     config_tokenizer_settings = {"line_comment": "#"}
     config_normalizer = "HikvisionNormalizer"
-    confdb_defaults = [
-        ("hints", "protocols", "ntp", "mode", "client")
-    ]
+    confdb_defaults = [("hints", "protocols", "ntp", "mode", "client")]
