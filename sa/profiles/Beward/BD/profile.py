@@ -20,3 +20,7 @@ class Profile(BaseProfile):
     config_tokenizer = "line"
     config_tokenizer_settings = {"line_comment": "#", "rewrite": [(re.compile(r"[\.=\[\]]"), " ")]}
     config_normalizer = "BDNormalizer"
+    confdb_defaults = [
+        ("hints", "protocols", "ntp", "mode", "client"),
+        ("hints", "protocols", "ntp", "version", "3"),
+    ]

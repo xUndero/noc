@@ -43,40 +43,6 @@ class BDNormalizer(BaseNormalizer):
 
     SYNTAX = [
         DEF(
-            "system",
-            [
-                DEF(
-                    "clock",
-                    [
-                        DEF(
-                            "source",
-                            [
-                                DEF(
-                                    CHOICES("ntp", "local"),
-                                    required=True,
-                                    default="local",
-                                    name="source",
-                                    gen="make_clock_source",
-                                )
-                            ],
-                        ),
-                        DEF(
-                            "ntp_servers",
-                            [
-                                DEF(
-                                    ANY,
-                                    required=False,
-                                    name="server",
-                                    gen="make_ntp_server",
-                                    multi=True,
-                                )
-                            ],
-                        ),
-                    ],
-                )
-            ],
-        ),
-        DEF(
             "image-sources",
             [
                 DEF(
@@ -678,7 +644,7 @@ class BDNormalizer(BaseNormalizer):
 
     @match("root", "Time", "TimeZone", ANY)
     def normalize_timezone(self, tokens):
-        yield self.make_tz_offset(tz_offset=tokens[3])
+        yield self.make_tz_offset(tz_name="", tz_offset=tokens[3])
 
     @match("root", "Time", "SynSource", "NTP")
     def normalize_timesource(self, tokens):
@@ -686,7 +652,7 @@ class BDNormalizer(BaseNormalizer):
 
     @match("root", "Time", "NTP", "Server", REST)
     def normalize_ntp_server(self, tokens):
-        yield self.make_ntp_server(server=".".join(tokens[4:]))
+        yield self.make_ntp_server_address(name="0", address=".".join(tokens[4:]))
 
     @match("root", "ImageSource", "I0", "Sensor", "Wdr", ANY)
     def normalize_image_wdr(self, tokens):
