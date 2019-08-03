@@ -16,40 +16,6 @@ class HikvisionNormalizer(BaseNormalizer):
 
     SYNTAX = [
         DEF(
-            "system",
-            [
-                DEF(
-                    "clock",
-                    [
-                        DEF(
-                            "source",
-                            [
-                                DEF(
-                                    CHOICES("ntp", "local"),
-                                    required=True,
-                                    default="local",
-                                    name="source",
-                                    gen="make_clock_source",
-                                )
-                            ],
-                        ),
-                        DEF(
-                            "ntp_servers",
-                            [
-                                DEF(
-                                    ANY,
-                                    required=False,
-                                    name="server",
-                                    gen="make_ntp_server",
-                                    multi=True,
-                                )
-                            ],
-                        ),
-                    ],
-                )
-            ],
-        ),
-        DEF(
             "image-sources",
             [
                 DEF(
@@ -647,7 +613,8 @@ class HikvisionNormalizer(BaseNormalizer):
 
     @match("Time", "timeZone", ANY)
     def normalize_timezone(self, tokens):
-        yield self.make_tz_offset(tz_offset=tokens[2])
+        name, offset = tokens[2].split("-")
+        yield self.make_tz_offset(tz_name=name, tz_offset=offset)
 
     @match("Time", "timeMode", "NTP")
     def normalize_timesource(self, tokens):
@@ -655,7 +622,7 @@ class HikvisionNormalizer(BaseNormalizer):
 
     @match("Time", "NTPServer", ANY, ANY)
     def normalize_ntp_server(self, tokens):
-        yield self.make_ntp_server(server=tokens[2])
+        yield self.make_ntp_server_address(name=tokens[2], address=tokens[3])
 
     @match("Users", "user", ANY, "userLevel", ANY)
     def normalize_username_access_level(self, tokens):
