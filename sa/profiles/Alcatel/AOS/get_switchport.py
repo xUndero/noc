@@ -40,6 +40,7 @@ class Script(BaseScript):
             if i:
                 cli_ag = self.cli("show vlan port %s" % i)
                 tagget = []
+                untagged = None
                 for match_ag in self.rx_line_vlan_ag.finditer(cli_ag):
                     vlan = match_ag.group("vlan")
                     vlan_type = match_ag.group("vlan_type")
@@ -62,6 +63,8 @@ class Script(BaseScript):
                         "members": members,
                     }
                 ]
+                if untagged:
+                    r[-1]["untagged"] = untagged
         if members:
             for m in pc["members"]:
                 portchannel_members[m] = i
