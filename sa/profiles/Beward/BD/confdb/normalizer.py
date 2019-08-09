@@ -8,7 +8,6 @@
 
 # NOC modules
 from noc.core.confdb.normalizer.base import BaseNormalizer, match, ANY, REST
-from noc.core.confdb.syntax import DEF, BOOL, CHOICES
 
 RESOLUTION_MAPPER = {
     "2048x2048": "2048x2048",
@@ -29,8 +28,8 @@ RESOLUTION_MAPPER = {
 }
 
 AUDIO_CODEC_MAPPER = {
-    "ulaw": "g711A",
-    "alaw": "g711U",
+    "ulaw": "g711a",
+    "alaw": "g711u",
     "16000": "g726",
     "24000": "g726",
     "32000": "g726",
@@ -40,604 +39,6 @@ AUDIO_CODEC_MAPPER = {
 
 
 class BDNormalizer(BaseNormalizer):
-
-    SYNTAX = [
-        DEF(
-            "image-sources",
-            [
-                DEF(
-                    ANY,
-                    [
-                        DEF(
-                            "name",
-                            [
-                                DEF(
-                                    BOOL,
-                                    required=False,
-                                    name="enabled",
-                                    gen="make_image_source_name",
-                                )
-                            ],
-                        )
-                    ],
-                    multi=True,
-                    name="video_source",
-                    gen="make_video_source",
-                )
-                # DEF("resolution", [
-                #     DEF(ANY, required=False, name="resolution", gen="make_video_source_resolution"),
-                # Move to video_source
-                #     ]),
-            ],
-        ),
-        DEF(
-            "audio-sources",
-            [
-                DEF(
-                    ANY,
-                    [
-                        DEF(
-                            "name",
-                            [
-                                DEF(
-                                    BOOL,
-                                    required=False,
-                                    name="enabled",
-                                    gen="make_audio_source_name",
-                                )
-                            ],
-                        )
-                    ],
-                    multi=True,
-                    name="audio_source",
-                    gen="make_audio_source",
-                )
-            ],
-        ),
-        DEF(
-            "media-profiles",
-            [
-                DEF(
-                    ANY,
-                    [
-                        DEF(
-                            "image-source",
-                            [
-                                DEF(
-                                    "source-name",
-                                    [
-                                        DEF(
-                                            ANY,
-                                            required=False,
-                                            name="source_name",
-                                            gen="make_video_source_profile",
-                                        )
-                                    ],
-                                ),
-                                DEF(
-                                    "imaging",
-                                    [
-                                        DEF(
-                                            "brightness",
-                                            [
-                                                DEF(
-                                                    ANY,
-                                                    required=False,
-                                                    name="brightness",
-                                                    gen="make_image_brightness",
-                                                )
-                                            ],
-                                        ),
-                                        DEF(
-                                            "saturation",
-                                            [
-                                                DEF(
-                                                    ANY,
-                                                    required=False,
-                                                    name="saturation",
-                                                    gen="make_image_saturation",
-                                                )
-                                            ],
-                                        ),
-                                        DEF(
-                                            "contrast",
-                                            [
-                                                DEF(
-                                                    ANY,
-                                                    required=False,
-                                                    name="contrast",
-                                                    gen="make_image_contrast",
-                                                )
-                                            ],
-                                        ),
-                                        DEF(
-                                            "sharpness",
-                                            [
-                                                DEF(
-                                                    ANY,
-                                                    required=False,
-                                                    name="sharpness",
-                                                    gen="make_image_sharpness",
-                                                )
-                                            ],
-                                        ),
-                                        DEF(
-                                            "white-balance",
-                                            [
-                                                DEF(
-                                                    "cr-gain",
-                                                    [
-                                                        DEF(
-                                                            ANY,
-                                                            required=False,
-                                                            name="gain",
-                                                            gen="make_image_wb_crgain",
-                                                        )
-                                                    ],
-                                                ),
-                                                DEF(
-                                                    "gb-gain",
-                                                    [
-                                                        DEF(
-                                                            ANY,
-                                                            required=False,
-                                                            name="brightness",
-                                                            gen="make_image__wb_gbgain",
-                                                        )
-                                                    ],
-                                                ),
-                                                DEF(
-                                                    "mode",
-                                                    [
-                                                        DEF(
-                                                            CHOICES("auto", "on", "off"),
-                                                            required=False,
-                                                            name="mode",
-                                                            gen="make_image_wb_mode",
-                                                        )
-                                                    ],
-                                                ),
-                                            ],
-                                        ),
-                                        DEF(
-                                            "wide-dynamic-range",
-                                            [
-                                                DEF(
-                                                    "level",
-                                                    [
-                                                        DEF(
-                                                            ANY,
-                                                            required=False,
-                                                            name="level",
-                                                            gen="make_image_wdr_level",
-                                                        )
-                                                    ],
-                                                ),
-                                                DEF(
-                                                    "mode",
-                                                    [
-                                                        DEF(
-                                                            CHOICES("auto", "on", "off"),
-                                                            required=False,
-                                                            name="mode",
-                                                            gen="make_image_wdr_mode",
-                                                        )
-                                                    ],
-                                                ),
-                                            ],
-                                        ),
-                                        DEF(
-                                            "black-light-compensation",
-                                            [
-                                                DEF(
-                                                    "enabled",
-                                                    [
-                                                        DEF(
-                                                            BOOL,
-                                                            required=False,
-                                                            name="enabled",
-                                                            gen="make_image_blc_enable",
-                                                        )
-                                                    ],
-                                                ),
-                                                DEF(
-                                                    "mode",
-                                                    [
-                                                        DEF(
-                                                            ANY,
-                                                            required=False,
-                                                            name="mode",
-                                                            gen="make_image_blc_mode",
-                                                        )
-                                                    ],
-                                                ),
-                                            ],
-                                        ),
-                                    ],
-                                ),
-                            ],
-                        )
-                    ],
-                    required=True,
-                    multi=True,
-                    name="profile_name",
-                )
-            ],
-        ),
-        DEF(
-            "encoder_profiles",
-            [
-                DEF(
-                    ANY,
-                    [
-                        DEF(
-                            "source-name",
-                            [
-                                DEF(
-                                    ANY,
-                                    required=False,
-                                    name="source_name",
-                                    gen="make_encoder_source",
-                                )
-                            ],
-                        ),
-                        DEF(
-                            "enabled",
-                            [DEF(BOOL, required=False, name="enabled", gen="make_enable_stream")],
-                        ),
-                        DEF(
-                            "video-encoder",
-                            [
-                                DEF(
-                                    "encoding",
-                                    [
-                                        DEF(
-                                            CHOICES("MJPEG", "H264"),
-                                            required=False,
-                                            name="encoding",
-                                            gen="make_video_encoder_encoding",
-                                        )
-                                    ],
-                                ),
-                                DEF(
-                                    "resolution",
-                                    [
-                                        DEF(
-                                            "height",
-                                            [
-                                                DEF(
-                                                    ANY,
-                                                    required=False,
-                                                    name="height",
-                                                    gen="make_video_encoder_resolution_h",
-                                                )
-                                            ],
-                                        ),
-                                        DEF(
-                                            "width",
-                                            [
-                                                DEF(
-                                                    ANY,
-                                                    required=False,
-                                                    name="width",
-                                                    gen="make_video_encoder_resolution_w",
-                                                )
-                                            ],
-                                        ),
-                                    ],
-                                ),
-                                DEF(
-                                    "quality",
-                                    [
-                                        DEF(
-                                            ANY,
-                                            required=False,
-                                            name="quality",
-                                            gen="make_video_encoder_quality",
-                                        )
-                                    ],
-                                ),
-                                DEF(
-                                    "rate-control",
-                                    [
-                                        DEF(
-                                            "mode",
-                                            [
-                                                DEF(
-                                                    CHOICES("VBR", "CBR"),
-                                                    required=False,
-                                                    name="mode",
-                                                    gen="make_video_encoder_ratecontrol_mode",
-                                                )
-                                            ],
-                                        ),
-                                        DEF(
-                                            "framerate-limit",
-                                            [
-                                                DEF(
-                                                    ANY,
-                                                    required=False,
-                                                    name="frameratelimit",
-                                                    gen="make_video_encoder_frameratelimit",
-                                                )
-                                            ],
-                                        ),
-                                        DEF(
-                                            "bitrate-limit",
-                                            [
-                                                DEF(
-                                                    ANY,
-                                                    required=False,
-                                                    name="bitratelimit",
-                                                    gen="make_video_encoder_bitratelimit",
-                                                )
-                                            ],
-                                        ),
-                                    ],
-                                ),
-                                # @todo MJPEG profile
-                                DEF(
-                                    "h264",
-                                    [
-                                        DEF(
-                                            "gov-length",
-                                            [
-                                                DEF(
-                                                    ANY,
-                                                    required=False,
-                                                    name="gov_length",
-                                                    gen="make_video_encoder_h264_gov_length",
-                                                )
-                                            ],
-                                        ),
-                                        DEF(
-                                            "h264-profile",
-                                            [
-                                                DEF(
-                                                    ANY,
-                                                    required=False,
-                                                    name="h264_profile",
-                                                    gen="make_video_encoder_h264_profile",
-                                                )
-                                            ],
-                                        ),
-                                    ],
-                                ),
-                            ],
-                        ),
-                        DEF(
-                            "audio-encoder",
-                            [
-                                DEF(
-                                    "enabled",
-                                    [
-                                        DEF(
-                                            BOOL,
-                                            required=False,
-                                            name="enabled",
-                                            gen="make_enable_audio_stream",
-                                        )
-                                    ],
-                                ),
-                                DEF(
-                                    "source-name",
-                                    [
-                                        DEF(
-                                            ANY,
-                                            required=False,
-                                            name="source_name",
-                                            gen="make_audio_encoder_source",
-                                        )
-                                    ],
-                                ),
-                                DEF(
-                                    "encoding",
-                                    [
-                                        DEF(
-                                            ANY,
-                                            required=False,
-                                            name="encoding",
-                                            gen="make_audio_encoder_encoding",
-                                        )
-                                    ],
-                                ),
-                                DEF(
-                                    "bitrate-limit",
-                                    [
-                                        DEF(
-                                            ANY,
-                                            required=False,
-                                            name="bitratelimit",
-                                            gen="make_audio_encoder_bitratelimit",
-                                        )
-                                    ],
-                                ),
-                            ],
-                        ),
-                    ],
-                    required=True,
-                    multi=True,
-                    name="stream_id",
-                )
-            ],
-        ),
-        DEF(
-            "overlays",
-            [
-                DEF(
-                    "text",
-                    [
-                        DEF(
-                            ANY,
-                            [
-                                DEF(
-                                    "enabled",
-                                    [
-                                        DEF(
-                                            BOOL,
-                                            required=False,
-                                            name="enabled",
-                                            gen="make_enable_text_overlay",
-                                        )
-                                    ],
-                                ),
-                                DEF(
-                                    "position",
-                                    [
-                                        DEF(
-                                            "X",
-                                            [
-                                                DEF(
-                                                    ANY,
-                                                    required=False,
-                                                    name="x",
-                                                    gen="make_text_overlay_postion_x",
-                                                )
-                                            ],
-                                        ),
-                                        DEF(
-                                            "Y",
-                                            [
-                                                DEF(
-                                                    ANY,
-                                                    required=False,
-                                                    name="y",
-                                                    gen="make_text_overlay_postion_y",
-                                                )
-                                            ],
-                                        ),
-                                    ],
-                                ),
-                                DEF(
-                                    "text",
-                                    [
-                                        DEF(
-                                            ANY,
-                                            required=False,
-                                            name="text",
-                                            gen="make_text_overlay_text",
-                                        )
-                                    ],
-                                ),
-                            ],
-                            multi=True,
-                            required=False,
-                            name="index",
-                        )
-                    ],
-                ),
-                DEF(
-                    "datetime",
-                    [
-                        DEF(
-                            "enabled",
-                            [
-                                DEF(
-                                    BOOL,
-                                    required=False,
-                                    name="enabled",
-                                    gen="make_enable_datetime_overlay",
-                                )
-                            ],
-                        ),
-                        DEF(
-                            "position",
-                            [
-                                DEF(
-                                    "X",
-                                    [
-                                        DEF(
-                                            ANY,
-                                            required=False,
-                                            name="x",
-                                            gen="make_datetime_overlay_postion_x",
-                                        )
-                                    ],
-                                ),
-                                DEF(
-                                    "Y",
-                                    [
-                                        DEF(
-                                            ANY,
-                                            required=False,
-                                            name="y",
-                                            gen="make_datetime_overlay_postion_y",
-                                        )
-                                    ],
-                                ),
-                            ],
-                        ),
-                        DEF(
-                            "date_format",
-                            [
-                                DEF(
-                                    ANY,
-                                    required=False,
-                                    name="format",
-                                    gen="make_datetime_overlay_date_format",
-                                )
-                            ],
-                        ),
-                        DEF(
-                            "time_format",
-                            [
-                                DEF(
-                                    ANY,
-                                    required=False,
-                                    name="format",
-                                    gen="make_datetime_overlay_time_format",
-                                )
-                            ],
-                        ),
-                    ],
-                ),
-                DEF(
-                    "channel_name",
-                    [
-                        DEF(
-                            "enabled",
-                            [
-                                DEF(
-                                    BOOL,
-                                    required=False,
-                                    name="enabled",
-                                    gen="make_enable_channel_name_overlay",
-                                )
-                            ],
-                        ),
-                        DEF(
-                            "position",
-                            [
-                                DEF(
-                                    "X",
-                                    [
-                                        DEF(
-                                            ANY,
-                                            required=False,
-                                            name="x",
-                                            gen="make_channel_name_overlay_postion_x",
-                                        )
-                                    ],
-                                ),
-                                DEF(
-                                    "Y",
-                                    [
-                                        DEF(
-                                            ANY,
-                                            required=False,
-                                            name="y",
-                                            gen="make_channel_name_overlay_postion_y",
-                                        )
-                                    ],
-                                ),
-                            ],
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ]
-
     @match("root", "Network", "HostName", ANY)
     def normalize_hostname(self, tokens):
         yield self.make_hostname(tokens[3])
@@ -656,73 +57,105 @@ class BDNormalizer(BaseNormalizer):
 
     @match("root", "ImageSource", "I0", "Sensor", "Wdr", ANY)
     def normalize_image_wdr(self, tokens):
-        yield self.make_image_wdr_mode(profile_name="default", mode=tokens[5])
+        yield self.make_video_wide_dynamic_range_admin_status(
+            name="default", admin_status=tokens[5] != "off"
+        )
 
     @match("root", "ImageSource", "I0", "Sensor", "Backlight", ANY)
     def normalize_image_blc(self, tokens):
-        yield self.make_image_blc_enable(profile_name="default", enabled=tokens[5] == "on")
+        yield self.make_video_black_light_compensation_admin_status(
+            name="default", admin_status=tokens[5] == "on"
+        )
 
     @match("root", "ImageSource", "I0", "Sensor", "Sharpness", ANY)
     def normalize_image_sharpness(self, tokens):
-        yield self.make_image_sharpness(profile_name="default", sharpness=tokens[5])
+        yield self.make_video_sharpness(name="default", sharpness=tokens[5])
 
     @match("root", "ImageSource", "I0", "Sensor", "WhiteBalance", ANY)
     def normalize_image_wb(self, tokens):
-        yield self.make_image_wb_mode(profile_name="default", mode=tokens[5])
+        yield self.make_video_white_balance_admin_status(
+            name="default", admin_status=tokens[5] != "off"
+        )
+        if tokens[5] == "auto":
+            yield self.make_video_white_balance_auto(name="default")
 
     @match("root", "Image", "I0", "Appearance", "Resolution", ANY)
     def normalize_resolution(self, tokens):
         r = tokens[5].split(",")
         for index, s in enumerate(["mjpeg", "h264", "h264_2"]):
             height, width = RESOLUTION_MAPPER[r[index]].split("x")
-            yield self.make_enable_stream(stream_id=s, enabled=r[index] != "disable")
-            yield self.make_video_encoder_resolution_h(stream_id=s, height=height)
-            yield self.make_video_encoder_resolution_w(stream_id=s, width=width)
+            yield self.make_media_streams_video_admin_status(
+                name=s, admin_status=r[index] != "disable"
+            )
+            yield self.make_media_streams_video_resolution_height(name=s, height=height)
+            yield self.make_media_streams_video_resolution_width(name=s, width=width)
+            yield self.make_stream_rtsp_path(name=s, path="/%s" % s)
             if s == "mjpeg":
-                yield self.make_video_encoder_encoding(stream_id=s, encoding="MJPEG")
+                yield self.make_media_streams_video_codec_mpeg4(name=s)
             else:
-                yield self.make_video_encoder_encoding(stream_id=s, encoding="H264")
+                yield self.make_media_streams_video_codec_h264(name=s)
 
     @match("root", "Image", "I0", "RateControl", "H264Mode", ANY)
     def normalize_video_control_mode_h264(self, tokens):
-        yield self.make_video_encoder_ratecontrol_mode(stream_id="h264", mode=tokens[5].upper())
+        self.set_context("h264_use_vbr", tokens[5] == "vbr")
+        # yield self.make_video_encoder_ratecontrol_mode(name="h264", mode=tokens[5].upper())
+        yield
 
     @match("root", "Image", "I0", "RateControl", "H264_2Mode", ANY)
     def normalize_video_control_h264_2(self, tokens):
-        yield self.make_video_encoder_ratecontrol_mode(stream_id="h264_2", mode=tokens[5].upper())
+        self.set_context("h264_2_use_vbr", tokens[5] == "vbr")
+        yield
+        # yield self.make_video_encoder_ratecontrol_mode(name="h264_2", mode=tokens[5].upper())
 
     @match("root", "Image", "I0", "Appearance", "H264_2Bitrate", ANY)
     def normalize_bitrate_h264_2(self, tokens):
-        yield self.make_video_encoder_bitratelimit(stream_id="h264_2", bitratelimit=tokens[5])
+        if self.get_context("h264_2_use_vbr"):
+            yield self.make_media_streams_video_rate_control_vbr_max_bitrate(
+                name="h264_2", max_bitrate=tokens[5]
+            )
+        else:
+            yield self.make_media_streams_video_rate_control_cbr_bitrate(
+                name="h264_2", bitrate=tokens[5]
+            )
 
     @match("root", "Image", "I0", "Appearance", "H264Bitrate", ANY)
     def normalize_bitrate_h264(self, tokens):
-        yield self.make_video_encoder_bitratelimit(stream_id="h264", bitratelimit=tokens[5])
+        if self.get_context("h264_use_vbr"):
+            yield self.make_media_streams_video_rate_control_vbr_max_bitrate(
+                name="h264", max_bitrate=tokens[5]
+            )
+        else:
+            yield self.make_media_streams_video_rate_control_cbr_bitrate(
+                name="h264", bitrate=tokens[5]
+            )
 
     @match("root", "Image", "I0", "Appearance", "H264_2VideoKeyFrameInterval", ANY)
     def normalize_keyframe_h264_2(self, tokens):
-        yield self.make_video_encoder_h264_gov_length(stream_id="h264_2", gov_length=tokens[5])
+        yield self.make_media_streams_video_codec_h264_profile_gov_length(
+            name="h264_2", gov_length=tokens[5]
+        )
 
     @match("root", "Image", "I0", "Appearance", "H264VideoKeyFrameInterval", ANY)
     def normalize_keyframe_h264(self, tokens):
-        yield self.make_video_encoder_h264_gov_length(stream_id="h264", gov_length=tokens[5])
+        yield self.make_media_streams_video_codec_h264_profile_gov_length(
+            name="h264", gov_length=tokens[5]
+        )
 
     @match("root", "Audio", "DuplexMode", ANY)
     def normalize_stream_audio_enable(self, tokens):
-        yield self.make_enable_audio_stream(stream_id="h264", enabled=tokens[3] != "disable")
+        yield self.make_media_streams_audio_admin_status(
+            name="h264", admin_status=tokens[3] != "disable"
+        )
 
     @match("root", "AudioSource", ANY, "BitRate", ANY)
     def normalize_stream_audio_encoder(self, tokens):
-        yield self.make_audio_encoder_bitratelimit(stream_id="h264", bitratelimit=tokens[4])
-        yield self.make_audio_encoder_encoding(
-            stream_id="h264", encoding=AUDIO_CODEC_MAPPER[tokens[4]]
-        )
-        yield self.make_audio_encoder_source(stream_id="h264", source_name=tokens[2])
+        #  yield self.make_audio_encoder_bitratelimit(name="h264", bitratelimit=tokens[4])
+        yield self.make_media_streams_audio_codec(name="h264", codec=AUDIO_CODEC_MAPPER[tokens[4]])
 
     @match("root", "Image", "I0", "Text", "String", REST)
     def normalize_overlay_text_text(self, tokens):
-        yield self.make_enable_text_overlay(index="1", enabled=True)
-        yield self.make_text_overlay_text(index="1", text=" ".join(tokens[5:]))
+        yield self.make_media_streams_overlay_status(overlay_name="1", admin_status=True)
+        yield self.make_media_streams_overlay_text(overlay_name="1", text=" ".join(tokens[5:]))
 
     @match("user", ANY)
     def normalize_username(self, tokens):
