@@ -8,23 +8,37 @@
 
 # NOC modules
 from noc.core.confdb.normalizer.base import BaseNormalizer, match, ANY, REST
+from noc.core.video.resolution import (
+    RES_480i,
+    RES_576p,
+    RES_720p,
+    RES_1080p,
+    RES_QCIF,
+    RES_CIF,
+    RES_SIF,
+    RES_VGA,
+    RES_QVGA,
+    RES_SXGA,
+    RES_QUADVGA,
+)
 
-RESOLUTION_MAPPER = {
-    "2048x2048": "2048x2048",
-    "1080p": "1920x1080",
-    "sxga": "1280x1024",
-    "quadvga": "1280x960",
-    "720p": "1280x720",
-    ("d1", "ntsc"): "720x480",
-    ("d1", "pal"): "720x576",
-    "d1": "720x576",
-    "vga": "640x480",
-    "qvga": "320x240",
-    ("cif", "ntsc"): "252x240",
-    ("cif", "pal"): "352x288",
-    "cif": "352x288",
-    "qcif": "176x144",
-    "disable": "0x0",
+RESOLUTION_ALIASES = {
+    # "2048x2048": "2048x2048",
+    "2048x2048": None,
+    "1080p": RES_1080p,
+    "sxga": RES_SXGA,
+    "quadvga": RES_QUADVGA,
+    "720p": RES_720p,
+    ("d1", "ntsc"): RES_480i,
+    ("d1", "pal"): RES_576p,
+    "d1": RES_576p,
+    "vga": RES_VGA,
+    "qvga": RES_QVGA,
+    ("cif", "ntsc"): RES_SIF,
+    ("cif", "pal"): RES_CIF,
+    "cif": RES_CIF,
+    "qcif": RES_QCIF,
+    "disable": None,
 }
 
 AUDIO_CODEC_MAPPER = {
@@ -81,19 +95,29 @@ class BDNormalizer(BaseNormalizer):
 
     @match("root", "Image", "I0", "Appearance", "Resolution", ANY)
     def normalize_resolution(self, tokens):
-        r = tokens[5].split(",")
-        for index, s in enumerate(["mjpeg", "h264", "h264_2"]):
-            height, width = RESOLUTION_MAPPER[r[index]].split("x")
-            yield self.make_media_streams_video_admin_status(
-                name=s, admin_status=r[index] != "disable"
-            )
-            yield self.make_media_streams_video_resolution_height(name=s, height=height)
-            yield self.make_media_streams_video_resolution_width(name=s, width=width)
-            yield self.make_stream_rtsp_path(name=s, path="/%s" % s)
-            if s == "mjpeg":
-                yield self.make_media_streams_video_codec_mpeg4(name=s)
+        for index, resolution_name in enumerate(tokens[5].split(",")):
+            if not index:
+                # <resolution_mjpeg>,<resolution_h264> main, <resolution_h264_2> extra 1 ...
+                stream_name = "mjpeg"
+            elif index == 1:
+                stream_name = "h264"
             else:
-                yield self.make_media_streams_video_codec_h264(name=s)
+                stream_name = "h264_%d" % index
+            res = RESOLUTION_ALIASES.get(resolution_name)
+            if not res:
+                height, width = 0, 0
+            else:
+                height, width = res.width, res.width
+            yield self.make_media_streams_video_admin_status(
+                name=stream_name, admin_status=resolution_name != "disable"
+            )
+            yield self.make_media_streams_video_resolution_height(name=stream_name, height=height)
+            yield self.make_media_streams_video_resolution_width(name=stream_name, width=width)
+            yield self.make_stream_rtsp_path(name=stream_name, path="/%s" % stream_name)
+            if stream_name == "mjpeg":
+                yield self.make_media_streams_video_codec_mpeg4(name=stream_name)
+            else:
+                yield self.make_media_streams_video_codec_h264(name=stream_name)
 
     @match("root", "Image", "I0", "RateControl", "H264Mode", ANY)
     def normalize_video_control_mode_h264(self, tokens):
@@ -154,8 +178,10 @@ class BDNormalizer(BaseNormalizer):
 
     @match("root", "Image", "I0", "Text", "String", REST)
     def normalize_overlay_text_text(self, tokens):
-        yield self.make_media_streams_overlay_status(overlay_name="1", admin_status=True)
-        yield self.make_media_streams_overlay_text(overlay_name="1", text=" ".join(tokens[5:]))
+        yield self.make_media_streams_overlay_status(overlay_name="channel_name", admin_status=True)
+        yield self.make_media_streams_overlay_text(
+            overlay_name="channel_name", text=" ".join(tokens[5:])
+        )
 
     @match("user", ANY)
     def normalize_username(self, tokens):
