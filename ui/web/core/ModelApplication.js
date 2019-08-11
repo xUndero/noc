@@ -1895,7 +1895,11 @@ Ext.define("NOC.core.ModelApplication", {
     checkStoreLoad: function(operation) {
         if(operation.success === false) {
             var message = operation.getError() || __("Failed to load data");
+            if(Ext.isObject(message)) {
+                message = message.statusText;
+            }
             NOC.error(message);
+            return
         }
         if(operation.getResponse().status >= 300) {
             NOC.error(__("HTTP status : ") + operation.getResponse().status);
