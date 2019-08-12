@@ -287,14 +287,13 @@ Build docs:
   environment: docs
   image: registry.getnoc.com/infrastructure/docs:master
   before_script:
-    - NOC_SRC_PATH=..
+    - NOC_SRC_PATH=../../..
   script:
     - set -x
     - FLIST=$(git --no-pager diff --name-only $CI_COMMIT_SHA $(git merge-base origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME $CI_COMMIT_SHA) | egrep "^docs/" || true)
     - >
       if [ ! -z "$FLIST" ];
       then
-        ls $NOC_SRC_PATH
         wget -q -O- https://cdn.getnoc.com/noc/collections%40$(wget -q -O- https://cdn.getnoc.com/noc/collections.latest).tar.bz2 | tar xjf - collections/inv.platforms
         cd docs/
         python ./scripts/build-auto-include.py
@@ -318,7 +317,7 @@ Build Master Docs:
   environment: docs
   image: registry.getnoc.com/infrastructure/docs:master
   before_script:
-    - NOC_SRC_PATH=..
+    - NOC_SRC_PATH=../../..
   script:
     - set -x
     - wget -q -O- https://cdn.getnoc.com/noc/collections%40$(wget -q -O- https://cdn.getnoc.com/noc/collections.latest).tar.bz2 | tar xjf - collections/inv.platforms
