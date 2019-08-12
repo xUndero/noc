@@ -11,6 +11,7 @@ from mongoengine import Q
 # NOC modules
 from noc.lib.app.extapplication import ExtApplication, view
 from noc.sa.models.managedobject import ManagedObject
+from noc.sa.models.useraccess import UserAccess
 from noc.inv.models.interface import Interface
 from noc.inv.models.subinterface import SubInterface
 from noc.inv.models.interfaceprofile import InterfaceProfile
@@ -134,11 +135,13 @@ class InterfaceAppplication(ExtApplication):
                 "state__label": unicode(i.state if i.state else self.default_state),
                 "vc_domain": i.vc_domain.id if i.vc_domain else None,
                 "vc_domain__label": unicode(i.vc_domain) if i.vc_domain else None,
-                "row_class": self.get_style(i)
+                "row_class": self.get_style(i),
+                "mo": o.name,
+                "url": "#sa.managedobject/%s/interfaces" % o.id
         }
 
     @staticmethod
-    def prepare_l2_iface_data(self, i, o):
+    def prepare_l2_iface_data(i, o):
         """
         :param i:  interface object
         :param o: managed_object
@@ -148,11 +151,13 @@ class InterfaceAppplication(ExtApplication):
                 "name": i.name,
                 "description": i.description,
                 "untagged_vlan": i.untagged_vlan,
-                "tagged_vlans": i.tagged_vlans
+                "tagged_vlans": i.tagged_vlans,
+                "mo": o.name,
+                "url": "#sa.managedobject/%s/interfaces" % o.id
         }
 
     @staticmethod
-    def prepare_l3_iface_data(self, i, o):
+    def prepare_l3_iface_data(i, o):
         """
         :param i:  interface object
         :param o: managed_object
@@ -165,10 +170,12 @@ class InterfaceAppplication(ExtApplication):
                 "ipv6_addresses": i.ipv6_addresses,
                 "enabled_protocols": i.enabled_protocols,
                 "vlan": i.vlan_ids,
-                "vrf": i.forwarding_instance.name if i.forwarding_instance else ""
+                "vrf": i.forwarding_instance.name if i.forwarding_instance else "",
+                "mo": o.name,
+                "url": "#sa.managedobject/%s/interfaces" % o.id
         }
 
-    #api
+    # api
     @view(url="^(?P<managed_object>\d+)/$", method=["GET"], access="view", api=True)
     def api_get_interfaces(self, request, managed_object):
         """
@@ -331,28 +338,36 @@ class InterfaceAppplication(ExtApplication):
     def api_search_description(self, request, description):
         """
         GET interfaces by description
-        :param managed_object:
+        :param request:
+        :param description:
         :return:
         """
+        mos = ManagedObject.objects.all()
+        if not request.user.is_superuser:
+            mos = mos.filter(administrative_domain__in=UserAccess.get_domains(request.user))
         l1 = [] if len(description) < 2 else [
             self.prepare_l1_iface_data(i, i.managed_object) for i in Interface.objects.filter(
-                                                       description__icontains=description, type="physical")[:300]
+                                                       description__icontains=description, type="physical",
+                                                       managed_object__in=mos)[:300]
         ]
         # LAG
         lag = [] if len(description) < 2 else [
             self.prepare_lag_iface_data(i, i.managed_object) for i in Interface.objects.filter(
-                                                       description__icontains=description, type="aggregated")[:300]
+                                                       description__icontains=description, type="aggregated",
+                                                       managed_object__in=mos)[:300]
         ]
         # L2 interfaces
         l2 = [] if len(description) < 2 else [
             self.prepare_l2_iface_data(i, i.managed_object) for i in SubInterface.objects.filter(
-                                                        description__icontains=description, enabled_afi="BRIDGE")[:300]
+                                                        description__icontains=description, enabled_afi="BRIDGE",
+                                                        managed_object__in=mos)[:300]
         ]
         # L3 interfaces
         q = Q(enabled_afi="IPv4") | Q(enabled_afi="IPv6")
         l3 = [] if len(description) < 2 else [
             self.prepare_l3_iface_data(i, i.managed_object) for i in SubInterface.objects.filter(
-                                                        description__icontains=description).filter(q)[:300]
+                                                        description__icontains=description,
+                                                        managed_object__in=mos).filter(q)[:300]
         ]
         return {
             "l1": self.sorted_iname(l1),

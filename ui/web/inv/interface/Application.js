@@ -55,11 +55,16 @@ Ext.define("NOC.inv.interface.Application", {
         });
         me.searchDescriptionField = Ext.create("Ext.ux.form.SearchField", {
             fieldLabel: __("Description Search"),
+            tooltip: __("Put your Search Description end press ENTER<br/>" +
+                        "Returns only first 300 strings with match description."),
             labelWidth: 100,
             width: "500",
             explicitSubmit: true,
             scope: me,
-            handler: me.onSearchDescriptionField
+            handler: me.onSearchDescriptionField,
+            listeners: {
+                       render: me.addTooltip
+            }
         });
         //
         Ext.apply(me, {
