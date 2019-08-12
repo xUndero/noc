@@ -316,6 +316,8 @@ Build Master Docs:
   stage: Build docs
   environment: docs
   image: registry.getnoc.com/infrastructure/docs:master
+  before_script:
+    - NOC_SRC_PATH=${CI_PROJECT_DIR}
   script:
     - set -x
     - wget -O- https://cdn.getnoc.com/noc/collections%40$(wget -q -O- https://cdn.getnoc.com/noc/collections.latest).tar.bz2 | tar xjf - collections/inv.platforms
