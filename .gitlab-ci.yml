@@ -294,6 +294,7 @@ Build docs:
     - >
       if [ ! -z "$FLIST" ];
       then
+        wget -O- https://cdn.getnoc.com/noc/collections%40$(wget -q -O- https://cdn.getnoc.com/noc/collections.latest).tar.bz2 | tar xjf - collections/inv.platforms
         cd docs/
         python ./scripts/build-auto-include.py
         sphinx-build -a -E -b html src/en ../build/docs/en
@@ -317,6 +318,7 @@ Build Master Docs:
   image: registry.getnoc.com/infrastructure/docs:master
   script:
     - set -x
+    - wget -O- https://cdn.getnoc.com/noc/collections%40$(wget -q -O- https://cdn.getnoc.com/noc/collections.latest).tar.bz2 | tar xjf - collections/inv.platforms
     - cd docs/
     - python ./scripts/build-auto-include.py
     - sphinx-build -a -E -b html src/en ../build/docs/en
