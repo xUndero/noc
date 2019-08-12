@@ -39,8 +39,7 @@ class Script(BaseScript):
     rx_mtu = re.compile(r"^\s+MTU (?P<mtu>\d+) bytes", re.MULTILINE)
     rx_vlan_id = re.compile(r"^vlan(?P<vlan_id>\d+)", re.MULTILINE)
     rx_ifname = re.compile(
-        r"^(?P<ifname>tengigabitethernet|gigaethernet)(?P<ifnum>\d+/\d+/\d+)",
-        re.MULTILINE,
+        r"^(?P<ifname>tengigabitethernet|gigaethernet)(?P<ifnum>\d+/\d+/\d+)", re.MULTILINE
     )
     rx_switch = re.compile(
         r"^Interface:.*\n"
