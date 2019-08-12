@@ -294,6 +294,9 @@ Build docs:
     - >
       if [ ! -z "$FLIST" ];
       then
+        env
+        echo $NOC_SRC_PATH
+        ls $NOC_SRC_PATH
         wget -O- https://cdn.getnoc.com/noc/collections%40$(wget -q -O- https://cdn.getnoc.com/noc/collections.latest).tar.bz2 | tar xjf - collections/inv.platforms
         cd docs/
         python ./scripts/build-auto-include.py
