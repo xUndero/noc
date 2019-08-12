@@ -38,85 +38,88 @@ class InterfaceAppplication(ExtApplication):
         }
     }
 
-    @view(url="^(?P<managed_object>\d+)/$", method=["GET"], access="view", api=True)
-    def api_get_interfaces(self, request, managed_object):
-        """
-        GET interfaces
-        :param managed_object:
-        :return:
-        """
+    def __init__(self, *args, **kwargs):
+        super(InterfaceAppplication, self).__init__(*args, **kwargs)
+        self.style_cache = {}  # profile_id -> css_style
+        self.default_state = ResourceState.get_default()
 
-        def sorted_iname(s):
-            return sorted(s, key=lambda x: split_alnum(x["name"]))
-
-        def get_style(i):
-            profile = i.profile
-            if profile:
-                try:
-                    return style_cache[profile.id]
-                except KeyError:
-                    pass
-                if profile.style:
-                    s = profile.style.css_class_name
-                else:
-                    s = ""
-                style_cache[profile.id] = s
-                return s
+    # helpers
+    def get_style(self, i):
+        profile = i.profile
+        if profile:
+            try:
+                return self.style_cache[profile.id]
+            except KeyError:
+                pass
+            if profile.style:
+                s = profile.style.css_class_name
             else:
-                return ""
+                s = ""
+            self.style_cache[profile.id] = s
+            return s
+        else:
+            return ""
 
-        def get_link(i):
-            link = i.link
-            if not link:
-                return None
-            if link.is_ptp:
-                # ptp
-                o = link.other_ptp(i)
-                label = "%s:%s" % (o.managed_object.name, o.name)
-            elif link.is_lag:
-                # unresolved LAG
-                o = [ii for ii in link.other(i)
-                     if ii.managed_object.id != i.managed_object.id]
-                label = "LAG %s: %s" % (o[0].managed_object.name,
-                                        ", ".join(ii.name for ii in o))
-            else:
-                # Broadcast
-                label = ", ".join("%s:%s" % (ii.managed_object.name, ii.name) for ii in link.other(i))
-            return {"id": str(link.id), "label": label}
+    @staticmethod
+    def sorted_iname(s):
+        return sorted(s, key=lambda x: split_alnum(x["name"]))
 
-        # Get object
-        o = self.get_object_or_404(ManagedObject, id=int(managed_object))
-        if not o.has_access(request.user):
-            return self.response_forbidden("Permission denied")
-        # Physical interfaces
-        # @todo: proper ordering
-        default_state = ResourceState.get_default()
-        style_cache = {}  # profile_id -> css_style
-        l1 = [
-            {
-                "id": str(i.id),
-                "name": i.name,
-                "description": i.description,
-                "mac": i.mac,
-                "ifindex": i.ifindex,
-                "lag": (i.aggregated_interface.name
-                        if i.aggregated_interface else ""),
-                "link": get_link(i),
-                "profile": str(i.profile.id) if i.profile else None,
-                "profile__label": unicode(i.profile) if i.profile else None,
-                "enabled_protocols": i.enabled_protocols,
-                "project": i.project.id if i.project else None,
-                "project__label": unicode(i.project) if i.project else None,
-                "state": i.state.id if i.state else default_state.id,
-                "state__label": unicode(i.state if i.state else default_state),
-                "vc_domain": i.vc_domain.id if i.vc_domain else None,
-                "vc_domain__label": unicode(i.vc_domain) if i.vc_domain else None,
-                "row_class": get_style(i)
-            } for i in Interface.objects.filter(managed_object=o.id, type="physical")
-        ]
-        # LAG
-        lag = [
-            {
+    @staticmethod
+    def get_link(i):
+        link = i.link
+        if not link:
+            return None
+        if link.is_ptp:
+            # ptp
+            o = link.other_ptp(i)
+            label = "%s:%s" % (o.managed_object.name, o.name)
+        elif link.is_lag:
+            # unresolved LAG
+            o = [ii for ii in link.other(i)
+                 if ii.managed_object.id != i.managed_object.id]
+            label = "LAG %s: %s" % (o[0].managed_object.name,
+                                    ", ".join(ii.name for ii in o))
+        else:
+            # Broadcast
+            label = ", ".join("%s:%s" % (ii.managed_object.name, ii.name) for ii in link.other(i))
+        return {"id": str(link.id), "label": label}
+
+    def prepare_l1_iface_data(self, i, o):
+        """
+        :param i:  interface object
+        :param o: managed_object
+        :return: dict with data of attributes
+        """
+        return {
+            "id": str(i.id),
+            "name": i.name,
+            "description": i.description,
+            "mac": i.mac,
+            "ifindex": i.ifindex,
+            "lag": (i.aggregated_interface.name
+                    if i.aggregated_interface else ""),
+            "link": self.get_link(i),
+            "profile": str(i.profile.id) if i.profile else None,
+            "profile__label": unicode(i.profile) if i.profile else None,
+            "enabled_protocols": i.enabled_protocols,
+            "project": i.project.id if i.project else None,
+            "project__label": unicode(i.project) if i.project else None,
+            "state": i.state.id if i.state else self.default_state.id,
+            "state__label": unicode(i.state if i.state else self.default_state),
+            "vc_domain": i.vc_domain.id if i.vc_domain else None,
+            "vc_domain__label": unicode(i.vc_domain) if i.vc_domain else None,
+            "row_class": self.get_style(i),
+            "mo": o.name,
+            "url": "#sa.managedobject/%s/interfaces" % o.id
+        }
+
+    def prepare_lag_iface_data(self, i, o):
+        """
+        :param i:  interface object
+        :param o: managed_object
+        :return: dict with data of attributes
+        """
+        return {
                 "id": str(i.id),
                 "name": i.name,
                 "description": i.description,
@@ -127,26 +130,35 @@ class InterfaceAppplication(ExtApplication):
                 "enabled_protocols": i.enabled_protocols,
                 "project": i.project.id if i.project else None,
                 "project__label": unicode(i.project) if i.project else None,
-                "state": i.state.id if i.state else default_state.id,
-                "state__label": unicode(i.state if i.state else default_state),
+                "state": i.state.id if i.state else self.default_state.id,
+                "state__label": unicode(i.state if i.state else self.default_state),
                 "vc_domain": i.vc_domain.id if i.vc_domain else None,
                 "vc_domain__label": unicode(i.vc_domain) if i.vc_domain else None,
-                "row_class": get_style(i)
-            } for i in Interface.objects.filter(managed_object=o.id, type="aggregated")
-        ]
-        # L2 interfaces
-        l2 = [
-            {
+                "row_class": self.get_style(i)
+        }
+
+    @staticmethod
+    def prepare_l2_iface_data(self, i, o):
+        """
+        :param i:  interface object
+        :param o: managed_object
+        :return: dict with data of attributes
+        """
+        return {
                 "name": i.name,
                 "description": i.description,
                 "untagged_vlan": i.untagged_vlan,
                 "tagged_vlans": i.tagged_vlans
-            } for i in SubInterface.objects.filter(managed_object=o.id, enabled_afi="BRIDGE")
-        ]
-        # L3 interfaces
-        q = Q(enabled_afi="IPv4") | Q(enabled_afi="IPv6")
-        l3 = [
-            {
+        }
+
+    @staticmethod
+    def prepare_l3_iface_data(self, i, o):
+        """
+        :param i:  interface object
+        :param o: managed_object
+        :return: dict with data of attributes
+        """
+        return {
                 "name": i.name,
                 "description": i.description,
                 "ipv4_addresses": i.ipv4_addresses,
@@ -154,13 +166,47 @@ class InterfaceAppplication(ExtApplication):
                 "enabled_protocols": i.enabled_protocols,
                 "vlan": i.vlan_ids,
                 "vrf": i.forwarding_instance.name if i.forwarding_instance else ""
-            } for i in SubInterface.objects.filter(managed_object=o.id).filter(q)
+        }
+
+    #api
+    @view(url="^(?P<managed_object>\d+)/$", method=["GET"], access="view", api=True)
+    def api_get_interfaces(self, request, managed_object):
+        """
+        GET interfaces
+        :param managed_object:
+        :return:
+        """
+        # Get object
+        o = self.get_object_or_404(ManagedObject, id=int(managed_object))
+        if not o.has_access(request.user):
+            return self.response_forbidden("Permission denied")
+        # Physical interfaces
+        # @todo: proper ordering
+        l1 = [
+            self.prepare_l1_iface_data(i, o) for i in Interface.objects.filter(
+                                                       managed_object=o.id, type="physical")
+        ]
+        # LAG
+        lag = [
+            self.prepare_lag_iface_data(i, o) for i in Interface.objects.filter(
+                                                       managed_object=o.id, type="aggregated")
+        ]
+        # L2 interfaces
+        l2 = [
+            self.prepare_l2_iface_data(i, o) for i in SubInterface.objects.filter(
+                                                        managed_object=o.id, enabled_afi="BRIDGE")
+        ]
+        # L3 interfaces
+        q = Q(enabled_afi="IPv4") | Q(enabled_afi="IPv6")
+        l3 = [
+            self.prepare_l3_iface_data(i, o) for i in SubInterface.objects.filter(
+                                                        managed_object=o.id).filter(q)
         ]
         return {
-            "l1": sorted_iname(l1),
-            "lag": sorted_iname(lag),
-            "l2": sorted_iname(l2),
-            "l3": sorted_iname(l3)
+            "l1": self.sorted_iname(l1),
+            "lag": self.sorted_iname(lag),
+            "l2": self.sorted_iname(l2),
+            "l3": self.sorted_iname(l3)
         }
 
     @view(
@@ -280,3 +326,37 @@ class InterfaceAppplication(ExtApplication):
             i.vc_domain = vc_domain
             i.save()
         return True
+
+    @view(url="^search_description/(?P<description>.*?)/$", method=["GET"], access="view", api=True)
+    def api_search_description(self, request, description):
+        """
+        GET interfaces by description
+        :param managed_object:
+        :return:
+        """
+        l1 = [] if len(description) < 2 else [
+            self.prepare_l1_iface_data(i, i.managed_object) for i in Interface.objects.filter(
+                                                       description__icontains=description, type="physical")[:300]
+        ]
+        # LAG
+        lag = [] if len(description) < 2 else [
+            self.prepare_lag_iface_data(i, i.managed_object) for i in Interface.objects.filter(
+                                                       description__icontains=description, type="aggregated")[:300]
+        ]
+        # L2 interfaces
+        l2 = [] if len(description) < 2 else [
+            self.prepare_l2_iface_data(i, i.managed_object) for i in SubInterface.objects.filter(
+                                                        description__icontains=description, enabled_afi="BRIDGE")[:300]
+        ]
+        # L3 interfaces
+        q = Q(enabled_afi="IPv4") | Q(enabled_afi="IPv6")
+        l3 = [] if len(description) < 2 else [
+            self.prepare_l3_iface_data(i, i.managed_object) for i in SubInterface.objects.filter(
+                                                        description__icontains=description).filter(q)[:300]
+        ]
+        return {
+            "l1": self.sorted_iname(l1),
+            "lag": self.sorted_iname(lag),
+            "l2": self.sorted_iname(l2),
+            "l3": self.sorted_iname(l3)
+        }
