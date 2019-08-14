@@ -52,7 +52,7 @@ class RouterOSNormalizer(BaseNormalizer):
     def normalize_interface_address_interface(self, tokens):
         yield self.defer("ip.address.%s" % tokens[2], interface=tokens[4])
 
-    @match("/system", "ntp", "client", "enabled", ANY)
+    @match("/system", "ntp", "client", INTEGER, "enabled", ANY)
     def normalize_timesource(self, tokens):
-        if tokens[4] == "yes":
+        if tokens[5] == "yes":
             yield self.make_clock_source(source="ntp")
