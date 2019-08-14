@@ -141,5 +141,4 @@ class JunOSNormalizer(BaseNormalizer):
 
     @match("system", "ntp", "server", ANY)
     def normalize_ntp_server(self, tokens):
-        print tokens
         yield self.make_ntp_server_address(name="0", address=tokens[3])
