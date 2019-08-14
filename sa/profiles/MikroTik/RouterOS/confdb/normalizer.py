@@ -56,3 +56,10 @@ class RouterOSNormalizer(BaseNormalizer):
     def normalize_timesource(self, tokens):
         if tokens[5] == "yes":
             yield self.make_clock_source(source="ntp")
+
+    @match("/system", "ntp", "client", INTEGER, ANY, ANY)
+    def normalize_ntp_server(self, tokens):
+        if tokens[5] == "primary-ntp":
+            yield self.make_ntp_server_address(name="0", address=tokens[5])
+        if tokens[5] == "secondary-ntp":
+            yield self.make_ntp_server_address(name="1", address=tokens[5])
