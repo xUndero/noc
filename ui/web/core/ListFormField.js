@@ -18,6 +18,7 @@ Ext.define("NOC.core.ListFormField", {
     initComponent: function() {
         var me = this;
 
+        me.scroll = {x: 0, y: 0};
         // me.rows = me.rows || 3;
         me.fields = Ext.clone(me.items).map(function(item) {
             return Ext.Object.merge(item, {isListForm: true})
@@ -68,7 +69,7 @@ Ext.define("NOC.core.ListFormField", {
         });
 
         me.panel = Ext.create("Ext.form.Panel", {
-            scrollable: 'vertical',
+            scrollable: "vertical",
             dockedItems: [
                 {
                     xtype: "toolbar",
@@ -85,7 +86,8 @@ Ext.define("NOC.core.ListFormField", {
                     ]
                 }
             ],
-            items: []
+            items: [],
+            onScrollEnd: me.onScrollEnd
         });
         Ext.apply(me, {
             items: [
@@ -94,6 +96,10 @@ Ext.define("NOC.core.ListFormField", {
         });
         me.currentSelection = undefined;
         me.callParent();
+    },
+    onScrollEnd: function(x, y) {
+        var me = this;
+        me.scroll = {x: x, y: y};
     },
     getFormData: function(form) {
         var me = this,
@@ -217,7 +223,7 @@ Ext.define("NOC.core.ListFormField", {
                 },
                 afterrender: function(self) {
                     var me = this;
-                    me.panel.setMaxHeight(self.getHeight() * me.rows);
+                    me.panel.setMaxHeight((self.getHeight() + 5) * me.rows);
                 }
             }
         });
