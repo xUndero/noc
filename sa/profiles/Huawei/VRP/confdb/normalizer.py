@@ -182,3 +182,11 @@ class VRPNormalizer(BaseNormalizer):
         yield self.make_inet_static_route_next_hop(
             route=self.to_prefix(tokens[2], tokens[3]), next_hop=tokens[4]
         )
+
+    @match("ntp-service", "unicast-peer", ANY)
+    def normalize_timesource(self, tokens):
+        yield self.make_clock_source(source="ntp")
+
+    @match("ntp-service", "unicast-peer", ANY)
+    def normalize_ntp_server(self, tokens):
+        yield self.make_ntp_server_address(name="0", address=tokens[2])
