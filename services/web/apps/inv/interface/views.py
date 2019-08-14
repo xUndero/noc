@@ -85,6 +85,10 @@ class InterfaceAppplication(ExtApplication):
             label = ", ".join("%s:%s" % (ii.managed_object.name, ii.name) for ii in link.other(i))
         return {"id": str(link.id), "label": label}
 
+    @staticmethod
+    def convert_mo_interface_url(o_id):
+        return "#sa.managedobject/%s/interfaces" % o_id
+
     def prepare_l1_iface_data(self, i, o):
         """
         :param i:  interface object
@@ -111,7 +115,7 @@ class InterfaceAppplication(ExtApplication):
             "vc_domain__label": unicode(i.vc_domain) if i.vc_domain else None,
             "row_class": self.get_style(i),
             "mo": o.name,
-            "url": "#sa.managedobject/%s/interfaces" % o.id
+            "url": self.convert_mo_interface_url(o.id)
         }
 
     def prepare_lag_iface_data(self, i, o):
@@ -137,11 +141,10 @@ class InterfaceAppplication(ExtApplication):
                 "vc_domain__label": unicode(i.vc_domain) if i.vc_domain else None,
                 "row_class": self.get_style(i),
                 "mo": o.name,
-                "url": "#sa.managedobject/%s/interfaces" % o.id
+                "url": self.convert_mo_interface_url(o.id)
         }
 
-    @staticmethod
-    def prepare_l2_iface_data(i, o):
+    def prepare_l2_iface_data(self, i, o):
         """
         :param i:  interface object
         :param o: managed_object
@@ -153,11 +156,10 @@ class InterfaceAppplication(ExtApplication):
                 "untagged_vlan": i.untagged_vlan,
                 "tagged_vlans": i.tagged_vlans,
                 "mo": o.name,
-                "url": "#sa.managedobject/%s/interfaces" % o.id
+                "url": self.convert_mo_interface_url(o.id)
         }
 
-    @staticmethod
-    def prepare_l3_iface_data(i, o):
+    def prepare_l3_iface_data(self, i, o):
         """
         :param i:  interface object
         :param o: managed_object
@@ -172,7 +174,7 @@ class InterfaceAppplication(ExtApplication):
                 "vlan": i.vlan_ids,
                 "vrf": i.forwarding_instance.name if i.forwarding_instance else "",
                 "mo": o.name,
-                "url": "#sa.managedobject/%s/interfaces" % o.id
+                "url": self.convert_mo_interface_url(o.id)
         }
 
     # api
