@@ -55,9 +55,7 @@ class Profile(BaseProfile):
     command_exit = "quit"
     rogue_chars = [re.compile(r"\x1b\[42D\s+\x1b\[42D"), "\r"]
     config_tokenizer = "indent"
-    config_tokenizer_settings = {
-        # "end_of_context": "#"
-    }
+    config_tokenizer_settings = {"line_comment": "#"}
     config_normalizer = "VRPNormalizer"
     confdb_defaults = [
         ("hints", "interfaces", "defaults", "admin-status", True),
