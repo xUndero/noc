@@ -184,17 +184,22 @@ class Script(BaseScript):
             raise NotImplementedError()
         platform, version, image = self.parse_version(v)
         if platform in self.BAD_PLATFORM:
-            platform = self.snmp.get(mib["ENTITY-MIB::entPhysicalModelName", 2])  # "Quidway S5628F-HI"
+            platform = self.snmp.get(
+                mib["ENTITY-MIB::entPhysicalModelName", 2]
+            )  # "Quidway S5628F-HI"
             platform = platform.split()[-1]
-            version1 = self.snmp.get(mib["ENTITY-MIB::entPhysicalSoftwareRev", 2])  # like "5.20 Release 2102P01"
-            version2 = self.snmp.get(mib["ENTITY-MIB::entPhysicalSoftwareRev", 7])  # "V200R001B02D015SP02"
+            version1 = self.snmp.get(
+                mib["ENTITY-MIB::entPhysicalSoftwareRev", 2]
+            )  # like "5.20 Release 2102P01"
+            version2 = self.snmp.get(
+                mib["ENTITY-MIB::entPhysicalSoftwareRev", 7]
+            )  # "V200R001B02D015SP02"
             version = "%s (%s)" % (version1.split()[0], version2)
         serial = []
         for oid, x in self.snmp.getnext(mib["ENTITY-MIB::entPhysicalSerialNum"]):
             if not x:
                 continue
             serial += [x.strip(" \x00")]
-
         r = {"vendor": "Huawei", "platform": platform, "version": version}
         attributes = {}
         if image:
@@ -217,7 +222,6 @@ class Script(BaseScript):
                 v = self.cli("display version", cached=True)
             except self.CLISyntaxError:
                 raise NotImplementedError
-
         platform, version, image = self.parse_version(v)
         r = {"vendor": "Huawei", "platform": platform, "version": version}
         attributes = {}
