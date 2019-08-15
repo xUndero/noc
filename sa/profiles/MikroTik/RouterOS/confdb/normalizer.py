@@ -59,7 +59,7 @@ class RouterOSNormalizer(BaseNormalizer):
 
     @match("/system", "ntp", "client", INTEGER, ANY, ANY)
     def normalize_ntp_server(self, tokens):
-        if tokens[5] == "primary-ntp":
+        if tokens[4] == "primary-ntp":
             yield self.make_ntp_server_address(name="0", address=tokens[5])
-        if tokens[5] == "secondary-ntp":
+        if tokens[4] == "secondary-ntp":
             yield self.make_ntp_server_address(name="1", address=tokens[5])
