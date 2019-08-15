@@ -241,3 +241,12 @@ class MESNormalizer(BaseNormalizer):
             yield self.make_output_vlan_map_rewrite_vlan(
                 interface=if_name, unit=if_name, num="1", op="push", vlan=tokens[6]
             )
+
+    @match("clock", "source", ANY)
+    def normalize_timesource(self, tokens):
+        if tokens[2] == "sntp":
+            yield self.make_clock_source(source="ntp")
+
+    @match("sntp", "server", ANY, ANY)
+    def normalize_ntp_server(self, tokens):
+        yield self.make_ntp_server_address(name="ip", address=tokens[2])
