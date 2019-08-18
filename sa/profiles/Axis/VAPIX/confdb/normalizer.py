@@ -45,7 +45,7 @@ class VAPIXNormalizer(BaseNormalizer):
         yield self.make_video_sharpness(name="default", sharpness=tokens[5])
 
     @match("root", "ImageSource", "I0", "Sensor", "Brightness", ANY)
-    def normalize_image_sharpness(self, tokens):
+    def normalize_image_brightness(self, tokens):
         yield self.make_video_brightness(name="default", brightness=tokens[5])
 
     @match("root", "ImageSource", "I0", "Sensor", "WhiteBalance", ANY)
@@ -60,21 +60,17 @@ class VAPIXNormalizer(BaseNormalizer):
     def normalize_resolution(self, tokens):
         for stream_name, resolution in [("h264", tokens[5]), ("mjpeg", tokens[5])]:
             height, width = resolution.split("x")
-            yield self.make_media_streams_video_admin_status(
-                name=stream_name, admin_status=True
-            )
+            yield self.make_media_streams_video_admin_status(name=stream_name, admin_status=True)
             yield self.make_media_streams_video_resolution_height(name=stream_name, height=height)
             yield self.make_media_streams_video_resolution_width(name=stream_name, width=width)
             if stream_name == "mjpeg":
                 yield self.make_media_streams_video_codec_mpeg4(name=stream_name)
-                yield self.make_stream_rtsp_path(
-                    name=stream_name,
-                    path="/mjpg/video.mjpg")
+                yield self.make_stream_rtsp_path(name=stream_name, path="/mjpg/video.mjpg")
             else:
                 yield self.make_media_streams_video_codec_h264(name=stream_name)
                 yield self.make_stream_rtsp_path(
-                    name=stream_name,
-                    path="/axis-media/media.amp?videocodec=mpeg4")
+                    name=stream_name, path="/axis-media/media.amp?videocodec=mpeg4"
+                )
 
     @match("root", "Image", "I0", "RateControl", "Mode", ANY)
     def normalize_video_control_mode_h264(self, tokens):
