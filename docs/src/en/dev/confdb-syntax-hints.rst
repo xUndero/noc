@@ -10,6 +10,7 @@ Multiple  No
 Default:  -
 ========  ==
 
+
 Contains:
 
 +--------------------------------------------------------+------------+---------+
@@ -32,6 +33,7 @@ Multiple  No
 Default:  -
 ========  ======================================
 
+
 Contains:
 
 +---------------------------------------------------------------+------------+---------+
@@ -52,6 +54,7 @@ Multiple  No
 Default:  -
 ========  =================================================
 
+
 Contains:
 
 +--------------------------------------------------------------------------------+------------+---------+
@@ -71,6 +74,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==========================================================
+
 
 Contains:
 
@@ -93,9 +97,10 @@ Default:  -
 Name      admin_status
 ========  =======================================================================
 
+
 .. py:function:: make_defaults_interface_admin_status(admin_status)
 
-    Generate `hints interfaces defaults admin-status <admin_status>` node
+    Generate `hints interfaces defaults admin-status \<admin_status\>` node
 
     :param admin_status: hints interfaces defaults admin-status
 
@@ -110,6 +115,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ======================================
+
 
 Contains:
 
@@ -137,6 +143,7 @@ Multiple  No
 Default:  -
 ========  ================================================
 
+
 Contains:
 
 +---------------------------------------------------------------------+------------+---------+
@@ -159,6 +166,7 @@ Multiple  No
 Default:  -
 ========  =====================================================
 
+
 Contains:
 
 +----------------------------------------------------------------------+------------+---------+
@@ -180,9 +188,10 @@ Default:  -
 Name      status
 ========  ============================================================
 
+
 .. py:function:: make_global_lldp_status(status)
 
-    Generate `hints protocols lldp status <status>` node
+    Generate `hints protocols lldp status \<status\>` node
 
     :param status: hints protocols lldp status
 
@@ -197,6 +206,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =====================================================
+
 
 Contains:
 
@@ -219,6 +229,7 @@ Default:  -
 Name      interface
 ========  ===============================================================
 
+
 Contains:
 
 +-----------------------------------------------------------------------------+------------+---------+
@@ -239,11 +250,12 @@ Multiple  No
 Default:  -
 ========  =========================================================================
 
+
 .. py:function:: make_lldp_interface_disable(None)
 
-    Generate `hints protocols lldp interface *<interface> off` node
+    Generate `hints protocols lldp interface \*\<interface\> off` node
 
-    :param None: hints protocols lldp interface *<interface>
+    :param None: hints protocols lldp interface \*\<interface\>
 
 .. _dev-confdb-syntax-hints-protocols-cdp:
 
@@ -256,6 +268,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ================================================
+
 
 Contains:
 
@@ -279,6 +292,7 @@ Multiple  No
 Default:  -
 ========  ====================================================
 
+
 Contains:
 
 +---------------------------------------------------------------------+------------+---------+
@@ -300,9 +314,10 @@ Default:  -
 Name      status
 ========  ===========================================================
 
+
 .. py:function:: make_global_cdp_status(status)
 
-    Generate `hints protocols cdp status <status>` node
+    Generate `hints protocols cdp status \<status\>` node
 
     :param status: hints protocols cdp status
 
@@ -317,6 +332,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ====================================================
+
 
 Contains:
 
@@ -339,6 +355,7 @@ Default:  -
 Name      interface
 ========  ==============================================================
 
+
 Contains:
 
 +----------------------------------------------------------------------------+------------+---------+
@@ -359,11 +376,12 @@ Multiple  No
 Default:  -
 ========  ========================================================================
 
+
 .. py:function:: make_cdp_interface_disable(None)
 
-    Generate `hints protocols cdp interface *<interface> off` node
+    Generate `hints protocols cdp interface \*\<interface\> off` node
 
-    :param None: hints protocols cdp interface *<interface>
+    :param None: hints protocols cdp interface \*\<interface\>
 
 .. _dev-confdb-syntax-hints-protocols-spanning-tree:
 
@@ -376,6 +394,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ================================================
+
 
 Contains:
 
@@ -401,6 +420,7 @@ Multiple  No
 Default:  -
 ========  ==============================================================
 
+
 Contains:
 
 +-------------------------------------------------------------------------------+------------+---------+
@@ -422,9 +442,10 @@ Default:  -
 Name      status
 ========  =====================================================================
 
+
 .. py:function:: make_global_spanning_tree_status(status)
 
-    Generate `hints protocols spanning-tree status <status>` node
+    Generate `hints protocols spanning-tree status \<status\>` node
 
     :param status: hints protocols spanning-tree status
 
@@ -439,6 +460,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==============================================================
+
 
 Contains:
 
@@ -461,9 +483,10 @@ Default:  -
 Name      priority
 ========  =======================================================================
 
+
 .. py:function:: make_global_spanning_tree_priority(priority)
 
-    Generate `hints protocols spanning-tree priority <priority>` node
+    Generate `hints protocols spanning-tree priority \<priority\>` node
 
     :param priority: hints protocols spanning-tree priority
 
@@ -478,6 +501,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==============================================================
+
 
 Contains:
 
@@ -500,6 +524,7 @@ Default:  -
 Name      interface
 ========  ========================================================================
 
+
 Contains:
 
 +--------------------------------------------------------------------------------------+------------+---------+
@@ -520,11 +545,12 @@ Multiple  No
 Default:  -
 ========  ==================================================================================
 
+
 .. py:function:: make_spanning_tree_interface_disable(None)
 
-    Generate `hints protocols spanning-tree interface *<interface> off` node
+    Generate `hints protocols spanning-tree interface \*\<interface\> off` node
 
-    :param None: hints protocols spanning-tree interface *<interface>
+    :param None: hints protocols spanning-tree interface \*\<interface\>
 
 .. _dev-confdb-syntax-hints-protocols-loop-detect:
 
@@ -537,6 +563,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ================================================
+
 
 Contains:
 
@@ -560,6 +587,7 @@ Multiple  No
 Default:  -
 ========  ============================================================
 
+
 Contains:
 
 +-----------------------------------------------------------------------------+------------+---------+
@@ -581,9 +609,10 @@ Default:  -
 Name      status
 ========  ===================================================================
 
+
 .. py:function:: make_global_loop_detect_status(status)
 
-    Generate `hints protocols loop-detect status <status>` node
+    Generate `hints protocols loop-detect status \<status\>` node
 
     :param status: hints protocols loop-detect status
 
@@ -598,6 +627,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ============================================================
+
 
 Contains:
 
@@ -620,6 +650,7 @@ Default:  -
 Name      interface
 ========  ======================================================================
 
+
 Contains:
 
 +------------------------------------------------------------------------------------+------------+---------+
@@ -640,9 +671,10 @@ Multiple  No
 Default:  -
 ========  ================================================================================
 
+
 .. py:function:: make_loop_detect_interface_disable(None)
 
-    Generate `hints protocols loop-detect interface *<interface> off` node
+    Generate `hints protocols loop-detect interface \*\<interface\> off` node
 
-    :param None: hints protocols loop-detect interface *<interface>
+    :param None: hints protocols loop-detect interface \*\<interface\>
 

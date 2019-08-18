@@ -10,6 +10,7 @@ Multiple  No
 Default:  -
 ========  ==
 
+
 Contains:
 
 +-------------------------------------------------+------------+---------+
@@ -31,6 +32,7 @@ Default:  default
 Name      vr
 ========  ========================================================
 
+
 Contains:
 
 +--------------------------------------------------------------------------------------+------------+---------+
@@ -50,6 +52,7 @@ Required  Yes
 Multiple  No
 Default:  -
 ========  ===========================================================
+
 
 Contains:
 
@@ -71,6 +74,7 @@ Multiple  Yes
 Default:  default
 Name      instance
 ========  ===============================================================================
+
 
 Contains:
 
@@ -108,6 +112,7 @@ Multiple  No
 Default:  -
 ========  ========================================================================================
 
+
 Contains:
 
 +------------------------------------------------------------------------------------------+------------+---------+
@@ -129,11 +134,12 @@ Default:  -
 Name      type
 ========  =============================================================================================
 
+
 .. py:function:: make_forwarding_instance_type(type)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> type <type>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> type \<type\>` node
 
-    :param type: virtual-router *<vr> forwarding-instance *<instance> type
+    :param type: virtual-router \*\<vr\> forwarding-instance \*\<instance\> type
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-description:
 
@@ -146,6 +152,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================================
+
 
 Contains:
 
@@ -168,11 +175,12 @@ Default:  -
 Name      description
 ========  ====================================================================================================
 
+
 .. py:function:: make_forwarding_instance_description(description)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> description <description>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> description \<description\>` node
 
-    :param description: virtual-router *<vr> forwarding-instance *<instance> description
+    :param description: virtual-router \*\<vr\> forwarding-instance \*\<instance\> description
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-distinguisher:
 
@@ -185,6 +193,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================================
+
 
 Contains:
 
@@ -207,11 +216,12 @@ Default:  -
 Name      rd
 ========  ============================================================================================================
 
+
 .. py:function:: make_forwarding_instance_rd(rd)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> route-distinguisher <rd>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> route-distinguisher \<rd\>` node
 
-    :param rd: virtual-router *<vr> forwarding-instance *<instance> route-distinguisher
+    :param rd: virtual-router \*\<vr\> forwarding-instance \*\<instance\> route-distinguisher
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vrf-target:
 
@@ -224,6 +234,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================================
+
 
 Contains:
 
@@ -247,6 +258,7 @@ Multiple  No
 Default:  -
 ========  ===================================================================================================
 
+
 Contains:
 
 +-----------------------------------------------------------------------------------------------------------+------------+---------+
@@ -268,11 +280,12 @@ Default:  -
 Name      target
 ========  ==========================================================================================================
 
+
 .. py:function:: make_forwarding_instance_import_target(target)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> vrf-target import *<target>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> vrf-target import \*\<target\>` node
 
-    :param target: virtual-router *<vr> forwarding-instance *<instance> vrf-target import
+    :param target: virtual-router \*\<vr\> forwarding-instance \*\<instance\> vrf-target import
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vrf-target-export:
 
@@ -285,6 +298,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ===================================================================================================
+
 
 Contains:
 
@@ -307,11 +321,12 @@ Default:  -
 Name      target
 ========  ==========================================================================================================
 
+
 .. py:function:: make_forwarding_instance_export_target(target)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> vrf-target export *<target>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> vrf-target export \*\<target\>` node
 
-    :param target: virtual-router *<vr> forwarding-instance *<instance> vrf-target export
+    :param target: virtual-router \*\<vr\> forwarding-instance \*\<instance\> vrf-target export
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vpn-id:
 
@@ -324,6 +339,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================================
+
 
 Contains:
 
@@ -346,11 +362,12 @@ Default:  -
 Name      vpn_id
 ========  ===============================================================================================
 
+
 .. py:function:: make_forwarding_instance_vpn_id(vpn_id)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> vpn-id <vpn_id>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> vpn-id \<vpn_id\>` node
 
-    :param vpn_id: virtual-router *<vr> forwarding-instance *<instance> vpn-id
+    :param vpn_id: virtual-router \*\<vr\> forwarding-instance \*\<instance\> vpn-id
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans:
 
@@ -363,6 +380,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================================
+
 
 Contains:
 
@@ -385,11 +403,12 @@ Default:  -
 Name      vlan_id
 ========  ==============================================================================================
 
+
 .. py:function:: make_vlan_id(vlan_id)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> vlans *<vlan_id>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> vlans \*\<vlan_id\>` node
 
-    :param vlan_id: virtual-router *<vr> forwarding-instance *<instance> vlans
+    :param vlan_id: virtual-router \*\<vr\> forwarding-instance \*\<instance\> vlans
 
 
 Contains:
@@ -414,6 +433,7 @@ Multiple  No
 Default:  -
 ========  ======================================================================================================
 
+
 Contains:
 
 +--------------------------------------------------------------------------------------------------------+------------+---------+
@@ -435,11 +455,12 @@ Default:  -
 Name      name
 ========  ===========================================================================================================
 
+
 .. py:function:: make_vlan_name(name)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> vlans *<vlan_id> name <name>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> vlans \*\<vlan_id\> name \<name\>` node
 
-    :param name: virtual-router *<vr> forwarding-instance *<instance> vlans *<vlan_id> name
+    :param name: virtual-router \*\<vr\> forwarding-instance \*\<instance\> vlans \*\<vlan_id\> name
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans-vlan_id-description:
 
@@ -452,6 +473,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ======================================================================================================
+
 
 Contains:
 
@@ -474,11 +496,12 @@ Default:  -
 Name      description
 ========  ==================================================================================================================
 
+
 .. py:function:: make_vlan_description(description)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> vlans *<vlan_id> description <description>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> vlans \*\<vlan_id\> description \<description\>` node
 
-    :param description: virtual-router *<vr> forwarding-instance *<instance> vlans *<vlan_id> description
+    :param description: virtual-router \*\<vr\> forwarding-instance \*\<instance\> vlans \*\<vlan_id\> description
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces:
 
@@ -491,6 +514,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================================
+
 
 Contains:
 
@@ -513,6 +537,7 @@ Default:  -
 Name      interface
 ========  ===================================================================================================
 
+
 Contains:
 
 +----------------------------------------------------------------------------------------------------------+------------+---------+
@@ -532,6 +557,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =============================================================================================================
+
 
 Contains:
 
@@ -553,6 +579,7 @@ Multiple  Yes
 Default:  0
 Name      unit
 ========  ==================================================================================================================
+
 
 Contains:
 
@@ -584,6 +611,7 @@ Multiple  No
 Default:  -
 ========  =======================================================================================================================
 
+
 Contains:
 
 +----------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -605,11 +633,12 @@ Default:  -
 Name      description
 ========  ===================================================================================================================================
 
+
 .. py:function:: make_unit_description(description)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> description <description>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> description \<description\>` node
 
-    :param description: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> description
+    :param description: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> description
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-inet:
 
@@ -622,6 +651,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =======================================================================================================================
+
 
 Contains:
 
@@ -642,6 +672,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ============================================================================================================================
+
 
 Contains:
 
@@ -664,11 +695,12 @@ Default:  -
 Name      address
 ========  ====================================================================================================================================
 
+
 .. py:function:: make_unit_inet_address(address)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> inet address *<address>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> inet address \*\<address\>` node
 
-    :param address: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> inet address
+    :param address: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> inet address
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-inet6:
 
@@ -681,6 +713,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =======================================================================================================================
+
 
 Contains:
 
@@ -701,6 +734,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =============================================================================================================================
+
 
 Contains:
 
@@ -723,11 +757,12 @@ Default:  -
 Name      address
 ========  =====================================================================================================================================
 
+
 .. py:function:: make_unit_inet6_address(address)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> inet6 address *<address>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> inet6 address \*\<address\>` node
 
-    :param address: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> inet6 address
+    :param address: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> inet6 address
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-iso:
 
@@ -741,11 +776,12 @@ Multiple  No
 Default:  -
 ========  =======================================================================================================================
 
+
 .. py:function:: make_unit_iso(None)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> iso` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> iso` node
 
-    :param None: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit>
+    :param None: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\>
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-mpls:
 
@@ -759,11 +795,12 @@ Multiple  No
 Default:  -
 ========  =======================================================================================================================
 
+
 .. py:function:: make_unit_mpls(None)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> mpls` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> mpls` node
 
-    :param None: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit>
+    :param None: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\>
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge:
 
@@ -776,6 +813,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =======================================================================================================================
+
 
 Contains:
 
@@ -805,6 +843,7 @@ Multiple  No
 Default:  -
 ========  ==============================================================================================================================
 
+
 Contains:
 
 +----------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -829,6 +868,7 @@ Multiple  No
 Default:  -
 ========  =========================================================================================================================================
 
+
 Contains:
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -850,11 +890,12 @@ Default:  -
 Name      vlan_filter
 ========  ==================================================================================================================================================
 
+
 .. py:function:: make_switchport_untagged(vlan_filter)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport untagged *<vlan_filter>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge switchport untagged \*\<vlan_filter\>` node
 
-    :param vlan_filter: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport untagged
+    :param vlan_filter: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge switchport untagged
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport-native:
 
@@ -867,6 +908,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =========================================================================================================================================
+
 
 Contains:
 
@@ -889,11 +931,12 @@ Default:  -
 Name      vlan_id
 ========  ================================================================================================================================================
 
+
 .. py:function:: make_switchport_native(vlan_id)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport native <vlan_id>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge switchport native \<vlan_id\>` node
 
-    :param vlan_id: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport native
+    :param vlan_id: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge switchport native
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport-tagged:
 
@@ -906,6 +949,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =========================================================================================================================================
+
 
 Contains:
 
@@ -928,11 +972,12 @@ Default:  -
 Name      vlan_filter
 ========  ================================================================================================================================================
 
+
 .. py:function:: make_switchport_tagged(vlan_filter)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport tagged *<vlan_filter>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge switchport tagged \*\<vlan_filter\>` node
 
-    :param vlan_filter: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport tagged
+    :param vlan_filter: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge switchport tagged
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-port-security:
 
@@ -945,6 +990,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==============================================================================================================================
+
 
 Contains:
 
@@ -965,6 +1011,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ============================================================================================================================================
+
 
 Contains:
 
@@ -987,11 +1034,12 @@ Default:  -
 Name      limit
 ========  ==========================================================================================================================================================
 
+
 .. py:function:: make_unit_port_security_max_mac(limit)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge port-security max-mac-count <limit>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge port-security max-mac-count \<limit\>` node
 
-    :param limit: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge port-security max-mac-count
+    :param limit: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge port-security max-mac-count
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num:
 
@@ -1005,6 +1053,7 @@ Multiple  Yes
 Default:  -
 Name      num
 ========  ==============================================================================================================================
+
 
 Contains:
 
@@ -1032,6 +1081,7 @@ Multiple  No
 Default:  -
 ========  ==================================================================================================================================
 
+
 Contains:
 
 +---------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -1053,11 +1103,12 @@ Default:  0
 Name      stack
 ========  ========================================================================================================================================
 
+
 .. py:function:: make_input_vlan_map_stack(stack)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> stack <stack>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge \*\<num\> stack \<stack\>` node
 
-    :param stack: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> stack
+    :param stack: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge \*\<num\> stack
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-outer_vlans:
 
@@ -1070,6 +1121,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==================================================================================================================================
+
 
 Contains:
 
@@ -1092,11 +1144,12 @@ Default:  -
 Name      vlan_filter
 ========  ==============================================================================================================================================
 
+
 .. py:function:: make_input_vlan_map_outer_vlans(vlan_filter)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> outer_vlans *<vlan_filter>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge \*\<num\> outer_vlans \*\<vlan_filter\>` node
 
-    :param vlan_filter: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> outer_vlans
+    :param vlan_filter: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge \*\<num\> outer_vlans
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-inner_vlans:
 
@@ -1109,6 +1162,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==================================================================================================================================
+
 
 Contains:
 
@@ -1131,11 +1185,12 @@ Default:  -
 Name      vlan_filter
 ========  ==============================================================================================================================================
 
+
 .. py:function:: make_input_vlan_map_inner_vlans(vlan_filter)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> inner_vlans *<vlan_filter>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge \*\<num\> inner_vlans \*\<vlan_filter\>` node
 
-    :param vlan_filter: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> inner_vlans
+    :param vlan_filter: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge \*\<num\> inner_vlans
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num:
 
@@ -1149,6 +1204,7 @@ Multiple  Yes
 Default:  -
 Name      op_num
 ========  ==================================================================================================================================
+
 
 Contains:
 
@@ -1171,11 +1227,12 @@ Default:  -
 Name      op
 ========  =========================================================================================================================================
 
+
 .. py:function:: make_input_vlan_map_rewrite_operation(op)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> *<op_num> <op>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge \*\<num\> \*\<op_num\> \<op\>` node
 
-    :param op: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> *<op_num>
+    :param op: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge \*\<num\> \*\<op_num\>
 
 
 Contains:
@@ -1199,11 +1256,12 @@ Default:  -
 Name      vlan
 ========  ============================================================================================================================================
 
+
 .. py:function:: make_input_vlan_map_rewrite_vlan(vlan)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> *<op_num> <op> <vlan>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge \*\<num\> \*\<op_num\> \<op\> \<vlan\>` node
 
-    :param vlan: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> *<op_num> <op>
+    :param vlan: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge \*\<num\> \*\<op_num\> \<op\>
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-dynamic_vlans:
 
@@ -1216,6 +1274,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==============================================================================================================================
+
 
 Contains:
 
@@ -1238,6 +1297,7 @@ Default:  -
 Name      vlan_filter
 ========  ============================================================================================================================================
 
+
 Contains:
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -1257,6 +1317,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================================================================================================
+
 
 Contains:
 
@@ -1279,11 +1340,12 @@ Default:  -
 Name      service
 ========  ================================================================================================================================================================
 
+
 .. py:function:: make_interface_serivce_vlan(service)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge dynamic_vlans *<vlan_filter> service <service>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge dynamic_vlans \*\<vlan_filter\> service \<service\>` node
 
-    :param service: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge dynamic_vlans *<vlan_filter> service
+    :param service: virtual-router \*\<vr\> forwarding-instance \*\<instance\> interfaces \*\<interface\> unit \*\<unit\> bridge dynamic_vlans \*\<vlan_filter\> service
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route:
 
@@ -1296,6 +1358,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================================
+
 
 Contains:
 
@@ -1319,6 +1382,7 @@ Multiple  No
 Default:  -
 ========  ==============================================================================================
 
+
 Contains:
 
 +----------------------------------------------------------------------------------------------------+------------+---------+
@@ -1338,6 +1402,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ===================================================================================================
+
 
 Contains:
 
@@ -1359,6 +1424,7 @@ Multiple  No
 Default:  -
 Name      route
 ========  ==========================================================================================================
+
 
 Contains:
 
@@ -1382,6 +1448,7 @@ Multiple  No
 Default:  -
 ========  ================================================================================================================
 
+
 Contains:
 
 +------------------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -1403,11 +1470,12 @@ Default:  -
 Name      next_hop
 ========  =========================================================================================================================
 
+
 .. py:function:: make_inet_static_route_next_hop(next_hop)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> route inet static <route> next-hop *<next_hop>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> route inet static \<route\> next-hop \*\<next_hop\>` node
 
-    :param next_hop: virtual-router *<vr> forwarding-instance *<instance> route inet static <route> next-hop
+    :param next_hop: virtual-router \*\<vr\> forwarding-instance \*\<instance\> route inet static \<route\> next-hop
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet-static-route-discard:
 
@@ -1421,11 +1489,12 @@ Multiple  No
 Default:  -
 ========  ================================================================================================================
 
+
 .. py:function:: make_inet_static_route_discard(None)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> route inet static <route> discard` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> route inet static \<route\> discard` node
 
-    :param None: virtual-router *<vr> forwarding-instance *<instance> route inet static <route>
+    :param None: virtual-router \*\<vr\> forwarding-instance \*\<instance\> route inet static \<route\>
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet6:
 
@@ -1438,6 +1507,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==============================================================================================
+
 
 Contains:
 
@@ -1458,6 +1528,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ====================================================================================================
+
 
 Contains:
 
@@ -1480,6 +1551,7 @@ Default:  -
 Name      route
 ========  ===========================================================================================================
 
+
 Contains:
 
 +----------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -1499,6 +1571,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =================================================================================================================
+
 
 Contains:
 
@@ -1521,11 +1594,12 @@ Default:  -
 Name      next_hop
 ========  ==========================================================================================================================
 
+
 .. py:function:: make_inet6_static_route_next_hop(next_hop)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> route inet6 static <route> next-hop *<next_hop>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> route inet6 static \<route\> next-hop \*\<next_hop\>` node
 
-    :param next_hop: virtual-router *<vr> forwarding-instance *<instance> route inet6 static <route> next-hop
+    :param next_hop: virtual-router \*\<vr\> forwarding-instance \*\<instance\> route inet6 static \<route\> next-hop
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols:
 
@@ -1538,6 +1612,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================================
+
 
 Contains:
 
@@ -1579,11 +1654,12 @@ Multiple  No
 Default:  -
 ========  ==================================================================================================
 
+
 .. py:function:: make_protocols_telnet(None)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols telnet` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols telnet` node
 
-    :param None: virtual-router *<vr> forwarding-instance *<instance> protocols
+    :param None: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ssh:
 
@@ -1597,11 +1673,12 @@ Multiple  No
 Default:  -
 ========  ==================================================================================================
 
+
 .. py:function:: make_protocols_ssh(None)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols ssh` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols ssh` node
 
-    :param None: virtual-router *<vr> forwarding-instance *<instance> protocols
+    :param None: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-http:
 
@@ -1615,11 +1692,12 @@ Multiple  No
 Default:  -
 ========  ==================================================================================================
 
+
 .. py:function:: make_protocols_http(None)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols http` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols http` node
 
-    :param None: virtual-router *<vr> forwarding-instance *<instance> protocols
+    :param None: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-https:
 
@@ -1633,11 +1711,12 @@ Multiple  No
 Default:  -
 ========  ==================================================================================================
 
+
 .. py:function:: make_protocols_https(None)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols https` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols https` node
 
-    :param None: virtual-router *<vr> forwarding-instance *<instance> protocols
+    :param None: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp:
 
@@ -1650,6 +1729,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==================================================================================================
+
 
 Contains:
 
@@ -1673,6 +1753,7 @@ Multiple  No
 Default:  -
 ========  =======================================================================================================
 
+
 Contains:
 
 +------------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -1694,6 +1775,7 @@ Default:  -
 Name      community
 ========  =================================================================================================================
 
+
 Contains:
 
 +--------------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -1713,6 +1795,7 @@ Required  Yes
 Multiple  No
 Default:  -
 ========  ===========================================================================================================================
+
 
 Contains:
 
@@ -1735,11 +1818,12 @@ Default:  -
 Name      level
 ========  =================================================================================================================================
 
+
 .. py:function:: make_snmp_community_level(level)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols snmp community *<community> level <level>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols snmp community \*\<community\> level \<level\>` node
 
-    :param level: virtual-router *<vr> forwarding-instance *<instance> protocols snmp community *<community> level
+    :param level: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols snmp community \*\<community\> level
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-trap:
 
@@ -1752,6 +1836,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =======================================================================================================
+
 
 Contains:
 
@@ -1772,6 +1857,7 @@ Required  Yes
 Multiple  No
 Default:  -
 ========  ============================================================================================================
+
 
 Contains:
 
@@ -1794,6 +1880,7 @@ Default:  -
 Name      community
 ========  ======================================================================================================================
 
+
 Contains:
 
 +-----------------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -1813,6 +1900,7 @@ Required  Yes
 Multiple  No
 Default:  -
 ========  ================================================================================================================================
+
 
 Contains:
 
@@ -1847,6 +1935,7 @@ Multiple  No
 Default:  -
 ========  ==================================================================================================
 
+
 Contains:
 
 +--------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -1869,6 +1958,7 @@ Multiple  No
 Default:  -
 ========  =======================================================================================================
 
+
 Contains:
 
 +---------------------------------------------------------------------------------------------------------+------------+---------+
@@ -1890,11 +1980,12 @@ Default:  -
 Name      area
 ========  ============================================================================================================
 
+
 .. py:function:: make_isis_area(area)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols isis area *<area>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols isis area \*\<area\>` node
 
-    :param area: virtual-router *<vr> forwarding-instance *<instance> protocols isis area
+    :param area: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols isis area
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis-interface:
 
@@ -1907,6 +1998,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =======================================================================================================
+
 
 Contains:
 
@@ -1929,11 +2021,12 @@ Default:  -
 Name      interface
 ========  =================================================================================================================
 
+
 .. py:function:: make_isis_interface(interface)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols isis interface *<interface>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols isis interface \*\<interface\>` node
 
-    :param interface: virtual-router *<vr> forwarding-instance *<instance> protocols isis interface
+    :param interface: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols isis interface
 
 
 Contains:
@@ -1956,6 +2049,7 @@ Multiple  No
 Default:  -
 ========  ===========================================================================================================================
 
+
 Contains:
 
 +--------------------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -1977,11 +2071,12 @@ Default:  -
 Name      level
 ========  =================================================================================================================================
 
+
 .. py:function:: make_isis_level(level)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols isis interface *<interface> level *<level>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols isis interface \*\<interface\> level \*\<level\>` node
 
-    :param level: virtual-router *<vr> forwarding-instance *<instance> protocols isis interface *<interface> level
+    :param level: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols isis interface \*\<interface\> level
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ospf:
 
@@ -1994,6 +2089,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==================================================================================================
+
 
 Contains:
 
@@ -2014,6 +2110,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =======================================================================================================
+
 
 Contains:
 
@@ -2036,11 +2133,12 @@ Default:  -
 Name      interface
 ========  =================================================================================================================
 
+
 .. py:function:: make_ospf_interface(interface)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols ospf interface *<interface>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols ospf interface \*\<interface\>` node
 
-    :param interface: virtual-router *<vr> forwarding-instance *<instance> protocols ospf interface
+    :param interface: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols ospf interface
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ldp:
 
@@ -2053,6 +2151,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==================================================================================================
+
 
 Contains:
 
@@ -2073,6 +2172,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ======================================================================================================
+
 
 Contains:
 
@@ -2095,11 +2195,12 @@ Default:  -
 Name      interface
 ========  ================================================================================================================
 
+
 .. py:function:: make_ldp_interface(interface)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols ldp interface *<interface>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols ldp interface \*\<interface\>` node
 
-    :param interface: virtual-router *<vr> forwarding-instance *<instance> protocols ldp interface
+    :param interface: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols ldp interface
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-rsvp:
 
@@ -2112,6 +2213,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==================================================================================================
+
 
 Contains:
 
@@ -2132,6 +2234,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =======================================================================================================
+
 
 Contains:
 
@@ -2154,11 +2257,12 @@ Default:  -
 Name      interface
 ========  =================================================================================================================
 
+
 .. py:function:: make_rsvp_interface(interface)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols rsvp interface *<interface>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols rsvp interface \*\<interface\>` node
 
-    :param interface: virtual-router *<vr> forwarding-instance *<instance> protocols rsvp interface
+    :param interface: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols rsvp interface
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-pim:
 
@@ -2171,6 +2275,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==================================================================================================
+
 
 Contains:
 
@@ -2194,6 +2299,7 @@ Multiple  No
 Default:  -
 ========  ======================================================================================================
 
+
 Contains:
 
 +--------------------------------------------------------------------------------------------------------+------------+---------+
@@ -2215,11 +2321,12 @@ Default:  -
 Name      mode
 ========  ===========================================================================================================
 
+
 .. py:function:: make_pim_mode(mode)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols pim mode <mode>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols pim mode \<mode\>` node
 
-    :param mode: virtual-router *<vr> forwarding-instance *<instance> protocols pim mode
+    :param mode: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols pim mode
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-pim-interface:
 
@@ -2232,6 +2339,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ======================================================================================================
+
 
 Contains:
 
@@ -2254,11 +2362,12 @@ Default:  -
 Name      interface
 ========  ================================================================================================================
 
+
 .. py:function:: make_pim_interface(interface)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols pim interface *<interface>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols pim interface \*\<interface\>` node
 
-    :param interface: virtual-router *<vr> forwarding-instance *<instance> protocols pim interface
+    :param interface: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols pim interface
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping:
 
@@ -2271,6 +2380,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==================================================================================================
+
 
 Contains:
 
@@ -2292,6 +2402,7 @@ Multiple  No
 Default:  -
 ========  ================================================================================================================
 
+
 Contains:
 
 +------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -2312,6 +2423,7 @@ Multiple  Yes
 Default:  -
 Name      vlan
 ========  =====================================================================================================================
+
 
 Contains:
 
@@ -2336,6 +2448,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==========================================================================================================================
+
 
 Contains:
 
@@ -2382,6 +2495,7 @@ Multiple  No
 Default:  -
 ========  ==========================================================================================================================
 
+
 Contains:
 
 +-------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
@@ -2403,11 +2517,12 @@ Default:  -
 Name      interface
 ========  ====================================================================================================================================
 
+
 .. py:function:: make_igmp_snooping_interface(interface)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping vlan *<vlan> interface *<interface>` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols igmp-snooping vlan \*\<vlan\> interface \*\<interface\>` node
 
-    :param interface: virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping vlan *<vlan> interface
+    :param interface: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols igmp-snooping vlan \*\<vlan\> interface
 
 
 Contains:
@@ -2430,9 +2545,10 @@ Multiple  No
 Default:  -
 ========  ==============================================================================================================================================
 
+
 .. py:function:: make_igmp_snooping_multicast_router(None)
 
-    Generate `virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping vlan *<vlan> interface *<interface> multicast-router` node
+    Generate `virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols igmp-snooping vlan \*\<vlan\> interface \*\<interface\> multicast-router` node
 
-    :param None: virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping vlan *<vlan> interface *<interface>
+    :param None: virtual-router \*\<vr\> forwarding-instance \*\<instance\> protocols igmp-snooping vlan \*\<vlan\> interface \*\<interface\>
 

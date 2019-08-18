@@ -10,6 +10,7 @@ Multiple  No
 Default:  -
 ========  ==
 
+
 Contains:
 
 +-----------------------------------------------------------+------------+---------+
@@ -31,9 +32,10 @@ Default:  -
 Name      interface
 ========  ================================================
 
+
 .. py:function:: make_interface(interface)
 
-    Generate `interfaces *<interface>` node
+    Generate `interfaces \*\<interface\>` node
 
     :param interface: interfaces
 
@@ -76,6 +78,7 @@ Multiple  No
 Default:  -
 ========  ==========================================================
 
+
 Contains:
 
 +----------------------------------------------------------------------+------------+---------+
@@ -97,6 +100,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ===============================================================
+
 
 Contains:
 
@@ -120,6 +124,7 @@ Multiple  No
 Default:  -
 ========  =======================================================================
 
+
 Contains:
 
 +-----------------------------------------------------------------------+------------+---------+
@@ -141,11 +146,12 @@ Default:  -
 Name      id
 ========  ==========================================================================
 
+
 .. py:function:: make_interfaces_meta_profile_id(id)
 
-    Generate `interfaces *<interface> meta profile id <id>` node
+    Generate `interfaces \*\<interface\> meta profile id \<id\>` node
 
-    :param id: interfaces *<interface> meta profile id
+    :param id: interfaces \*\<interface\> meta profile id
 
 .. _dev-confdb-syntax-interfaces-interface-meta-profile-name:
 
@@ -158,6 +164,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =======================================================================
+
 
 Contains:
 
@@ -180,11 +187,12 @@ Default:  -
 Name      name
 ========  ============================================================================
 
+
 .. py:function:: make_interfaces_meta_profile_name(name)
 
-    Generate `interfaces *<interface> meta profile name <name>` node
+    Generate `interfaces \*\<interface\> meta profile name \<name\>` node
 
-    :param name: interfaces *<interface> meta profile name
+    :param name: interfaces \*\<interface\> meta profile name
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link:
 
@@ -197,6 +205,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ===============================================================
+
 
 Contains:
 
@@ -219,6 +228,7 @@ Default:  -
 Name      link
 ========  ====================================================================
 
+
 Contains:
 
 +------------------------------------------------------------------------------------+------------+---------+
@@ -240,6 +250,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =========================================================================
+
 
 Contains:
 
@@ -265,6 +276,7 @@ Multiple  No
 Default:  -
 ========  ================================================================================
 
+
 Contains:
 
 +----------------------------------------------------------------------------------------------+------------+---------+
@@ -286,11 +298,12 @@ Default:  -
 Name      object_id
 ========  ===================================================================================
 
+
 .. py:function:: make_interfaces_meta_link_object_id(object_id)
 
-    Generate `interfaces *<interface> meta link *<link> object id <object_id>` node
+    Generate `interfaces \*\<interface\> meta link \*\<link\> object id \<object_id\>` node
 
-    :param object_id: interfaces *<interface> meta link *<link> object id
+    :param object_id: interfaces \*\<interface\> meta link \*\<link\> object id
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-name:
 
@@ -303,6 +316,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ================================================================================
+
 
 Contains:
 
@@ -325,11 +339,12 @@ Default:  -
 Name      object_name
 ========  =====================================================================================
 
+
 .. py:function:: make_interfaces_meta_link_object_name(object_name)
 
-    Generate `interfaces *<interface> meta link *<link> object name <object_name>` node
+    Generate `interfaces \*\<interface\> meta link \*\<link\> object name \<object_name\>` node
 
-    :param object_name: interfaces *<interface> meta link *<link> object name
+    :param object_name: interfaces \*\<interface\> meta link \*\<link\> object name
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile:
 
@@ -342,6 +357,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ================================================================================
+
 
 Contains:
 
@@ -367,6 +383,7 @@ Multiple  No
 Default:  -
 ========  ========================================================================================
 
+
 Contains:
 
 +----------------------------------------------------------------------------------------+------------+---------+
@@ -388,11 +405,12 @@ Default:  -
 Name      id
 ========  ===========================================================================================
 
+
 .. py:function:: make_interfaces_meta_link_object_profile_id(id)
 
-    Generate `interfaces *<interface> meta link *<link> object profile id <id>` node
+    Generate `interfaces \*\<interface\> meta link \*\<link\> object profile id \<id\>` node
 
-    :param id: interfaces *<interface> meta link *<link> object profile id
+    :param id: interfaces \*\<interface\> meta link \*\<link\> object profile id
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-name:
 
@@ -405,6 +423,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================================
+
 
 Contains:
 
@@ -427,11 +446,12 @@ Default:  -
 Name      name
 ========  =============================================================================================
 
+
 .. py:function:: make_interfaces_meta_link_object_profile_name(name)
 
-    Generate `interfaces *<interface> meta link *<link> object profile name <name>` node
+    Generate `interfaces \*\<interface\> meta link \*\<link\> object profile name \<name\>` node
 
-    :param name: interfaces *<interface> meta link *<link> object profile name
+    :param name: interfaces \*\<interface\> meta link \*\<link\> object profile name
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-level:
 
@@ -444,6 +464,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================================
+
 
 Contains:
 
@@ -466,11 +487,12 @@ Default:  -
 Name      level
 ========  ==============================================================================================
 
+
 .. py:function:: make_interfaces_meta_link_object_profile_level(level)
 
-    Generate `interfaces *<interface> meta link *<link> object profile level <level>` node
+    Generate `interfaces \*\<interface\> meta link \*\<link\> object profile level \<level\>` node
 
-    :param level: interfaces *<interface> meta link *<link> object profile level
+    :param level: interfaces \*\<interface\> meta link \*\<link\> object profile level
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-interface:
 
@@ -483,6 +505,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  =========================================================================
+
 
 Contains:
 
@@ -505,11 +528,12 @@ Default:  -
 Name      remote_interface
 ========  ===================================================================================
 
+
 .. py:function:: make_interfaces_meta_link_interface(remote_interface)
 
-    Generate `interfaces *<interface> meta link *<link> interface *<remote_interface>` node
+    Generate `interfaces \*\<interface\> meta link \*\<link\> interface \*\<remote_interface\>` node
 
-    :param remote_interface: interfaces *<interface> meta link *<link> interface
+    :param remote_interface: interfaces \*\<interface\> meta link \*\<link\> interface
 
 .. _dev-confdb-syntax-interfaces-interface-type:
 
@@ -522,6 +546,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==========================================================
+
 
 Contains:
 
@@ -544,11 +569,12 @@ Default:  -
 Name      type
 ========  ===============================================================
 
+
 .. py:function:: make_interface_type(type)
 
-    Generate `interfaces *<interface> type <type>` node
+    Generate `interfaces \*\<interface\> type \<type\>` node
 
-    :param type: interfaces *<interface> type
+    :param type: interfaces \*\<interface\> type
 
 .. _dev-confdb-syntax-interfaces-interface-description:
 
@@ -561,6 +587,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==========================================================
+
 
 Contains:
 
@@ -583,11 +610,12 @@ Default:  -
 Name      description
 ========  ======================================================================
 
+
 .. py:function:: make_interface_description(description)
 
-    Generate `interfaces *<interface> description <description>` node
+    Generate `interfaces \*\<interface\> description \<description\>` node
 
-    :param description: interfaces *<interface> description
+    :param description: interfaces \*\<interface\> description
 
 .. _dev-confdb-syntax-interfaces-interface-admin-status:
 
@@ -600,6 +628,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==========================================================
+
 
 Contains:
 
@@ -622,11 +651,12 @@ Default:  -
 Name      admin_status
 ========  =======================================================================
 
+
 .. py:function:: make_interface_admin_status(admin_status)
 
-    Generate `interfaces *<interface> admin-status <admin_status>` node
+    Generate `interfaces \*\<interface\> admin-status \<admin_status\>` node
 
-    :param admin_status: interfaces *<interface> admin-status
+    :param admin_status: interfaces \*\<interface\> admin-status
 
 .. _dev-confdb-syntax-interfaces-interface-mtu:
 
@@ -639,6 +669,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==========================================================
+
 
 Contains:
 
@@ -661,11 +692,12 @@ Default:  -
 Name      mtu
 ========  ==============================================================
 
+
 .. py:function:: make_interface_mtu(mtu)
 
-    Generate `interfaces *<interface> mtu <mtu>` node
+    Generate `interfaces \*\<interface\> mtu \<mtu\>` node
 
-    :param mtu: interfaces *<interface> mtu
+    :param mtu: interfaces \*\<interface\> mtu
 
 .. _dev-confdb-syntax-interfaces-interface-speed:
 
@@ -678,6 +710,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==========================================================
+
 
 Contains:
 
@@ -700,11 +733,12 @@ Default:  -
 Name      speed
 ========  ================================================================
 
+
 .. py:function:: make_interface_speed(speed)
 
-    Generate `interfaces *<interface> speed <speed>` node
+    Generate `interfaces \*\<interface\> speed \<speed\>` node
 
-    :param speed: interfaces *<interface> speed
+    :param speed: interfaces \*\<interface\> speed
 
 .. _dev-confdb-syntax-interfaces-interface-duplex:
 
@@ -717,6 +751,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==========================================================
+
 
 Contains:
 
@@ -739,11 +774,12 @@ Default:  -
 Name      duplex
 ========  =================================================================
 
+
 .. py:function:: make_interface_duplex(duplex)
 
-    Generate `interfaces *<interface> duplex <duplex>` node
+    Generate `interfaces \*\<interface\> duplex \<duplex\>` node
 
-    :param duplex: interfaces *<interface> duplex
+    :param duplex: interfaces \*\<interface\> duplex
 
 .. _dev-confdb-syntax-interfaces-interface-flow-control:
 
@@ -756,6 +792,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==========================================================
+
 
 Contains:
 
@@ -778,11 +815,12 @@ Default:  -
 Name      flow_control
 ========  =======================================================================
 
+
 .. py:function:: make_interface_flow_control(flow_control)
 
-    Generate `interfaces *<interface> flow-control <flow_control>` node
+    Generate `interfaces \*\<interface\> flow-control \<flow_control\>` node
 
-    :param flow_control: interfaces *<interface> flow-control
+    :param flow_control: interfaces \*\<interface\> flow-control
 
 .. _dev-confdb-syntax-interfaces-interface-ethernet:
 
@@ -795,6 +833,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==========================================================
+
 
 Contains:
 
@@ -815,6 +854,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ===================================================================
+
 
 Contains:
 
@@ -837,11 +877,12 @@ Default:  -
 Name      mode
 ========  ====================================================================================
 
+
 .. py:function:: make_interface_ethernet_autonegotiation(mode)
 
-    Generate `interfaces *<interface> ethernet auto-negotiation *<mode>` node
+    Generate `interfaces \*\<interface\> ethernet auto-negotiation \*\<mode\>` node
 
-    :param mode: interfaces *<interface> ethernet auto-negotiation
+    :param mode: interfaces \*\<interface\> ethernet auto-negotiation
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control:
 
@@ -854,6 +895,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==========================================================
+
 
 Contains:
 
@@ -879,6 +921,7 @@ Multiple  No
 Default:  -
 ========  ========================================================================
 
+
 Contains:
 
 +-------------------------------------------------------------------------------------+------------+---------+
@@ -898,6 +941,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==================================================================================
+
 
 Contains:
 
@@ -920,11 +964,12 @@ Default:  -
 Name      level
 ========  ========================================================================================
 
+
 .. py:function:: make_interface_storm_control_broadcast_level(level)
 
-    Generate `interfaces *<interface> storm-control broadcast level <level>` node
+    Generate `interfaces \*\<interface\> storm-control broadcast level \<level\>` node
 
-    :param level: interfaces *<interface> storm-control broadcast level
+    :param level: interfaces \*\<interface\> storm-control broadcast level
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-multicast:
 
@@ -937,6 +982,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================
+
 
 Contains:
 
@@ -957,6 +1003,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==================================================================================
+
 
 Contains:
 
@@ -979,11 +1026,12 @@ Default:  -
 Name      level
 ========  ========================================================================================
 
+
 .. py:function:: make_interface_storm_control_multicast_level(level)
 
-    Generate `interfaces *<interface> storm-control multicast level <level>` node
+    Generate `interfaces \*\<interface\> storm-control multicast level \<level\>` node
 
-    :param level: interfaces *<interface> storm-control multicast level
+    :param level: interfaces \*\<interface\> storm-control multicast level
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-unicast:
 
@@ -996,6 +1044,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ========================================================================
+
 
 Contains:
 
@@ -1016,6 +1065,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ================================================================================
+
 
 Contains:
 
@@ -1038,9 +1088,10 @@ Default:  -
 Name      level
 ========  ======================================================================================
 
+
 .. py:function:: make_interface_storm_control_unicast_level(level)
 
-    Generate `interfaces *<interface> storm-control unicast level <level>` node
+    Generate `interfaces \*\<interface\> storm-control unicast level \<level\>` node
 
-    :param level: interfaces *<interface> storm-control unicast level
+    :param level: interfaces \*\<interface\> storm-control unicast level
 
