@@ -32,7 +32,7 @@ HAS_NOC_SRC = NOC_SRC_PATH and os.path.exists(NOC_SRC_PATH)
 
 if HAS_NOC_SRC:
     NOC_SRC_PATH = os.path.abspath(NOC_SRC_PATH)
-    sys.path.insert(0, os.path.dirname(NOC_SRC_PATH))
+    sys.path.insert(0, NOC_SRC_PATH)
 
 
 def get_branch():
@@ -73,7 +73,7 @@ if HAS_NOC_SRC:
     autoapi_root = "src"
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = [".templates"]
+templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -247,3 +247,9 @@ mermaid_output_format = os.environ.get("MERMAID_FORMAT", "raw")
 # The default is 'mmdc'; you may need to set this to a full path
 # if it's not in the executable search path.
 # mermaid_cmd = 'mmdc'
+
+# Google analytics settings
+ga_tracking_id = os.environ.get("GA_TRACKING_ID", None)
+
+# Customized HTML context
+html_context = {"ga_tracking_id": ga_tracking_id}

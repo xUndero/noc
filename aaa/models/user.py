@@ -20,10 +20,11 @@ from django.core import validators
 from django.contrib.auth.hashers import check_password, make_password
 
 # NOC modules
+from noc.config import config
 from noc.core.model.base import NOCModel
 from noc.core.model.decorator import on_delete_check
 from noc.core.translation import ugettext as _
-from noc.settings import LANGUAGE_CODE, LANGUAGES
+from noc.settings import LANGUAGES
 from .group import Group
 
 id_lock = Lock()
@@ -93,12 +94,14 @@ class User(NOCModel):
     )
     # Custom profile
     preferred_language = models.CharField(
-        max_length=16, null=True, blank=True, default=LANGUAGE_CODE, choices=LANGUAGES
+        max_length=16, null=True, blank=True, default=config.language, choices=LANGUAGES
     )
     # Heatmap position
     heatmap_lon = models.FloatField("Longitude", blank=True, null=True)
     heatmap_lat = models.FloatField("Latitude", blank=True, null=True)
     heatmap_zoom = models.IntegerField("Zoom", blank=True, null=True)
+    # Last login (Populated by login service)
+    last_login = models.DateTimeField("Last Login", blank=True, null=True)
 
     _id_cache = cachetools.TTLCache(maxsize=100, ttl=60)
     _name_cache = cachetools.TTLCache(maxsize=100, ttl=60)
@@ -169,3 +172,14 @@ class User(NOCModel):
         """
         full_name = "%s %s" % (self.first_name, self.last_name)
         return full_name.strip()
+
+    def register_login(self, ts=None):
+        """
+        Register user login
+
+        :param ts: Login timestamp
+        :return:
+        """
+        ts = ts or datetime.datetime.now()
+        self.last_login = ts
+        self.save(update_fields=["last_login"])

@@ -292,7 +292,7 @@ class Config(BaseConfig):
     instance = IntParameter(default=0)
 
     language = StringParameter(default="en")
-    language_code = StringParameter(default="en-us")
+    language_code = StringParameter(default="en")
 
     class layout(ConfigSection):
         ring_ring_edge = IntParameter(default=150)
@@ -330,6 +330,7 @@ class Config(BaseConfig):
         radius_secret = SecretParameter(default="noc")
         radius_server = StringParameter()
         user_cookie_ttl = IntParameter(default=1)
+        register_last_login = BooleanParameter(default=True)
 
     class mailsender(ConfigSection):
         smtp_server = StringParameter()
@@ -524,6 +525,7 @@ class Config(BaseConfig):
         theme = StringParameter(default="gray")
         api_row_limit = IntParameter(default=0)
         api_arch_alarm_limit = IntParameter(default=4 * 86400)
+        max_upload_size = IntParameter(default=16777216)
         language = StringParameter(default="en")
         install_collection = BooleanParameter(default=False)
         max_threads = IntParameter(default=10)

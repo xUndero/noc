@@ -10,7 +10,7 @@ managedobject DataStream
     :depth: 1
     :class: singlecol
 
-managedobject DataStream contains summarized :ref:`Managed Object<reference-managedobject>`
+managedobject DataStream contains summarized :ref:`Managed Object<reference-managed-object>`
 state, including capabilities, interfaces and topology
 
 Fields
@@ -19,7 +19,7 @@ Fields
 +------------------------+------------------+------------------------------------------------------------------------+
 | Name                   | Type             | Description                                                            |
 +========================+==================+========================================================================+
-| id                     | String           | :ref:`Managed Object's<reference-managedobject>` id                    |
+| id                     | String           | :ref:`Managed Object's<reference-managed-object>` id                   |
 +------------------------+------------------+------------------------------------------------------------------------+
 | change_id              | String           | :ref:`Record's change id<api-datastream-changeid>`                     |
 +------------------------+------------------+------------------------------------------------------------------------+
@@ -67,9 +67,9 @@ Fields
 +------------------------+------------------+------------------------------------------------------------------------+
 | service_groups         | Array of Object  | Service :ref:`Resource Groups<reference-resource-group>`               |
 +------------------------+------------------+------------------------------------------------------------------------+
-| * id                   | String           | :ref:`Resource Group's<reference-resourcegroup>` id                    |
+| * id                   | String           | :ref:`Resource Group's<reference-resource-group>` id                   |
 +------------------------+------------------+------------------------------------------------------------------------+
-| * name                 | String           | :ref:`Resource Group's<reference-resourcegroup>` id                    |
+| * name                 | String           | :ref:`Resource Group's<reference-resource-group>` id                   |
 +------------------------+------------------+------------------------------------------------------------------------+
 | * technology           | String           | :ref:`Technology's<reference-technology>` name                         |
 +------------------------+------------------+------------------------------------------------------------------------+
@@ -77,9 +77,9 @@ Fields
 +------------------------+------------------+------------------------------------------------------------------------+
 | client_groups          | Array of Object  | Client :ref:`Resource Groups<reference-resource-group>`                |
 +------------------------+------------------+------------------------------------------------------------------------+
-| * id                   | String           | :ref:`Resource Group's<reference-resourcegroup>` id                    |
+| * id                   | String           | :ref:`Resource Group's<reference-resource-group>` id                   |
 +------------------------+------------------+------------------------------------------------------------------------+
-| * name                 | String           | :ref:`Resource Group's<reference-resourcegroup>` id                    |
+| * name                 | String           | :ref:`Resource Group's<reference-resource-group>` id                   |
 +------------------------+------------------+------------------------------------------------------------------------+
 | * technology           | String           | :ref:`Technology's<reference-technology>` name                         |
 +------------------------+------------------+------------------------------------------------------------------------+
@@ -133,7 +133,7 @@ Fields
 +------------------------+------------------+------------------------------------------------------------------------+
 | * link                 | Array of Object  | List of links                                                          |
 +------------------------+------------------+------------------------------------------------------------------------+
-| ** object              | Integer          | Remote object's ID                                                     |
+| ** object              | Integer          | Remote object\'s ID                                                    |
 +------------------------+------------------+------------------------------------------------------------------------+
 | ** interface           | String           | Remote port's name (interfaces.name)                                   |
 +------------------------+------------------+------------------------------------------------------------------------+
@@ -141,21 +141,21 @@ Fields
 +------------------------+------------------+------------------------------------------------------------------------+
 | asset                  | Array of Object  | Hardware configuration/Inventory data                                  |
 +------------------------+------------------+------------------------------------------------------------------------+
-| * id                   | String           | Inventory object's ID                                                  |
+| * id                   | String           | Inventory object\'s ID                                                 |
 +------------------------+------------------+------------------------------------------------------------------------+
 | * model                | Object           | Inventory model (Object model)                                         |
 +------------------------+------------------+------------------------------------------------------------------------+
-| ** id                  | String           | Inventory model's ID                                                   |
+| ** id                  | String           | Inventory model\'s ID                                                  |
 +------------------------+------------------+------------------------------------------------------------------------+
-| ** name                | String           | Inventory model's name                                                 |
+| ** name                | String           | Inventory model\'s name                                                |
 +------------------------+------------------+------------------------------------------------------------------------+
 | ** tags                | Array of String  | :ref:`Object model's tags<dev-objectmodel-tags>`                       |
 +------------------------+------------------+------------------------------------------------------------------------+
-| ** vendor              | Object           | Inventory model's vendor                                               |
+| ** vendor              | Object           | Inventory model\'s vendor                                              |
 +------------------------+------------------+------------------------------------------------------------------------+
-| *** id                 | String           | Vendor's ID                                                            |
+| *** id                 | String           | Vendor\'s ID                                                           |
 +------------------------+------------------+------------------------------------------------------------------------+
-| *** name               | String           | Vendor's Name                                                          |
+| *** name               | String           | Vendor\'s Name                                                         |
 +------------------------+------------------+------------------------------------------------------------------------+
 | * serial               | String           | Inventory object's serial number                                       |
 +------------------------+------------------+------------------------------------------------------------------------+

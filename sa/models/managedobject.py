@@ -88,7 +88,7 @@ from .objectstatus import ObjectStatus
 from .objectdata import ObjectData
 
 # Increase whenever new field added or removed
-MANAGEDOBJECT_CACHE_VERSION = 18
+MANAGEDOBJECT_CACHE_VERSION = 19
 
 Credentials = namedtuple(
     "Credentials", ["user", "password", "super_password", "snmp_ro", "snmp_rw"]
@@ -466,6 +466,13 @@ class ManagedObject(NOCModel):
             ("A", "Raise Alarm"),
             ("S", "Raise Alarm&Stop"),
         ],
+        default="P",
+    )
+    # ConfDB settings
+    confdb_raw_policy = CharField(
+        "ConfDB Raw Policy",
+        max_length=1,
+        choices=[("P", "Profile"), ("D", "Disable"), ("E", "Enable")],
         default="P",
     )
     # Resource groups
@@ -1125,23 +1132,35 @@ class ManagedObject(NOCModel):
         except storage.Error as e:
             logger.error("[%s] Failed to mirror config: %s", self.name, e)
 
-    def validate_config(self, changed):
+    def to_validate(self, changed):
         """
-        Apply config validation rules
-        :param changed:
-        :return:
+        Check if config is to be validated
+
+        :param changed: True if config has been changed
+        :return: Boolean
         """
-        logger.debug("[%s] Validating config", self.name)
         policy = self.object_profile.config_validation_policy
         # D - Disable
         if policy == "D":
             logger.debug("[%s] Validation is disabled by policy. Skipping", self.name)
-            return
-        # C - Mirror on Change
+            return False
+        # C - Validate on Change
         if policy == "C" and not changed:
             logger.debug("[%s] Configuration has not been changed. Skipping", self.name)
+            return False
+        return True
+
+    def validate_config(self, changed):
+        """
+        Apply config validation rules (Legacy CLIPS path)
+
+        :param changed:
+        :return:
+        """
+        logger.debug("[%s] Validating config (Legacy path)", self.name)
+        if not self.to_validate(changed):
             return
-        # Validate
+        # Validate (Legacy Path)
         from noc.cm.engine import Engine
 
         engine = Engine(self)
@@ -1150,6 +1169,43 @@ class ManagedObject(NOCModel):
         except:  # noqa
             logger.error("Failed to validate config for %s", self.name)
             error_report()
+
+    def iter_validation_problems(self, changed):
+        """
+        Yield validation problems
+
+        :param changed: True if config has been changed
+        :return:
+        """
+        logger.debug("[%s] Validating config", self.name)
+        if not self.to_validate(changed):
+            return
+        confdb = self.get_confdb()
+        # Object-level validation
+        if self.object_profile.object_validation_policy:
+            for problem in self.object_profile.object_validation_policy.iter_problems(confdb):
+                yield problem
+        else:
+            logger.debug("[%s] Object validation policy is not set. Skipping", self.name)
+        # Interface-level validation
+        from noc.inv.models.interface import Interface
+        from noc.inv.models.interfaceprofile import InterfaceProfile
+
+        for doc in Interface._get_collection().aggregate(
+            [
+                {"$match": {"managed_object": self.id}},
+                {"$project": {"_id": 0, "name": 1, "profile": 1}},
+                {"$group": {"_id": "$profile", "ifaces": {"$push": "$name"}}},
+            ]
+        ):
+            iprofile = InterfaceProfile.get_by_id(doc["_id"])
+            if not iprofile or not iprofile.interface_validation_policy:
+                continue
+            for ifname in doc["ifaces"]:
+                for problem in iprofile.interface_validation_policy.iter_problems(
+                    confdb, ifname=ifname
+                ):
+                    yield problem
 
     @property
     def credentials(self):
@@ -1499,6 +1555,11 @@ class ManagedObject(NOCModel):
             return self.object_profile.denied_firmware_policy
         return self.denied_firmware_policy
 
+    def get_confdb_raw_policy(self):
+        if self.confdb_raw_policy == "P":
+            return self.object_profile.confdb_raw_policy
+        return self.confdb_raw_policy
+
     def get_config_policy(self):
         if self.config_policy == "P":
             return self.object_profile.config_policy
@@ -1631,10 +1692,16 @@ class ManagedObject(NOCModel):
         """
         profile = self.profile.get_profile()
         e = Engine()
-        # insert defaults
+        # Insert defaults
         defaults = profile.get_confdb_defaults(self)
         if defaults:
             e.insert_bulk(defaults)
+        # Get working config
+        if config is None:
+            config = self.config.read()
+        # Insert raw section
+        if self.get_confdb_raw_policy() == "E":
+            e.insert_bulk(("raw",) + t for t in self.iter_config_tokens(config))
         # Parse and normalize config
         e.insert_bulk(self.iter_normalized_tokens(config))
         # Apply applicators
@@ -1648,6 +1715,20 @@ class ManagedObject(NOCModel):
     @property
     def has_confdb_support(self):
         return self.profile.get_profile().has_confdb_support(self)
+
+    @classmethod
+    def mock_object(cls, profile=None):
+        """
+        Return mock object for tests
+
+        :param profile: Profile name
+        :return:
+        """
+        mo = ManagedObject()
+        if profile:
+            mo.profile = Profile.get_by_name(profile)
+        mo.is_mock = True
+        return mo
 
 
 @on_save

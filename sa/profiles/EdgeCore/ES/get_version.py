@@ -2,17 +2,17 @@
 # ---------------------------------------------------------------------
 # EdgeCore.ES.get_version
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2017 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
-"""
-"""
+
 # Python modules
 import re
 
 # NOC Modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetversion import IGetVersion
+from noc.core.mib import mib
 
 
 class Script(BaseScript):
@@ -20,72 +20,54 @@ class Script(BaseScript):
     cache = True
     interface = IGetVersion
 
+    def execute_snmp(self):
+        s = self.snmp.get(mib["SNMPv2-MIB::sysDescr.0"], cached=True)
+        oid = self.snmp.get(mib["SNMPv2-MIB::sysObjectID.0"], cached=True)
+        if oid == "":
+            raise self.snmp.TimeOutError  # Fallback to CLI
+        if ", " in oid:
+            oid = oid[1:-1].replace(", ", ".")
+        if oid[-3:] == "2.4":
+            # 3528M-SFP OID (v1.4.x.x)
+            v = self.snmp.get(oid[:-3] + "1.4.1.1.3.1.6.1", cached=True)
+        else:
+            if oid[-3:] == "101":
+                # 3528MV2-Style OID
+                v = self.snmp.get(oid[:-3] + "1.1.3.1.6.1", cached=True)
+            else:
+                # 3526-Style OID
+                v = self.snmp.get(oid + ".1.1.3.1.6.1", cached=True)
+        if v == "":
+            # 4626-Style OID
+            v = self.snmp.get(oid + ".100.1.3.0", cached=True)
+            if v == "":
+                raise self.snmp.TimeOutError  # Fallback to CLI
+        if self.rx_sys_4.search(s):
+            return self.get_version_4xxx(s, v)
+        return self.get_version_35xx("System description : " + s, v)
+
     #
     # Main dispatcher
     #
-    def execute(self):
-        s = ""
-        if self.has_snmp():
-            # Trying SNMP
-            try:
-                # SNMPv2-MIB::sysDescr.0
-                s = self.snmp.get("1.3.6.1.2.1.1.1.0", cached=True)
-                # SNMPv2-MIB::sysObjectID.0
-                oid = self.snmp.get("1.3.6.1.2.1.1.2.0", cached=True)
-                if oid == "":
-                    raise self.snmp.TimeOutError  # Fallback to CLI
-                if ", " in oid:
-                    oid = oid[1:-1].replace(", ", ".")
-                if oid[-3:] == "2.4":
-                    # 3528M-SFP OID (v1.4.x.x)
-                    v = self.snmp.get(oid[:-3] + "1.4.1.1.3.1.6.1", cached=True)
-                else:
-                    if oid[-3:] == "101":
-                        # 3528MV2-Style OID
-                        v = self.snmp.get(oid[:-3] + "1.1.3.1.6.1", cached=True)
-                    else:
-                        # 3526-Style OID
-                        v = self.snmp.get(oid + ".1.1.3.1.6.1", cached=True)
-                if v == "":
-                    # 4626-Style OID
-                    v = self.snmp.get(oid + ".100.1.3.0", cached=True)
-                    if v == "":
-                        raise self.snmp.TimeOutError  # Fallback to CLI
-                if self.rx_sys_4.search(s):
-                    return self.get_version_4xxx(s, v)
-                return self.get_version_35xx("System description : " + s, v)
-            except self.snmp.TimeOutError:
-                pass
-        if s == "":
-            # Trying CLI
-            try:
-                s = self.cli("show system", cached=True)
-            except self.CLISyntaxError:
-                # Get 4xxx version
-                return self.get_version_4xxx(None, None)
-            return self.get_version_35xx(s, None)
+    def execute_cli(self):
+        try:
+            s = self.cli("show system", cached=True)
+        except self.CLISyntaxError:
+            # Get 4xxx version
+            return self.get_version_4xxx(None, None)
+        return self.get_version_35xx(s, None)
 
     #
     # 35xx
     #
-    rx_sys_35 = re.compile(
-        r"^\s*System description\s*:\s(?P<platform>.+?)\s*$", re.MULTILINE | re.IGNORECASE
-    )
-    rx_sys_42 = re.compile(
-        r"^\s*System OID String\s*:\s(?P<platform>.+?)\s*$", re.MULTILINE | re.IGNORECASE
-    )
+    rx_sys_35 = re.compile(r"^\s*System [Dd]escription\s*:\s(?P<platform>.+?)\s*$", re.MULTILINE)
+    rx_sys_42 = re.compile(r"^\s*System OID String\s*:\s(?P<platform>.+?)\s*$", re.MULTILINE)
     rx_ver_35 = re.compile(
-        r"^\s*Operation code version\s*:\s*(?P<version>\S+)\s*$", re.MULTILINE | re.IGNORECASE
+        r"^\s*Operation [Cc]ode [Vv]ersion\s*:\s*(?P<version>\S+)\s*$", re.MULTILINE
     )
-    rx_ser_35 = re.compile(
-        r"^\s*Serial Number\s*:\s*(?P<serial>\S+)\s*$", re.MULTILINE | re.IGNORECASE
-    )
-    rx_hw_35 = re.compile(
-        r"^\s*Hardware Version\s*:\s*(?P<hardware>\S+)\s*$", re.MULTILINE | re.IGNORECASE
-    )
-    rx_boot_35 = re.compile(
-        r"^\s*Boot ROM Version\s+:\s+(?P<boot>.+)\s*$", re.MULTILINE | re.IGNORECASE
-    )
+    rx_ser_35 = re.compile(r"^\s*Serial Number\s*:\s*(?P<serial>\S+)\s*$", re.MULTILINE)
+    rx_hw_35 = re.compile(r"^\s*Hardware Version\s*:\s*(?P<hardware>\S+)\s*$", re.MULTILINE)
+    rx_boot_35 = re.compile(r"^\s*Boot ROM Version\s+:\s+(?P<boot>.+)\s*$", re.MULTILINE)
 
     def get_version_35xx(self, show_system, version):
         # Vendor default
@@ -95,6 +77,8 @@ class Script(BaseScript):
             v = self.cli("show version", cached=True)
             match = self.re_search(self.rx_ver_35, v)
             version = match.group("version")
+        else:
+            v = ""
         # Detect platform
         match = self.rx_sys_35.search(show_system)
         platform = match.group("platform")
@@ -153,7 +137,8 @@ class Script(BaseScript):
             else:
                 raise self.NotSupportedError(platform)
         r = {"vendor": vendor, "platform": platform, "version": version, "attributes": {}}
-        v = self.cli("show version", cached=True)
+        if not v:
+            return r
         match = self.rx_boot_35.search(v)
         if match:
             r["attributes"].update({"Boot PROM": match.group("boot")})
@@ -168,36 +153,25 @@ class Script(BaseScript):
     #
     # ES4626
     #
-    rx_sys_4 = re.compile(
-        r"(?P<platform>ES.+?) Device, Compiled", re.MULTILINE | re.DOTALL | re.IGNORECASE
-    )
+    rx_sys_4 = re.compile(r"(?P<platform>ES.+?|Switch) Device, Compiled")
     rx_ver_4 = re.compile(
-        r"SoftWare (Package )?Version.*?(?:_|Vco\.)(?P<version>\d.+?)$",
-        re.MULTILINE | re.DOTALL | re.IGNORECASE,
+        r"SoftWare (Package )?Version.*?(?:_|Vco\.| )(?P<version>\d.+?)$", re.MULTILINE
     )
-    rx_boot_4 = re.compile(
-        r"BootRom Version (\S+_)?(?P<boot>\d.+?)$", re.MULTILINE | re.DOTALL | re.IGNORECASE
-    )
-    rx_hw_4 = re.compile(
-        r"HardWare Version (\S+_)?(?P<hardware>\S+)$", re.MULTILINE | re.DOTALL | re.IGNORECASE
-    )
-    rx_ser_4 = re.compile(
-        r"Device serial number (\S+_)?(?P<serial>\S+)$", re.MULTILINE | re.DOTALL | re.IGNORECASE
-    )
+    rx_boot_4 = re.compile(r"BootRom Version (\S+_)?(?P<boot>\d.+?)$", re.MULTILINE)
+    rx_hw_4 = re.compile(r"HardWare Version (\S+_)?(?P<hardware>\S+)$", re.MULTILINE)
+    rx_ser_4 = re.compile(r"Device serial number (\S+_)?(?P<serial>\S+)$", re.MULTILINE)
 
     def get_version_4xxx(self, v, version):
         if not v:
             v = self.cli("show version 1", cached=True)
         match_sys = self.re_search(self.rx_sys_4, v)
+        platform = match_sys.group("platform")
+        if platform == "Switch":
+            platform = "Unknown"
         if not version:
             match_ver = self.re_search(self.rx_ver_4, v)
             version = match_ver.group("version")
-        r = {
-            "vendor": "EdgeCore",
-            "platform": match_sys.group("platform"),
-            "version": version,
-            "attributes": {},
-        }
+        r = {"vendor": "EdgeCore", "platform": platform, "version": version, "attributes": {}}
         match = self.rx_boot_4.search(v)
         if match:
             r["attributes"].update({"Boot PROM": match.group("boot")})

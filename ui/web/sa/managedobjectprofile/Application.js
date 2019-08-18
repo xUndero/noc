@@ -25,7 +25,8 @@ Ext.define("NOC.sa.managedobjectprofile.Application", {
         "NOC.vc.vpnprofile.LookupField",
         "NOC.main.template.LookupField",
         "NOC.main.extstorage.LookupField",
-        "NOC.main.handler.LookupField"
+        "NOC.main.handler.LookupField",
+        "NOC.cm.objectvalidationpolicy.LookupField"
     ],
     model: "NOC.sa.managedobjectprofile.Model",
     search: true,
@@ -1906,6 +1907,34 @@ Ext.define("NOC.sa.managedobjectprofile.Application", {
                                 },
                                 {
                                     xtype: "fieldset",
+                                    title: __("ConfDB"),
+                                    layout: "hbox",
+                                    defaults: {
+                                        labelAlign: "top",
+                                        padding: 4
+                                    },
+                                    items: [
+                                        {
+                                            name: "confdb_raw_policy",
+                                            xtype: "combobox",
+                                            fieldLabel: __("Raw Policy"),
+                                            allowBlank: false,
+                                            store: [
+                                                ["D", __("Disabled")],
+                                                ["E", __("Enabled")]
+                                            ],
+                                            tooltip: __('Append raw section to confdb'),
+                                            bind: {
+                                                disabled: "{!enableBoxDiscoveryConfig.checked}"
+                                            },
+                                            listeners: {
+                                                render: me.addTooltip
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: "fieldset",
                                     title: __("Config Validation"),
                                     layout: "hbox",
                                     defaults: {
@@ -1931,6 +1960,15 @@ Ext.define("NOC.sa.managedobjectprofile.Application", {
                                             },
                                             listeners: {
                                                 render: me.addTooltip
+                                            }
+                                        },
+                                        {
+                                            name: "object_validation_policy",
+                                            xtype: "cm.objectvalidationpolicy.LookupField",
+                                            fieldLabel: __("Policy"),
+                                            allowBlank: true,
+                                            bind: {
+                                                disabled: "{!enableBoxDiscoveryConfig.checked}"
                                             }
                                         }
                                     ]

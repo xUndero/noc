@@ -8,6 +8,9 @@
 
 # Python modules
 import logging
+import re
+
+# NOC modules
 from noc.config import config
 
 if config.features.pypy:
@@ -35,6 +38,7 @@ DATABASES = {
         "HOST": config.pg.addresses[0].host,
         "PORT": config.pg.addresses[0].port,
         "AUTOCOMMIT": True,
+        "DISABLE_SERVER_SIDE_CURSORS": True,
         "OPTIONS": {"connect_timeout": config.pg.connect_timeout},
     }
 }
@@ -48,6 +52,15 @@ TIME_FORMAT = config.date_time_formats.time_format
 MONTH_DAY_FORMAT = config.date_time_formats.month_day_format
 YEAR_MONTH_FORMAT = config.date_time_formats.year_month_format
 DATETIME_FORMAT = config.date_time_formats.datetime_format
+# Set up date input formats
+DATE_INPUT_FORMATS = ["%Y-%m-%d"]
+if config.date_time_formats.date_format != DATE_INPUT_FORMATS[0]:
+    DATE_INPUT_FORMATS.insert(
+        0,
+        re.sub(
+            "[^./: ]", lambda match: "%%%s" % match.group(0), config.date_time_formats.date_format
+        ),
+    )
 
 SITE_ID = 1
 
@@ -66,10 +79,14 @@ MEDIA_URL = ""
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-STATIC_URL = "/media/"
+STATIC_URL = "/ui/pkg/django-media/"
 
 # Make this unique, and don"t share it with anybody.
 SECRET_KEY = config.secret_key
+
+# The maximum size in bytes that a request body may be
+# before a SuspiciousOperation (RequestDataTooBig) is raised.
+DATA_UPLOAD_MAX_MEMORY_SIZE = config.web.max_upload_size
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = [
@@ -81,7 +98,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
-    "noc.core.middleware.context.messages",
 )
 #
 MIDDLEWARE = [

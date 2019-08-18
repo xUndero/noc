@@ -65,6 +65,17 @@ class Engine(object):
         for ctx in g:
             yield ctx
 
+    def any(self, expr, **kwargs):
+        """
+        Run query and return True if any result found
+        :param expr:
+        :param kwargs:
+        :return:
+        """
+        for _ in self.query(expr, **kwargs):
+            return True
+        return False
+
     def dump(self, format="tree"):
         return self.db.marshall(format)
 
@@ -321,7 +332,7 @@ class Engine(object):
                 if f:  # Descent deeper
                     for wctx in not_match(f, c, rest):
                         yield wctx
-                elif not any(True for x in rest if isinstance(x, Var)):
+                elif not any(True for x in rest if isinstance(x, Var) and not x.is_bound(c)):
                     # There is rest and token not found and no unbound variables left in rest
                     yield c
             elif not f:
