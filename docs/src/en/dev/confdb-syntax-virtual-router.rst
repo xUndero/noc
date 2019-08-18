@@ -1834,6 +1834,7 @@ Multiple  Yes
 Default:  -
 Name      address
 ========  =====================================================================================================================================
+
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis:
 
 virtual-router \*<vr> forwarding-instance \*<instance> protocols isis
@@ -2356,6 +2357,7 @@ Multiple  No
 Default:  -
 Name      version
 ========  ==================================================================================================================================
+
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan-immediate-leave:
 
 virtual-router \*<vr> forwarding-instance \*<instance> protocols igmp-snooping vlan \*<vlan> immediate-leave
@@ -2367,6 +2369,7 @@ Required  No
 Multiple  No
 Default:  -
 ========  ==========================================================================================================================
+
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan-interface:
 
 virtual-router \*<vr> forwarding-instance \*<instance> protocols igmp-snooping vlan \*<vlan> interface
