@@ -592,8 +592,8 @@ Contains:
 
 .. _dev-confdb-syntax-meta-tags-tag:
 
-meta tags *<tag>
-^^^^^^^^^^^^^^^^
+meta tags \*<tag>
+^^^^^^^^^^^^^^^^^
 
 ========  =========================================
 Parent    :ref: `meta<dev-confdb-syntax-meta-tags>`

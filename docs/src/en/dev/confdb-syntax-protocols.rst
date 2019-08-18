@@ -52,8 +52,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name:
 
-protocols ntp *<name>
-^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name>
+^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp>`
@@ -90,8 +90,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-version:
 
-protocols ntp *<name> version
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> version
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name>`
@@ -110,8 +110,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-version-version:
 
-protocols ntp *<name> version <version>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> version <version>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-version>`
@@ -129,8 +129,8 @@ Name      version
 
 .. _dev-confdb-syntax-protocols-ntp-name-address:
 
-protocols ntp *<name> address
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> address
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name>`
@@ -149,8 +149,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-address-address:
 
-protocols ntp *<name> address <address>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> address <address>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-address>`
@@ -168,8 +168,8 @@ Name      address
 
 .. _dev-confdb-syntax-protocols-ntp-name-mode:
 
-protocols ntp *<name> mode
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name>`
@@ -188,8 +188,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-mode-mode:
 
-protocols ntp *<name> mode <mode>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> mode <mode>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-mode>`
@@ -207,8 +207,8 @@ Name      mode
 
 .. _dev-confdb-syntax-protocols-ntp-name-authentication:
 
-protocols ntp *<name> authentication
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> authentication
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name>`
@@ -229,8 +229,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-authentication-type:
 
-protocols ntp *<name> authentication type
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> authentication type
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-authentication>`
@@ -249,8 +249,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-authentication-type-auth_type:
 
-protocols ntp *<name> authentication type <auth_type>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> authentication type <auth_type>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-authentication-type>`
@@ -268,8 +268,8 @@ Name      auth_type
 
 .. _dev-confdb-syntax-protocols-ntp-name-authentication-key:
 
-protocols ntp *<name> authentication key
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> authentication key
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-authentication>`
@@ -288,8 +288,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-authentication-key-key:
 
-protocols ntp *<name> authentication key <key>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> authentication key <key>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-authentication-key>`
@@ -307,8 +307,8 @@ Name      key
 
 .. _dev-confdb-syntax-protocols-ntp-name-prefer:
 
-protocols ntp *<name> prefer
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> prefer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name>`
@@ -325,8 +325,8 @@ Default:  -
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast:
 
-protocols ntp *<name> broadcast
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> broadcast
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name>`
@@ -351,8 +351,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-version:
 
-protocols ntp *<name> broadcast version
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> broadcast version
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-broadcast>`
@@ -371,8 +371,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-version-version:
 
-protocols ntp *<name> broadcast version <version>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> broadcast version <version>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-broadcast-version>`
@@ -390,8 +390,8 @@ Name      version
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-address:
 
-protocols ntp *<name> broadcast address
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> broadcast address
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-broadcast>`
@@ -410,8 +410,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-address-address:
 
-protocols ntp *<name> broadcast address <address>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> broadcast address <address>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-broadcast-address>`
@@ -429,8 +429,8 @@ Name      address
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-ttl:
 
-protocols ntp *<name> broadcast ttl
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> broadcast ttl
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-broadcast>`
@@ -449,8 +449,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-ttl-ttl:
 
-protocols ntp *<name> broadcast ttl <ttl>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> broadcast ttl <ttl>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-broadcast-ttl>`
@@ -468,8 +468,8 @@ Name      ttl
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-authentication:
 
-protocols ntp *<name> broadcast authentication
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> broadcast authentication
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-broadcast>`
@@ -490,8 +490,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-authentication-type:
 
-protocols ntp *<name> broadcast authentication type
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> broadcast authentication type
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-broadcast-authentication>`
@@ -510,8 +510,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-authentication-type-auth_type:
 
-protocols ntp *<name> broadcast authentication type <auth_type>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> broadcast authentication type <auth_type>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-broadcast-authentication-type>`
@@ -529,8 +529,8 @@ Name      auth_type
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-authentication-key:
 
-protocols ntp *<name> broadcast authentication key
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> broadcast authentication key
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-broadcast-authentication>`
@@ -549,8 +549,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-authentication-key-key:
 
-protocols ntp *<name> broadcast authentication key <key>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols ntp \*<name> broadcast authentication key <key>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-ntp-name-broadcast-authentication-key>`
@@ -647,8 +647,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-cdp-interface-interface:
 
-protocols cdp interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols cdp interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-cdp-interface>`
@@ -706,8 +706,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-lldp-interface-interface:
 
-protocols lldp interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols lldp interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-lldp-interface>`
@@ -734,8 +734,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-lldp-interface-interface-admin-status:
 
-protocols lldp interface *<interface> admin-status
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols lldp interface \*<interface> admin-status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-lldp-interface-interface>`
@@ -756,8 +756,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-lldp-interface-interface-admin-status-rx:
 
-protocols lldp interface *<interface> admin-status rx
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols lldp interface \*<interface> admin-status rx
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-lldp-interface-interface-admin-status>`
@@ -774,8 +774,8 @@ Default:  -
 
 .. _dev-confdb-syntax-protocols-lldp-interface-interface-admin-status-tx:
 
-protocols lldp interface *<interface> admin-status tx
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols lldp interface \*<interface> admin-status tx
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-lldp-interface-interface-admin-status>`
@@ -832,8 +832,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-udld-interface-interface:
 
-protocols udld interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols udld interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-udld-interface>`
@@ -975,8 +975,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-spanning-tree-instance-instance:
 
-protocols spanning-tree instance *<instance>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree instance \*<instance>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-instance>`
@@ -996,8 +996,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-spanning-tree-instance-instance-bridge-priority:
 
-protocols spanning-tree instance *<instance> bridge-priority
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree instance \*<instance> bridge-priority
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-instance-instance>`
@@ -1016,8 +1016,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-spanning-tree-instance-instance-bridge-priority-priority:
 
-protocols spanning-tree instance *<instance> bridge-priority <priority>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree instance \*<instance> bridge-priority <priority>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-instance-instance-bridge-priority>`
@@ -1055,8 +1055,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface:
 
-protocols spanning-tree interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-interface>`
@@ -1084,8 +1084,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-admin-status:
 
-protocols spanning-tree interface *<interface> admin-status
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree interface \*<interface> admin-status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-interface-interface>`
@@ -1104,8 +1104,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-admin-status-admin_status:
 
-protocols spanning-tree interface *<interface> admin-status <admin_status>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree interface \*<interface> admin-status <admin_status>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-interface-interface-admin-status>`
@@ -1123,8 +1123,8 @@ Name      admin_status
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-cost:
 
-protocols spanning-tree interface *<interface> cost
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree interface \*<interface> cost
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-interface-interface>`
@@ -1143,8 +1143,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-cost-cost:
 
-protocols spanning-tree interface *<interface> cost <cost>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree interface \*<interface> cost <cost>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-interface-interface-cost>`
@@ -1162,8 +1162,8 @@ Name      cost
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-bpdu-filter:
 
-protocols spanning-tree interface *<interface> bpdu-filter
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree interface \*<interface> bpdu-filter
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-interface-interface>`
@@ -1182,8 +1182,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-bpdu-filter-enabled:
 
-protocols spanning-tree interface *<interface> bpdu-filter <enabled>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree interface \*<interface> bpdu-filter <enabled>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-interface-interface-bpdu-filter>`
@@ -1201,8 +1201,8 @@ Name      enabled
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-bpdu-guard:
 
-protocols spanning-tree interface *<interface> bpdu-guard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree interface \*<interface> bpdu-guard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-interface-interface>`
@@ -1221,8 +1221,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-bpdu-guard-enabled:
 
-protocols spanning-tree interface *<interface> bpdu-guard <enabled>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree interface \*<interface> bpdu-guard <enabled>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-interface-interface-bpdu-guard>`
@@ -1240,8 +1240,8 @@ Name      enabled
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-mode:
 
-protocols spanning-tree interface *<interface> mode
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree interface \*<interface> mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-interface-interface>`
@@ -1260,8 +1260,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-mode-mode:
 
-protocols spanning-tree interface *<interface> mode <mode>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols spanning-tree interface \*<interface> mode <mode>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-spanning-tree-interface-interface-mode>`
@@ -1319,8 +1319,8 @@ Contains:
 
 .. _dev-confdb-syntax-protocols-loop-detect-interface-interface:
 
-protocols loop-detect interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+protocols loop-detect interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================
 Parent    :ref: `protocols<dev-confdb-syntax-protocols-loop-detect-interface>`

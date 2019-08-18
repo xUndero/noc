@@ -64,8 +64,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name:
 
-media sources video *<name>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video>`
@@ -85,8 +85,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings:
 
-media sources video *<name> settings
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name>`
@@ -117,8 +117,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-brightness:
 
-media sources video *<name> settings brightness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings brightness
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings>`
@@ -137,8 +137,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-brightness-brightness:
 
-media sources video *<name> settings brightness <brightness>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings brightness <brightness>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-brightness>`
@@ -156,8 +156,8 @@ Name      brightness
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-saturation:
 
-media sources video *<name> settings saturation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings saturation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings>`
@@ -176,8 +176,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-saturation-saturation:
 
-media sources video *<name> settings saturation <saturation>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings saturation <saturation>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-saturation>`
@@ -195,8 +195,8 @@ Name      saturation
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-contrast:
 
-media sources video *<name> settings contrast
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings contrast
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings>`
@@ -215,8 +215,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-contrast-contrast:
 
-media sources video *<name> settings contrast <contrast>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings contrast <contrast>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-contrast>`
@@ -234,8 +234,8 @@ Name      contrast
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-sharpness:
 
-media sources video *<name> settings sharpness
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings sharpness
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings>`
@@ -254,8 +254,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-sharpness-sharpness:
 
-media sources video *<name> settings sharpness <sharpness>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings sharpness <sharpness>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-sharpness>`
@@ -273,8 +273,8 @@ Name      sharpness
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-white-balance:
 
-media sources video *<name> settings white-balance
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings white-balance
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings>`
@@ -299,8 +299,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-white-balance-admin-status:
 
-media sources video *<name> settings white-balance admin-status
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings white-balance admin-status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-white-balance>`
@@ -319,8 +319,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-white-balance-admin-status-admin_status:
 
-media sources video *<name> settings white-balance admin-status <admin_status>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings white-balance admin-status <admin_status>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-white-balance-admin-status>`
@@ -338,8 +338,8 @@ Name      admin_status
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-white-balance-auto:
 
-media sources video *<name> settings white-balance auto
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings white-balance auto
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-white-balance>`
@@ -356,8 +356,8 @@ Default:  -
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-white-balance-cr-gain:
 
-media sources video *<name> settings white-balance cr-gain
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings white-balance cr-gain
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-white-balance>`
@@ -376,8 +376,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-white-balance-cr-gain-cr_gain:
 
-media sources video *<name> settings white-balance cr-gain <cr_gain>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings white-balance cr-gain <cr_gain>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-white-balance-cr-gain>`
@@ -395,8 +395,8 @@ Name      cr_gain
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-white-balance-gb-gain:
 
-media sources video *<name> settings white-balance gb-gain
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings white-balance gb-gain
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-white-balance>`
@@ -415,8 +415,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-white-balance-gb-gain-gb_gain:
 
-media sources video *<name> settings white-balance gb-gain <gb_gain>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings white-balance gb-gain <gb_gain>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-white-balance-gb-gain>`
@@ -434,8 +434,8 @@ Name      gb_gain
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-black-light-compensation:
 
-media sources video *<name> settings black-light-compensation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings black-light-compensation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings>`
@@ -454,8 +454,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-black-light-compensation-admin-status:
 
-media sources video *<name> settings black-light-compensation admin-status
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings black-light-compensation admin-status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-black-light-compensation>`
@@ -474,8 +474,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-black-light-compensation-admin-status-admin_status:
 
-media sources video *<name> settings black-light-compensation admin-status <admin_status>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings black-light-compensation admin-status <admin_status>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-black-light-compensation-admin-status>`
@@ -493,8 +493,8 @@ Name      admin_status
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-wide-dynamic-range:
 
-media sources video *<name> settings wide-dynamic-range
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings wide-dynamic-range
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings>`
@@ -515,8 +515,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-wide-dynamic-range-admin-status:
 
-media sources video *<name> settings wide-dynamic-range admin-status
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings wide-dynamic-range admin-status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-wide-dynamic-range>`
@@ -535,8 +535,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-wide-dynamic-range-admin-status-admin_status:
 
-media sources video *<name> settings wide-dynamic-range admin-status <admin_status>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings wide-dynamic-range admin-status <admin_status>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-wide-dynamic-range-admin-status>`
@@ -554,8 +554,8 @@ Name      admin_status
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-wide-dynamic-range-level:
 
-media sources video *<name> settings wide-dynamic-range level
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings wide-dynamic-range level
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-wide-dynamic-range>`
@@ -574,8 +574,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-wide-dynamic-range-level-level:
 
-media sources video *<name> settings wide-dynamic-range level <level>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources video \*<name> settings wide-dynamic-range level <level>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-video-name-settings-wide-dynamic-range-level>`
@@ -613,8 +613,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-audio-name:
 
-media sources audio *<name>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources audio \*<name>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-audio>`
@@ -636,8 +636,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-audio-name-source:
 
-media sources audio *<name> source
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources audio \*<name> source
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-audio-name>`
@@ -656,8 +656,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-audio-name-source-source:
 
-media sources audio *<name> source <source>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources audio \*<name> source <source>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-audio-name-source>`
@@ -675,8 +675,8 @@ Name      source
 
 .. _dev-confdb-syntax-media-sources-audio-name-settings:
 
-media sources audio *<name> settings
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources audio \*<name> settings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-audio-name>`
@@ -697,8 +697,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-audio-name-settings-volume:
 
-media sources audio *<name> settings volume
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources audio \*<name> settings volume
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-audio-name-settings>`
@@ -717,8 +717,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-audio-name-settings-volume-volume:
 
-media sources audio *<name> settings volume <volume>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources audio \*<name> settings volume <volume>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-audio-name-settings-volume>`
@@ -736,8 +736,8 @@ Name      volume
 
 .. _dev-confdb-syntax-media-sources-audio-name-settings-noise-reduction:
 
-media sources audio *<name> settings noise-reduction
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources audio \*<name> settings noise-reduction
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-audio-name-settings>`
@@ -756,8 +756,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-audio-name-settings-noise-reduction-admin-status:
 
-media sources audio *<name> settings noise-reduction admin-status
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources audio \*<name> settings noise-reduction admin-status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-audio-name-settings-noise-reduction>`
@@ -776,8 +776,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-sources-audio-name-settings-noise-reduction-admin-status-admin_status:
 
-media sources audio *<name> settings noise-reduction admin-status <admin_status>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media sources audio \*<name> settings noise-reduction admin-status <admin_status>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-sources-audio-name-settings-noise-reduction-admin-status>`
@@ -815,8 +815,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name:
 
-media streams *<name>
-^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name>
+^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams>`
@@ -838,8 +838,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-rtsp-path:
 
-media streams *<name> rtsp-path
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> rtsp-path
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name>`
@@ -858,8 +858,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-rtsp-path-path:
 
-media streams *<name> rtsp-path <path>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> rtsp-path <path>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-rtsp-path>`
@@ -877,8 +877,8 @@ Name      path
 
 .. _dev-confdb-syntax-media-streams-name-settings:
 
-media streams *<name> settings
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name>`
@@ -901,8 +901,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video:
 
-media streams *<name> settings video
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings>`
@@ -927,8 +927,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-admin-status:
 
-media streams *<name> settings video admin-status
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video admin-status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video>`
@@ -947,8 +947,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-admin-status-admin_status:
 
-media streams *<name> settings video admin-status <admin_status>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video admin-status <admin_status>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-admin-status>`
@@ -966,8 +966,8 @@ Name      admin_status
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-resolution:
 
-media streams *<name> settings video resolution
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video resolution
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video>`
@@ -988,8 +988,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-resolution-width:
 
-media streams *<name> settings video resolution width
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video resolution width
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-resolution>`
@@ -1008,8 +1008,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-resolution-width-width:
 
-media streams *<name> settings video resolution width <width>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video resolution width <width>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-resolution-width>`
@@ -1027,8 +1027,8 @@ Name      width
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-resolution-height:
 
-media streams *<name> settings video resolution height
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video resolution height
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-resolution>`
@@ -1047,8 +1047,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-resolution-height-height:
 
-media streams *<name> settings video resolution height <height>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video resolution height <height>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-resolution-height>`
@@ -1066,8 +1066,8 @@ Name      height
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec:
 
-media streams *<name> settings video codec
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video codec
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video>`
@@ -1088,8 +1088,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-mpeg4:
 
-media streams *<name> settings video codec mpeg4
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video codec mpeg4
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-codec>`
@@ -1106,8 +1106,8 @@ Default:  -
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264:
 
-media streams *<name> settings video codec h264
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video codec h264
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-codec>`
@@ -1133,8 +1133,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile:
 
-media streams *<name> settings video codec h264 profile
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video codec h264 profile
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-codec-h264>`
@@ -1159,8 +1159,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-name:
 
-media streams *<name> settings video codec h264 profile name
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video codec h264 profile name
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile>`
@@ -1179,8 +1179,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-name-profile:
 
-media streams *<name> settings video codec h264 profile name <profile>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video codec h264 profile name <profile>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-name>`
@@ -1198,8 +1198,8 @@ Name      profile
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-id:
 
-media streams *<name> settings video codec h264 profile id
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video codec h264 profile id
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile>`
@@ -1218,8 +1218,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-id-id:
 
-media streams *<name> settings video codec h264 profile id <id>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video codec h264 profile id <id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-id>`
@@ -1237,8 +1237,8 @@ Name      id
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-constraint-set:
 
-media streams *<name> settings video codec h264 profile constraint-set
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video codec h264 profile constraint-set
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile>`
@@ -1257,8 +1257,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-constraint-set-constraints:
 
-media streams *<name> settings video codec h264 profile constraint-set <constraints>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video codec h264 profile constraint-set <constraints>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-constraint-set>`
@@ -1276,8 +1276,8 @@ Name      constraints
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-gov-length:
 
-media streams *<name> settings video codec h264 profile gov-length
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video codec h264 profile gov-length
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile>`
@@ -1296,8 +1296,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-gov-length-gov_length:
 
-media streams *<name> settings video codec h264 profile gov-length <gov_length>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video codec h264 profile gov-length <gov_length>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-gov-length>`
@@ -1315,8 +1315,8 @@ Name      gov_length
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control:
 
-media streams *<name> settings video rate-control
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video rate-control
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video>`
@@ -1339,8 +1339,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-min-framerate:
 
-media streams *<name> settings video rate-control min-framerate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video rate-control min-framerate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-rate-control>`
@@ -1359,8 +1359,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-min-framerate-min_framerate:
 
-media streams *<name> settings video rate-control min-framerate <min_framerate>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video rate-control min-framerate <min_framerate>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-rate-control-min-framerate>`
@@ -1378,8 +1378,8 @@ Name      min_framerate
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-max-framerate:
 
-media streams *<name> settings video rate-control max-framerate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video rate-control max-framerate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-rate-control>`
@@ -1398,8 +1398,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-max-framerate-max_framerate:
 
-media streams *<name> settings video rate-control max-framerate <max_framerate>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video rate-control max-framerate <max_framerate>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-rate-control-max-framerate>`
@@ -1417,8 +1417,8 @@ Name      max_framerate
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode:
 
-media streams *<name> settings video rate-control mode
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video rate-control mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-rate-control>`
@@ -1439,8 +1439,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode-cbr:
 
-media streams *<name> settings video rate-control mode cbr
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video rate-control mode cbr
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode>`
@@ -1459,8 +1459,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode-cbr-bitrate:
 
-media streams *<name> settings video rate-control mode cbr bitrate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video rate-control mode cbr bitrate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode-cbr>`
@@ -1479,8 +1479,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode-cbr-bitrate-bitrate:
 
-media streams *<name> settings video rate-control mode cbr bitrate <bitrate>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video rate-control mode cbr bitrate <bitrate>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode-cbr-bitrate>`
@@ -1498,8 +1498,8 @@ Name      bitrate
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode-vbr:
 
-media streams *<name> settings video rate-control mode vbr
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video rate-control mode vbr
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode>`
@@ -1518,8 +1518,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode-vbr-max-bitrate:
 
-media streams *<name> settings video rate-control mode vbr max-bitrate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video rate-control mode vbr max-bitrate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode-vbr>`
@@ -1538,8 +1538,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode-vbr-max-bitrate-max_bitrate:
 
-media streams *<name> settings video rate-control mode vbr max-bitrate <max_bitrate>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings video rate-control mode vbr max-bitrate <max_bitrate>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode-vbr-max-bitrate>`
@@ -1557,8 +1557,8 @@ Name      max_bitrate
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio:
 
-media streams *<name> settings audio
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings audio
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings>`
@@ -1583,8 +1583,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio-admin-status:
 
-media streams *<name> settings audio admin-status
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings audio admin-status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-audio>`
@@ -1603,8 +1603,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio-admin-status-admin_status:
 
-media streams *<name> settings audio admin-status <admin_status>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings audio admin-status <admin_status>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-audio-admin-status>`
@@ -1622,8 +1622,8 @@ Name      admin_status
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio-codec:
 
-media streams *<name> settings audio codec
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings audio codec
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-audio>`
@@ -1642,8 +1642,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio-codec-codec:
 
-media streams *<name> settings audio codec <codec>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings audio codec <codec>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-audio-codec>`
@@ -1661,8 +1661,8 @@ Name      codec
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio-bitrate:
 
-media streams *<name> settings audio bitrate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings audio bitrate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-audio>`
@@ -1681,8 +1681,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio-bitrate-bitrate:
 
-media streams *<name> settings audio bitrate <bitrate>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings audio bitrate <bitrate>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-audio-bitrate>`
@@ -1700,8 +1700,8 @@ Name      bitrate
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio-samplerate:
 
-media streams *<name> settings audio samplerate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings audio samplerate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-audio>`
@@ -1720,8 +1720,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio-samplerate-samplerate:
 
-media streams *<name> settings audio samplerate <samplerate>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings audio samplerate <samplerate>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-audio-samplerate>`
@@ -1739,8 +1739,8 @@ Name      samplerate
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays:
 
-media streams *<name> settings overlays
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings overlays
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings>`
@@ -1759,8 +1759,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name:
 
-media streams *<name> settings overlays <overlay_name>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings overlays <overlay_name>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-overlays>`
@@ -1784,8 +1784,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-admin-status:
 
-media streams *<name> settings overlays <overlay_name> admin-status
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings overlays <overlay_name> admin-status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name>`
@@ -1804,8 +1804,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-admin-status-admin_status:
 
-media streams *<name> settings overlays <overlay_name> admin-status <admin_status>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings overlays <overlay_name> admin-status <admin_status>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-admin-status>`
@@ -1823,8 +1823,8 @@ Name      admin_status
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-position:
 
-media streams *<name> settings overlays <overlay_name> position
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings overlays <overlay_name> position
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name>`
@@ -1845,8 +1845,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-position-x:
 
-media streams *<name> settings overlays <overlay_name> position x
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings overlays <overlay_name> position x
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-position>`
@@ -1865,8 +1865,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-position-x-x:
 
-media streams *<name> settings overlays <overlay_name> position x <x>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings overlays <overlay_name> position x <x>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-position-x>`
@@ -1884,8 +1884,8 @@ Name      x
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-position-y:
 
-media streams *<name> settings overlays <overlay_name> position y
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings overlays <overlay_name> position y
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-position>`
@@ -1904,8 +1904,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-position-y-y:
 
-media streams *<name> settings overlays <overlay_name> position y <y>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings overlays <overlay_name> position y <y>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-position-y>`
@@ -1923,8 +1923,8 @@ Name      y
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-text:
 
-media streams *<name> settings overlays <overlay_name> text
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings overlays <overlay_name> text
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name>`
@@ -1943,8 +1943,8 @@ Contains:
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-text-text:
 
-media streams *<name> settings overlays <overlay_name> text <text>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+media streams \*<name> settings overlays <overlay_name> text <text>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================
 Parent    :ref: `media<dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-text>`

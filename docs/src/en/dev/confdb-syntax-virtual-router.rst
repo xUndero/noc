@@ -20,8 +20,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr:
 
-virtual-router *<vr>
-^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr>
+^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router>`
@@ -41,8 +41,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance:
 
-virtual-router *<vr> forwarding-instance
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr>`
@@ -61,8 +61,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance:
 
-virtual-router *<vr> forwarding-instance *<instance>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance>`
@@ -98,8 +98,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-type:
 
-virtual-router *<vr> forwarding-instance *<instance> type
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> type
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance>`
@@ -118,8 +118,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-type-type:
 
-virtual-router *<vr> forwarding-instance *<instance> type <type>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> type <type>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-type>`
@@ -137,8 +137,8 @@ Name      type
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-description:
 
-virtual-router *<vr> forwarding-instance *<instance> description
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> description
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance>`
@@ -157,8 +157,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-description-description:
 
-virtual-router *<vr> forwarding-instance *<instance> description <description>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> description <description>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-description>`
@@ -176,8 +176,8 @@ Name      description
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-distinguisher:
 
-virtual-router *<vr> forwarding-instance *<instance> route-distinguisher
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route-distinguisher
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance>`
@@ -196,8 +196,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-distinguisher-rd:
 
-virtual-router *<vr> forwarding-instance *<instance> route-distinguisher <rd>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route-distinguisher <rd>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-distinguisher>`
@@ -215,8 +215,8 @@ Name      rd
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vrf-target:
 
-virtual-router *<vr> forwarding-instance *<instance> vrf-target
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vrf-target
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance>`
@@ -237,8 +237,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vrf-target-import:
 
-virtual-router *<vr> forwarding-instance *<instance> vrf-target import
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vrf-target import
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vrf-target>`
@@ -257,8 +257,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vrf-target-import-target:
 
-virtual-router *<vr> forwarding-instance *<instance> vrf-target import *<target>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vrf-target import \*<target>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vrf-target-import>`
@@ -276,8 +276,8 @@ Name      target
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vrf-target-export:
 
-virtual-router *<vr> forwarding-instance *<instance> vrf-target export
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vrf-target export
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vrf-target>`
@@ -296,8 +296,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vrf-target-export-target:
 
-virtual-router *<vr> forwarding-instance *<instance> vrf-target export *<target>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vrf-target export \*<target>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vrf-target-export>`
@@ -315,8 +315,8 @@ Name      target
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vpn-id:
 
-virtual-router *<vr> forwarding-instance *<instance> vpn-id
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vpn-id
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance>`
@@ -335,8 +335,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vpn-id-vpn_id:
 
-virtual-router *<vr> forwarding-instance *<instance> vpn-id <vpn_id>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vpn-id <vpn_id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vpn-id>`
@@ -354,8 +354,8 @@ Name      vpn_id
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans:
 
-virtual-router *<vr> forwarding-instance *<instance> vlans
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vlans
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance>`
@@ -374,8 +374,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans-vlan_id:
 
-virtual-router *<vr> forwarding-instance *<instance> vlans *<vlan_id>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vlans \*<vlan_id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans>`
@@ -404,8 +404,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans-vlan_id-name:
 
-virtual-router *<vr> forwarding-instance *<instance> vlans *<vlan_id> name
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vlans \*<vlan_id> name
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans-vlan_id>`
@@ -424,8 +424,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans-vlan_id-name-name:
 
-virtual-router *<vr> forwarding-instance *<instance> vlans *<vlan_id> name <name>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vlans \*<vlan_id> name <name>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans-vlan_id-name>`
@@ -443,8 +443,8 @@ Name      name
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans-vlan_id-description:
 
-virtual-router *<vr> forwarding-instance *<instance> vlans *<vlan_id> description
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vlans \*<vlan_id> description
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans-vlan_id>`
@@ -463,8 +463,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans-vlan_id-description-description:
 
-virtual-router *<vr> forwarding-instance *<instance> vlans *<vlan_id> description <description>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> vlans \*<vlan_id> description <description>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-vlans-vlan_id-description>`
@@ -482,8 +482,8 @@ Name      description
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance>`
@@ -502,8 +502,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces>`
@@ -523,8 +523,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface>`
@@ -543,8 +543,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit>`
@@ -574,8 +574,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-description:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> description
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> description
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit>`
@@ -594,8 +594,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-description-description:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> description <description>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> description <description>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-description>`
@@ -613,8 +613,8 @@ Name      description
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-inet:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> inet
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> inet
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit>`
@@ -633,8 +633,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-inet-address:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> inet address
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> inet address
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-inet>`
@@ -653,8 +653,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-inet-address-address:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> inet address *<address>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> inet address \*<address>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-inet-address>`
@@ -672,8 +672,8 @@ Name      address
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-inet6:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> inet6
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> inet6
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit>`
@@ -692,8 +692,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-inet6-address:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> inet6 address
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> inet6 address
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-inet6>`
@@ -712,8 +712,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-inet6-address-address:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> inet6 address *<address>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> inet6 address \*<address>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-inet6-address>`
@@ -731,8 +731,8 @@ Name      address
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-iso:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> iso
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> iso
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit>`
@@ -749,8 +749,8 @@ Default:  -
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-mpls:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> mpls
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> mpls
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit>`
@@ -767,8 +767,8 @@ Default:  -
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit>`
@@ -795,8 +795,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge switchport
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge>`
@@ -819,8 +819,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport-untagged:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport untagged
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge switchport untagged
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport>`
@@ -839,8 +839,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport-untagged-vlan_filter:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport untagged *<vlan_filter>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge switchport untagged \*<vlan_filter>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport-untagged>`
@@ -858,8 +858,8 @@ Name      vlan_filter
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport-native:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport native
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge switchport native
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport>`
@@ -878,8 +878,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport-native-vlan_id:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport native <vlan_id>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge switchport native <vlan_id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport-native>`
@@ -897,8 +897,8 @@ Name      vlan_id
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport-tagged:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport tagged
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge switchport tagged
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport>`
@@ -917,8 +917,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport-tagged-vlan_filter:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge switchport tagged *<vlan_filter>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge switchport tagged \*<vlan_filter>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-switchport-tagged>`
@@ -936,8 +936,8 @@ Name      vlan_filter
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-port-security:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge port-security
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge port-security
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge>`
@@ -956,8 +956,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-port-security-max-mac-count:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge port-security max-mac-count
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge port-security max-mac-count
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-port-security>`
@@ -976,8 +976,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-port-security-max-mac-count-limit:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge port-security max-mac-count <limit>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge port-security max-mac-count <limit>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-port-security-max-mac-count>`
@@ -995,8 +995,8 @@ Name      limit
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge>`
@@ -1022,8 +1022,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-stack:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> stack
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> stack
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num>`
@@ -1042,8 +1042,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-stack-stack:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> stack <stack>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> stack <stack>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-stack>`
@@ -1061,8 +1061,8 @@ Name      stack
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-outer_vlans:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> outer_vlans
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> outer_vlans
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num>`
@@ -1081,8 +1081,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-outer_vlans-vlan_filter:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> outer_vlans *<vlan_filter>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> outer_vlans \*<vlan_filter>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-outer_vlans>`
@@ -1100,8 +1100,8 @@ Name      vlan_filter
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-inner_vlans:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> inner_vlans
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> inner_vlans
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num>`
@@ -1120,8 +1120,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-inner_vlans-vlan_filter:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> inner_vlans *<vlan_filter>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> inner_vlans \*<vlan_filter>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-inner_vlans>`
@@ -1139,8 +1139,8 @@ Name      vlan_filter
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> *<op_num>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> \*<op_num>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num>`
@@ -1160,8 +1160,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num-op:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> *<op_num> <op>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> \*<op_num> <op>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num>`
@@ -1188,8 +1188,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num-op-vlan:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> *<op_num> <op> <vlan>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> \*<op_num> <op> <vlan>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num-op>`
@@ -1205,10 +1205,222 @@ Name      vlan
 
     :param vlan: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> *<op_num> <op>
 
+.. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num:
+
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+========  ==============================================================================================================================
+Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge>`
+Required  Yes
+Multiple  Yes
+Default:  -
+Name      num
+========  ==============================================================================================================================
+
+Contains:
+
++---------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+| Node                                                                                                                                        | Required   | Multi   |
++=============================================================================================================================================+============+=========+
+| :ref: `stack<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-stack>`             | No         | Yes     |
++---------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+| :ref: `outer_vlans<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-outer_vlans>` | No         | Yes     |
++---------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+| :ref: `inner_vlans<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-inner_vlans>` | No         | Yes     |
++---------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+| :ref: `op_num<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num>`           | No         | Yes     |
++---------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+
+.. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-stack:
+
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> stack
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+========  ==================================================================================================================================
+Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num>`
+Required  No
+Multiple  No
+Default:  -
+========  ==================================================================================================================================
+
+Contains:
+
++---------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+| Node                                                                                                                                  | Required   | Multi   |
++=======================================================================================================================================+============+=========+
+| :ref: `stack<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-stack-stack>` | Yes        | No      |
++---------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+
+.. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-stack-stack:
+
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> stack <stack>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+========  ========================================================================================================================================
+Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-stack>`
+Required  Yes
+Multiple  No
+Default:  0
+Name      stack
+========  ========================================================================================================================================
+
+.. py:function:: make_output_vlan_map_stack(stack)
+
+    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> stack <stack>` node
+
+    :param stack: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> stack
+
+.. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-outer_vlans:
+
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> outer_vlans
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+========  ==================================================================================================================================
+Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num>`
+Required  No
+Multiple  No
+Default:  -
+========  ==================================================================================================================================
+
+Contains:
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+| Node                                                                                                                                                    | Required   | Multi   |
++=========================================================================================================================================================+============+=========+
+| :ref: `vlan_filter<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-outer_vlans-vlan_filter>` | No         | No      |
++---------------------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+
+.. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-outer_vlans-vlan_filter:
+
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> outer_vlans \*<vlan_filter>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+========  ==============================================================================================================================================
+Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-outer_vlans>`
+Required  No
+Multiple  Yes
+Default:  -
+Name      vlan_filter
+========  ==============================================================================================================================================
+
+.. py:function:: make_output_vlan_map_outer_vlans(vlan_filter)
+
+    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> outer_vlans *<vlan_filter>` node
+
+    :param vlan_filter: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> outer_vlans
+
+.. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-inner_vlans:
+
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> inner_vlans
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+========  ==================================================================================================================================
+Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num>`
+Required  No
+Multiple  No
+Default:  -
+========  ==================================================================================================================================
+
+Contains:
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+| Node                                                                                                                                                    | Required   | Multi   |
++=========================================================================================================================================================+============+=========+
+| :ref: `vlan_filter<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-inner_vlans-vlan_filter>` | No         | No      |
++---------------------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+
+.. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-inner_vlans-vlan_filter:
+
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> inner_vlans \*<vlan_filter>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+========  ==============================================================================================================================================
+Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-inner_vlans>`
+Required  No
+Multiple  Yes
+Default:  -
+Name      vlan_filter
+========  ==============================================================================================================================================
+
+.. py:function:: make_output_vlan_map_inner_vlans(vlan_filter)
+
+    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> inner_vlans *<vlan_filter>` node
+
+    :param vlan_filter: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> inner_vlans
+
+.. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num:
+
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> \*<op_num>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+========  ==================================================================================================================================
+Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num>`
+Required  No
+Multiple  Yes
+Default:  -
+Name      op_num
+========  ==================================================================================================================================
+
+Contains:
+
++----------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+| Node                                                                                                                             | Required   | Multi   |
++==================================================================================================================================+============+=========+
+| :ref: `op<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num-op>` | Yes        | Yes     |
++----------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+
+.. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num-op:
+
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> \*<op_num> <op>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+========  =========================================================================================================================================
+Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num>`
+Required  Yes
+Multiple  No
+Default:  -
+Name      op
+========  =========================================================================================================================================
+
+.. py:function:: make_output_vlan_map_rewrite_operation(op)
+
+    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> *<op_num> <op>` node
+
+    :param op: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> *<op_num>
+
+
+Contains:
+
++-----------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+| Node                                                                                                                                    | Required   | Multi   |
++=========================================================================================================================================+============+=========+
+| :ref: `vlan<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num-op-vlan>` | No         | No      |
++-----------------------------------------------------------------------------------------------------------------------------------------+------------+---------+
+
+.. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num-op-vlan:
+
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge \*<num> \*<op_num> <op> <vlan>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+========  ============================================================================================================================================
+Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-num-op_num-op>`
+Required  No
+Multiple  No
+Default:  -
+Name      vlan
+========  ============================================================================================================================================
+
+.. py:function:: make_output_vlan_map_rewrite_vlan(vlan)
+
+    Generate `virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> *<op_num> <op> <vlan>` node
+
+    :param vlan: virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge *<num> *<op_num> <op>
+
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-dynamic_vlans:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge dynamic_vlans
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge dynamic_vlans
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge>`
@@ -1227,8 +1439,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-dynamic_vlans-vlan_filter:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge dynamic_vlans *<vlan_filter>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge dynamic_vlans \*<vlan_filter>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-dynamic_vlans>`
@@ -1248,8 +1460,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-dynamic_vlans-vlan_filter-service:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge dynamic_vlans *<vlan_filter> service
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge dynamic_vlans \*<vlan_filter> service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-dynamic_vlans-vlan_filter>`
@@ -1268,8 +1480,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-dynamic_vlans-vlan_filter-service-service:
 
-virtual-router *<vr> forwarding-instance *<instance> interfaces *<interface> unit *<unit> bridge dynamic_vlans *<vlan_filter> service <service>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> interfaces \*<interface> unit \*<unit> bridge dynamic_vlans \*<vlan_filter> service <service>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-interfaces-interface-unit-unit-bridge-dynamic_vlans-vlan_filter-service>`
@@ -1287,8 +1499,8 @@ Name      service
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route:
 
-virtual-router *<vr> forwarding-instance *<instance> route
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance>`
@@ -1309,8 +1521,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet:
 
-virtual-router *<vr> forwarding-instance *<instance> route inet
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route inet
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route>`
@@ -1329,8 +1541,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet-static:
 
-virtual-router *<vr> forwarding-instance *<instance> route inet static
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route inet static
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet>`
@@ -1349,8 +1561,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet-static-route:
 
-virtual-router *<vr> forwarding-instance *<instance> route inet static <route>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route inet static <route>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet-static>`
@@ -1372,8 +1584,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet-static-route-next-hop:
 
-virtual-router *<vr> forwarding-instance *<instance> route inet static <route> next-hop
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route inet static <route> next-hop
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet-static-route>`
@@ -1392,8 +1604,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet-static-route-next-hop-next_hop:
 
-virtual-router *<vr> forwarding-instance *<instance> route inet static <route> next-hop *<next_hop>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route inet static <route> next-hop \*<next_hop>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet-static-route-next-hop>`
@@ -1411,8 +1623,8 @@ Name      next_hop
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet-static-route-discard:
 
-virtual-router *<vr> forwarding-instance *<instance> route inet static <route> discard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route inet static <route> discard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet-static-route>`
@@ -1429,8 +1641,8 @@ Default:  -
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet6:
 
-virtual-router *<vr> forwarding-instance *<instance> route inet6
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route inet6
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route>`
@@ -1449,8 +1661,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet6-static:
 
-virtual-router *<vr> forwarding-instance *<instance> route inet6 static
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route inet6 static
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet6>`
@@ -1469,8 +1681,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet6-static-route:
 
-virtual-router *<vr> forwarding-instance *<instance> route inet6 static <route>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route inet6 static <route>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet6-static>`
@@ -1490,8 +1702,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet6-static-route-next-hop:
 
-virtual-router *<vr> forwarding-instance *<instance> route inet6 static <route> next-hop
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route inet6 static <route> next-hop
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet6-static-route>`
@@ -1510,8 +1722,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet6-static-route-next-hop-next_hop:
 
-virtual-router *<vr> forwarding-instance *<instance> route inet6 static <route> next-hop *<next_hop>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> route inet6 static <route> next-hop \*<next_hop>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-route-inet6-static-route-next-hop>`
@@ -1529,8 +1741,8 @@ Name      next_hop
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance>`
@@ -1569,8 +1781,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-telnet:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols telnet
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols telnet
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols>`
@@ -1587,8 +1799,8 @@ Default:  -
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ssh:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols ssh
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols ssh
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols>`
@@ -1605,8 +1817,8 @@ Default:  -
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-http:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols http
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols http
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols>`
@@ -1623,8 +1835,8 @@ Default:  -
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-https:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols https
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols https
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols>`
@@ -1641,8 +1853,8 @@ Default:  -
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols snmp
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols snmp
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols>`
@@ -1663,8 +1875,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-community:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols snmp community
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols snmp community
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp>`
@@ -1683,8 +1895,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-community-community:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols snmp community *<community>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols snmp community \*<community>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-community>`
@@ -1704,8 +1916,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-community-community-level:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols snmp community *<community> level
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols snmp community \*<community> level
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-community-community>`
@@ -1724,8 +1936,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-community-community-level-level:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols snmp community *<community> level <level>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols snmp community \*<community> level <level>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-community-community-level>`
@@ -1743,8 +1955,8 @@ Name      level
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-trap:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols snmp trap
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols snmp trap
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp>`
@@ -1763,8 +1975,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-trap-community:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols snmp trap community
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols snmp trap community
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-trap>`
@@ -1783,8 +1995,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-trap-community-community:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols snmp trap community *<community>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols snmp trap community \*<community>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-trap-community>`
@@ -1804,8 +2016,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-trap-community-community-host:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols snmp trap community *<community> host
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols snmp trap community \*<community> host
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-trap-community-community>`
@@ -1824,8 +2036,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-trap-community-community-host-address:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols snmp trap community *<community> host *<address>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols snmp trap community \*<community> host \*<address>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-snmp-trap-community-community-host>`
@@ -1836,8 +2048,8 @@ Name      address
 ========  =====================================================================================================================================
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols isis
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols isis
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols>`
@@ -1858,8 +2070,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis-area:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols isis area
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols isis area
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis>`
@@ -1878,8 +2090,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis-area-area:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols isis area *<area>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols isis area \*<area>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis-area>`
@@ -1897,8 +2109,8 @@ Name      area
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols isis interface
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols isis interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis>`
@@ -1917,8 +2129,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis-interface-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols isis interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols isis interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis-interface>`
@@ -1945,8 +2157,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis-interface-interface-level:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols isis interface *<interface> level
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols isis interface \*<interface> level
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis-interface-interface>`
@@ -1965,8 +2177,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis-interface-interface-level-level:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols isis interface *<interface> level *<level>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols isis interface \*<interface> level \*<level>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-isis-interface-interface-level>`
@@ -1984,8 +2196,8 @@ Name      level
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ospf:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols ospf
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols ospf
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols>`
@@ -2004,8 +2216,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ospf-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols ospf interface
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols ospf interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ospf>`
@@ -2024,8 +2236,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ospf-interface-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols ospf interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols ospf interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ospf-interface>`
@@ -2043,8 +2255,8 @@ Name      interface
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ldp:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols ldp
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols ldp
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols>`
@@ -2063,8 +2275,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ldp-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols ldp interface
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols ldp interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ldp>`
@@ -2083,8 +2295,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ldp-interface-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols ldp interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols ldp interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-ldp-interface>`
@@ -2102,8 +2314,8 @@ Name      interface
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-rsvp:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols rsvp
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols rsvp
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols>`
@@ -2122,8 +2334,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-rsvp-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols rsvp interface
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols rsvp interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-rsvp>`
@@ -2142,8 +2354,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-rsvp-interface-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols rsvp interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols rsvp interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-rsvp-interface>`
@@ -2161,8 +2373,8 @@ Name      interface
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-pim:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols pim
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols pim
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols>`
@@ -2183,8 +2395,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-pim-mode:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols pim mode
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols pim mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-pim>`
@@ -2203,8 +2415,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-pim-mode-mode:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols pim mode <mode>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols pim mode <mode>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-pim-mode>`
@@ -2222,8 +2434,8 @@ Name      mode
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-pim-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols pim interface
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols pim interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-pim>`
@@ -2242,8 +2454,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-pim-interface-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols pim interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols pim interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-pim-interface>`
@@ -2261,8 +2473,8 @@ Name      interface
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols igmp-snooping
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols>`
@@ -2281,8 +2493,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping vlan
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols igmp-snooping vlan
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping>`
@@ -2301,8 +2513,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping vlan *<vlan>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols igmp-snooping vlan \*<vlan>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan>`
@@ -2326,8 +2538,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan-version:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping vlan *<vlan> version
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols igmp-snooping vlan \*<vlan> version
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan>`
@@ -2346,8 +2558,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan-version-version:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping vlan *<vlan> version <version>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols igmp-snooping vlan \*<vlan> version <version>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan-version>`
@@ -2358,8 +2570,8 @@ Name      version
 ========  ==================================================================================================================================
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan-immediate-leave:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping vlan *<vlan> immediate-leave
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols igmp-snooping vlan \*<vlan> immediate-leave
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan>`
@@ -2369,8 +2581,8 @@ Default:  -
 ========  ==========================================================================================================================
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping vlan *<vlan> interface
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols igmp-snooping vlan \*<vlan> interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan>`
@@ -2389,8 +2601,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan-interface-interface:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping vlan *<vlan> interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols igmp-snooping vlan \*<vlan> interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan-interface>`
@@ -2417,8 +2629,8 @@ Contains:
 
 .. _dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan-interface-interface-multicast-router:
 
-virtual-router *<vr> forwarding-instance *<instance> protocols igmp-snooping vlan *<vlan> interface *<interface> multicast-router
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+virtual-router \*<vr> forwarding-instance \*<instance> protocols igmp-snooping vlan \*<vlan> interface \*<interface> multicast-router
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================================================================================
 Parent    :ref: `virtual-router<dev-confdb-syntax-virtual-router-vr-forwarding-instance-instance-protocols-igmp-snooping-vlan-vlan-interface-interface>`

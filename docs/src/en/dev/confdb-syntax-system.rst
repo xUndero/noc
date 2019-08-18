@@ -318,8 +318,8 @@ Contains:
 
 .. _dev-confdb-syntax-system-user-username:
 
-system user *<username>
-^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username>
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================
 Parent    :ref: `system<dev-confdb-syntax-system-user>`
@@ -345,8 +345,8 @@ Contains:
 
 .. _dev-confdb-syntax-system-user-username-uid:
 
-system user *<username> uid
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> uid
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username>`
@@ -365,8 +365,8 @@ Contains:
 
 .. _dev-confdb-syntax-system-user-username-uid-uid:
 
-system user *<username> uid <uid>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> uid <uid>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username-uid>`
@@ -384,8 +384,8 @@ Name      uid
 
 .. _dev-confdb-syntax-system-user-username-full-name:
 
-system user *<username> full-name
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> full-name
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username>`
@@ -404,8 +404,8 @@ Contains:
 
 .. _dev-confdb-syntax-system-user-username-full-name-full_name:
 
-system user *<username> full-name <full_name>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> full-name <full_name>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username-full-name>`
@@ -423,8 +423,8 @@ Name      full_name
 
 .. _dev-confdb-syntax-system-user-username-class:
 
-system user *<username> class
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> class
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username>`
@@ -443,8 +443,8 @@ Contains:
 
 .. _dev-confdb-syntax-system-user-username-class-class_name:
 
-system user *<username> class *<class_name>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> class \*<class_name>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username-class>`
@@ -462,8 +462,8 @@ Name      class_name
 
 .. _dev-confdb-syntax-system-user-username-authentication:
 
-system user *<username> authentication
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> authentication
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username>`
@@ -486,8 +486,8 @@ Contains:
 
 .. _dev-confdb-syntax-system-user-username-authentication-encrypted-password:
 
-system user *<username> authentication encrypted-password
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> authentication encrypted-password
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username-authentication>`
@@ -506,8 +506,8 @@ Contains:
 
 .. _dev-confdb-syntax-system-user-username-authentication-encrypted-password-password:
 
-system user *<username> authentication encrypted-password <password>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> authentication encrypted-password <password>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username-authentication-encrypted-password>`
@@ -525,8 +525,8 @@ Name      password
 
 .. _dev-confdb-syntax-system-user-username-authentication-ssh-rsa:
 
-system user *<username> authentication ssh-rsa
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> authentication ssh-rsa
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username-authentication>`
@@ -545,8 +545,8 @@ Contains:
 
 .. _dev-confdb-syntax-system-user-username-authentication-ssh-rsa-rsa:
 
-system user *<username> authentication ssh-rsa *<rsa>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> authentication ssh-rsa \*<rsa>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username-authentication-ssh-rsa>`
@@ -564,8 +564,8 @@ Name      rsa
 
 .. _dev-confdb-syntax-system-user-username-authentication-ssh-dsa:
 
-system user *<username> authentication ssh-dsa
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> authentication ssh-dsa
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username-authentication>`
@@ -584,8 +584,8 @@ Contains:
 
 .. _dev-confdb-syntax-system-user-username-authentication-ssh-dsa-dsa:
 
-system user *<username> authentication ssh-dsa *<dsa>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+system user \*<username> authentication ssh-dsa \*<dsa>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================
 Parent    :ref: `system<dev-confdb-syntax-system-user-username-authentication-ssh-dsa>`

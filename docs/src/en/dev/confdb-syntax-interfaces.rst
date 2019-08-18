@@ -20,8 +20,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface:
 
-interfaces *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces>`
@@ -66,8 +66,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta:
 
-interfaces *<interface> meta
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface>`
@@ -88,8 +88,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-profile:
 
-interfaces *<interface> meta profile
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta profile
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta>`
@@ -110,8 +110,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-profile-id:
 
-interfaces *<interface> meta profile id
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta profile id
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-profile>`
@@ -130,8 +130,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-profile-id-id:
 
-interfaces *<interface> meta profile id <id>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta profile id <id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-profile-id>`
@@ -149,8 +149,8 @@ Name      id
 
 .. _dev-confdb-syntax-interfaces-interface-meta-profile-name:
 
-interfaces *<interface> meta profile name
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta profile name
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-profile>`
@@ -169,8 +169,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-profile-name-name:
 
-interfaces *<interface> meta profile name <name>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta profile name <name>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ============================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-profile-name>`
@@ -188,8 +188,8 @@ Name      name
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link:
 
-interfaces *<interface> meta link
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta>`
@@ -208,8 +208,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link:
 
-interfaces *<interface> meta link *<link>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link>`
@@ -231,8 +231,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object:
 
-interfaces *<interface> meta link *<link> object
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> object
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link>`
@@ -255,8 +255,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-id:
 
-interfaces *<interface> meta link *<link> object id
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> object id
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link-object>`
@@ -275,8 +275,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-id-object_id:
 
-interfaces *<interface> meta link *<link> object id <object_id>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> object id <object_id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link-object-id>`
@@ -294,8 +294,8 @@ Name      object_id
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-name:
 
-interfaces *<interface> meta link *<link> object name
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> object name
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link-object>`
@@ -314,8 +314,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-name-object_name:
 
-interfaces *<interface> meta link *<link> object name <object_name>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> object name <object_name>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =====================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link-object-name>`
@@ -333,8 +333,8 @@ Name      object_name
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile:
 
-interfaces *<interface> meta link *<link> object profile
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> object profile
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link-object>`
@@ -357,8 +357,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-id:
 
-interfaces *<interface> meta link *<link> object profile id
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> object profile id
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile>`
@@ -377,8 +377,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-id-id:
 
-interfaces *<interface> meta link *<link> object profile id <id>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> object profile id <id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===========================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-id>`
@@ -396,8 +396,8 @@ Name      id
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-name:
 
-interfaces *<interface> meta link *<link> object profile name
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> object profile name
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile>`
@@ -416,8 +416,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-name-name:
 
-interfaces *<interface> meta link *<link> object profile name <name>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> object profile name <name>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =============================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-name>`
@@ -435,8 +435,8 @@ Name      name
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-level:
 
-interfaces *<interface> meta link *<link> object profile level
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> object profile level
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile>`
@@ -455,8 +455,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-level-level:
 
-interfaces *<interface> meta link *<link> object profile level <level>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> object profile level <level>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-level>`
@@ -474,8 +474,8 @@ Name      level
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-interface:
 
-interfaces *<interface> meta link *<link> interface
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link>`
@@ -494,8 +494,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-interface-remote_interface:
 
-interfaces *<interface> meta link *<link> interface *<remote_interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> meta link \*<link> interface \*<remote_interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-meta-link-link-interface>`
@@ -513,8 +513,8 @@ Name      remote_interface
 
 .. _dev-confdb-syntax-interfaces-interface-type:
 
-interfaces *<interface> type
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> type
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface>`
@@ -533,8 +533,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-type-type:
 
-interfaces *<interface> type <type>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> type <type>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-type>`
@@ -552,8 +552,8 @@ Name      type
 
 .. _dev-confdb-syntax-interfaces-interface-description:
 
-interfaces *<interface> description
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> description
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface>`
@@ -572,8 +572,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-description-description:
 
-interfaces *<interface> description <description>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> description <description>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-description>`
@@ -591,8 +591,8 @@ Name      description
 
 .. _dev-confdb-syntax-interfaces-interface-admin-status:
 
-interfaces *<interface> admin-status
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> admin-status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface>`
@@ -611,8 +611,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-admin-status-admin_status:
 
-interfaces *<interface> admin-status <admin_status>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> admin-status <admin_status>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-admin-status>`
@@ -630,8 +630,8 @@ Name      admin_status
 
 .. _dev-confdb-syntax-interfaces-interface-mtu:
 
-interfaces *<interface> mtu
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> mtu
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface>`
@@ -650,8 +650,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-mtu-mtu:
 
-interfaces *<interface> mtu <mtu>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> mtu <mtu>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-mtu>`
@@ -669,8 +669,8 @@ Name      mtu
 
 .. _dev-confdb-syntax-interfaces-interface-speed:
 
-interfaces *<interface> speed
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> speed
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface>`
@@ -689,8 +689,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-speed-speed:
 
-interfaces *<interface> speed <speed>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> speed <speed>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-speed>`
@@ -708,8 +708,8 @@ Name      speed
 
 .. _dev-confdb-syntax-interfaces-interface-duplex:
 
-interfaces *<interface> duplex
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> duplex
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface>`
@@ -728,8 +728,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-duplex-duplex:
 
-interfaces *<interface> duplex <duplex>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> duplex <duplex>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-duplex>`
@@ -747,8 +747,8 @@ Name      duplex
 
 .. _dev-confdb-syntax-interfaces-interface-flow-control:
 
-interfaces *<interface> flow-control
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> flow-control
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface>`
@@ -767,8 +767,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-flow-control-flow_control:
 
-interfaces *<interface> flow-control <flow_control>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> flow-control <flow_control>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =======================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-flow-control>`
@@ -786,8 +786,8 @@ Name      flow_control
 
 .. _dev-confdb-syntax-interfaces-interface-ethernet:
 
-interfaces *<interface> ethernet
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> ethernet
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface>`
@@ -806,8 +806,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-ethernet-auto-negotiation:
 
-interfaces *<interface> ethernet auto-negotiation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> ethernet auto-negotiation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-ethernet>`
@@ -826,8 +826,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-ethernet-auto-negotiation-mode:
 
-interfaces *<interface> ethernet auto-negotiation *<mode>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> ethernet auto-negotiation \*<mode>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ====================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-ethernet-auto-negotiation>`
@@ -845,8 +845,8 @@ Name      mode
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control:
 
-interfaces *<interface> storm-control
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> storm-control
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==========================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface>`
@@ -869,8 +869,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-broadcast:
 
-interfaces *<interface> storm-control broadcast
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> storm-control broadcast
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-storm-control>`
@@ -889,8 +889,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-broadcast-level:
 
-interfaces *<interface> storm-control broadcast level
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> storm-control broadcast level
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-storm-control-broadcast>`
@@ -909,8 +909,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-broadcast-level-level:
 
-interfaces *<interface> storm-control broadcast level <level>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> storm-control broadcast level <level>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-storm-control-broadcast-level>`
@@ -928,8 +928,8 @@ Name      level
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-multicast:
 
-interfaces *<interface> storm-control multicast
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> storm-control multicast
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-storm-control>`
@@ -948,8 +948,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-multicast-level:
 
-interfaces *<interface> storm-control multicast level
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> storm-control multicast level
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-storm-control-multicast>`
@@ -968,8 +968,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-multicast-level-level:
 
-interfaces *<interface> storm-control multicast level <level>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> storm-control multicast level <level>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-storm-control-multicast-level>`
@@ -987,8 +987,8 @@ Name      level
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-unicast:
 
-interfaces *<interface> storm-control unicast
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> storm-control unicast
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-storm-control>`
@@ -1007,8 +1007,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-unicast-level:
 
-interfaces *<interface> storm-control unicast level
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> storm-control unicast level
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-storm-control-unicast>`
@@ -1027,8 +1027,8 @@ Contains:
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-unicast-level-level:
 
-interfaces *<interface> storm-control unicast level <level>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+interfaces \*<interface> storm-control unicast level <level>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================================================
 Parent    :ref: `interfaces<dev-confdb-syntax-interfaces-interface-storm-control-unicast-level>`

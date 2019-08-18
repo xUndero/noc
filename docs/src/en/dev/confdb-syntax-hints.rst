@@ -208,8 +208,8 @@ Contains:
 
 .. _dev-confdb-syntax-hints-protocols-lldp-interface-interface:
 
-hints protocols lldp interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+hints protocols lldp interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ===============================================================
 Parent    :ref: `hints<dev-confdb-syntax-hints-protocols-lldp-interface>`
@@ -229,8 +229,8 @@ Contains:
 
 .. _dev-confdb-syntax-hints-protocols-lldp-interface-interface-off:
 
-hints protocols lldp interface *<interface> off
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+hints protocols lldp interface \*<interface> off
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  =========================================================================
 Parent    :ref: `hints<dev-confdb-syntax-hints-protocols-lldp-interface-interface>`
@@ -328,8 +328,8 @@ Contains:
 
 .. _dev-confdb-syntax-hints-protocols-cdp-interface-interface:
 
-hints protocols cdp interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+hints protocols cdp interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==============================================================
 Parent    :ref: `hints<dev-confdb-syntax-hints-protocols-cdp-interface>`
@@ -349,8 +349,8 @@ Contains:
 
 .. _dev-confdb-syntax-hints-protocols-cdp-interface-interface-off:
 
-hints protocols cdp interface *<interface> off
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+hints protocols cdp interface \*<interface> off
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================
 Parent    :ref: `hints<dev-confdb-syntax-hints-protocols-cdp-interface-interface>`
@@ -489,8 +489,8 @@ Contains:
 
 .. _dev-confdb-syntax-hints-protocols-spanning-tree-interface-interface:
 
-hints protocols spanning-tree interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+hints protocols spanning-tree interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ========================================================================
 Parent    :ref: `hints<dev-confdb-syntax-hints-protocols-spanning-tree-interface>`
@@ -510,8 +510,8 @@ Contains:
 
 .. _dev-confdb-syntax-hints-protocols-spanning-tree-interface-interface-off:
 
-hints protocols spanning-tree interface *<interface> off
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+hints protocols spanning-tree interface \*<interface> off
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ==================================================================================
 Parent    :ref: `hints<dev-confdb-syntax-hints-protocols-spanning-tree-interface-interface>`
@@ -609,8 +609,8 @@ Contains:
 
 .. _dev-confdb-syntax-hints-protocols-loop-detect-interface-interface:
 
-hints protocols loop-detect interface *<interface>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+hints protocols loop-detect interface \*<interface>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ======================================================================
 Parent    :ref: `hints<dev-confdb-syntax-hints-protocols-loop-detect-interface>`
@@ -630,8 +630,8 @@ Contains:
 
 .. _dev-confdb-syntax-hints-protocols-loop-detect-interface-interface-off:
 
-hints protocols loop-detect interface *<interface> off
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+hints protocols loop-detect interface \*<interface> off
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ========  ================================================================================
 Parent    :ref: `hints<dev-confdb-syntax-hints-protocols-loop-detect-interface-interface>`
