@@ -206,7 +206,7 @@ Ext.define("NOC.core.ListFormField", {
             itemId: itemId,
             items: me.fields,
             defaults: {
-                margin: "0 30 0 10"
+                margin: "5 30 0 10"
             },
             listeners: {
                 scope: me,
