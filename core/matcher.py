@@ -53,7 +53,7 @@ def match(ctx, expr):
 
 
 def match_regex(v, rx):
-    return bool(re.search(rx, v))
+    return bool(re.search(rx, str(v)))
 
 
 def match_in(v, iter):
