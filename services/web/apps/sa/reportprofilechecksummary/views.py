@@ -63,8 +63,14 @@ class ReportFilterApplication(SimpleReport):
             (_("Is Managed, object type undefined"), "2is1.6is1.3isp1"),
             (_("Is Managed, object type undefined not ping response"), "2is1.6is1.3isp1.3is1"),
             (_("Is Managed, object type undefined has ping response"), "2is1.6is1.3isp1.3is2"),
-            (_("Is Managed, object type undefined bad SNMP Credential"), "2is1.6is1.3isp1.3is2.1isp1"),
-            (_("Is Managed, object type undefined for various reasons"), "2is1.6is1.3isp1.3is2.1isp0"),
+            (
+                _("Is Managed, object type undefined bad SNMP Credential"),
+                "2is1.6is1.3isp1.3is2.1isp1",
+            ),
+            (
+                _("Is Managed, object type undefined for various reasons"),
+                "2is1.6is1.3isp1.3is2.1isp0",
+            ),
             (_("Is Managed, object type Profile is not know"), "2is1.6is1.7a1.3is2.4isp1"),
             (_("Is monitoring, object type undefined, only availablity check"), "2is1.6is2"),
         ]
