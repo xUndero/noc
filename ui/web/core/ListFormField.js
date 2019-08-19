@@ -214,7 +214,7 @@ Ext.define("NOC.core.ListFormField", {
                     var me = this;
                     // reset selected label
                     me.panel.items.each(function(panel) {
-                        panel.setBodyStyle("border-left-width", "1px");
+                        panel.setBodyStyle("border-width", "3 3 0 1");
                         panel.setBodyStyle("margin-left", "5px")
                     });
                     me.selected(self);
@@ -223,11 +223,12 @@ Ext.define("NOC.core.ListFormField", {
                 },
                 afterrender: function(self) {
                     var me = this;
-                    me.panel.setMaxHeight((self.getHeight() + 5) * me.rows);
+                    me.panel.setMaxHeight((self.getHeight() + 6) * me.rows + 6);
                 }
             }
         });
-        formPanel.setBodyStyle("margin-left", "5px");
+        formPanel.setBodyStyle("border-width", "3 3 0 3");
+        formPanel.setBodyStyle("margin-left", "3p   x");
         if(record != null) {
             formPanel.form.setValues(record);
         }
@@ -241,8 +242,8 @@ Ext.define("NOC.core.ListFormField", {
         me.cloneButton.setDisabled(arg);
     },
     selected: function(panel) {
-        panel.setBodyStyle("border-left-width", "6px");
-        panel.setBodyStyle("margin-left", "0px")
+        panel.setBodyStyle("border-width", "3 3 0 6");
+        panel.setBodyStyle("margin-left", "0px");
     },
     deleteRecord: function() {
         var me = this;
