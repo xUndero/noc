@@ -206,7 +206,7 @@ Ext.define("NOC.core.ListFormField", {
             itemId: itemId,
             items: me.fields,
             defaults: {
-                margin: "5 30 0 10"
+                margin: "4 30 0 10"
             },
             listeners: {
                 scope: me,
@@ -228,7 +228,7 @@ Ext.define("NOC.core.ListFormField", {
             }
         });
         formPanel.setBodyStyle("border-width", "3 3 0 3");
-        formPanel.setBodyStyle("margin-left", "3p   x");
+        formPanel.setBodyStyle("margin-left", "3px");
         if(record != null) {
             formPanel.form.setValues(record);
         }
