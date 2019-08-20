@@ -37,6 +37,8 @@ def match(ctx, expr):
                 return False
             if isinstance(expr[x], dict):
                 for m in expr[x]:
+                    if ctx[x] is None:
+                        continue
                     mf = matchers.get(m)
                     if mf and not isinstance(expr[x][m], tuple):
                         if not mf(ctx[x], expr[x][m]):
@@ -53,7 +55,7 @@ def match(ctx, expr):
 
 
 def match_regex(v, rx):
-    return bool(re.search(rx, v or ""))
+    return bool(re.search(rx, v))
 
 
 def match_in(v, iter):
