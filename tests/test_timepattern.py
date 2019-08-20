@@ -13,7 +13,7 @@ import datetime
 import pytest
 
 # NOC modules
-from noc.core.timepattern import TimePattern, TimePatternList
+from noc.core.timepattern import TimePattern
 
 
 @pytest.mark.parametrize(
