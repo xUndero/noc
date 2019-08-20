@@ -49,6 +49,12 @@ def test_eq_and(raw, config, expected):
             {"platform": {"$regex": "^S"}, "vendor": "Dell"},
             False,
         ),
+        (
+            {"vendor": "Eltex", "image": "_image.bin"},
+            {"image": {"$regex": "^\S+"}, "vendor": "Eltex"},
+            True,
+        ),
+        ({"vendor": "Eltex"}, {"image": {"$regex": "^\S+"}, "vendor": "Eltex"}, False),
     ],
 )
 def test_regex(raw, config, expected):
