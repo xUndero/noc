@@ -157,9 +157,9 @@ Name      brightness
 
 .. py:function:: make_video_brightness(brightness)
 
-    Generate `media sources video \*\<name\> settings brightness \<brightness\>` node
+    Generate `media sources video \*<name> settings brightness <brightness>` node
 
-    :param brightness: media sources video \*\<name\> settings brightness
+    :param brightness: media sources video \*<name> settings brightness
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-saturation:
 
@@ -198,9 +198,9 @@ Name      saturation
 
 .. py:function:: make_video_saturation(saturation)
 
-    Generate `media sources video \*\<name\> settings saturation \<saturation\>` node
+    Generate `media sources video \*<name> settings saturation <saturation>` node
 
-    :param saturation: media sources video \*\<name\> settings saturation
+    :param saturation: media sources video \*<name> settings saturation
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-contrast:
 
@@ -239,9 +239,9 @@ Name      contrast
 
 .. py:function:: make_video_contrast(contrast)
 
-    Generate `media sources video \*\<name\> settings contrast \<contrast\>` node
+    Generate `media sources video \*<name> settings contrast <contrast>` node
 
-    :param contrast: media sources video \*\<name\> settings contrast
+    :param contrast: media sources video \*<name> settings contrast
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-sharpness:
 
@@ -280,9 +280,9 @@ Name      sharpness
 
 .. py:function:: make_video_sharpness(sharpness)
 
-    Generate `media sources video \*\<name\> settings sharpness \<sharpness\>` node
+    Generate `media sources video \*<name> settings sharpness <sharpness>` node
 
-    :param sharpness: media sources video \*\<name\> settings sharpness
+    :param sharpness: media sources video \*<name> settings sharpness
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-white-balance:
 
@@ -348,9 +348,9 @@ Name      admin_status
 
 .. py:function:: make_video_white_balance_admin_status(admin_status)
 
-    Generate `media sources video \*\<name\> settings white-balance admin-status \<admin_status\>` node
+    Generate `media sources video \*<name> settings white-balance admin-status <admin_status>` node
 
-    :param admin_status: media sources video \*\<name\> settings white-balance admin-status
+    :param admin_status: media sources video \*<name> settings white-balance admin-status
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-white-balance-auto:
 
@@ -367,9 +367,9 @@ Default:  -
 
 .. py:function:: make_video_white_balance_auto(None)
 
-    Generate `media sources video \*\<name\> settings white-balance auto` node
+    Generate `media sources video \*<name> settings white-balance auto` node
 
-    :param None: media sources video \*\<name\> settings white-balance
+    :param None: media sources video \*<name> settings white-balance
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-white-balance-cr-gain:
 
@@ -408,9 +408,9 @@ Name      cr_gain
 
 .. py:function:: make_video_white_balance_cr_gain(cr_gain)
 
-    Generate `media sources video \*\<name\> settings white-balance cr-gain \<cr_gain\>` node
+    Generate `media sources video \*<name> settings white-balance cr-gain <cr_gain>` node
 
-    :param cr_gain: media sources video \*\<name\> settings white-balance cr-gain
+    :param cr_gain: media sources video \*<name> settings white-balance cr-gain
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-white-balance-gb-gain:
 
@@ -449,9 +449,9 @@ Name      gb_gain
 
 .. py:function:: make_video_white_balance_gb_gain(gb_gain)
 
-    Generate `media sources video \*\<name\> settings white-balance gb-gain \<gb_gain\>` node
+    Generate `media sources video \*<name> settings white-balance gb-gain <gb_gain>` node
 
-    :param gb_gain: media sources video \*\<name\> settings white-balance gb-gain
+    :param gb_gain: media sources video \*<name> settings white-balance gb-gain
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-black-light-compensation:
 
@@ -511,9 +511,9 @@ Name      admin_status
 
 .. py:function:: make_video_black_light_compensation_admin_status(admin_status)
 
-    Generate `media sources video \*\<name\> settings black-light-compensation admin-status \<admin_status\>` node
+    Generate `media sources video \*<name> settings black-light-compensation admin-status <admin_status>` node
 
-    :param admin_status: media sources video \*\<name\> settings black-light-compensation admin-status
+    :param admin_status: media sources video \*<name> settings black-light-compensation admin-status
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-wide-dynamic-range:
 
@@ -575,9 +575,9 @@ Name      admin_status
 
 .. py:function:: make_video_wide_dynamic_range_admin_status(admin_status)
 
-    Generate `media sources video \*\<name\> settings wide-dynamic-range admin-status \<admin_status\>` node
+    Generate `media sources video \*<name> settings wide-dynamic-range admin-status <admin_status>` node
 
-    :param admin_status: media sources video \*\<name\> settings wide-dynamic-range admin-status
+    :param admin_status: media sources video \*<name> settings wide-dynamic-range admin-status
 
 .. _dev-confdb-syntax-media-sources-video-name-settings-wide-dynamic-range-level:
 
@@ -616,9 +616,9 @@ Name      level
 
 .. py:function:: make_video_wide_dynamic_range_level(level)
 
-    Generate `media sources video \*\<name\> settings wide-dynamic-range level \<level\>` node
+    Generate `media sources video \*<name> settings wide-dynamic-range level <level>` node
 
-    :param level: media sources video \*\<name\> settings wide-dynamic-range level
+    :param level: media sources video \*<name> settings wide-dynamic-range level
 
 .. _dev-confdb-syntax-media-sources-audio:
 
@@ -702,9 +702,9 @@ Name      source
 
 .. py:function:: make_audio_source(source)
 
-    Generate `media sources audio \*\<name\> source \<source\>` node
+    Generate `media sources audio \*<name> source <source>` node
 
-    :param source: media sources audio \*\<name\> source
+    :param source: media sources audio \*<name> source
 
 .. _dev-confdb-syntax-media-sources-audio-name-settings:
 
@@ -766,9 +766,9 @@ Name      volume
 
 .. py:function:: make_audio_volume(volume)
 
-    Generate `media sources audio \*\<name\> settings volume \<volume\>` node
+    Generate `media sources audio \*<name> settings volume <volume>` node
 
-    :param volume: media sources audio \*\<name\> settings volume
+    :param volume: media sources audio \*<name> settings volume
 
 .. _dev-confdb-syntax-media-sources-audio-name-settings-noise-reduction:
 
@@ -828,9 +828,9 @@ Name      admin_status
 
 .. py:function:: make_audio_noise_reduction_admin_status(admin_status)
 
-    Generate `media sources audio \*\<name\> settings noise-reduction admin-status \<admin_status\>` node
+    Generate `media sources audio \*<name> settings noise-reduction admin-status <admin_status>` node
 
-    :param admin_status: media sources audio \*\<name\> settings noise-reduction admin-status
+    :param admin_status: media sources audio \*<name> settings noise-reduction admin-status
 
 .. _dev-confdb-syntax-media-streams:
 
@@ -914,9 +914,9 @@ Name      path
 
 .. py:function:: make_stream_rtsp_path(path)
 
-    Generate `media streams \*\<name\> rtsp-path \<path\>` node
+    Generate `media streams \*<name> rtsp-path <path>` node
 
-    :param path: media streams \*\<name\> rtsp-path
+    :param path: media streams \*<name> rtsp-path
 
 .. _dev-confdb-syntax-media-streams-name-settings:
 
@@ -1007,9 +1007,9 @@ Name      admin_status
 
 .. py:function:: make_media_streams_video_admin_status(admin_status)
 
-    Generate `media streams \*\<name\> settings video admin-status \<admin_status\>` node
+    Generate `media streams \*<name> settings video admin-status <admin_status>` node
 
-    :param admin_status: media streams \*\<name\> settings video admin-status
+    :param admin_status: media streams \*<name> settings video admin-status
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-resolution:
 
@@ -1071,9 +1071,9 @@ Name      width
 
 .. py:function:: make_media_streams_video_resolution_width(width)
 
-    Generate `media streams \*\<name\> settings video resolution width \<width\>` node
+    Generate `media streams \*<name> settings video resolution width <width>` node
 
-    :param width: media streams \*\<name\> settings video resolution width
+    :param width: media streams \*<name> settings video resolution width
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-resolution-height:
 
@@ -1112,9 +1112,9 @@ Name      height
 
 .. py:function:: make_media_streams_video_resolution_height(height)
 
-    Generate `media streams \*\<name\> settings video resolution height \<height\>` node
+    Generate `media streams \*<name> settings video resolution height <height>` node
 
-    :param height: media streams \*\<name\> settings video resolution height
+    :param height: media streams \*<name> settings video resolution height
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec:
 
@@ -1154,9 +1154,9 @@ Default:  -
 
 .. py:function:: make_media_streams_video_codec_mpeg4(None)
 
-    Generate `media streams \*\<name\> settings video codec mpeg4` node
+    Generate `media streams \*<name> settings video codec mpeg4` node
 
-    :param None: media streams \*\<name\> settings video codec
+    :param None: media streams \*<name> settings video codec
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264:
 
@@ -1173,9 +1173,9 @@ Default:  -
 
 .. py:function:: make_media_streams_video_codec_h264(None)
 
-    Generate `media streams \*\<name\> settings video codec h264` node
+    Generate `media streams \*<name> settings video codec h264` node
 
-    :param None: media streams \*\<name\> settings video codec
+    :param None: media streams \*<name> settings video codec
 
 
 Contains:
@@ -1250,9 +1250,9 @@ Name      profile
 
 .. py:function:: make_media_streams_video_codec_h264_profile_name(profile)
 
-    Generate `media streams \*\<name\> settings video codec h264 profile name \<profile\>` node
+    Generate `media streams \*<name> settings video codec h264 profile name <profile>` node
 
-    :param profile: media streams \*\<name\> settings video codec h264 profile name
+    :param profile: media streams \*<name> settings video codec h264 profile name
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-id:
 
@@ -1291,9 +1291,9 @@ Name      id
 
 .. py:function:: make_media_streams_video_codec_h264_profile_id(id)
 
-    Generate `media streams \*\<name\> settings video codec h264 profile id \<id\>` node
+    Generate `media streams \*<name> settings video codec h264 profile id <id>` node
 
-    :param id: media streams \*\<name\> settings video codec h264 profile id
+    :param id: media streams \*<name> settings video codec h264 profile id
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-constraint-set:
 
@@ -1332,9 +1332,9 @@ Name      constraints
 
 .. py:function:: make_media_streams_video_codec_h264_profile_constrains(constraints)
 
-    Generate `media streams \*\<name\> settings video codec h264 profile constraint-set \<constraints\>` node
+    Generate `media streams \*<name> settings video codec h264 profile constraint-set <constraints>` node
 
-    :param constraints: media streams \*\<name\> settings video codec h264 profile constraint-set
+    :param constraints: media streams \*<name> settings video codec h264 profile constraint-set
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-codec-h264-profile-gov-length:
 
@@ -1373,9 +1373,9 @@ Name      gov_length
 
 .. py:function:: make_media_streams_video_codec_h264_profile_gov_length(gov_length)
 
-    Generate `media streams \*\<name\> settings video codec h264 profile gov-length \<gov_length\>` node
+    Generate `media streams \*<name> settings video codec h264 profile gov-length <gov_length>` node
 
-    :param gov_length: media streams \*\<name\> settings video codec h264 profile gov-length
+    :param gov_length: media streams \*<name> settings video codec h264 profile gov-length
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control:
 
@@ -1439,9 +1439,9 @@ Name      min_framerate
 
 .. py:function:: make_media_streams_video_rate_control_min_framerate(min_framerate)
 
-    Generate `media streams \*\<name\> settings video rate-control min-framerate \<min_framerate\>` node
+    Generate `media streams \*<name> settings video rate-control min-framerate <min_framerate>` node
 
-    :param min_framerate: media streams \*\<name\> settings video rate-control min-framerate
+    :param min_framerate: media streams \*<name> settings video rate-control min-framerate
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-max-framerate:
 
@@ -1480,9 +1480,9 @@ Name      max_framerate
 
 .. py:function:: make_media_streams_video_rate_control_max_framerate(max_framerate)
 
-    Generate `media streams \*\<name\> settings video rate-control max-framerate \<max_framerate\>` node
+    Generate `media streams \*<name> settings video rate-control max-framerate <max_framerate>` node
 
-    :param max_framerate: media streams \*\<name\> settings video rate-control max-framerate
+    :param max_framerate: media streams \*<name> settings video rate-control max-framerate
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode:
 
@@ -1565,9 +1565,9 @@ Name      bitrate
 
 .. py:function:: make_media_streams_video_rate_control_cbr_bitrate(bitrate)
 
-    Generate `media streams \*\<name\> settings video rate-control mode cbr bitrate \<bitrate\>` node
+    Generate `media streams \*<name> settings video rate-control mode cbr bitrate <bitrate>` node
 
-    :param bitrate: media streams \*\<name\> settings video rate-control mode cbr bitrate
+    :param bitrate: media streams \*<name> settings video rate-control mode cbr bitrate
 
 .. _dev-confdb-syntax-media-streams-name-settings-video-rate-control-mode-vbr:
 
@@ -1627,9 +1627,9 @@ Name      max_bitrate
 
 .. py:function:: make_media_streams_video_rate_control_vbr_max_bitrate(max_bitrate)
 
-    Generate `media streams \*\<name\> settings video rate-control mode vbr max-bitrate \<max_bitrate\>` node
+    Generate `media streams \*<name> settings video rate-control mode vbr max-bitrate <max_bitrate>` node
 
-    :param max_bitrate: media streams \*\<name\> settings video rate-control mode vbr max-bitrate
+    :param max_bitrate: media streams \*<name> settings video rate-control mode vbr max-bitrate
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio:
 
@@ -1695,9 +1695,9 @@ Name      admin_status
 
 .. py:function:: make_media_streams_audio_admin_status(admin_status)
 
-    Generate `media streams \*\<name\> settings audio admin-status \<admin_status\>` node
+    Generate `media streams \*<name> settings audio admin-status <admin_status>` node
 
-    :param admin_status: media streams \*\<name\> settings audio admin-status
+    :param admin_status: media streams \*<name> settings audio admin-status
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio-codec:
 
@@ -1736,9 +1736,9 @@ Name      codec
 
 .. py:function:: make_media_streams_audio_codec(codec)
 
-    Generate `media streams \*\<name\> settings audio codec \<codec\>` node
+    Generate `media streams \*<name> settings audio codec <codec>` node
 
-    :param codec: media streams \*\<name\> settings audio codec
+    :param codec: media streams \*<name> settings audio codec
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio-bitrate:
 
@@ -1777,9 +1777,9 @@ Name      bitrate
 
 .. py:function:: make_media_streams_audio_bitrate(bitrate)
 
-    Generate `media streams \*\<name\> settings audio bitrate \<bitrate\>` node
+    Generate `media streams \*<name> settings audio bitrate <bitrate>` node
 
-    :param bitrate: media streams \*\<name\> settings audio bitrate
+    :param bitrate: media streams \*<name> settings audio bitrate
 
 .. _dev-confdb-syntax-media-streams-name-settings-audio-samplerate:
 
@@ -1818,9 +1818,9 @@ Name      samplerate
 
 .. py:function:: make_media_streams_audio_samplerate(samplerate)
 
-    Generate `media streams \*\<name\> settings audio samplerate \<samplerate\>` node
+    Generate `media streams \*<name> settings audio samplerate <samplerate>` node
 
-    :param samplerate: media streams \*\<name\> settings audio samplerate
+    :param samplerate: media streams \*<name> settings audio samplerate
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays:
 
@@ -1906,9 +1906,9 @@ Name      admin_status
 
 .. py:function:: make_media_streams_overlay_status(admin_status)
 
-    Generate `media streams \*\<name\> settings overlays \<overlay_name\> admin-status \<admin_status\>` node
+    Generate `media streams \*<name> settings overlays <overlay_name> admin-status <admin_status>` node
 
-    :param admin_status: media streams \*\<name\> settings overlays \<overlay_name\> admin-status
+    :param admin_status: media streams \*<name> settings overlays <overlay_name> admin-status
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-position:
 
@@ -1970,9 +1970,9 @@ Name      x
 
 .. py:function:: make_media_streams_overlay_position_x(x)
 
-    Generate `media streams \*\<name\> settings overlays \<overlay_name\> position x \<x\>` node
+    Generate `media streams \*<name> settings overlays <overlay_name> position x <x>` node
 
-    :param x: media streams \*\<name\> settings overlays \<overlay_name\> position x
+    :param x: media streams \*<name> settings overlays <overlay_name> position x
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-position-y:
 
@@ -2011,9 +2011,9 @@ Name      y
 
 .. py:function:: make_media_streams_overlay_position_y(y)
 
-    Generate `media streams \*\<name\> settings overlays \<overlay_name\> position y \<y\>` node
+    Generate `media streams \*<name> settings overlays <overlay_name> position y <y>` node
 
-    :param y: media streams \*\<name\> settings overlays \<overlay_name\> position y
+    :param y: media streams \*<name> settings overlays <overlay_name> position y
 
 .. _dev-confdb-syntax-media-streams-name-settings-overlays-overlay_name-text:
 
@@ -2052,7 +2052,7 @@ Name      text
 
 .. py:function:: make_media_streams_overlay_text(text)
 
-    Generate `media streams \*\<name\> settings overlays \<overlay_name\> text \<text\>` node
+    Generate `media streams \*<name> settings overlays <overlay_name> text <text>` node
 
-    :param text: media streams \*\<name\> settings overlays \<overlay_name\> text
+    :param text: media streams \*<name> settings overlays <overlay_name> text
 

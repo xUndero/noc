@@ -68,7 +68,7 @@ Name      name
 
 .. py:function:: make_ntp_server(name)
 
-    Generate `protocols ntp \*\<name\>` node
+    Generate `protocols ntp \*<name>` node
 
     :param name: protocols ntp
 
@@ -128,9 +128,9 @@ Name      version
 
 .. py:function:: make_ntp_server_version(version)
 
-    Generate `protocols ntp \*\<name\> version \<version\>` node
+    Generate `protocols ntp \*<name> version <version>` node
 
-    :param version: protocols ntp \*\<name\> version
+    :param version: protocols ntp \*<name> version
 
 .. _dev-confdb-syntax-protocols-ntp-name-address:
 
@@ -169,9 +169,9 @@ Name      address
 
 .. py:function:: make_ntp_server_address(address)
 
-    Generate `protocols ntp \*\<name\> address \<address\>` node
+    Generate `protocols ntp \*<name> address <address>` node
 
-    :param address: protocols ntp \*\<name\> address
+    :param address: protocols ntp \*<name> address
 
 .. _dev-confdb-syntax-protocols-ntp-name-mode:
 
@@ -210,9 +210,9 @@ Name      mode
 
 .. py:function:: make_ntp_server_mode(mode)
 
-    Generate `protocols ntp \*\<name\> mode \<mode\>` node
+    Generate `protocols ntp \*<name> mode <mode>` node
 
-    :param mode: protocols ntp \*\<name\> mode
+    :param mode: protocols ntp \*<name> mode
 
 .. _dev-confdb-syntax-protocols-ntp-name-authentication:
 
@@ -274,9 +274,9 @@ Name      auth_type
 
 .. py:function:: make_ntp_server_authentication_type(auth_type)
 
-    Generate `protocols ntp \*\<name\> authentication type \<auth_type\>` node
+    Generate `protocols ntp \*<name> authentication type <auth_type>` node
 
-    :param auth_type: protocols ntp \*\<name\> authentication type
+    :param auth_type: protocols ntp \*<name> authentication type
 
 .. _dev-confdb-syntax-protocols-ntp-name-authentication-key:
 
@@ -315,9 +315,9 @@ Name      key
 
 .. py:function:: make_ntp_server_authentication_key(key)
 
-    Generate `protocols ntp \*\<name\> authentication key \<key\>` node
+    Generate `protocols ntp \*<name> authentication key <key>` node
 
-    :param key: protocols ntp \*\<name\> authentication key
+    :param key: protocols ntp \*<name> authentication key
 
 .. _dev-confdb-syntax-protocols-ntp-name-prefer:
 
@@ -334,9 +334,9 @@ Default:  -
 
 .. py:function:: make_ntp_server_prefer(None)
 
-    Generate `protocols ntp \*\<name\> prefer` node
+    Generate `protocols ntp \*<name> prefer` node
 
-    :param None: protocols ntp \*\<name\>
+    :param None: protocols ntp \*<name>
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast:
 
@@ -402,9 +402,9 @@ Name      version
 
 .. py:function:: make_ntp_server_broadcast_version(version)
 
-    Generate `protocols ntp \*\<name\> broadcast version \<version\>` node
+    Generate `protocols ntp \*<name> broadcast version <version>` node
 
-    :param version: protocols ntp \*\<name\> broadcast version
+    :param version: protocols ntp \*<name> broadcast version
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-address:
 
@@ -443,9 +443,9 @@ Name      address
 
 .. py:function:: make_ntp_server_broadcast_address(address)
 
-    Generate `protocols ntp \*\<name\> broadcast address \<address\>` node
+    Generate `protocols ntp \*<name> broadcast address <address>` node
 
-    :param address: protocols ntp \*\<name\> broadcast address
+    :param address: protocols ntp \*<name> broadcast address
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-ttl:
 
@@ -484,9 +484,9 @@ Name      ttl
 
 .. py:function:: make_ntp_server_broadcast_ttl(ttl)
 
-    Generate `protocols ntp \*\<name\> broadcast ttl \<ttl\>` node
+    Generate `protocols ntp \*<name> broadcast ttl <ttl>` node
 
-    :param ttl: protocols ntp \*\<name\> broadcast ttl
+    :param ttl: protocols ntp \*<name> broadcast ttl
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-authentication:
 
@@ -548,9 +548,9 @@ Name      auth_type
 
 .. py:function:: make_ntp_server_broadcast_authentication_type(auth_type)
 
-    Generate `protocols ntp \*\<name\> broadcast authentication type \<auth_type\>` node
+    Generate `protocols ntp \*<name> broadcast authentication type <auth_type>` node
 
-    :param auth_type: protocols ntp \*\<name\> broadcast authentication type
+    :param auth_type: protocols ntp \*<name> broadcast authentication type
 
 .. _dev-confdb-syntax-protocols-ntp-name-broadcast-authentication-key:
 
@@ -589,9 +589,9 @@ Name      key
 
 .. py:function:: make_ntp_server_broadcast_authentication_key(key)
 
-    Generate `protocols ntp \*\<name\> broadcast authentication key \<key\>` node
+    Generate `protocols ntp \*<name> broadcast authentication key <key>` node
 
-    :param key: protocols ntp \*\<name\> broadcast authentication key
+    :param key: protocols ntp \*<name> broadcast authentication key
 
 .. _dev-confdb-syntax-protocols-ntp-boot-server:
 
@@ -630,7 +630,7 @@ Name      boot_server
 
 .. py:function:: make_ntp_boot_server(boot_server)
 
-    Generate `protocols ntp boot-server \<boot_server\>` node
+    Generate `protocols ntp boot-server <boot_server>` node
 
     :param boot_server: protocols ntp boot-server
 
@@ -692,7 +692,7 @@ Name      interface
 
 .. py:function:: make_cdp_interface(interface)
 
-    Generate `protocols cdp interface \*\<interface\>` node
+    Generate `protocols cdp interface \*<interface>` node
 
     :param interface: protocols cdp interface
 
@@ -754,7 +754,7 @@ Name      interface
 
 .. py:function:: make_lldp_interface(interface)
 
-    Generate `protocols lldp interface \*\<interface\>` node
+    Generate `protocols lldp interface \*<interface>` node
 
     :param interface: protocols lldp interface
 
@@ -805,9 +805,9 @@ Default:  -
 
 .. py:function:: make_lldp_admin_status_rx(None)
 
-    Generate `protocols lldp interface \*\<interface\> admin-status rx` node
+    Generate `protocols lldp interface \*<interface> admin-status rx` node
 
-    :param None: protocols lldp interface \*\<interface\> admin-status
+    :param None: protocols lldp interface \*<interface> admin-status
 
 .. _dev-confdb-syntax-protocols-lldp-interface-interface-admin-status-tx:
 
@@ -824,9 +824,9 @@ Default:  -
 
 .. py:function:: make_lldp_admin_status_tx(None)
 
-    Generate `protocols lldp interface \*\<interface\> admin-status tx` node
+    Generate `protocols lldp interface \*<interface> admin-status tx` node
 
-    :param None: protocols lldp interface \*\<interface\> admin-status
+    :param None: protocols lldp interface \*<interface> admin-status
 
 .. _dev-confdb-syntax-protocols-udld:
 
@@ -886,7 +886,7 @@ Name      interface
 
 .. py:function:: make_udld_interface(interface)
 
-    Generate `protocols udld interface \*\<interface\>` node
+    Generate `protocols udld interface \*<interface>` node
 
     :param interface: protocols udld interface
 
@@ -954,7 +954,7 @@ Name      mode
 
 .. py:function:: make_spanning_tree_mode(mode)
 
-    Generate `protocols spanning-tree mode \<mode\>` node
+    Generate `protocols spanning-tree mode <mode>` node
 
     :param mode: protocols spanning-tree mode
 
@@ -995,7 +995,7 @@ Name      priority
 
 .. py:function:: make_spanning_tree_priority(priority)
 
-    Generate `protocols spanning-tree priority \<priority\>` node
+    Generate `protocols spanning-tree priority <priority>` node
 
     :param priority: protocols spanning-tree priority
 
@@ -1079,9 +1079,9 @@ Name      priority
 
 .. py:function:: make_spanning_tree_instance_bridge_priority(priority)
 
-    Generate `protocols spanning-tree instance \*\<instance\> bridge-priority \<priority\>` node
+    Generate `protocols spanning-tree instance \*<instance> bridge-priority <priority>` node
 
-    :param priority: protocols spanning-tree instance \*\<instance\> bridge-priority
+    :param priority: protocols spanning-tree instance \*<instance> bridge-priority
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface:
 
@@ -1171,9 +1171,9 @@ Name      admin_status
 
 .. py:function:: make_interface_spanning_tree_admin_status(admin_status)
 
-    Generate `protocols spanning-tree interface \*\<interface\> admin-status \<admin_status\>` node
+    Generate `protocols spanning-tree interface \*<interface> admin-status <admin_status>` node
 
-    :param admin_status: protocols spanning-tree interface \*\<interface\> admin-status
+    :param admin_status: protocols spanning-tree interface \*<interface> admin-status
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-cost:
 
@@ -1212,9 +1212,9 @@ Name      cost
 
 .. py:function:: make_spanning_tree_interface_cost(cost)
 
-    Generate `protocols spanning-tree interface \*\<interface\> cost \<cost\>` node
+    Generate `protocols spanning-tree interface \*<interface> cost <cost>` node
 
-    :param cost: protocols spanning-tree interface \*\<interface\> cost
+    :param cost: protocols spanning-tree interface \*<interface> cost
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-bpdu-filter:
 
@@ -1253,9 +1253,9 @@ Name      enabled
 
 .. py:function:: make_spanning_tree_interface_bpdu_filter(enabled)
 
-    Generate `protocols spanning-tree interface \*\<interface\> bpdu-filter \<enabled\>` node
+    Generate `protocols spanning-tree interface \*<interface> bpdu-filter <enabled>` node
 
-    :param enabled: protocols spanning-tree interface \*\<interface\> bpdu-filter
+    :param enabled: protocols spanning-tree interface \*<interface> bpdu-filter
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-bpdu-guard:
 
@@ -1294,9 +1294,9 @@ Name      enabled
 
 .. py:function:: make_spanning_tree_interface_bpdu_guard(enabled)
 
-    Generate `protocols spanning-tree interface \*\<interface\> bpdu-guard \<enabled\>` node
+    Generate `protocols spanning-tree interface \*<interface> bpdu-guard <enabled>` node
 
-    :param enabled: protocols spanning-tree interface \*\<interface\> bpdu-guard
+    :param enabled: protocols spanning-tree interface \*<interface> bpdu-guard
 
 .. _dev-confdb-syntax-protocols-spanning-tree-interface-interface-mode:
 
@@ -1335,9 +1335,9 @@ Name      mode
 
 .. py:function:: make_spanning_tree_interface_mode(mode)
 
-    Generate `protocols spanning-tree interface \*\<interface\> mode \<mode\>` node
+    Generate `protocols spanning-tree interface \*<interface> mode <mode>` node
 
-    :param mode: protocols spanning-tree interface \*\<interface\> mode
+    :param mode: protocols spanning-tree interface \*<interface> mode
 
 .. _dev-confdb-syntax-protocols-loop-detect:
 
@@ -1397,7 +1397,7 @@ Name      interface
 
 .. py:function:: make_loop_detect_interface(interface)
 
-    Generate `protocols loop-detect interface \*\<interface\>` node
+    Generate `protocols loop-detect interface \*<interface>` node
 
     :param interface: protocols loop-detect interface
 

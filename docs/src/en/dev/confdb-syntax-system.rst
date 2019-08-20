@@ -67,7 +67,7 @@ Name      hostname
 
 .. py:function:: make_hostname(hostname)
 
-    Generate `system hostname \<hostname\>` node
+    Generate `system hostname <hostname>` node
 
     :param hostname: system hostname
 
@@ -110,7 +110,7 @@ Name      domain_name
 
 .. py:function:: make_domain_name(domain_name)
 
-    Generate `system domain-name \<domain_name\>` node
+    Generate `system domain-name <domain_name>` node
 
     :param domain_name: system domain-name
 
@@ -151,7 +151,7 @@ Name      prompt
 
 .. py:function:: make_prompt(prompt)
 
-    Generate `system prompt \<prompt\>` node
+    Generate `system prompt <prompt>` node
 
     :param prompt: system prompt
 
@@ -215,7 +215,7 @@ Name      tz_name
 
 .. py:function:: make_tz(tz_name)
 
-    Generate `system clock timezone \<tz_name\>` node
+    Generate `system clock timezone <tz_name>` node
 
     :param tz_name: system clock timezone
 
@@ -265,9 +265,9 @@ Name      tz_offset
 
 .. py:function:: make_tz_offset(tz_offset)
 
-    Generate `system clock timezone \<tz_name\> offset \<tz_offset\>` node
+    Generate `system clock timezone <tz_name> offset <tz_offset>` node
 
-    :param tz_offset: system clock timezone \<tz_name\> offset
+    :param tz_offset: system clock timezone <tz_name> offset
 
 .. _dev-confdb-syntax-system-clock-source:
 
@@ -306,7 +306,7 @@ Name      source
 
 .. py:function:: make_clock_source(source)
 
-    Generate `system clock source \<source\>` node
+    Generate `system clock source <source>` node
 
     :param source: system clock source
 
@@ -396,9 +396,9 @@ Name      uid
 
 .. py:function:: make_user_uid(uid)
 
-    Generate `system user \*\<username\> uid \<uid\>` node
+    Generate `system user \*<username> uid <uid>` node
 
-    :param uid: system user \*\<username\> uid
+    :param uid: system user \*<username> uid
 
 .. _dev-confdb-syntax-system-user-username-full-name:
 
@@ -437,9 +437,9 @@ Name      full_name
 
 .. py:function:: make_user_full_name(full_name)
 
-    Generate `system user \*\<username\> full-name \<full_name\>` node
+    Generate `system user \*<username> full-name <full_name>` node
 
-    :param full_name: system user \*\<username\> full-name
+    :param full_name: system user \*<username> full-name
 
 .. _dev-confdb-syntax-system-user-username-class:
 
@@ -478,9 +478,9 @@ Name      class_name
 
 .. py:function:: make_user_class(class_name)
 
-    Generate `system user \*\<username\> class \*\<class_name\>` node
+    Generate `system user \*<username> class \*<class_name>` node
 
-    :param class_name: system user \*\<username\> class
+    :param class_name: system user \*<username> class
 
 .. _dev-confdb-syntax-system-user-username-authentication:
 
@@ -544,9 +544,9 @@ Name      password
 
 .. py:function:: make_user_encrypted_password(password)
 
-    Generate `system user \*\<username\> authentication encrypted-password \<password\>` node
+    Generate `system user \*<username> authentication encrypted-password <password>` node
 
-    :param password: system user \*\<username\> authentication encrypted-password
+    :param password: system user \*<username> authentication encrypted-password
 
 .. _dev-confdb-syntax-system-user-username-authentication-ssh-rsa:
 
@@ -585,9 +585,9 @@ Name      rsa
 
 .. py:function:: make_user_ssh_rsa(rsa)
 
-    Generate `system user \*\<username\> authentication ssh-rsa \*\<rsa\>` node
+    Generate `system user \*<username> authentication ssh-rsa \*<rsa>` node
 
-    :param rsa: system user \*\<username\> authentication ssh-rsa
+    :param rsa: system user \*<username> authentication ssh-rsa
 
 .. _dev-confdb-syntax-system-user-username-authentication-ssh-dsa:
 
@@ -626,7 +626,7 @@ Name      dsa
 
 .. py:function:: make_user_ssh_dsa(dsa)
 
-    Generate `system user \*\<username\> authentication ssh-dsa \*\<dsa\>` node
+    Generate `system user \*<username> authentication ssh-dsa \*<dsa>` node
 
-    :param dsa: system user \*\<username\> authentication ssh-dsa
+    :param dsa: system user \*<username> authentication ssh-dsa
 

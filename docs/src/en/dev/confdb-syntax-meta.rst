@@ -72,7 +72,7 @@ Name      id
 
 .. py:function:: make_meta_id(id)
 
-    Generate `meta id \<id\>` node
+    Generate `meta id <id>` node
 
     :param id: meta id
 
@@ -113,7 +113,7 @@ Name      profile
 
 .. py:function:: make_meta_profile(profile)
 
-    Generate `meta profile \<profile\>` node
+    Generate `meta profile <profile>` node
 
     :param profile: meta profile
 
@@ -154,7 +154,7 @@ Name      vendor
 
 .. py:function:: make_meta_vendor(vendor)
 
-    Generate `meta vendor \<vendor\>` node
+    Generate `meta vendor <vendor>` node
 
     :param vendor: meta vendor
 
@@ -195,7 +195,7 @@ Name      platform
 
 .. py:function:: make_meta_platform(platform)
 
-    Generate `meta platform \<platform\>` node
+    Generate `meta platform <platform>` node
 
     :param platform: meta platform
 
@@ -236,7 +236,7 @@ Name      version
 
 .. py:function:: make_meta_version(version)
 
-    Generate `meta version \<version\>` node
+    Generate `meta version <version>` node
 
     :param version: meta version
 
@@ -302,7 +302,7 @@ Name      id
 
 .. py:function:: make_meta_object_profile_id(id)
 
-    Generate `meta object-profile id \<id\>` node
+    Generate `meta object-profile id <id>` node
 
     :param id: meta object-profile id
 
@@ -343,7 +343,7 @@ Name      name
 
 .. py:function:: make_meta_object_profile_name(name)
 
-    Generate `meta object-profile name \<name\>` node
+    Generate `meta object-profile name <name>` node
 
     :param name: meta object-profile name
 
@@ -384,7 +384,7 @@ Name      level
 
 .. py:function:: make_meta_object_profile_level(level)
 
-    Generate `meta object-profile level \<level\>` node
+    Generate `meta object-profile level <level>` node
 
     :param level: meta object-profile level
 
@@ -448,7 +448,7 @@ Name      id
 
 .. py:function:: make_meta_segment_id(id)
 
-    Generate `meta segment id \<id\>` node
+    Generate `meta segment id <id>` node
 
     :param id: meta segment id
 
@@ -489,7 +489,7 @@ Name      name
 
 .. py:function:: make_meta_segment_name(name)
 
-    Generate `meta segment name \<name\>` node
+    Generate `meta segment name <name>` node
 
     :param name: meta segment name
 
@@ -553,7 +553,7 @@ Name      address
 
 .. py:function:: make_meta_management_address(address)
 
-    Generate `meta management address \<address\>` node
+    Generate `meta management address <address>` node
 
     :param address: meta management address
 
@@ -594,7 +594,7 @@ Name      protocol
 
 .. py:function:: make_meta_management_protocol(protocol)
 
-    Generate `meta management protocol \<protocol\>` node
+    Generate `meta management protocol <protocol>` node
 
     :param protocol: meta management protocol
 
@@ -635,7 +635,7 @@ Name      tag
 
 .. py:function:: make_meta_tag(tag)
 
-    Generate `meta tags \*\<tag\>` node
+    Generate `meta tags \*<tag>` node
 
     :param tag: meta tags
 

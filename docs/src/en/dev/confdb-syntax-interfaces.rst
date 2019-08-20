@@ -35,7 +35,7 @@ Name      interface
 
 .. py:function:: make_interface(interface)
 
-    Generate `interfaces \*\<interface\>` node
+    Generate `interfaces \*<interface>` node
 
     :param interface: interfaces
 
@@ -149,9 +149,9 @@ Name      id
 
 .. py:function:: make_interfaces_meta_profile_id(id)
 
-    Generate `interfaces \*\<interface\> meta profile id \<id\>` node
+    Generate `interfaces \*<interface> meta profile id <id>` node
 
-    :param id: interfaces \*\<interface\> meta profile id
+    :param id: interfaces \*<interface> meta profile id
 
 .. _dev-confdb-syntax-interfaces-interface-meta-profile-name:
 
@@ -190,9 +190,9 @@ Name      name
 
 .. py:function:: make_interfaces_meta_profile_name(name)
 
-    Generate `interfaces \*\<interface\> meta profile name \<name\>` node
+    Generate `interfaces \*<interface> meta profile name <name>` node
 
-    :param name: interfaces \*\<interface\> meta profile name
+    :param name: interfaces \*<interface> meta profile name
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link:
 
@@ -301,9 +301,9 @@ Name      object_id
 
 .. py:function:: make_interfaces_meta_link_object_id(object_id)
 
-    Generate `interfaces \*\<interface\> meta link \*\<link\> object id \<object_id\>` node
+    Generate `interfaces \*<interface> meta link \*<link> object id <object_id>` node
 
-    :param object_id: interfaces \*\<interface\> meta link \*\<link\> object id
+    :param object_id: interfaces \*<interface> meta link \*<link> object id
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-name:
 
@@ -342,9 +342,9 @@ Name      object_name
 
 .. py:function:: make_interfaces_meta_link_object_name(object_name)
 
-    Generate `interfaces \*\<interface\> meta link \*\<link\> object name \<object_name\>` node
+    Generate `interfaces \*<interface> meta link \*<link> object name <object_name>` node
 
-    :param object_name: interfaces \*\<interface\> meta link \*\<link\> object name
+    :param object_name: interfaces \*<interface> meta link \*<link> object name
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile:
 
@@ -408,9 +408,9 @@ Name      id
 
 .. py:function:: make_interfaces_meta_link_object_profile_id(id)
 
-    Generate `interfaces \*\<interface\> meta link \*\<link\> object profile id \<id\>` node
+    Generate `interfaces \*<interface> meta link \*<link> object profile id <id>` node
 
-    :param id: interfaces \*\<interface\> meta link \*\<link\> object profile id
+    :param id: interfaces \*<interface> meta link \*<link> object profile id
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-name:
 
@@ -449,9 +449,9 @@ Name      name
 
 .. py:function:: make_interfaces_meta_link_object_profile_name(name)
 
-    Generate `interfaces \*\<interface\> meta link \*\<link\> object profile name \<name\>` node
+    Generate `interfaces \*<interface> meta link \*<link> object profile name <name>` node
 
-    :param name: interfaces \*\<interface\> meta link \*\<link\> object profile name
+    :param name: interfaces \*<interface> meta link \*<link> object profile name
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-object-profile-level:
 
@@ -490,9 +490,9 @@ Name      level
 
 .. py:function:: make_interfaces_meta_link_object_profile_level(level)
 
-    Generate `interfaces \*\<interface\> meta link \*\<link\> object profile level \<level\>` node
+    Generate `interfaces \*<interface> meta link \*<link> object profile level <level>` node
 
-    :param level: interfaces \*\<interface\> meta link \*\<link\> object profile level
+    :param level: interfaces \*<interface> meta link \*<link> object profile level
 
 .. _dev-confdb-syntax-interfaces-interface-meta-link-link-interface:
 
@@ -531,9 +531,9 @@ Name      remote_interface
 
 .. py:function:: make_interfaces_meta_link_interface(remote_interface)
 
-    Generate `interfaces \*\<interface\> meta link \*\<link\> interface \*\<remote_interface\>` node
+    Generate `interfaces \*<interface> meta link \*<link> interface \*<remote_interface>` node
 
-    :param remote_interface: interfaces \*\<interface\> meta link \*\<link\> interface
+    :param remote_interface: interfaces \*<interface> meta link \*<link> interface
 
 .. _dev-confdb-syntax-interfaces-interface-type:
 
@@ -572,9 +572,9 @@ Name      type
 
 .. py:function:: make_interface_type(type)
 
-    Generate `interfaces \*\<interface\> type \<type\>` node
+    Generate `interfaces \*<interface> type <type>` node
 
-    :param type: interfaces \*\<interface\> type
+    :param type: interfaces \*<interface> type
 
 .. _dev-confdb-syntax-interfaces-interface-description:
 
@@ -613,9 +613,9 @@ Name      description
 
 .. py:function:: make_interface_description(description)
 
-    Generate `interfaces \*\<interface\> description \<description\>` node
+    Generate `interfaces \*<interface> description <description>` node
 
-    :param description: interfaces \*\<interface\> description
+    :param description: interfaces \*<interface> description
 
 .. _dev-confdb-syntax-interfaces-interface-admin-status:
 
@@ -654,9 +654,9 @@ Name      admin_status
 
 .. py:function:: make_interface_admin_status(admin_status)
 
-    Generate `interfaces \*\<interface\> admin-status \<admin_status\>` node
+    Generate `interfaces \*<interface> admin-status <admin_status>` node
 
-    :param admin_status: interfaces \*\<interface\> admin-status
+    :param admin_status: interfaces \*<interface> admin-status
 
 .. _dev-confdb-syntax-interfaces-interface-mtu:
 
@@ -695,9 +695,9 @@ Name      mtu
 
 .. py:function:: make_interface_mtu(mtu)
 
-    Generate `interfaces \*\<interface\> mtu \<mtu\>` node
+    Generate `interfaces \*<interface> mtu <mtu>` node
 
-    :param mtu: interfaces \*\<interface\> mtu
+    :param mtu: interfaces \*<interface> mtu
 
 .. _dev-confdb-syntax-interfaces-interface-speed:
 
@@ -736,9 +736,9 @@ Name      speed
 
 .. py:function:: make_interface_speed(speed)
 
-    Generate `interfaces \*\<interface\> speed \<speed\>` node
+    Generate `interfaces \*<interface> speed <speed>` node
 
-    :param speed: interfaces \*\<interface\> speed
+    :param speed: interfaces \*<interface> speed
 
 .. _dev-confdb-syntax-interfaces-interface-duplex:
 
@@ -777,9 +777,9 @@ Name      duplex
 
 .. py:function:: make_interface_duplex(duplex)
 
-    Generate `interfaces \*\<interface\> duplex \<duplex\>` node
+    Generate `interfaces \*<interface> duplex <duplex>` node
 
-    :param duplex: interfaces \*\<interface\> duplex
+    :param duplex: interfaces \*<interface> duplex
 
 .. _dev-confdb-syntax-interfaces-interface-flow-control:
 
@@ -818,9 +818,9 @@ Name      flow_control
 
 .. py:function:: make_interface_flow_control(flow_control)
 
-    Generate `interfaces \*\<interface\> flow-control \<flow_control\>` node
+    Generate `interfaces \*<interface> flow-control <flow_control>` node
 
-    :param flow_control: interfaces \*\<interface\> flow-control
+    :param flow_control: interfaces \*<interface> flow-control
 
 .. _dev-confdb-syntax-interfaces-interface-ethernet:
 
@@ -880,9 +880,9 @@ Name      mode
 
 .. py:function:: make_interface_ethernet_autonegotiation(mode)
 
-    Generate `interfaces \*\<interface\> ethernet auto-negotiation \*\<mode\>` node
+    Generate `interfaces \*<interface> ethernet auto-negotiation \*<mode>` node
 
-    :param mode: interfaces \*\<interface\> ethernet auto-negotiation
+    :param mode: interfaces \*<interface> ethernet auto-negotiation
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control:
 
@@ -967,9 +967,9 @@ Name      level
 
 .. py:function:: make_interface_storm_control_broadcast_level(level)
 
-    Generate `interfaces \*\<interface\> storm-control broadcast level \<level\>` node
+    Generate `interfaces \*<interface> storm-control broadcast level <level>` node
 
-    :param level: interfaces \*\<interface\> storm-control broadcast level
+    :param level: interfaces \*<interface> storm-control broadcast level
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-multicast:
 
@@ -1029,9 +1029,9 @@ Name      level
 
 .. py:function:: make_interface_storm_control_multicast_level(level)
 
-    Generate `interfaces \*\<interface\> storm-control multicast level \<level\>` node
+    Generate `interfaces \*<interface> storm-control multicast level <level>` node
 
-    :param level: interfaces \*\<interface\> storm-control multicast level
+    :param level: interfaces \*<interface> storm-control multicast level
 
 .. _dev-confdb-syntax-interfaces-interface-storm-control-unicast:
 
@@ -1091,7 +1091,7 @@ Name      level
 
 .. py:function:: make_interface_storm_control_unicast_level(level)
 
-    Generate `interfaces \*\<interface\> storm-control unicast level \<level\>` node
+    Generate `interfaces \*<interface> storm-control unicast level <level>` node
 
-    :param level: interfaces \*\<interface\> storm-control unicast level
+    :param level: interfaces \*<interface> storm-control unicast level
 
