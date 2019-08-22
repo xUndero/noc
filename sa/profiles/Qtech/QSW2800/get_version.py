@@ -122,6 +122,7 @@ class Script(BaseScript):
     def execute_snmp(self, **kwargs):
         r = {"vendor": "Qtech", "attributes": {}}
         sys_descr = self.snmp.get(mib["SNMPv2-MIB::sysDescr.0"], cached=True)
+        sys_descr = sys_descr.replace("\x16", "")  # On QSW-3400-28T-AC 7.0.3.5(B0221.0055)
         for ree in [self.rx_ver, self.rx_ver2, self.rx_ver3]:
             match = ree.match(sys_descr)
             if match:
