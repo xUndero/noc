@@ -26,7 +26,8 @@ class Script(BaseScript):
         r"^\s*SoftWare(?: Package)? Version\s+(?P<version>\S+(?:\(\S+\))?)\n"
         r"^\s*BootRom Version\s+(?P<bootprom>\S+)\n"
         r"^\s*HardWare Version\s+(?P<hardware>\S+).+"
-        r"^\s*(?:Device serial number |Serial No.:(?:|\s+))(?P<serial>\S+)\n",
+        r"^\s*(?:Device serial number |Serial No.:(?:|\s+))(?P<serial>\S+|\S+pn sw)\n",
+        # pn sw on serial - QSW-3500-10T-AC, 8.2.1.52
         re.MULTILINE | re.DOTALL,
     )
 
@@ -108,6 +109,16 @@ class Script(BaseScript):
             raise NotImplementedError("Unknown platform OID: %s" % oid)
         return platform
 
+    def fix_hw_serial(self):
+        serial, hw_ver = None, None
+        try:
+            # SNMPv2-MIB::sysDescr.0
+            serial = self.snmp.get(mib["1.3.6.1.4.1.27514.1.1.1.1.1.4.0"])
+            hw_ver = self.snmp.get(mib["1.3.6.1.4.1.27514.1.1.1.1.1.6.0"])
+        except (self.snmp.TimeOutError, self.snmp.SNMPError):
+            pass
+        return serial, hw_ver
+
     def execute_snmp(self, **kwargs):
         r = {"vendor": "Qtech", "attributes": {}}
         sys_descr = self.snmp.get(mib["SNMPv2-MIB::sysDescr.0"], cached=True)
@@ -126,10 +137,15 @@ class Script(BaseScript):
             r["version"] = self.rx_version.search(sys_descr).group("version")
         if "bootprom" in match:
             r["attributes"]["Boot PROM"] = match["bootprom"]
+        hw_ver, serial = self.fix_hw_serial()
         if "hardware" in match:
             r["attributes"]["HW version"] = match["hardware"]
+        elif hw_ver:
+            r["attributes"]["HW version"] = hw_ver
         if "serial" in match:
             r["attributes"]["Serial Number"] = match["serial"]
+        elif serial:
+            r["attributes"]["Serial Number"] = serial
         return r
 
     def execute_cli(self, **kwargs):
