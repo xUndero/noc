@@ -249,4 +249,4 @@ class MESNormalizer(BaseNormalizer):
 
     @match("sntp", "server", ANY, ANY)
     def normalize_ntp_server(self, tokens):
-        yield self.make_ntp_server_address(name="ip", address=tokens[2])
+        yield self.make_ntp_server_address(name="address", address=tokens[2])
