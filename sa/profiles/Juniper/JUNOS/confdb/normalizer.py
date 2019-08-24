@@ -139,6 +139,8 @@ class JunOSNormalizer(BaseNormalizer):
     def normalize_timesource(self, tokens):
         yield self.make_clock_source(source="ntp")
 
+    @match("system", "ntp", "server", ANY)
     @match("system", "ntp", "server", ANY, ANY)
+    @match("system", "ntp", "server", ANY, ANY, ANY, ANY, ANY)
     def normalize_ntp_server(self, tokens):
-        yield self.make_ntp_server_address(name="0", address=tokens[3])
+        yield self.make_ntp_server_address(name="address", address=tokens[3])
