@@ -13,7 +13,7 @@ import datetime
 import pytest
 
 # NOC modules
-from noc.core.timepattern import TimePattern
+from noc.core.timepattern import TimePattern, TimePatternList
 
 
 @pytest.mark.parametrize(
@@ -41,3 +41,17 @@ def test_timepattern(config, year, month, day, expected):
 def test_timepattern_error(config):
     with pytest.raises(Exception):
         assert TimePattern(config)
+
+
+@pytest.mark.parametrize(
+    "config, year, month, day, expected",
+    [
+        (["13", "01-15"], 2005, 3, 13, True),
+        (["13.03.2005", "01-15"], 2005, 3, 13, True),
+        (["fri", "01.03"], 2005, 3, 13, False),
+    ],
+)
+def test_timepattern_list(config, year, month, day, expected):
+    tp = TimePatternList(config)
+    for i in tp.patterns:
+        assert TimePattern(i).match(datetime.datetime(year=year, month=month, day=day)) == expected
