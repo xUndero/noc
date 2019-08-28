@@ -247,6 +247,9 @@ class MESNormalizer(BaseNormalizer):
         if tokens[2] == "sntp":
             yield self.make_clock_source(source="ntp")
 
+    @match("sntp", "server", ANY)
     @match("sntp", "server", ANY, ANY)
+    @match("sntp", "server", ANY, ANY, ANY)
+    @match("sntp", "server", ANY, ANY, ANY, ANY)
     def normalize_ntp_server(self, tokens):
         yield self.make_ntp_server_address(name=tokens[2], address=tokens[2])
