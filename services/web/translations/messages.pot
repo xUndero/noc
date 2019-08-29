@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The NOC Project VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-08-14 12:14+0300\n"
+"POT-Creation-Date: 2019-08-29 18:03+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -611,7 +611,7 @@ msgid "Managed Object"
 msgstr ""
 
 #: services/web/apps/fm/reportescalations/views.py:89
-#: services/web/apps/sa/reportstalediscovery/views.py:69
+#: services/web/apps/sa/reportstalediscovery/views.py:68
 msgid "Segment"
 msgstr ""
 
@@ -990,21 +990,48 @@ msgstr ""
 msgid "Discovery Object Caps"
 msgstr ""
 
-#: services/web/apps/inv/reportdiscoverylinks/views.py:24
-#: services/web/apps/inv/reportdiscoverylinks/views.py:25
+#: services/web/apps/inv/reportdiscoverylinks/views.py:21
+#: services/web/apps/inv/reportdiscoverylinks/views.py:22
 msgid "Discovery Links Summary"
 msgstr ""
 
-#: services/web/apps/inv/reportdiscoverylinks/views.py:97
+#: services/web/apps/inv/reportdiscoverylinks/views.py:27
+#: services/web/apps/inv/reportdiscoverylinks/views.py:34
+#: services/web/apps/inv/reportdiscoverylinks/views.py:42
+msgid "All polling"
+msgstr ""
+
+#: services/web/apps/inv/reportdiscoverylinks/views.py:43
+msgid "0"
+msgstr ""
+
+#: services/web/apps/inv/reportdiscoverylinks/views.py:44
+msgid "1"
+msgstr ""
+
+#: services/web/apps/inv/reportdiscoverylinks/views.py:45
+msgid "2"
+msgstr ""
+
+#: services/web/apps/inv/reportdiscoverylinks/views.py:46
+msgid "More 3"
+msgstr ""
+
+#: services/web/apps/inv/reportdiscoverylinks/views.py:78
 msgid "Links count"
 msgstr ""
 
-#: services/web/apps/inv/reportdiscoverylinks/views.py:97
+#: services/web/apps/inv/reportdiscoverylinks/views.py:79
 msgid "MO Count"
 msgstr ""
 
-#: services/web/apps/inv/reportdiscoverylinks/views.py:97
+#: services/web/apps/inv/reportdiscoverylinks/views.py:80
 msgid "Percent at All"
+msgstr ""
+
+#: services/web/apps/inv/reportdiscoverylinks/views.py:81
+#: services/web/apps/sa/reportprofilechecksummary/views.py:121
+msgid "Detail"
 msgstr ""
 
 #: services/web/apps/inv/reportdiscoverypoison/views.py:17
@@ -1090,7 +1117,7 @@ msgstr ""
 #: services/web/apps/inv/reportpendinglinks/views.py:208
 #: services/web/apps/sa/reportdiscoveryproblem/views.py:228
 #: services/web/apps/sa/reportprofilechecksdetailed/views.py:140
-#: services/web/apps/sa/reportstalediscovery/views.py:68
+#: services/web/apps/sa/reportstalediscovery/views.py:67
 msgid "Address"
 msgstr ""
 
@@ -1103,7 +1130,7 @@ msgstr ""
 #: services/web/apps/fm/reportoutages/views.py:125
 #: services/web/apps/inv/reportobjectsserial/views.py:47
 #: services/web/apps/sa/reportobjectsummary/views.py:132
-#: services/web/apps/sa/reportstalediscovery/views.py:66
+#: services/web/apps/sa/reportstalediscovery/views.py:65
 msgid "Platform"
 msgstr ""
 
@@ -2277,84 +2304,84 @@ msgid "Managed Object Profile Check Summary"
 msgstr ""
 
 #: services/web/apps/sa/reportprofilechecksummary/views.py:29
-#: services/web/apps/sa/reportprofilechecksummary/views.py:60
+#: services/web/apps/sa/reportprofilechecksummary/views.py:61
 msgid "Is Managed, object type defined"
 msgstr ""
 
 #: services/web/apps/sa/reportprofilechecksummary/views.py:36
-#: services/web/apps/sa/reportprofilechecksummary/views.py:57
+#: services/web/apps/sa/reportprofilechecksummary/views.py:58
 msgid "Is Managed"
 msgstr ""
 
-#: services/web/apps/sa/reportprofilechecksummary/views.py:56
+#: services/web/apps/sa/reportprofilechecksummary/views.py:57
 msgid "Not Managed"
 msgstr ""
 
-#: services/web/apps/sa/reportprofilechecksummary/views.py:61
+#: services/web/apps/sa/reportprofilechecksummary/views.py:62
 msgid "Is Managed, object type defined bad CLI Credential"
 msgstr ""
 
-#: services/web/apps/sa/reportprofilechecksummary/views.py:62
+#: services/web/apps/sa/reportprofilechecksummary/views.py:63
 msgid "Is Managed, object type undefined"
 msgstr ""
 
-#: services/web/apps/sa/reportprofilechecksummary/views.py:63
+#: services/web/apps/sa/reportprofilechecksummary/views.py:64
 msgid "Is Managed, object type undefined not ping response"
 msgstr ""
 
-#: services/web/apps/sa/reportprofilechecksummary/views.py:64
+#: services/web/apps/sa/reportprofilechecksummary/views.py:65
 msgid "Is Managed, object type undefined has ping response"
 msgstr ""
 
-#: services/web/apps/sa/reportprofilechecksummary/views.py:65
+#: services/web/apps/sa/reportprofilechecksummary/views.py:67
 msgid "Is Managed, object type undefined bad SNMP Credential"
 msgstr ""
 
-#: services/web/apps/sa/reportprofilechecksummary/views.py:66
+#: services/web/apps/sa/reportprofilechecksummary/views.py:71
 msgid "Is Managed, object type undefined for various reasons"
 msgstr ""
 
-#: services/web/apps/sa/reportprofilechecksummary/views.py:67
+#: services/web/apps/sa/reportprofilechecksummary/views.py:74
 msgid "Is Managed, object type Profile is not know"
 msgstr ""
 
-#: services/web/apps/sa/reportprofilechecksummary/views.py:99
-#: services/web/apps/sa/reportprofilechecksummary/views.py:106
+#: services/web/apps/sa/reportprofilechecksummary/views.py:75
+msgid "Is monitoring, object type undefined, only availablity check"
+msgstr ""
+
+#: services/web/apps/sa/reportprofilechecksummary/views.py:107
+#: services/web/apps/sa/reportprofilechecksummary/views.py:114
 msgid "Is Managed, objects not processed yet"
 msgstr ""
 
-#: services/web/apps/sa/reportprofilechecksummary/views.py:109
+#: services/web/apps/sa/reportprofilechecksummary/views.py:117
 msgid "PP"
 msgstr ""
 
 #: services/web/apps/fm/reportoutages/views.py:127
-#: services/web/apps/sa/reportprofilechecksummary/views.py:110
+#: services/web/apps/sa/reportprofilechecksummary/views.py:118
 msgid "Status"
 msgstr ""
 
 #: services/web/apps/sa/reportobjectsummary/views.py:153
-#: services/web/apps/sa/reportprofilechecksummary/views.py:111
+#: services/web/apps/sa/reportprofilechecksummary/views.py:119
 msgid "Quantity"
 msgstr ""
 
-#: services/web/apps/sa/reportprofilechecksummary/views.py:112
+#: services/web/apps/sa/reportprofilechecksummary/views.py:120
 msgid "Percent"
 msgstr ""
 
-#: services/web/apps/sa/reportprofilechecksummary/views.py:113
-msgid "Detail"
-msgstr ""
-
-#: services/web/apps/sa/reportstalediscovery/views.py:23
+#: services/web/apps/sa/reportstalediscovery/views.py:22
 msgid "Stale discovery"
 msgstr ""
 
-#: services/web/apps/sa/reportstalediscovery/views.py:63
+#: services/web/apps/sa/reportstalediscovery/views.py:62
 msgid "Admin. Domain"
 msgstr ""
 
 #: services/web/apps/inv/reportdiscoverycaps/views.py:57
-#: services/web/apps/sa/reportstalediscovery/views.py:64
+#: services/web/apps/sa/reportstalediscovery/views.py:63
 msgid "Object"
 msgstr ""
 
@@ -2369,24 +2396,24 @@ msgstr ""
 #: services/web/apps/sa/reportobjectsummary/views.py:132
 #: services/web/apps/sa/reportobjectsummary/views.py:140
 #: services/web/apps/sa/reportprofilechecksdetailed/views.py:142
-#: services/web/apps/sa/reportstalediscovery/views.py:65
+#: services/web/apps/sa/reportstalediscovery/views.py:64
 msgid "Profile"
 msgstr ""
 
 #: services/web/apps/sa/reportobjectsummary/views.py:140
-#: services/web/apps/sa/reportstalediscovery/views.py:67
+#: services/web/apps/sa/reportstalediscovery/views.py:66
 msgid "Version"
 msgstr ""
 
-#: services/web/apps/sa/reportstalediscovery/views.py:70
+#: services/web/apps/sa/reportstalediscovery/views.py:69
 msgid "Job"
 msgstr ""
 
-#: services/web/apps/sa/reportstalediscovery/views.py:71
+#: services/web/apps/sa/reportstalediscovery/views.py:70
 msgid "Last Success"
 msgstr ""
 
-#: services/web/apps/sa/reportstalediscovery/views.py:72
+#: services/web/apps/sa/reportstalediscovery/views.py:71
 msgid "Reason"
 msgstr ""
 

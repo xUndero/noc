@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The NOC Project VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-08-14 12:14+0300\n"
+"POT-Creation-Date: 2019-08-29 18:03+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: ui/web/aaa/group/Application.js:73 ui/web/aaa/user/Application.js:282
+#: ui/web/aaa/group/Application.js:73 ui/web/aaa/user/Application.js:290
 #: ui/web/core/ModelApplication.js:504 ui/web/core/RepoPreview.js:162
 #: ui/web/core/RepoPreview.js:163 ui/web/main/desktop/ChangeCredentials.js:46
 #: ui/web/peer/prefixlistbuilder/Application.js:86
@@ -75,69 +75,69 @@ msgstr ""
 msgid "Set password"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:34 ui/web/aaa/user/Application.js:68
+#: ui/web/aaa/user/Application.js:34 ui/web/aaa/user/Application.js:76
 msgid "Username"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:39 ui/web/aaa/user/Application.js:77
+#: ui/web/aaa/user/Application.js:39 ui/web/aaa/user/Application.js:85
 msgid "e-mail Address"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:44 ui/web/aaa/user/Application.js:85
+#: ui/web/aaa/user/Application.js:44 ui/web/aaa/user/Application.js:93
 msgid "First Name"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:49 ui/web/aaa/user/Application.js:92
+#: ui/web/aaa/user/Application.js:49 ui/web/aaa/user/Application.js:100
 msgid "Last Name"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:59 ui/web/aaa/user/Application.js:209
+#: ui/web/aaa/user/Application.js:60 ui/web/aaa/user/Application.js:217
 msgid "Superuser"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:105
+#: ui/web/aaa/user/Application.js:66 ui/web/aaa/user/Application.js:194
+msgid "Last Login"
+msgstr ""
+
+#: ui/web/aaa/user/Application.js:113
 msgid "Superuser status"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:135
+#: ui/web/aaa/user/Application.js:143
 #: ui/web/main/authldapdomain/Application.js:195
 #: ui/web/main/userprofile/Application.js:33
 msgid "Groups"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:140
+#: ui/web/aaa/user/Application.js:148
 msgid "Selected Groups"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:144
+#: ui/web/aaa/user/Application.js:152
 msgid "No group selected"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:174
+#: ui/web/aaa/user/Application.js:182
 msgid "User Permissions"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:186
-msgid "Last Login"
-msgstr ""
-
-#: ui/web/aaa/user/Application.js:193
+#: ui/web/aaa/user/Application.js:201
 msgid "Date of joined"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:216
+#: ui/web/aaa/user/Application.js:224
 msgid "Password mismatch"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:234
+#: ui/web/aaa/user/Application.js:242
 msgid "Failed to set password"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:238
+#: ui/web/aaa/user/Application.js:246
 msgid "Password empty"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:298
+#: ui/web/aaa/user/Application.js:306
 msgid "Invalid username"
 msgstr ""
 
@@ -195,29 +195,29 @@ msgstr ""
 
 #: ui/web/cm/interfacevalidationpolicy/Application.js:48
 #: ui/web/cm/interfacevalidationpolicy/Application.js:107
-#: ui/web/cm/objectvalidationpolicy/Application.js:48
-#: ui/web/cm/objectvalidationpolicy/Application.js:107
+#: ui/web/cm/objectvalidationpolicy/Application.js:50
+#: ui/web/cm/objectvalidationpolicy/Application.js:113
 msgid "Filter Query"
 msgstr ""
 
 #: ui/web/cm/interfacevalidationpolicy/Application.js:62
-#: ui/web/cm/objectvalidationpolicy/Application.js:62
+#: ui/web/cm/objectvalidationpolicy/Application.js:67
 #: ui/web/sa/managedobject/ConfDBPanel.js:75
 msgid "Query"
 msgstr ""
 
 #: ui/web/cm/interfacevalidationpolicy/Application.js:74
-#: ui/web/cm/objectvalidationpolicy/Application.js:74
+#: ui/web/cm/objectvalidationpolicy/Application.js:80
 msgid "Query Parameters"
 msgstr ""
 
 #: ui/web/cm/interfacevalidationpolicy/Application.js:127
-#: ui/web/cm/objectvalidationpolicy/Application.js:127
+#: ui/web/cm/objectvalidationpolicy/Application.js:134
 msgid "Error template"
 msgstr ""
 
 #: ui/web/cm/interfacevalidationpolicy/Application.js:141
-#: ui/web/cm/objectvalidationpolicy/Application.js:141
+#: ui/web/cm/objectvalidationpolicy/Application.js:149
 msgid "Fatal"
 msgstr ""
 
@@ -283,13 +283,13 @@ msgstr ""
 msgid "Failed add custom fields to form "
 msgstr ""
 
-#: ui/web/core/InlineGrid.js:33 ui/web/core/ListFormField.js:27
+#: ui/web/core/InlineGrid.js:33 ui/web/core/ListFormField.js:28
 #: ui/web/ux/form/GridField.js:47 ui/web/ux/form/StringsField.js:32
 msgid "Append"
 msgstr ""
 
 #: ui/web/core/FormPanel.js:177 ui/web/core/InlineGrid.js:38
-#: ui/web/core/ListFormField.js:41 ui/web/core/M2MField.js:34
+#: ui/web/core/ListFormField.js:42 ui/web/core/M2MField.js:34
 #: ui/web/core/ModelApplication.js:514
 #: ui/web/inv/inv/plugins/file/FilePanel.js:35
 #: ui/web/ip/ipam/DeletePrefixPanel.js:84
@@ -359,20 +359,20 @@ msgstr ""
 msgid "No API token given"
 msgstr ""
 
-#: ui/web/core/ListFormField.js:34
+#: ui/web/core/ListFormField.js:35
 msgid "Insert"
 msgstr ""
 
-#: ui/web/core/ListFormField.js:49 ui/web/core/ModelApplication.js:31
+#: ui/web/core/ListFormField.js:50 ui/web/core/ModelApplication.js:31
 #: ui/web/core/ModelApplication.js:525 ui/web/ux/form/GridField.js:62
 msgid "Clone"
 msgstr ""
 
-#: ui/web/core/ListFormField.js:57
+#: ui/web/core/ListFormField.js:58
 msgid "Move Up"
 msgstr ""
 
-#: ui/web/core/ListFormField.js:64
+#: ui/web/core/ListFormField.js:65
 msgid "Move Down"
 msgstr ""
 
@@ -1437,7 +1437,7 @@ msgid "Alarm Classes"
 msgstr ""
 
 #: ui/web/cm/interfacevalidationpolicy/Application.js:135
-#: ui/web/cm/objectvalidationpolicy/Application.js:135
+#: ui/web/cm/objectvalidationpolicy/Application.js:142
 #: ui/web/fm/alarmclassconfig/Application.js:18
 #: ui/web/fm/alarmclassconfig/Application.js:52
 #: ui/web/fm/alarmdiagnosticconfig/Application.js:35
@@ -1871,7 +1871,7 @@ msgstr ""
 msgid "Syntax"
 msgstr ""
 
-#: ui/web/aaa/group/Application.js:68 ui/web/aaa/user/Application.js:277
+#: ui/web/aaa/group/Application.js:68 ui/web/aaa/user/Application.js:285
 #: ui/web/fm/mib/Application.js:134
 #: ui/web/inv/connectiontype/Application.js:156
 #: ui/web/inv/inv/plugins/conduits/ConduitsPanel.js:46
@@ -2488,7 +2488,7 @@ msgid "Reset Scopes"
 msgstr ""
 
 #: ui/web/cm/interfacevalidationpolicy/Application.js:57
-#: ui/web/cm/objectvalidationpolicy/Application.js:57
+#: ui/web/cm/objectvalidationpolicy/Application.js:61
 #: ui/web/cm/validationpolicy/Application.js:61
 #: ui/web/inv/connectionrule/Application.js:103
 #: ui/web/phone/numbercategory/Application.js:73
@@ -3332,7 +3332,7 @@ msgstr ""
 #: ui/web/cm/interfacevalidationpolicy/Application.js:78
 #: ui/web/cm/objectvalidationpolicy/Application.js:25
 #: ui/web/cm/objectvalidationpolicy/Application.js:35
-#: ui/web/cm/objectvalidationpolicy/Application.js:78
+#: ui/web/cm/objectvalidationpolicy/Application.js:84
 #: ui/web/cm/validationpolicy/Application.js:23
 #: ui/web/cm/validationpolicy/Application.js:44
 #: ui/web/cm/validationrule/Application.js:58
@@ -5243,7 +5243,7 @@ msgstr ""
 
 #: ui/web/cm/confdbquery/Application.js:91
 #: ui/web/cm/interfacevalidationpolicy/Application.js:94
-#: ui/web/cm/objectvalidationpolicy/Application.js:94
+#: ui/web/cm/objectvalidationpolicy/Application.js:100
 #: ui/web/fm/alarmclass/Application.js:173 ui/web/gis/layer/Application.js:128
 #: ui/web/main/authldapdomain/Application.js:32
 #: ui/web/main/config/Application.js:76
@@ -5256,7 +5256,7 @@ msgid "Default"
 msgstr ""
 
 #: ui/web/cm/interfacevalidationpolicy/Application.js:88
-#: ui/web/cm/objectvalidationpolicy/Application.js:88
+#: ui/web/cm/objectvalidationpolicy/Application.js:94
 #: ui/web/core/filter/Filter.js:244 ui/web/core/filter/Filter.js:287
 #: ui/web/core/modelfilter/List.js:30 ui/web/dev/spec/Application.js:150
 #: ui/web/fm/alarm/plugins/Thresholds.js:47
@@ -6009,7 +6009,7 @@ msgstr ""
 #: ui/web/cm/interfacevalidationpolicy/Application.js:83
 #: ui/web/cm/objectnotify/Application.js:26
 #: ui/web/cm/objectnotify/Application.js:59
-#: ui/web/cm/objectvalidationpolicy/Application.js:83
+#: ui/web/cm/objectvalidationpolicy/Application.js:89
 #: ui/web/dev/quiz/Application.js:108 ui/web/dev/spec/Application.js:135
 #: ui/web/dns/dnszone/Application.js:40 ui/web/dns/dnszone/Application.js:167
 #: ui/web/fm/alarm/view/grids/MultiPanel.js:165
@@ -6059,7 +6059,7 @@ msgstr ""
 msgid "Maintainer"
 msgstr ""
 
-#: ui/web/aaa/user/Application.js:111 ui/web/peer/maintainer/Application.js:54
+#: ui/web/aaa/user/Application.js:119 ui/web/peer/maintainer/Application.js:54
 #: ui/web/sa/authprofile/Application.js:80
 #: ui/web/sa/authprofile/Application.js:172
 #: ui/web/sa/managedobject/Application.js:647
@@ -6480,8 +6480,8 @@ msgstr ""
 #: ui/web/cm/errortype/Application.js:35 ui/web/cm/errortype/Application.js:56
 #: ui/web/cm/interfacevalidationpolicy/Application.js:42
 #: ui/web/cm/interfacevalidationpolicy/Application.js:99
-#: ui/web/cm/objectvalidationpolicy/Application.js:42
-#: ui/web/cm/objectvalidationpolicy/Application.js:99
+#: ui/web/cm/objectvalidationpolicy/Application.js:43
+#: ui/web/cm/objectvalidationpolicy/Application.js:105
 #: ui/web/cm/validationpolicy/Application.js:34
 #: ui/web/cm/validationpolicy/Application.js:56
 #: ui/web/cm/validationrule/Application.js:74
@@ -6762,7 +6762,7 @@ msgid "Close Handler"
 msgstr ""
 
 #: ui/web/cm/interfacevalidationpolicy/Application.js:121
-#: ui/web/cm/objectvalidationpolicy/Application.js:121
+#: ui/web/cm/objectvalidationpolicy/Application.js:128
 #: ui/web/gis/layer/Application.js:35 ui/web/gis/layer/Application.js:86
 #: ui/web/inv/vendor/Application.js:27 ui/web/inv/vendor/Application.js:68
 #: ui/web/project/project/Application.js:31
@@ -8017,9 +8017,9 @@ msgstr ""
 
 #: ui/web/aaa/apikey/Application.js:40 ui/web/aaa/apikey/Application.js:63
 #: ui/web/aaa/apikey/Application.js:123 ui/web/aaa/user/Application.js:54
-#: ui/web/aaa/user/Application.js:99 ui/web/aaa/user/Application.js:204
+#: ui/web/aaa/user/Application.js:107 ui/web/aaa/user/Application.js:212
 #: ui/web/cm/interfacevalidationpolicy/Application.js:116
-#: ui/web/cm/objectvalidationpolicy/Application.js:116
+#: ui/web/cm/objectvalidationpolicy/Application.js:123
 #: ui/web/cm/validationpolicy/Application.js:28
 #: ui/web/cm/validationpolicy/Application.js:51
 #: ui/web/cm/validationpolicy/Application.js:64
