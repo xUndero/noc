@@ -11,7 +11,6 @@ from __future__ import absolute_import
 from collections import namedtuple
 
 # Third-party modules
-import six
 from pymongo import ReadPreference
 
 # NOC modules
@@ -113,11 +112,7 @@ class ReportDiscoveryResult(BaseReportColumn):
         pid = {}
         for p in Pool.objects.filter():
             pool_ids = ids.intersection(
-                set(
-                    ManagedObject.objects.filter(pool=p).values_list(
-                        "id", flat=True
-                    )
-                )
+                set(ManagedObject.objects.filter(pool=p).values_list("id", flat=True))
             )
             if not pool_ids:
                 continue
@@ -132,7 +127,6 @@ class ReportDiscoveryResult(BaseReportColumn):
                 break
         for i in self.sync_ids:
             yield next(r[pid[i]], (i, ("",) * len(self.ATTRS)))
-
         # return list(six.itervalues(r))
 
     def convert(self, val):
