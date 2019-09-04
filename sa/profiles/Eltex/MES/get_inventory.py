@@ -128,7 +128,7 @@ class Script(BaseScript):
             raise self.NotSupportedError("PS on unknown platform: %s" % platform)
         if type not in ["Main", "Redundant"]:
             raise self.NotSupportedError("Unknown PS type: %s" % type)
-        return {"type": "PWR", "vendor": "ELTEX", "part_no": part_no, "number": type}
+        return {"type": "PSU", "vendor": "ELTEX", "part_no": part_no, "number": type}
 
     def get_trans(self, ifname):
         if self.has_detail:
