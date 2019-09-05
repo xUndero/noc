@@ -128,7 +128,7 @@ class Script(BaseScript):
             raise self.NotSupportedError("PS on unknown platform: %s" % platform)
         if type not in ["Main", "Redundant"]:
             raise self.NotSupportedError("Unknown PS type: %s" % type)
-        return {"type": "PSU", "vendor": "ELTEX", "part_no": part_no, "number": type}
+        return {"type": "PWR", "vendor": "ELTEX", "part_no": part_no, "number": type}
 
     def get_trans(self, ifname):
         if self.has_detail:
@@ -188,13 +188,29 @@ class Script(BaseScript):
             pass
 
         if self.has_capability("Stack | Members"):
+            has_unit_command = True
             for unit in self.capabilities["Stack | Member Ids"].split(" | "):
-                plat = self.cli("show system unit %s" % unit, cached=True)
+                try:
+                    plat = self.cli("show system unit %s" % unit, cached=True)
+                except self.CLISyntaxError:
+                    # Found on MES1124M SW version 1.1.46
+                    # Left for compatibility with other models
+                    if unit == "1":
+                        plat = self.cli("show system", cached=True)
+                        has_unit_command = False
+                    else:
+                        raise self.NotSupportedError()
                 if not self.is_has_image:
-                    ver = self.cli("show version unit %s" % unit, cached=True)
+                    if has_unit_command:
+                        ver = self.cli("show version unit %s" % unit, cached=True)
+                    else:
+                        ver = self.cli("show version", cached=True)
                 else:
                     ver = ""
-                ser = self.cli("show system id unit %s" % unit, cached=True)
+                if has_unit_command:
+                    ser = self.cli("show system id unit %s" % unit, cached=True)
+                else:
+                    ser = self.cli("show system", cached=True)
                 r = self.get_chassis(plat, ver, ser)
                 platform = r["part_no"][0]
                 res += [r]
