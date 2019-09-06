@@ -20,7 +20,7 @@ class Script(BaseScript):
     interface = IGetInventory
 
     rx_port = re.compile(
-        r"^(?P<port>(?:Fa|Gi|Te|Po)\S+)\s+(?P<type>\S+)\s+\S+\s+\S+\s+\S+\s+\S+\s+(?:Up|Down|Not Present)",
+        r"^(?P<port>(?:Fa|Gi|Te|e|g)\S+)\s+(?P<type>\S+)\s+\S+\s+\S+\s+\S+\s+\S+\s+(?:Up|Down|Not Present)",
         re.MULTILINE | re.IGNORECASE,
     )
     rx_sfp_vendor = re.compile("SFP vendor name:(?P<vendor>\S+)")
@@ -37,9 +37,7 @@ class Script(BaseScript):
         v = self.cli("show interfaces status", cached=True)
         for match in self.rx_port.finditer(v):
             if match.group("type") in ["1G-Combo-C", "1G-Combo-F", "10G-Combo-C", "10G-Combo-F"]:
-                c = self.cli(
-                    "show fiber-ports optical-transceiver interface %s" % match.group("port")
-                )
+                c = self.cli("show fiber-ports optical-transceiver %s detail" % match.group("port"))
                 match1 = self.rx_sfp_serial.search(c)
                 if match1:
                     r += [
@@ -47,7 +45,7 @@ class Script(BaseScript):
                             "type": "XCVR",
                             "vendor": "NONAME",
                             "part_no": "Unknown | Transceiver | SFP",
-                            "number": match.group("port")[-1:],
+                            "number": match.group("port"),
                             "serial": match1.group("serial"),
                         }
                     ]
