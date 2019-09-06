@@ -2,7 +2,7 @@
 # ----------------------------------------------------------------------
 #  SegmentTopology class
 # ----------------------------------------------------------------------
-#  Copyright (C) 2007-2018 The NOC Project
+#  Copyright (C) 2007-2019 The NOC Project
 #  See LICENSE for details
 # ----------------------------------------------------------------------
 
@@ -82,6 +82,8 @@ class SegmentTopology(BaseTopology):
         Find uplinks basing on Managed Object's level. Top-leveled objects are returned.
         :return:
         """
+        if not self.G:
+            return []
         max_level = max(
             self.G.node[i].get("level")
             for i in self.G.node
