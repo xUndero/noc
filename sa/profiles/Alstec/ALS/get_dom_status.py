@@ -12,7 +12,7 @@ import re
 # NOC modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetdomstatus import IGetDOMStatus
-from noc.core.convert.dbm import mw2dbm
+from noc.lib.convert import mw2dbm
 
 
 class Script(BaseScript):
@@ -33,7 +33,7 @@ class Script(BaseScript):
             v = round(mw2dbm(v), 2)
         return v
 
-    def execute(self, interface=None):
+    def execute_cli(self, interface=None):
         cmd = "show fiber-ports optical-transceiver detailed"
         if interface is not None:
             cmd += " interface %s" % interface
