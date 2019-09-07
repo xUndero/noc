@@ -344,7 +344,7 @@ class ReportObjectDetailApplication(ExtApplication):
             "tags",
         ).order_by(
             "id"
-        ):
+        ).iterator():
             if (mos_filter and mo_id not in mos_filter) or not mos_id:
                 continue
             if container_serials:
@@ -359,7 +359,7 @@ class ReportObjectDetailApplication(ExtApplication):
                 serial, hw_ver, boot_prom, patch = next(roa)[0]  # noqa
             else:
                 serial, hw_ver, boot_prom, patch = "", "", "", ""  # noqa
-            r += [
+            r.append([
                 translate_row(
                     row(
                         [
@@ -391,6 +391,7 @@ class ReportObjectDetailApplication(ExtApplication):
                     cmap,
                 )
             ]
+            )
             if "adm_path" in columns_filter:
                 r[-1].extend([ad] + list(ad_path[ad]))
             if "interface_type_count" in columns_filter:
@@ -414,7 +415,7 @@ class ReportObjectDetailApplication(ExtApplication):
         if o_format == "csv":
             response = HttpResponse(content_type="text/csv")
             response["Content-Disposition"] = 'attachment; filename="%s.csv"' % filename
-            writer = csv.writer(response, dialect="excel", delimiter=";")
+            writer = csv.writer(response, dialect="excel", delimiter=";", quotechar="\"")
             writer.writerows(r)
             return response
         elif o_format == "xlsx":
