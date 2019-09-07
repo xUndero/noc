@@ -910,7 +910,7 @@ class Service(object):
                     to_send[: config.nsqd.ch_chunk_size],
                     to_send[config.nsqd.ch_chunk_size :],
                 )
-                self.pub(channel, "%s\n%s\n" % (fields, "\n".join(chunk)))
+                self.pub(channel, "%s\n%s\n" % (fields, "\n".join(chunk)), raw=True)
 
     def log_request(self, handler):
         """
