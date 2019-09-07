@@ -11,6 +11,7 @@ from mongoengine import Q
 # NOC modules
 from noc.lib.app.extapplication import ExtApplication, view
 from noc.sa.models.managedobject import ManagedObject
+from noc.services.web.apps.sa.objectlist.views import ObjectListApplication
 from noc.sa.models.useraccess import UserAccess
 from noc.inv.models.interface import Interface
 from noc.inv.models.subinterface import SubInterface
@@ -176,6 +177,16 @@ class InterfaceAppplication(ExtApplication):
                 "mo": o.name,
                 "url": self.convert_mo_interface_url(o.id)
         }
+
+    @staticmethod
+    def qdict_to_dict(qdict):
+        """Convert a Django QueryDict to a Python dict.
+
+        Single-value fields are put in directly, and for multi-value fields, a list
+        of all values is stored at the field's key.
+
+        """
+        return {k: v[0] if len(v) == 1 else v for k, v in qdict.lists()}
 
     # api
     @view(url="^(?P<managed_object>\d+)/$", method=["GET"], access="view", api=True)
@@ -344,7 +355,19 @@ class InterfaceAppplication(ExtApplication):
         :param description:
         :return:
         """
+        params = self.qdict_to_dict(request.GET)
         mos = ManagedObject.objects.all()
+        if params and "is_managed" in params:
+            if not params.get("is_managed") == "all":
+                is_managed = (params.get("is_managed") == "true")
+                mos = mos.filter(is_managed=is_managed)
+            del params["is_managed"]
+        if params:
+            q = ObjectListApplication.cleaned_query(ObjectListApplication(ObjectListApplication), params)
+            if q:
+                mos = mos.filter(**q)
+        if "__query" in params.keys():
+            mos = mos.filter(name__icontains=params["__query"])
         if not request.user.is_superuser:
             mos = mos.filter(administrative_domain__in=UserAccess.get_domains(request.user))
         l1 = [] if len(description) < 2 else [

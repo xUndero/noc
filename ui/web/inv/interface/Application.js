@@ -211,10 +211,9 @@ Ext.define("NOC.inv.interface.Application", {
                 ],
                 tbar: [
                     me.searchDescriptionField,
-                    me.searchField,
-                    '->',
                     me.radioForm,
-                    { xtype: 'tbspacer', width: 50 },
+                    { xtype: 'tbspacer', width: 20 },
+                    me.searchField,
                 ]
             });
         me.callParent();
@@ -322,6 +321,6 @@ Ext.define("NOC.inv.interface.Application", {
         var is_managed = Ext.getCmp('only_is_managed').getGroupValue()
         columnsStore = me.down('[itemId=filterPanel]').viewModel.get('filterObject')
         columnsStore['is_managed'] = is_managed
-        return JSON.stringify(columnsStore)
+        return columnsStore
     }
 });
