@@ -721,9 +721,10 @@ class Service(object):
         self.logger.info("[nsq|%s] Starting NSQ publisher", topic)
         queue = self.topic_queues[topic]
         while not queue.to_shutdown:
-            # @todo: wait
-            # @todo: messages
-            messages = list(queue.iter_get())
+            # Message throttling. Wait and allow to collect more messages
+            yield queue.wait_async(rate=config.nsqd.topic_mpub_rate)
+            # Get next batch up to `mpub_messages` messages or up to `mpub_size` size
+            messages = list(queue.iter_get(n=config.nsqd.mpub_messages, size=config.nsqd.mpub_size))
             try:
                 self.logger.debug("[nsq|%s] Publishing %d messages", topic, len(messages))
                 yield mpub(topic, messages, dcs=self.dcs, io_loop=self.ioloop)

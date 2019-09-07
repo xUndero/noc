@@ -12,6 +12,9 @@ from threading import Thread
 
 # Third-party modules
 import pytest
+import tornado.gen
+import tornado.ioloop
+import tornado.locks
 
 # NOC modules
 from noc.core.nsq.topic import TopicQueue
@@ -166,4 +169,30 @@ def test_wait():
     p_thread.start()
     p_thread.join(join_timeout)
     c_thread.join(join_timeout)
+    assert to_produce == consumed["data"]
+
+
+def test_wait_async():
+    @tornado.gen.coroutine
+    def producer():
+        for msg in to_produce:
+            queue.put(msg)
+            yield tornado.gen.sleep(sleep_timeout)
+        queue.shutdown()
+
+    @tornado.gen.coroutine
+    def consumer():
+        while not queue.to_shutdown or queue.qsize()[0]:
+            yield queue.wait_async(1)
+            consumed["data"] += list(queue.iter_get(100))
+        io_loop.stop()
+
+    sleep_timeout = 0.1
+    to_produce = ["%04d" % i for i in range(10)]
+    consumed = {"data": []}
+    queue = TopicQueue("test_wait")
+    io_loop = tornado.ioloop.IOLoop.current()
+    io_loop.add_callback(producer)
+    io_loop.add_callback(consumer)
+    io_loop.start()
     assert to_produce == consumed["data"]

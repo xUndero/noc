@@ -9,10 +9,16 @@
 # Python modules
 from collections import deque
 from threading import Lock, Condition
+import datetime
 
 # Third-party modules
 import six
 import ujson
+import tornado.gen
+import tornado.locks
+
+# NOC modules
+from noc.core.backport.time import perf_counter
 
 
 class TopicQueue(object):
@@ -20,9 +26,11 @@ class TopicQueue(object):
         self.topic = topic
         self.lock = Lock()
         self.put_condition = Condition()
+        self.put_async_condition = tornado.locks.Condition()
         self.queue = deque()  # @todo: maxlen
         self.queue_size = 0
         self.to_shutdown = False
+        self.last_get = None
 
     def put(self, message, fifo=True):
         """
@@ -45,6 +53,7 @@ class TopicQueue(object):
             self.queue_size += len(message)
         with self.put_condition:
             self.put_condition.notify_all()
+            self.put_async_condition.notify_all()
 
     def return_messages(self, messages):
         """
@@ -84,6 +93,7 @@ class TopicQueue(object):
                     yield msg
                 except IndexError:
                     break
+        self.last_get = perf_counter()
 
     def is_empty(self):
         """
@@ -116,11 +126,39 @@ class TopicQueue(object):
 
     def wait(self, timeout=None):
         """
-        Block and wait up to `timeout`
+        Block and wait for new messages up to `timeout`
 
         :param timeout: Wait timeout. No limit if None
         """
-        if not self.queue_size:
+        if self.queue_size:
             return  # Data ready
         with self.put_condition:
             self.put_condition.wait(timeout)
+
+    @tornado.gen.coroutine
+    def wait_async(self, timeout=None, rate=None):
+        """
+        Block and wait up to `timeout`
+        :param timeout: Max. wait in seconds
+        :param rate: Max. rate of publishing in messages per second
+        :return:
+        """
+        # Sleep to throttle rate
+        if rate and self.last_get:
+            now = perf_counter()
+            delta = max(self.last_get + 1.0 / rate - now, 0)
+            if delta > 0:
+                yield tornado.gen.sleep(delta)
+                # Adjust remaining timeout
+                if timeout:
+                    # Adjust timeout
+                    timeout -= delta
+                    if timeout <= 0:
+                        # Timeout expired
+                        raise tornado.gen.Return()
+        # Check if queue already contains messages
+        if not self.queue_size:
+            # No messages, wait
+            if timeout is not None:
+                timeout = datetime.timedelta(seconds=timeout)
+            yield self.put_async_condition.wait(timeout)
