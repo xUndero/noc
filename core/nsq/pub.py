@@ -97,7 +97,7 @@ def mpub(topic, messages, dcs=None, io_loop=None, retries=None):
         si = yield dcs.resolve(NSQ_HTTP_SERVICE, near=True)
         # Send message
         code, _, body = yield fetch(
-            "http://%s/mpub?topic=%s&binary=true" % (si[0], topic),
+            "http://%s/mpub?topic=%s&binary=true" % (si, topic),
             method="POST",
             body=body,
             io_loop=io_loop,
