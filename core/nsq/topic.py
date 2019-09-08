@@ -35,7 +35,7 @@ class TopicQueue(object):
     def put(self, message, fifo=True):
         """
         Put message into queue. Block if queue is full
-        
+
         :param message: Message of any json-serializable type
         :param fifo: Boolean. Append message to the start of queue (LIFO) if False.
             Append message to the end of queue (FIFO) if True.

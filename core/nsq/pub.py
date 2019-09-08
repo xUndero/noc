@@ -94,7 +94,7 @@ def mpub(topic, messages, dcs=None, io_loop=None, retries=None):
     metrics["nsq_mpub", ("topic", topic)] += 1
     while retries > 0:
         # Get actual nsqd service's address and port
-        si = yield dcs.resolve_near(NSQ_HTTP_SERVICE)
+        si = yield dcs.resolve(NSQ_HTTP_SERVICE, near=True)
         # Send message
         code, _, body = yield fetch(
             "http://%s/mpub?topic=%s&binary=true" % (si[0], topic),
