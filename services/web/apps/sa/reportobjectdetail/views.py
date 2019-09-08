@@ -362,7 +362,6 @@ class ReportObjectDetailApplication(ExtApplication):
             else:
                 serial, hw_ver, boot_prom, patch = "", "", "", ""  # noqa
             r.append(
-                [
                     translate_row(
                         row(
                             [
@@ -393,7 +392,6 @@ class ReportObjectDetailApplication(ExtApplication):
                         ),
                         cmap,
                     )
-                ]
             )
             if "adm_path" in columns_filter:
                 r[-1].extend([ad] + list(ad_path[ad]))
