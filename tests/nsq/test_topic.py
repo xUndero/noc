@@ -191,7 +191,7 @@ def test_wait_async():
     to_produce = ["%04d" % i for i in range(10)]
     consumed = {"data": []}
     queue = TopicQueue("test_wait")
-    io_loop = tornado.ioloop.IOLoop.current()
+    io_loop = tornado.ioloop.IOLoop()
     io_loop.add_callback(producer)
     io_loop.add_callback(consumer)
     io_loop.start()
