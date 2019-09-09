@@ -74,6 +74,8 @@ class Script(BaseScript):
         s = [e[0] for e in parse_table(r)]
         if not s:  # MES3324
             r = self.cli("show system", cached=True)
+            if "Unit" not in r:  # MES3108F
+                return []
             s = [e[0] for e in parse_table(r, footer=r"^Unit\s*(?:Main Power|Fans Status)")]
             while s[-1] == "":
                 del s[-1]
