@@ -71,7 +71,7 @@ class FirmwarePolicy(Document):
     def get_recommended_version(cls, platform):
         """
         Get recommended version for  platform
-        
+
         :param platform: Platform instance
         :return: Version string or None
         """
