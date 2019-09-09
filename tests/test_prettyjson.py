@@ -13,12 +13,7 @@ import pytest
 from noc.core.prettyjson import to_json
 
 
-@pytest.mark.parametrize(
-    "config, expected",
-    [
-        ("\n", True),
-    ],
-)
+@pytest.mark.parametrize("config, expected", [("\n", True)])
 def test_prettyjson(config, expected):
     json_string = {"key1": "value1", "key2": "value2", "key3": "value3"}
     prettyjson = to_json(json_string)
