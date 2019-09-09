@@ -31,6 +31,13 @@ class TopicQueue(object):
         self.queue_size = 0
         self.to_shutdown = False
         self.last_get = None
+        # Metrics
+        self.msg_put = 0
+        self.msg_get = 0
+        self.msg_put_size = 0
+        self.msg_get_size = 0
+        self.msg_requeued = 0
+        self.msg_requeued_size = 0
 
     def put(self, message, fifo=True):
         """
@@ -50,7 +57,10 @@ class TopicQueue(object):
                 self.queue.append(message)
             else:
                 self.queue.appendleft(message)
-            self.queue_size += len(message)
+            m_size = len(message)
+            self.queue_size += m_size
+            self.msg_put += 1
+            self.msg_put_size += m_size
         with self.put_condition:
             self.put_condition.notify_all()
             self.put_async_condition.notify_all()
@@ -67,6 +77,8 @@ class TopicQueue(object):
                 raise RuntimeError("return_messages() after shutdown")
             for msg in reversed(messages):
                 self.queue.appendleft(msg)
+                self.msg_requeued += 1
+                self.msg_requeued_size += len(msg)
 
     def iter_get(self, n=1, size=None):
         """
@@ -90,6 +102,8 @@ class TopicQueue(object):
                         self.queue.appendleft(msg)
                         break
                     self.queue_size -= m_size
+                    self.msg_get += 1
+                    self.msg_get_size += m_size
                     yield msg
                 except IndexError:
                     break
@@ -162,3 +176,15 @@ class TopicQueue(object):
             if timeout is not None:
                 timeout = datetime.timedelta(seconds=timeout)
             yield self.put_async_condition.wait(timeout)
+
+    def apply_metrics(self, data):
+        data.update(
+            {
+                ("nsq_msg_put", ("topic", self.topic)): self.msg_put,
+                ("nsq_msg_put_size", ("topic", self.topic)): self.msg_put_size,
+                ("nsq_msg_get", ("topic", self.topic)): self.msg_get,
+                ("nsq_msg_get_size", ("topic", self.topic)): self.msg_get_size,
+                ("nsq_msg_requeued", ("topic", self.topic)): self.msg_requeued,
+                ("nsq_msg_requeued_size", ("topic", self.topic)): self.msg_requeued_size,
+            }
+        )

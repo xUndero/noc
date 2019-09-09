@@ -605,6 +605,8 @@ class Service(object):
             for x in self.executors:
                 self.executors[x].apply_metrics(r)
         apply_metrics(r)
+        for topic in self.topic_queues:
+            self.topic_queues[topic].apply_metrics(r)
         apply_hists(r)
         apply_quantiles(r)
         return r

@@ -196,3 +196,60 @@ def test_wait_async():
     io_loop.add_callback(consumer)
     io_loop.start()
     assert to_produce == consumed["data"]
+
+
+def test_metrics():
+    queue = TopicQueue("test_metrics")
+    k = ("topic", queue.topic)
+    # Initial metrics are zeroed
+    metrics = {"other": 1}
+    queue.apply_metrics(metrics)
+    assert metrics.get("other") == 1  # Untouched
+    assert metrics.get(("nsq_msg_put", k)) == 0
+    assert metrics.get(("nsq_msg_put_size", k)) == 0
+    assert metrics.get(("nsq_msg_get", k)) == 0
+    assert metrics.get(("nsq_msg_get_size", k)) == 0
+    assert metrics.get(("nsq_msg_requeued", k)) == 0
+    assert metrics.get(("nsq_msg_requeued_size", k)) == 0
+    # Put 100 messages of 10 octets each
+    for i in range(100):
+        msg = "%10d" % i
+        queue.put(msg)
+    queue.apply_metrics(metrics)
+    assert metrics.get("other") == 1  # Untouched
+    assert metrics.get(("nsq_msg_put", k)) == 100
+    assert metrics.get(("nsq_msg_put_size", k)) == 1000
+    assert metrics.get(("nsq_msg_get", k)) == 0
+    assert metrics.get(("nsq_msg_get_size", k)) == 0
+    assert metrics.get(("nsq_msg_requeued", k)) == 0
+    assert metrics.get(("nsq_msg_requeued_size", k)) == 0
+    # Get 50 messages of 10 octets each
+    msgs = list(queue.iter_get(50))
+    queue.apply_metrics(metrics)
+    assert metrics.get("other") == 1  # Untouched
+    assert metrics.get(("nsq_msg_put", k)) == 100
+    assert metrics.get(("nsq_msg_put_size", k)) == 1000
+    assert metrics.get(("nsq_msg_get", k)) == 50
+    assert metrics.get(("nsq_msg_get_size", k)) == 500
+    assert metrics.get(("nsq_msg_requeued", k)) == 0
+    assert metrics.get(("nsq_msg_requeued_size", k)) == 0
+    # Return 10 messages back to queue
+    queue.return_messages(msgs[:10])
+    queue.apply_metrics(metrics)
+    assert metrics.get("other") == 1  # Untouched
+    assert metrics.get(("nsq_msg_put", k)) == 100
+    assert metrics.get(("nsq_msg_put_size", k)) == 1000
+    assert metrics.get(("nsq_msg_get", k)) == 50
+    assert metrics.get(("nsq_msg_get_size", k)) == 500
+    assert metrics.get(("nsq_msg_requeued", k)) == 10
+    assert metrics.get(("nsq_msg_requeued_size", k)) == 100
+    # Get 60 messages (50 left + 10 returned)
+    list(queue.iter_get(60))
+    queue.apply_metrics(metrics)
+    assert metrics.get("other") == 1  # Untouched
+    assert metrics.get(("nsq_msg_put", k)) == 100
+    assert metrics.get(("nsq_msg_put_size", k)) == 1000
+    assert metrics.get(("nsq_msg_get", k)) == 110
+    assert metrics.get(("nsq_msg_get_size", k)) == 1100
+    assert metrics.get(("nsq_msg_requeued", k)) == 10
+    assert metrics.get(("nsq_msg_requeued_size", k)) == 100
