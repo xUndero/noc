@@ -9,9 +9,7 @@
 # Python modules
 import math
 import struct
-## Third-party modules
-import pyximport
-pyximport.install()
+
 # NOC modules
 from noc.speedup.ber import parse_tlv_header, parse_p_oid, encode_int
 
