@@ -87,10 +87,11 @@ def mpub(topic, messages, dcs=None, io_loop=None, retries=None):
         # No global DCS, instantiate one
         dcs = get_dcs(ioloop=io_loop)
     # Build body
-    body = mpub_encode(messages)
+    msg = mpub_encode(messages)
     # Post message
     retries = retries or config.nsqd.pub_retries
     code = 200
+    body = None
     metrics["nsq_mpub", ("topic", topic)] += 1
     while retries > 0:
         # Get actual nsqd service's address and port
@@ -99,7 +100,7 @@ def mpub(topic, messages, dcs=None, io_loop=None, retries=None):
         code, _, body = yield fetch(
             "http://%s/mpub?topic=%s&binary=true" % (si, topic),
             method="POST",
-            body=body,
+            body=msg,
             io_loop=io_loop,
             connect_timeout=config.nsqd.connect_timeout,
             request_timeout=config.nsqd.request_timeout,

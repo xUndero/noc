@@ -80,7 +80,7 @@ class TopicQueue(object):
                 self.msg_requeued += 1
                 self.msg_requeued_size += len(msg)
 
-    def iter_get(self, n=1, size=None):
+    def iter_get(self, n=1, size=None, total_overhead=0, message_overhead=0):
         """
         Get up to `n` items up to `size` size.
 
@@ -88,15 +88,21 @@ class TopicQueue(object):
 
         :param n: Amount of items returned
         :param size: None - unlimited, integer - upper size limit
+        :param total_overhead: Adjust total size to `total_overhead` octets.
+        :param message_overhead: Adjust total size to `message_overhead` per each returned message.
         :return: Yields items
         """
         total = 0
+        if size and total_overhead:
+            total += total_overhead
         with self.lock:
             for _i in range(n):
                 try:
                     msg = self.queue.popleft()
                     m_size = len(msg)
                     total += m_size
+                    if size and message_overhead:
+                        total += message_overhead
                     if size and total > size:
                         # Size limit exceeded. Return message to queue
                         self.queue.appendleft(msg)

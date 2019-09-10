@@ -726,7 +726,14 @@ class Service(object):
             # Message throttling. Wait and allow to collect more messages
             yield queue.wait_async(rate=config.nsqd.topic_mpub_rate)
             # Get next batch up to `mpub_messages` messages or up to `mpub_size` size
-            messages = list(queue.iter_get(n=config.nsqd.mpub_messages, size=config.nsqd.mpub_size))
+            messages = list(
+                queue.iter_get(
+                    n=config.nsqd.mpub_messages,
+                    size=config.nsqd.mpub_size,
+                    total_overhead=4,
+                    message_overhead=4,
+                )
+            )
             try:
                 self.logger.debug("[nsq|%s] Publishing %d messages", topic, len(messages))
                 yield mpub(topic, messages, dcs=self.dcs, io_loop=self.ioloop)

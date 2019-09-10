@@ -88,6 +88,12 @@ def test_put_order(put_kwargs, expected):
         (["11", "22", "33"], {"n": 3, "size": 4}, ["11", "22"]),
         (["11", "22", "33"], {"n": 3, "size": 8}, ["11", "22", "33"]),
         (["11", "22", "33"], {"n": 4, "size": 10}, ["11", "22", "33"]),
+        # Limit with overheads
+        (
+            ["11", "22", "33"],
+            {"n": 4, "size": 16, "total_overhead": 4, "message_overhead": 4},
+            ["11", "22"],
+        ),
     ],
 )
 def test_get_limit(input, get_kwargs, expected):
@@ -138,6 +144,9 @@ def test_shutdown():
     # Try to put an item, raise Runtime error
     with pytest.raises(RuntimeError):
         queue.put("9999")
+    # Try to return a message, raise Runtime error
+    with pytest.raises(RuntimeError):
+        queue.return_messages(["9999"])
     # Consume all other items
     consumed += list(queue.iter_get(10))
     # Check all items are consumed
