@@ -100,11 +100,7 @@ class Script(BaseScript):
                 )
             if ip_address:
                 interfaces[ifname]["subinterfaces"] += [
-                    {
-                        "name": ifname,
-                        "enabled_afi": ["IPv4"],
-                        "ipv4_addresses": [ip_address],
-                    }
+                    {"name": ifname, "enabled_afi": ["IPv4"], "ipv4_addresses": [ip_address]}
                 ]
                 if value["mac"] != "00:00:00:00:00:00":
                     interfaces[ifname]["subinterfaces"][-1]["mac"] = value["mac"]
