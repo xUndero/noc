@@ -55,6 +55,8 @@ class SegmentTopology(BaseTopology):
     @cachetools.cachedmethod(operator.attrgetter("_uplinks_cache"))
     def get_uplinks(self):
         self.logger.info("Searching for uplinks")
+        if not self.G:
+            raise StopIteration
         for policy in self.segment.profile.iter_uplink_policy():
             uplinks = getattr(self, "get_uplinks_%s" % policy)()
             if uplinks:
@@ -82,8 +84,6 @@ class SegmentTopology(BaseTopology):
         Find uplinks basing on Managed Object's level. Top-leveled objects are returned.
         :return:
         """
-        if not self.G:
-            return []
         max_level = max(
             self.G.node[i].get("level")
             for i in self.G.node
