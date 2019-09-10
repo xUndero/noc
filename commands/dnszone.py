@@ -25,7 +25,7 @@ from noc.ip.models.addressprofile import AddressProfile
 from noc.ip.models.address import Address
 from noc.lib.validators import is_int
 from noc.dns.utils.rr import RR
-from noc.lib.text import split_alnum
+from noc.core.text import split_alnum
 
 
 class Command(BaseCommand):
@@ -249,7 +249,7 @@ class Command(BaseCommand):
         start = 0
         for match in cls.rx_q.finditer(s):
             if start < match.start():
-                yield s[start : match.start()]
+                yield s[start: match.start()]
             yield match.group(0)
             start = match.end()
         if start < len(s) - 1:
