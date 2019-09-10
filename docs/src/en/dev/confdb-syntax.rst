@@ -8,4 +8,4 @@ ConfDB Syntax Reference
     :titlesonly:
     :glob:
 
-    /dev/confdb-syntax-*
+    /dev/confdb-syntax-syntax
