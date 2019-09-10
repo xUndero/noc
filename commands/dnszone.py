@@ -249,7 +249,7 @@ class Command(BaseCommand):
         start = 0
         for match in cls.rx_q.finditer(s):
             if start < match.start():
-                yield s[start: match.start()]
+                yield s[start : match.start()]
             yield match.group(0)
             start = match.end()
         if start < len(s) - 1:
