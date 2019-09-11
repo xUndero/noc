@@ -75,7 +75,6 @@ class Profile(BaseProfile):
             if exc_type is None:
                 self.script.cli("end")
 
-
     INTERFACE_TYPES = {
         "fa": "physical",  # FastEthernet
         "gi": "physical",  # GigabitEthernet

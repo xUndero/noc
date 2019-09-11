@@ -45,7 +45,7 @@ class Script(BaseScript):
                 if platform == "SKS 10G":
                     platform = "SKS-16E1-IP-1U"
                 elif platform.startswith("SKS"):
-                    platform = "SW-24"
+                    platform = "SKS-16E1-IP"
                 if not i[0]:
                     break
                 stack[i[0]]["part_no"] = platform
@@ -88,7 +88,12 @@ class Script(BaseScript):
 
             v = self.cli("show interfaces status", cached=True)
             for match in self.rx_port.finditer(v):
-                if match.group("type") in ["1G-Combo-C", "1G-Combo-F", "10G-Combo-C", "10G-Combo-F"]:
+                if match.group("type") in [
+                    "1G-Combo-C",
+                    "1G-Combo-F",
+                    "10G-Combo-C",
+                    "10G-Combo-F",
+                ]:
                     c = self.cli(
                         "show fiber-ports optical-transceiver interface %s" % match.group("port")
                     )
