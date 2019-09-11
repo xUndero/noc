@@ -23,10 +23,11 @@ class Script(BaseScript):
     rx_e1_part_no = re.compile(r"^sysType\s+(?P<part_no>.+?)\s*\n", re.MULTILINE)
     rx_e1_serial = re.compile(r"^serialNum\s+(?P<serial>\S+)\s*\n", re.MULTILINE)
     rx_e1_revision = re.compile(r"^hwVer\s+(?P<revision>\S+)\s*\n", re.MULTILINE)
-    rx_port = re.compile(
+    rx_port1 = re.compile(
         r"^(?P<port>(?:Fa|Gi|Te|Po)\S+)\s+(?P<type>\S+)\s+\S+\s+\S+\s+\S+\s+\S+\s+(?:Up|Down|Not Present)",
         re.MULTILINE | re.IGNORECASE,
     )
+    rx_port2 = re.compile(r"^(?P<port>[fgt]\d\S*)\s+.+?\s+(?P<type>\S+)\s*\n", re.MULTILINE)
     rx_sfp_vendor = re.compile("SFP vendor name:(?P<vendor>\S+)")
     rx_sfp_serial = re.compile("SFP serial number:(?P<serial>\S+)")
 
@@ -86,17 +87,28 @@ class Script(BaseScript):
                         }
                     ]
 
-            v = self.cli("show interfaces status", cached=True)
-            for match in self.rx_port.finditer(v):
+            try:
+                v = self.cli("show interfaces status", cached=True)
+                rx_port = self.rx_port1
+            except self.CLISyntaxError:
+                v = self.cli("show interface brief")
+                rx_port = self.rx_port2
+            for match in rx_port.finditer(v):
                 if match.group("type") in [
                     "1G-Combo-C",
                     "1G-Combo-F",
                     "10G-Combo-C",
                     "10G-Combo-F",
+                    "Giga-Combo-TX",
+                    "Giga-Combo-FX",
                 ]:
-                    c = self.cli(
-                        "show fiber-ports optical-transceiver interface %s" % match.group("port")
-                    )
+                    try:
+                        c = self.cli(
+                            "show fiber-ports optical-transceiver interface %s"
+                            % match.group("port")
+                        )
+                    except self.CLISyntaxError:
+                        break
                     match1 = self.rx_sfp_serial.search(c)
                     if match1:
                         r += [
