@@ -13,8 +13,23 @@ import pytest
 from noc.core.prettyjson import to_json
 
 
-@pytest.mark.parametrize("config, expected", [("\n", True)])
+@pytest.mark.parametrize(
+    "config, expected",
+    [
+        ({"key1": "value1", "key2": "value2", "key3": "value3"}, True),
+        (["key1" "value1" "key2" "value2" "key3" "value3"], False),
+    ]
+)
 def test_prettyjson(config, expected):
-    json_string = {"key1": "value1", "key2": "value2", "key3": "value3"}
-    prettyjson = to_json(json_string)
-    assert prettyjson.endswith(config) == expected
+    assert to_json(config).startswith("{\n") == expected
+
+
+@pytest.mark.parametrize(
+    "config, expected",
+    [
+        (("key1", "value1", "key2", "value2", "key3", "value3"), True),
+    ],
+)
+def test_prettyjson_error(config, expected):
+    with pytest.raises(TypeError):
+        assert to_json(config).startswith("{\n") == expected
