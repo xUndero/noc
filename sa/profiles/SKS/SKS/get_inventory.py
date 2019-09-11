@@ -20,9 +20,9 @@ class Script(BaseScript):
     interface = IGetInventory
     cache = True
 
-    rx_e1_part_no = re.compile("^sysType\s+(?P<part_no>.+?)\s*\n", re.MULTILINE)
-    rx_e1_serial = re.compile("^serialNum\s+(?P<serial>\S+)\s*\n", re.MULTILINE)
-    rx_e1_revision = re.compile("^hwVer\s+(?P<revision>\S+)\s*\n", re.MULTILINE)
+    rx_e1_part_no = re.compile(r"^sysType\s+(?P<part_no>.+?)\s*\n", re.MULTILINE)
+    rx_e1_serial = re.compile(r"^serialNum\s+(?P<serial>\S+)\s*\n", re.MULTILINE)
+    rx_e1_revision = re.compile(r"^hwVer\s+(?P<revision>\S+)\s*\n", re.MULTILINE)
     rx_port = re.compile(
         r"^(?P<port>(?:Fa|Gi|Te|Po)\S+)\s+(?P<type>\S+)\s+\S+\s+\S+\s+\S+\s+\S+\s+(?:Up|Down|Not Present)",
         re.MULTILINE | re.IGNORECASE,
