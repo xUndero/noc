@@ -29,7 +29,7 @@ class Script(BaseScript):
     def execute_cli(self, interface=None):
         r = []
         try:
-            c = self.cli("show interfaces status")
+            c = self.cli("show interfaces status", cached=True)
             rx_port = self.rx_port1
         except self.CLISyntaxError:
             c = self.cli("show interface brief")
