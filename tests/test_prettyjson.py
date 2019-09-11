@@ -18,17 +18,14 @@ from noc.core.prettyjson import to_json
     [
         ({"key1": "value1", "key2": "value2", "key3": "value3"}, True),
         (["key1" "value1" "key2" "value2" "key3" "value3"], False),
-    ]
+    ],
 )
 def test_prettyjson(config, expected):
     assert to_json(config).startswith("{\n") == expected
 
 
 @pytest.mark.parametrize(
-    "config, expected",
-    [
-        (("key1", "value1", "key2", "value2", "key3", "value3"), True),
-    ],
+    "config, expected", [(("key1", "value1", "key2", "value2", "key3", "value3"), True)]
 )
 def test_prettyjson_error(config, expected):
     with pytest.raises(TypeError):
