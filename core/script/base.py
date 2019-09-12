@@ -21,7 +21,7 @@ from six.moves import zip
 
 # NOC modules
 from noc.core.log import PrefixLoggerAdapter
-from noc.lib.validators import is_int
+from noc.core.validators import is_int
 from noc.core.profile.loader import loader as profile_loader
 from noc.core.handler import get_handler
 from noc.core.mac import MAC
@@ -563,13 +563,13 @@ class BaseScript(six.with_metaclass(BaseScriptMetaclass, object)):
                     raise ValueError(x)
                 prefix = match.group(1)
                 # Detect range boundaries
-                start = int(f[len(prefix) :])
+                start = int(f[len(prefix):])
                 if is_int(t):
                     stop = int(t)  # Just integer
                 else:
                     if not t.startswith(prefix):
                         raise ValueError(x)
-                    stop = int(t[len(prefix) :])  # Prefixed
+                    stop = int(t[len(prefix):])  # Prefixed
                 if start > stop:
                     raise ValueError(x)
                 for i in range(start, stop + 1):
@@ -845,7 +845,7 @@ class BaseScript(six.with_metaclass(BaseScriptMetaclass, object)):
                     r = self.strip_first_lines(r.lstrip())
                 else:
                     # Some switches, like ProCurve do not send \n after the echo
-                    r = r[len(cmd) :]
+                    r = r[len(cmd):]
             # Store cli cache when necessary
             if cached:
                 self.root.cli_cache[cmd] = r
