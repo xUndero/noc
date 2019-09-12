@@ -563,13 +563,13 @@ class BaseScript(six.with_metaclass(BaseScriptMetaclass, object)):
                     raise ValueError(x)
                 prefix = match.group(1)
                 # Detect range boundaries
-                start = int(f[len(prefix):])
+                start = int(f[len(prefix) :])
                 if is_int(t):
                     stop = int(t)  # Just integer
                 else:
                     if not t.startswith(prefix):
                         raise ValueError(x)
-                    stop = int(t[len(prefix):])  # Prefixed
+                    stop = int(t[len(prefix) :])  # Prefixed
                 if start > stop:
                     raise ValueError(x)
                 for i in range(start, stop + 1):
@@ -845,7 +845,7 @@ class BaseScript(six.with_metaclass(BaseScriptMetaclass, object)):
                     r = self.strip_first_lines(r.lstrip())
                 else:
                     # Some switches, like ProCurve do not send \n after the echo
-                    r = r[len(cmd):]
+                    r = r[len(cmd) :]
             # Store cli cache when necessary
             if cached:
                 self.root.cli_cache[cmd] = r
