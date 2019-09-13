@@ -91,10 +91,10 @@ class Script(BaseScript):
                 if i["name"] == ifname:
                     i["subinterfaces"] += [
                         {
-                            "name": match.group("name"),
+                            "name": match.group("alias"),
                             "oper_status": True,
                             "admin_status": True,
-                            "description": match.group("alias"),
+                            "description": match.group("name"),
                             "mac": match.group("mac"),
                             "enable_afi": ["IPv4"],
                             "ip_addresess": [match.group("ip")],
