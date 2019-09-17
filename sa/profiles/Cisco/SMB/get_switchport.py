@@ -111,7 +111,7 @@ class Script(BaseScript):
             if amode in ("trunk", "general"):
                 is_trunk = True
                 is_qnq = False
-            elif amode in ("access",):
+            elif amode == "access":
                 if "avlan" in match.groups():
                     untagged = match.group("avlan")
                 is_trunk = False
