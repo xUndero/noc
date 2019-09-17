@@ -419,7 +419,7 @@ class MetricsCheck(DiscoveryCheck):
                     continue
                 # Attach time_delta, when required
                 if time_delta and cfg.metric_type.scope.enable_timedelta:
-                    data[table, pk]["time_delta"] = time_delta
+                    data[cfg.metric_type.scope.table_name][item_hash]["time_delta"] = time_delta
                 n_metrics += 1
             if cfg.threshold_profile and m.abs_value is not None:
                 alarms += self.process_thresholds(m, cfg)
