@@ -158,10 +158,10 @@ class Span(object):
             client=self.client or "",
             duration=self.duration,
             error_code=self.error_code or 0,
-            error_text=self.error_text,
+            error_text=str(self.error_text),
             sample=self.sample,
-            in_label=self.in_label or "",
-            out_label=self.out_label or "",
+            in_label=str(self.in_label) or "",
+            out_label=str(self.out_label) or "",
         )
         with span_lock:
             spans += [span]
