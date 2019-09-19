@@ -37,7 +37,7 @@ class Script(BaseScript):
         r"^\s+SoftWare Version (?P<version>\S+)\s*\n"
         r"^\s+BootRom Version (?P<bootprom>\S+)\s*\n"
         r"^\s+HardWare Version (?P<hardware>\S+)\s*\n"
-        r"^\s+Serial No.:\s*(?P<serial>\S+)\s*\n",
+        r"^\s+(?:Serial No.:|Device serial number)\s*(?P<serial>\S+)\s*\n",
         re.MULTILINE,
     )
 
