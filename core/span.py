@@ -153,15 +153,15 @@ class Span(object):
             ctx=self.span_context,
             id=self.span_id,
             parent=self.parent,
-            server=self.server or "",
-            service=self.service or "",
-            client=self.client or "",
+            server=str(self.server or ""),
+            service=str(self.service or ""),
+            client=str(self.client or ""),
             duration=self.duration,
             error_code=self.error_code or 0,
-            error_text=str(self.error_text),
+            error_text=str(self.error_text or ""),
             sample=self.sample,
-            in_label=str(self.in_label) or "",
-            out_label=str(self.out_label) or "",
+            in_label=str(self.in_label or ""),
+            out_label=str(self.out_label or ""),
         )
         with span_lock:
             spans += [span]
