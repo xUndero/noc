@@ -69,7 +69,10 @@ class Script(BaseScript):
         }
 
     def execute_cli(self):
-        match = self.rx_ver.search(self.cli("show version", cached=True))
+        v = self.cli("show version", cached=True)
+        match = self.rx_ver.search(v)
+        if not match:
+            match = self.rx_ver_snmp.search(v)
         return {
             "vendor": "NAG",
             "platform": match.group("platform"),
