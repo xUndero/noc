@@ -31,4 +31,3 @@ class Script(BaseScript):
                 continue
             r += [match.groupdict()]
         return r
-
