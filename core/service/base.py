@@ -160,7 +160,7 @@ class Service(object):
         elif topo == CH_SHARDED:
             self.register_metrics = self._register_sharded_metrics
             self.total_weight = 0
-            self.get_shard = Sharder().get_sharding_function()
+            self.get_shard = Sharder("").get_sharding_function()
         else:
             self.die("Invalid ClickHouse cluster topology")
         # NSQ Topics
