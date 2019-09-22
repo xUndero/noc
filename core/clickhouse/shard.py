@@ -107,8 +107,8 @@ class ShardingSharder(BaseSharder):
             else:
                 f = "%s else %r" % (f, channels)
         fn = "_ch_sharding_function(k):\n    return %s" % f
-        exec compile(fn, "<string>", "exec")
-        return _ch_sharding_function
+        exec(compile(fn, "<string>", "exec"))
+        return _ch_sharding_function  # noqa
 
     def feed(self, records):
         key = self.SHARDING_KEYS.get(self.f_parts[0], self.DEFAULT_SHARDING_KEY)
