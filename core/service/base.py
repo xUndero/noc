@@ -855,12 +855,11 @@ class Service(object):
         key = self.SHARDING_KEYS.get(table, self.DEFAULT_SHARDING_KEY)
         tw = self.total_weight
         table = "raw_%s" % table
-        sx = self.get_shard
         # Distribute data to shards
         data = defaultdict(list)
         for m in metrics:
             si = shard_index(m)
-            for ch in eval(sx, {"k": si}):
+            for ch in self.get_shard(si):
                 data[ch] += [m]
         # Publish metrics
         for ch in data:
