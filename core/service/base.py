@@ -14,7 +14,6 @@ import signal
 import uuid
 import argparse
 from collections import defaultdict
-import random
 import time
 import threading
 
