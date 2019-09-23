@@ -106,7 +106,7 @@ class ShardingSharder(BaseSharder):
                 f = "%s else %r if k < %d" % (f, channels, w)
             else:
                 f = "%s else %r" % (f, channels)
-        fn = "_ch_sharding_function(k):\n    return %s" % f
+        fn = "def _ch_sharding_function(k):\n    return %s" % f
         exec(compile(fn, "<string>", "exec"))
         return _ch_sharding_function  # noqa
 
