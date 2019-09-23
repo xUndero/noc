@@ -15,8 +15,8 @@ from mongoengine.document import Document
 from mongoengine.fields import StringField, UUIDField
 
 # NOC modules
-from noc.lib.prettyjson import to_json
-from noc.lib.text import quote_safe_path
+from noc.core.prettyjson import to_json
+from noc.core.text import quote_safe_path
 
 
 @six.python_2_unicode_compatible

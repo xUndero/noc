@@ -12,8 +12,6 @@ import zlib
 
 # Third-party modules
 from django.http import HttpResponse
-
-# Third-party modules
 import ujson
 from mongoengine.queryset import Q as MQ
 
@@ -39,7 +37,7 @@ from noc.main.models.resourcestate import ResourceState
 from noc.project.models.project import Project
 from noc.vc.models.vcdomain import VCDomain
 from noc.sa.models.objectcapabilities import ObjectCapabilities
-from noc.lib.text import split_alnum
+from noc.core.text import split_alnum
 from noc.sa.interfaces.base import (
     ListOfParameter,
     ModelParameter,
@@ -943,3 +941,15 @@ class ManagedObjectApplication(ExtModelApplication):
         ]
 
         return {"cpe": sorted_iname(l1)}
+
+    def has_repo_config_access(self, user, obj):
+        """
+        Check user has access to object
+
+        :param user: User instance
+        :param obj: ManagedObject instance
+        :return: True if user has access, False otherwise
+        """
+        if user.is_superuser:
+            return True
+        return ManagedObject.objects.filter(id=obj.id).filter(UserAccess.Q(user)).exists()

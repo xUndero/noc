@@ -19,8 +19,8 @@ import cachetools
 
 # NOC modules
 from noc.main.models.doccategory import category
-from noc.lib.prettyjson import to_json
-from noc.lib.text import quote_safe_path
+from core.prettyjson import to_json
+from noc.core.text import quote_safe_path
 from noc.core.model.decorator import on_delete_check
 
 id_lock = Lock()

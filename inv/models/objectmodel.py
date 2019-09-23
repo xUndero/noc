@@ -33,8 +33,8 @@ from .unknownmodel import UnknownModel
 from .vendor import Vendor
 from noc.main.models.doccategory import category
 from noc.core.mongo.fields import PlainReferenceField
-from noc.lib.prettyjson import to_json
-from noc.lib.text import quote_safe_path
+from noc.core.prettyjson import to_json
+from noc.core.text import quote_safe_path
 from noc.core.model.decorator import on_delete_check, on_save
 
 id_lock = Lock()
@@ -104,7 +104,7 @@ class ObjectModel(Document):
         "auto_create_index": False,
         "indexes": [("vendor", "data.asset.part_no"), ("vendor", "data.asset.order_part_no")],
         "json_collection": "inv.objectmodels",
-        "json_unique_fields": ["name"],
+        "json_unique_fields": ["name", "uuid"],
         "json_depends_on": ["inv.vendors", "inv.connectionrules"],
     }
 

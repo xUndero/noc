@@ -15,8 +15,8 @@ from mongoengine.document import Document, EmbeddedDocument
 from mongoengine.fields import StringField, UUIDField, ListField, EmbeddedDocumentField
 
 # NOC modules
-from noc.lib.prettyjson import to_json
-from noc.lib.text import quote_safe_path
+from noc.core.prettyjson import to_json
+from noc.core.text import quote_safe_path
 from noc.core.model.decorator import on_delete_check
 
 
@@ -98,7 +98,7 @@ class ConnectionRule(Document):
         "auto_create_index": False,
         "indexes": [],
         "json_collection": "inv.connectionrules",
-        "json_unique_fields": ["name"],
+        "json_unique_fields": ["name", "uuid"],
     }
 
     name = StringField(unique=True)

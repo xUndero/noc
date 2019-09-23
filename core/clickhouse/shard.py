@@ -11,16 +11,21 @@ from __future__ import absolute_import
 import random
 from collections import defaultdict
 
+# Third-party modules
+import ujson
+
 # NOC modules
 from noc.config import config, CH_UNCLUSTERED, CH_REPLICATED, CH_SHARDED
-from .pub import pub
+from noc.core.service.pub import pub
 
 
 class BaseSharder(object):
     TOPIC = "chwriter"
 
     def __init__(self, fields, chunk=None):
-        self.fields = fields
+        parts = fields.split(".")
+        self.table = parts[0]
+        self.fields = fields[1:]
         self.records = defaultdict(list)
         self.chunk = chunk or config.nsqd.ch_chunk_size
 
@@ -36,7 +41,10 @@ class BaseSharder(object):
             data = self.records[topic]
             while data:
                 chunk, data = data[: self.chunk], data[self.chunk :]
-                yield topic, "%s\n%s\n" % (self.fields, "\n".join(chunk))
+                yield topic, "%s\n%s" % (
+                    self.table,
+                    "\n".join(ujson.dumps(dict(zip(self.fields, s.split("\t")))) for s in chunk),
+                )
         self.records = defaultdict(list)
 
     def pub(self):
@@ -98,7 +106,9 @@ class ShardingSharder(BaseSharder):
                 f = "%s else %r if k < %d" % (f, channels, w)
             else:
                 f = "%s else %r" % (f, channels)
-        return compile(f, "<string>", "eval")
+        fn = "def _ch_sharding_function(k):\n    return %s" % f
+        exec(compile(fn, "<string>", "exec"))
+        return _ch_sharding_function  # noqa
 
     def feed(self, records):
         key = self.SHARDING_KEYS.get(self.f_parts[0], self.DEFAULT_SHARDING_KEY)
@@ -114,14 +124,13 @@ class ShardingSharder(BaseSharder):
             def sf(x):
                 return random.randint(0, tw - 1)
 
-        sx = self.get_shard
         # Shard and replicate
         for m in records:
             if not m:
                 continue
             sk = sf(m)
             # Distribute to channels
-            for c in eval(sx, {"k": sk}):
+            for c in self.get_shard(sk):
                 self.records[c] += [m]
 
 

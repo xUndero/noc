@@ -13,8 +13,8 @@ import re
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetinterfaces import IGetInterfaces
 from noc.core.ip import IPv4
-from noc.lib.validators import is_int
-from noc.lib.text import parse_table
+from noc.core.validators import is_int
+from noc.core.text import parse_table
 
 
 class Script(BaseScript):

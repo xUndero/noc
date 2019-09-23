@@ -30,7 +30,7 @@ from noc.fm.models.activealarm import ActiveAlarm
 from noc.fm.models.archivedalarm import ArchivedAlarm
 from noc.fm.models.eventclass import EventClass
 from noc.fm.models.mib import MIB
-from noc.lib.validators import is_oid
+from noc.core.validators import is_oid
 from noc.core.escape import json_escape
 
 
@@ -282,7 +282,7 @@ class Command(BaseCommand):
                 window = window // 2
                 if window < datetime.timedelta(hours=1):
                     self.die("Too many events for delete in interval %s" % window)
-                event_ts -= window
+                event_ts += window
         if force:
             self.print("All data before %s from active events will be Remove..\n" % before)
             for i in reversed(range(1, 10)):

@@ -2,7 +2,7 @@
 # ----------------------------------------------------------------------
 # ./noc script
 # ----------------------------------------------------------------------
-# Copyright (C) 2007-2017 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ import yaml
 
 # NOC modules
 from noc.core.management.base import BaseCommand
-from noc.lib.validators import is_int
+from noc.core.validators import is_int
 from noc.core.span import get_spans, Span
 from noc.core.script.loader import loader
 from noc.core.script.beef import Beef
@@ -289,12 +289,11 @@ class Command(BaseCommand):
         # Fetch commands from spans
         cli_svc = {"beef_cli", "cli", "telnet", "ssh"}
         commands = set()
-        for sd in get_spans():
-            row = sd.split("\t")
-            if row[6] not in cli_svc:
+        for span in get_spans():
+            if span.service not in cli_svc:
                 continue
             # Delete last \\n symbol and add command
-            commands.add(row[12][:-3].decode("string_escape").strip())
+            commands.add(span.in_label[:-3].decode("string_escape").strip())
         # Update specs
         s_name = "cli_%s" % script.name.rsplit(".", 1)[-1]
         names = set()

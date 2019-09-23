@@ -23,8 +23,8 @@ from mongoengine.fields import (
 
 # NOC modules
 from noc.core.mongo.fields import PlainReferenceField
-from noc.lib.prettyjson import to_json
-from noc.lib.text import quote_safe_path
+from noc.core.prettyjson import to_json
+from noc.core.text import quote_safe_path
 from noc.main.models.doccategory import category
 from noc.core.model.decorator import on_delete_check
 
@@ -43,7 +43,7 @@ class ConnectionType(Document):
         "auto_create_index": False,
         "indexes": ["extend", "data", "c_group"],
         "json_collection": "inv.connectiontypes",
-        "json_unique_fields": ["name"],
+        "json_unique_fields": ["name", "uuid"],
     }
 
     name = StringField(unique=True)

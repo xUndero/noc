@@ -19,8 +19,8 @@ from mongoengine.errors import ValidationError
 from noc.core.mongo.fields import PlainReferenceField
 from noc.sa.models.profile import Profile
 from noc.main.models.doccategory import category
-from noc.lib.prettyjson import to_json
-from noc.lib.text import quote_safe_path
+from noc.core.prettyjson import to_json
+from noc.core.text import quote_safe_path
 
 
 @category
