@@ -185,6 +185,9 @@ class Script(BaseScript):
         elif len(n) == 3:
             # SFP+-10G-LR
             t, s, m = n
+        elif len(n) == 4 and description.startswith("SFP-1000BASE-BX10-"):
+            # SFP-1000BASE-BX10-U, SFP-1000BASE-BX10-D
+            return "NoName | Transceiver | 1G | SFP BX10%s" % n[-1]
         else:
             self.logger.error("Cannot detect transceiver type: '%s'", description)
             return self.UNKNOWN_XCVR
