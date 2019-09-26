@@ -32,7 +32,6 @@ class ModelBase(type):
         cls._fields = {}
         cls._display_fields = OrderedDict()
         cls._model_field = {}
-        cls._tsv_encoders = {}
         cls._meta = ModelMeta(
             engine=getattr(cls.Meta, "engine", None),
             db_table=getattr(cls.Meta, "db_table", None),
@@ -50,7 +49,6 @@ class ModelBase(type):
         for f in sorted(cls._model_field, key=lambda x: cls._model_field[x].field_number):
             cls._display_fields[f] = cls._model_field[f]
             cls._display_fields[f].name = f
-        cls._tsv_order = [cls._tsv_encoders[f] for f in cls._fields_order]
         return cls
 
 
@@ -124,8 +122,14 @@ class Model(six.with_metaclass(ModelBase)):
         )
 
     @classmethod
-    def to_tsv(cls, **kwargs):
-        return "\t".join(f(kwargs) for f in cls._tsv_order) + "\n"
+    def to_json(cls, **kwargs):
+        """
+        Convert dict of kwargs to JSON-serializeable dict
+
+        :param kwargs:
+        :return:
+        """
+        return {f: cls._model_field[f].to_json(kwargs[f]) for f in kwargs}
 
     @classmethod
     def to_python(cls, row, **kwargs):
@@ -134,22 +138,6 @@ class Model(six.with_metaclass(ModelBase)):
             # print(num, f)
             r[f] = cls._model_field[f].to_python(row[num])
         return r
-
-    @classmethod
-    def get_fingerprint(cls):
-        field_list = []
-        for f in cls._fields_order:
-            if isinstance(cls._fields[f], NestedField):
-                field_list += ["%s.%s" % (f, nf) for nf in cls._fields[f].field_type._fields_order]
-            else:
-                field_list += [f]
-        return "%s|%s" % (cls._get_db_table(), "|".join(field_list))
-
-    @classmethod
-    def get_short_fingerprint(cls):
-        seed = ".".join(cls._fields_order)
-        h = hashlib.sha256(seed).hexdigest()[:8]
-        return "%s.%s" % (cls._get_db_table(), h)
 
     @classmethod
     def ensure_table(cls, connect=None):
@@ -351,7 +339,3 @@ class NestedModel(Model):
     @classmethod
     def get_create_sql(cls):
         return ",\n".join(cls._fields[f].get_create_sql() for f in cls._fields_order)
-
-    @classmethod
-    def get_fingerprint(cls):
-        return ["%s.%s" % (cls._fields[f].name, f) for f in cls._fields_order]
