@@ -10,7 +10,6 @@
 from ast import literal_eval
 from datetime import datetime
 import itertools
-from functools import partial
 import socket
 import struct
 

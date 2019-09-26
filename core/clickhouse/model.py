@@ -2,26 +2,25 @@
 # ----------------------------------------------------------------------
 # Clickhouse models
 # ----------------------------------------------------------------------
-# Copyright (C) 2007-2018 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ----------------------------------------------------------------------
 
 # Python modules
 from __future__ import absolute_import, print_function
-import hashlib
 from collections import OrderedDict
 
 # Third-party modules
 import six
 
 # NOC modules
-from .fields import BaseField, NestedField
-from .connect import connection
 from noc.core.bi.query import to_sql, escape_field
 from noc.config import config
 from noc.sa.models.useraccess import UserAccess
 from noc.sa.models.managedobject import ManagedObject
 from noc.core.backport.time import perf_counter
+from .fields import BaseField
+from .connect import connection
 
 __all__ = ["Model", "NestedModel"]
 
