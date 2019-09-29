@@ -9,7 +9,7 @@
 # NOC modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetinventory import IGetInventory
-from noc.lib.text import parse_kv
+from noc.core.text import parse_kv
 
 
 class Script(BaseScript):
@@ -31,12 +31,14 @@ class Script(BaseScript):
         r = parse_kv(self.kv_map, v, sep=":")
         if "prod_version" in r:
             r["prod_version"] = r["prod_version"].split(":")[-1].strip(" .")
-        return [{
-            "type": "CHASSIS",
-            "number": "0",
-            "vendor": "Raisecom",
-            "part_no": r["platform"],
-            "revision": r["prod_version"],
-            "serial": r["serial"],
-            "description": "",
-        }]
+        return [
+            {
+                "type": "CHASSIS",
+                "number": "0",
+                "vendor": "Raisecom",
+                "part_no": r["platform"],
+                "revision": r["prod_version"],
+                "serial": r["serial"],
+                "description": "",
+            }
+        ]

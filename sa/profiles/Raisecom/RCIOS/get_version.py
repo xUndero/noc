@@ -9,7 +9,7 @@
 # NOC modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetversion import IGetVersion
-from noc.lib.text import parse_kv
+from noc.core.text import parse_kv
 
 
 class Script(BaseScript):
@@ -32,5 +32,9 @@ class Script(BaseScript):
             "vendor": "Raisecom",
             "platform": r["platform"],
             "version": r["version"],
-            "attributes": {"Serial Number": r["serial"], "Boot PROM": r["bootprom"], "HW version": r["hw_version"]},
+            "attributes": {
+                "Serial Number": r["serial"],
+                "Boot PROM": r["bootprom"],
+                "HW version": r["hw_version"],
+            },
         }
