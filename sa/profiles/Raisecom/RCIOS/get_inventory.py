@@ -9,7 +9,7 @@
 # NOC modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetinventory import IGetInventory
-from noc.core.text import parse_kv
+from noc.lib.text import parse_kv
 
 
 class Script(BaseScript):
