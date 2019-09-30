@@ -92,7 +92,14 @@ class Script(BaseScript):
                 match = self.rx_chassis.search(line)
                 if match:
                     rev = match.group("revision")
-                    yield (chassis_no, "Chassis", rev, None, match.group("serial"), match.group("rest"))
+                    yield (
+                        chassis_no,
+                        "Chassis",
+                        rev,
+                        None,
+                        match.group("serial"),
+                        match.group("rest"),
+                    )
 
     def execute_cli(self):
         virtual_chassis = None
