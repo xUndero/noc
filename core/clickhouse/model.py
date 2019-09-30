@@ -211,7 +211,7 @@ class Model(six.with_metaclass(ModelBase)):
             """,
             [config.clickhouse.db, table_name],
         ):
-            existing[cls.quote_name(name)] = type
+            existing[name] = type
         # Check
         after = None
         for field_name, db_type in cls.iter_create_sql():
@@ -232,7 +232,7 @@ class Model(six.with_metaclass(ModelBase)):
             else:
                 connect.execute(
                     post="ALTER TABLE %s ADD COLUMN %s %s AFTER %s"
-                    % (table_name, field_name, db_type, after)
+                    % (table_name, cls.quote_name(field_name), db_type, cls.quote_name(after))
                 )
                 c = True
             after = field_name
