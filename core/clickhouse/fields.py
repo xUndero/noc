@@ -13,7 +13,6 @@ import itertools
 import socket
 import struct
 from collections import defaultdict
-from functools import partial
 
 # Third-party modules
 import six
@@ -120,8 +119,7 @@ class BaseField(object):
         :param name: Nested field name
         :return: (Field name, Nested name)
         """
-        if name.startswith("`"):
-            name = name[1:-1]
+        name = name.strip("`")
         if "." in name:
             return name.split(".", 1)
         return name, None
@@ -356,16 +354,18 @@ class NestedField(ArrayField):
         value = literal_eval(value)
         return [
             {
-                k: self.field_type._meta.fields[k].to_python(v.strip("'"))
-                for k, v in six.iteritems(dict(zip(self.field_type._fields_order, v)))
+                f.name: f.to_python(v.strip("'"))
+                for f, v in six.iteritems(dict(zip(self.field_type._meta.ordered_fields, v)))
             }
             for v in value
         ]
 
     def get_select_sql(self):
-        m = ["toString(%s.%s[x])" % (self.name, x) for x in self.field_type._fields_order]
+        m = [
+            "toString(%s.%s[x])" % (self.name, f.name) for f in self.field_type._meta.ordered_fields
+        ]
         r = [
             "arrayMap(x -> [%s], arrayEnumerate(%s.%s))"
-            % (",".join(m), self.name, self.field_type._fields_order[0])
+            % (",".join(m), self.name, self.field_type.get_pk_name())
         ]
         return "".join(r)

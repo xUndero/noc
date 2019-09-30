@@ -103,11 +103,11 @@ class BIAPI(API):
                 if cls.ref_dict.get(k.model, None):
                     for f in Dictionary.get_dictionary_class(
                         cls.ref_dict.get(k.model, None)
-                    )._fields_order:
+                    )._meta.ordered_fields:
                         r["fields"] += [
                             {
-                                "name": f,
-                                "description": f,
+                                "name": f.name,
+                                "description": f.description or f.name,
                                 "type": "UInt64",
                                 "ro": True,
                                 "dict": cls.ref_dict.get(k.model, None),

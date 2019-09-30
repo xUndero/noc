@@ -393,6 +393,15 @@ class Model(six.with_metaclass(ModelBase)):
             dt = perf_counter() - t0
         return {"fields": aliases, "result": r, "duration": dt, "sql": sql}
 
+    @classmethod
+    def get_pk_name(cls):
+        """
+        Get primary key's name
+
+        :return: Field name
+        """
+        return cls._meta.ordered_fields[0].name
+
 
 class NestedModel(Model):
     @classmethod

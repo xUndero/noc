@@ -163,6 +163,15 @@ class Dictionary(six.with_metaclass(DictionaryBase)):
         return cls._meta.fields[name].get_db_type()
 
     @classmethod
+    def get_pk_name(cls):
+        """
+        Get primary key's name
+
+        :return: Field name
+        """
+        return cls._meta.ordered_fields[0].name
+
+    @classmethod
     def dump(cls, out):
         # @todo: !!!
         raise NotImplementedError()
