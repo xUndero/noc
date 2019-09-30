@@ -193,8 +193,8 @@ class Model(six.with_metaclass(ModelBase)):
     def ensure_columns(cls, connect, table_name):
         """
         Create necessary table columns
-        
-        :param connect: ClickHouse client 
+
+        :param connect: ClickHouse client
         :param table_name: Database table name
         :return: True, if any column has been altered
         """
