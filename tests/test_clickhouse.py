@@ -45,7 +45,8 @@ class MyModel(Model):
             },
             {
                 "date": "2019-09-26",
-                "pairs": [{"index": 1, "text": "First"}, {"index": 2, "text": "Second"}],
+                "pairs.index": [1, 2],
+                "pairs.text": ["First", "Second"],
                 "text": "Test",
             },
         )

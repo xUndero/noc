@@ -12,6 +12,8 @@ from datetime import datetime
 import itertools
 import socket
 import struct
+from collections import defaultdict
+from functools import partial
 
 # Third-party modules
 import six
@@ -43,30 +45,28 @@ class BaseField(object):
         self.is_agg = False
         self.low_cardinality = config.clickhouse.enable_low_cardinality and low_cardinality
 
-    def contribute_to_class(self, cls, name):
+    def set_name(self, name):
         """
-        Install field to model
-        :param cls:
-        :param name:
+        Set field name according to model
+
+        :param name: Field name
         :return:
         """
-        cls._fields[name] = self
-        cls._fields[name].name = name
+        self.name = name
 
-    def get_create_sql(self):
+    def iter_create_sql(self):
         """
-        Return query for table create query. Example:
-
-            CounterID UInt32,
-            StartDate Date,
+        Yields (field name, db type) for all nested fields
 
         :return:
         """
-        return "%s %s" % (self.name, self.get_db_type())
+        yield self.name, self.get_db_type()
 
-    def get_db_type(self):
+    def get_db_type(self, name=None):
         """
         Return Field type. Use it in create query
+
+        :param name: Optional nested field name
         :return:
         """
         if self.low_cardinality:
@@ -79,6 +79,16 @@ class BaseField(object):
         :return:
         """
         return self.db_type
+
+    def apply_json(self, row_json, value):
+        """
+        Append converted `value` to `row _json` dict
+
+        :param json: Row dict
+        :param value: Raw value
+        :return:
+        """
+        row_json[self.name] = self.to_json(value)
 
     def to_json(self, value):
         """
@@ -101,6 +111,20 @@ class BaseField(object):
 
     def get_select_sql(self):
         return self.name
+
+    @staticmethod
+    def nested_path(name):
+        """
+        Split nested path to field name and nested name
+
+        :param name: Nested field name
+        :return: (Field name, Nested name)
+        """
+        if name.startswith("`"):
+            name = name[1:-1]
+        if "." in name:
+            return name.split(".", 1)
+        return name, None
 
 
 class StringField(BaseField):
@@ -220,7 +244,7 @@ class ArrayField(BaseField):
     def to_json(self, value):
         return [self.field_type.to_json(v) for v in value]
 
-    def get_db_type(self):
+    def get_db_type(self, name=None):
         return "Array(%s)" % self.field_type.get_db_type()
 
     def get_displayed_type(self):
@@ -303,21 +327,28 @@ class AggregatedField(BaseField):
 class NestedField(ArrayField):
     db_type = "Nested"
 
-    def __init__(self, field_type, description=None, *args):
-        super(NestedField, self).__init__(field_type=field_type, description=description)
+    def iter_create_sql(self):
+        for nested_field in self.field_type._meta.ordered_fields:
+            yield "%s.%s" % (self.name, nested_field.name), self.get_db_type(nested_field.name)
 
-    def to_json(self, value):
-        return [{f: self.field_type._fields[f].to_json(item[f]) for f in item} for item in value]
+    def apply_json(self, row_json, value):
+        arrays = defaultdict(list)
+        for item in value:
+            row = {}
+            for f in item:
+                self.field_type._meta.fields[f].apply_json(row, item[f])
+            for nested_name in row:
+                full_name = "%s.%s" % (self.name, nested_name)
+                arrays[full_name] += [row[nested_name]]
+        row_json.update(arrays)
 
-    def get_db_type(self):
-        return "Nested (\n%s \n)" % self.field_type.get_create_sql()
+    def get_db_type(self, name=None):
+        if name is None:
+            return "Nested (\n%s \n)" % self.field_type.get_create_sql()
+        return "Array(%s)" % self.field_type._meta.fields[name].get_db_type()
 
     def get_displayed_type(self):
         return "Nested (\n%s \n)" % self.field_type.get_create_sql()
-
-    @staticmethod
-    def get_create_nested_sql(name, type):
-        return "`%s` Array(%s)" % (name, type)
 
     def to_python(self, value):
         if not value or value == "[]":
@@ -325,7 +356,7 @@ class NestedField(ArrayField):
         value = literal_eval(value)
         return [
             {
-                k: self.field_type._fields[k].to_python(v.strip("'"))
+                k: self.field_type._meta.fields[k].to_python(v.strip("'"))
                 for k, v in six.iteritems(dict(zip(self.field_type._fields_order, v)))
             }
             for v in value
