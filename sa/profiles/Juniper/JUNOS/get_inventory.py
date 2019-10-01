@@ -42,7 +42,7 @@ class Script(BaseScript):
         "ROUTING ENGINE": "RE",
         "AFEB": "AFEB",
         "CB": "SCB",
-        "SIB": "SCB",
+        "SIB": "SIB",
         "MGMT BRD": "MGMT",
         "FPC": "FPC",
         "MPC": "FPC",
