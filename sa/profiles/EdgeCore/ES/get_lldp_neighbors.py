@@ -39,7 +39,7 @@ class Script(BaseScript):
         r"^\s*Eth(| )(.+?)\s*(\|)MAC Address\s+(\S+).+?$", re.MULTILINE | re.DOTALL
     )
     rx_neigh = re.compile(
-        r"(?P<local_if>Eth\s\S+)\s+(\||)\s+(?P<id>\S+).*?(?P<name>\S+)$",
+        r"(?P<local_if>Eth\s\S+)\s+(\||)\s+(?P<id>\S+).*?(?P<name>\S*)$",
         re.MULTILINE | re.IGNORECASE,
     )
     rx_detail = re.compile(
