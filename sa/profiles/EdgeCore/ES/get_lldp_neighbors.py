@@ -47,7 +47,7 @@ class Script(BaseScript):
         r"(?P<p_type>[^\n]+).*?Port(|\s+)ID\s+:\s(?P<p_id>[^\n]+).*?"
         r"Sys(|tem\s+)Name\s+:\s(?P<name>\S+).*?"
         r"(SystemCapSupported|System\sCapabilities)\s+:\s"
-        r"(?P<capability>[^\n]+).*",
+        r"(?P<capability>[^\n]*).*",
         re.MULTILINE | re.IGNORECASE | re.DOTALL,
     )
     rx_port_descr = re.compile(r"^\s*Port Description\s+:\s+(?P<descr>.+)\n", re.MULTILINE)
