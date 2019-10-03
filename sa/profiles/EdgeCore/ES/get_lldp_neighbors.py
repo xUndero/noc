@@ -45,7 +45,7 @@ class Script(BaseScript):
     rx_detail = re.compile(
         r".*Chassis I(d|D)\s+:\s(?P<id>\S+).*?Port(|\s+)ID Type\s+:\s"
         r"(?P<p_type>[^\n]+).*?Port(|\s+)ID\s+:\s(?P<p_id>[^\n]+).*?"
-        r"Sys(|tem\s+)Name\s+:\s(?P<name>\S+).*?"
+        r"Sys(|tem\s+)Name\s+:\s(?P<name>\S*).*?"
         r"(SystemCapSupported|System\sCapabilities)\s+:\s"
         r"(?P<capability>[^\n]*).*",
         re.MULTILINE | re.IGNORECASE | re.DOTALL,
@@ -99,7 +99,8 @@ class Script(BaseScript):
                         remote_port = str(match.group("p_id"))
                     remote_port = remote_port.rstrip("\x00")
                 n["remote_chassis_id"] = match.group("id")
-                n["remote_system_name"] = match.group("name")
+                if match.group("name"):
+                    n["remote_system_name"] = match.group("name")
                 n["remote_port"] = remote_port
 
                 caps = lldp_caps_to_bits(
