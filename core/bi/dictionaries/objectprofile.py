@@ -18,4 +18,4 @@ class ObjectProfile(Dictionary):
 
     name = StringField()
     # ObjectProfile Level
-    level = UInt8Field
+    level = UInt8Field()
