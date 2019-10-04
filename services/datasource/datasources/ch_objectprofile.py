@@ -8,7 +8,6 @@
 
 # Python modules
 from __future__ import absolute_import
-from pymongo import ReadPreference
 
 # NOC modules
 from .base import BaseDataSource
@@ -21,9 +20,4 @@ class CHManagedObjectProfileDataSource(BaseDataSource):
     def extract(self):
 
         for mop in ManagedObjectProfile.objects.filter().iterator():
-            yield (
-                mop.bi_id,
-                moo.id,
-                mop.name,
-                mop.level,
-            )
+            yield (mop.bi_id, mop.id, mop.name, mop.level)
