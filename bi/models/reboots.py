@@ -21,7 +21,7 @@ from noc.core.bi.dictionaries.vendor import Vendor
 from noc.core.bi.dictionaries.platform import Platform
 from noc.core.bi.dictionaries.version import Version
 from noc.core.bi.dictionaries.profile import Profile
-from noc.core.bi.dictionaries.objectprofle import ObjectProfile
+from noc.core.bi.dictionaries.objectprofile import ObjectProfile
 from noc.core.bi.dictionaries.administrativedomain import AdministrativeDomain
 from noc.core.bi.dictionaries.networksegment import NetworkSegment
 from noc.core.bi.dictionaries.container import Container
