@@ -88,6 +88,7 @@ class Script(GetMetricsScript):
                 s["status"] = data["status"]
                 s["radio"] = data["radio"]
 
+    """
     @metrics(
         [
             "Interface | Load | In",
@@ -148,6 +149,7 @@ class Script(GetMetricsScript):
                     id=("Radio | TxPower", ["", "", "", iface]),
                     value=radio_metrics[data["radio"]]["tx-power"],
                 )
+    """
 
     @metrics(
         ["Radio | TxPower", "Radio | Quality"],
