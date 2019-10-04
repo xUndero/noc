@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------
-# CHServiceProfile datasource
+# CHNetworkSegment datasource
 # ----------------------------------------------------------------------
 # Copyright (C) 2007-2017 The NOC Project
 # See LICENSE for details
@@ -12,16 +12,18 @@ from pymongo import ReadPreference
 
 # NOC modules
 from .base import BaseDataSource
-from noc.sa.models.serviceprofile import ServiceProfile
+from noc.sa.models.managedobjectprofile import ManagedObjectProfile
 
 
-class CHServiceProfileClassDataSource(BaseDataSource):
-    name = "ch_serviceprofile"
+class CHManagedObjectProfileDataSource(BaseDataSource):
+    name = "ch_objectprofile"
 
     def extract(self):
-        for a in (
-            ServiceProfile.objects.filter(read_preference=ReadPreference.SECONDARY_PREFERRED)
-            .all()
-            .order_by("id")
-        ):
-            yield (a.bi_id, a.id, a.name, a.description, a.glyph)
+
+        for mop in ManagedObjectProfile.objects.filter().iterator():
+            yield (
+                mop.bi_id,
+                moo.id,
+                mop.name,
+                mop.level,
+            )
