@@ -280,7 +280,7 @@ class Script(BaseScript):
                 i_type = "PWR"
             elif item_name.startswith("main_board"):
                 i_type = "BOARD"
-            elif item_name.startswith("Daughter_Board"):
+            elif item_name.startswith("daughter_board"):
                 i_type = "DAUGHTERBOARD"
             else:
                 i_type = "CHASSIS"
