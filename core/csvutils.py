@@ -166,7 +166,7 @@ def csv_import(model, f, resolution=IR_FAIL, delimiter=","):
         if len(row) != l_header:
             return None, "Invalid row size. line %d" % count
         vars = dict(zip(header, row))
-        for h, v in six.iteritems(vars):
+        for h, v in vars.items():
             if v in ("None", ""):
                 v = None
             # Check required field is not none
