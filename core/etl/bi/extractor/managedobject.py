@@ -55,8 +55,7 @@ class ManagedObjectsExtractor(BaseExtractor):
         nr = 0
         ts = datetime.datetime.now()
         # External data
-        print(self.start, self.stop)
-        stats_start = self.start - datetime.timedelta(days=1)  # limit by day ?
+        stats_start = self.start - datetime.timedelta(days=1)  # configuration ?
         x_data = [
             self.get_interfaces(),
             self.get_links(),
