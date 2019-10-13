@@ -91,7 +91,7 @@ class Command(BaseCommand):
                 end = min(start + window, stop)
                 if hasattr(ecls, "use_archive"):
                     e = ecls(
-                        start=start, stop=end, prefix=self.data_prefix, use_archive=use_archive,
+                        start=start, stop=end, prefix=self.data_prefix, use_archive=use_archive
                     )
                 else:
                     e = ecls(start=start, stop=end, prefix=self.data_prefix)
@@ -111,7 +111,6 @@ class Command(BaseCommand):
                     )
                     is_exception = True
                     continue
-
                 self.print(
                     "[%s] Extracting %s - %s ... " % (e.name, start, end), end="", flush=True
                 )
