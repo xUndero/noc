@@ -106,14 +106,14 @@ class Script(GetMetricsScript):
     def get_interface_metrics(self, metrics):
         ifaces = []
         radio_metrics = self.get_radio_metrics(metrics)
-        iface_metric_map = {
-            "rx-bytes": "Interface | Load | In",
-            "tx-bytes": "Interface | Load | Out",
-            "rx-packets": "Interface | Packets | In",
-            "tx-packets": "Interface | Packets | Out",
-            "rx-errors": "Interface | Errors | In",
-            "tx-errors": "Interface | Errors | Out",
-        }
+        # iface_metric_map = {
+        #     "rx-bytes": "Interface | Load | In",
+        #     "tx-bytes": "Interface | Load | Out",
+        #     "rx-packets": "Interface | Packets | In",
+        #     "tx-packets": "Interface | Packets | Out",
+        #     "rx-errors": "Interface | Errors | In",
+        #     "tx-errors": "Interface | Errors | Out",
+        # }
         c = self.cli("get interface all detail")
         for block in c.split("\n\n"):
             ifaces += [
