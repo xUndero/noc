@@ -11,7 +11,7 @@ from __future__ import division
 from collections import defaultdict
 
 # Third-party modules
-import six
+# import six
 
 # NOC modules
 from noc.sa.profiles.Generic.get_metrics import Script as GetMetricsScript, metrics
