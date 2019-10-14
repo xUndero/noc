@@ -93,14 +93,20 @@ def csv_export(model, queryset=None, first_row_only=False):
     if queryset is None:
         queryset = model.objects.all()
         # Write rows
-    for r in queryset.select_related():
+    for r in queryset.select_related().iterator():
         row = []
         # Format row
         for f, required, rel, rf in fields:
             v = getattr(r, f)
             if v is None:
                 v = ""
-            if f == "tags":
+            if f in {
+                "tags",
+                "static_service_groups",
+                "effective_service_groups",
+                "static_client_groups",
+                "effective_client_groups",
+            }:
                 row += [",".join(v)]
             elif rel is None or not v:
                 row += [v]
@@ -208,7 +214,13 @@ def csv_import(model, f, resolution=IR_FAIL, delimiter=","):
                         variables[h] = int(v)
                     except ValueError as e:
                         raise ValueError("Invalid integer: %s" % e)
-                elif h == "tags":
+                elif h in {
+                    "tags",
+                    "static_service_groups",
+                    "effective_service_groups",
+                    "static_client_groups",
+                    "effective_client_groups",
+                }:
                     variables[h] = [x.strip() for x in v.split(",") if x.strip()]
         # Find object
         o = None
@@ -235,7 +247,8 @@ def csv_import(model, f, resolution=IR_FAIL, delimiter=","):
                 # Fail
                 return (
                     None,
-                    "Failed to save line %d: Object %s is already exists" % (count, repr(vars)),
+                    "Failed to save line %d: Object %s is already exists"
+                    % (count, repr(variables)),
                 )
             elif resolution == IR_SKIP:
                 # Skip line
