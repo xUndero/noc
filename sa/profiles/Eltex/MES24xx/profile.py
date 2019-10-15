@@ -30,6 +30,7 @@ class Profile(BaseProfile):
         re.compile(r"\x1b\[K"),
         re.compile(r"\r"),
     ]
+
     INTERFACE_TYPES = {
         "gi": "physical",  # gigabitethernet
         "fa": "physical",  # fastethernet
