@@ -25,7 +25,7 @@ class Script(BaseScript):
         r"(?:^Bridge Port Type: .+\n)?"
         r"(?:^\s*\n)?"
         r"^Interface SubType: .+\n"
-        r"^Interface Alias: (?P<descr>.+)\n"
+        r"^(?:Interface Alias|Description): (?P<descr>.+)\n"
         r"(?:^\s*\n)?"
         r"(^Hardware Address is (?P<mac>\S+)\s*\n)?"
         r"(^MTU\s+(?P<mtu>\d+) bytes,.+\s*\n)?",
