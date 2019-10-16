@@ -417,6 +417,7 @@
                             </td>
                             <td>
                                 <span class="small">{{ i["mac"] }}</span>
+                                <a href="/api/card/view/interfacepath/{{ i["id"] }}/" target="_">TRACE</a>
                             </td>
                             <td>
                                 {% if i["untagged_vlan"] %}<span class="small">U: {{ i["untagged_vlan"] }}</span>{% endif %}

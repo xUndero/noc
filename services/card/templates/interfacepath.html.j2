@@ -1,0 +1,195 @@
+<style>
+    .path {
+        padding-bottom: 8px;
+    }
+
+    .ruler {
+        display: flex;
+        flex-direction: row;
+        padding: 4px;
+        margin: 4px;
+    }
+
+    .ruler .object {
+        width: 200px;
+    }
+
+    .ruler .hw-data {
+        width: 200px;
+    }
+
+    .ruler .link-set {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ruler .link-set .level {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .ruler .link-set .level:not(:last-child) {
+        border-bottom: 1px solid #808080;
+    }
+
+    .ruler .link-set .level div:not(:last-child) {
+        border-right: 1px solid #808080;
+    }
+
+    .ruler .interface {
+        width: 150px
+    }
+
+    .item {
+        border: 1px solid #808080;
+        border-radius: 8px;
+        padding: 4px;
+        margin: 4px;
+        display: flex;
+        flex-direction: row;
+    }
+    .item .object {
+        width: 200px;
+    }
+    .item .hw-data {
+        width: 200px;
+    }
+    .item .links-data {
+        display: flex;
+        flex-direction: column;
+    }
+    .links-data .links {
+    }
+    .links .link {
+        border-left: 1px solid #808080;
+    }
+    .link .interface {
+        display: flex;
+        flex-direction: row;
+    }
+    .link .interface div {
+        padding: 4px;
+    }
+    .link .interface div:not(:last-child) {
+        border-left: 1px solid #c0c0c0;
+    }
+
+    .ingress {
+        border-bottom: 2px solid #c0c0c0;
+    }
+    .interface .name {
+        text-align: right;
+    }
+
+    .x1 {
+        width: 75px;
+    }
+
+    .x2 {
+        width: 150px;
+    }
+
+    .center {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .right {
+        text-align: right;
+    }
+</style>
+
+<h1>Path from {{ object.managed_object.name }}:{{ object.name }} upwards</h1>
+{% for path in paths %}
+<div class="path">
+    <div class="ruler">
+        <div class="object center">Object</div>
+        <div class="hw-data center">Platform</div>
+        <div class="link-set">
+            <div class="level center">1</div>
+            <div class="level">
+                <div class="x2 center">Interface</div>
+                <div class="x2 center">State</div>
+                <div class="x2 center">Utilization</div>
+                <div class="x2 center">Packets</div>
+                <div class="x2 center">Errors</div>
+            </div>
+            <div class="level">
+                <div class="x1"></div>
+                <div class="x1"></div>
+                <div class="x1 center">Speed</div>
+                <div class="x1 center">Duplex</div>
+                <div class="x1 center">In</div>
+                <div class="x1 center">Out</div>
+                <div class="x1 center">In</div>
+                <div class="x1 center">Out</div>
+                <div class="x1 center">In</div>
+                <div class="x1 center">Out</div>
+            </div>
+        </div>
+    </div>
+  {%  for item in path %}
+    <div class="item obj-{{ item["object"].bi_id }}">
+        <div class="object">
+            <div class="name">{{ item["object"].name }}</div>
+            <div class="address">{{ item["object"].address }}</div>
+        </div>
+        <div class="hw-data">
+            <div class="platform">{{ item["object"].platform.name }}</div>
+            <div class="version">{{ item["object"].version.version }}</div>
+        </div>
+        <div class="links-data">
+            {% for direction in ["ingress", "egress"] %}
+                <div class="{{ direction }} links">
+                    {% for link in item[direction] %}
+                        <div class="link">
+                            {% for iface in link %}
+                            <div class="interface iface-{{ if_hash[iface.name] }}">
+                                <div class="x2 name">{{ iface.name }}</div>
+                                <div class="x1 right m-speed">-</div>
+                                <div class="x1 right">-</div>
+                                <div class="x1 right m-load_in">-</div>
+                                <div class="x1 right m-load_out">-</div>
+                                <div class="x1 right m-packets_in">-</div>
+                                <div class="x1 right m-packets_out">-</div>
+                                <div class="x1 right">-</div>
+                                <div class="x1 right">-</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+  {% endfor %}
+</div>
+{% endfor %}
+<script>
+    var queryKey = "{{ ajax_query_key }}";
+    var mLevelPrefixes = ["obj-", "iface-", "m-"];
+
+    function getMetrics() {
+        $.ajax("/api/card/view/interfacepath/ajax/?key=" + queryKey).done(function(data) {
+            function setValue(root, item, idx) {
+                var lCls = mLevelPrefixes[idx] + item[idx];
+                var elements = root.getElementsByClassName(lCls);
+                for(var i = 0; i < elements.length; i++) {
+                    var el = elements[i];
+                    if(idx === 2) {
+                        el.innerHTML = item[3];
+                    } else {
+                        setValue(el, item, idx + 1);
+                    }
+                }
+            }
+
+            for(var i = 0; i < data.length; i++) {
+                // obj, iface, metric, value
+                setValue(document, data[i], 0);
+            }
+        })
+    }
+
+    $(document).ready(getMetrics);
+</script>
