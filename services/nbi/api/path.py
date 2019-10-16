@@ -149,7 +149,7 @@ class PathAPI(NBIAPI):
         return 200, {"status": True, "paths": paths, "time": dt}
 
     def get_object_and_interface(self, object=None, interface=None, service=None):
-        # type: (Optional[Dict], Optional[Dict], Optional[Dict], Optional[Dict]) -> Tuple[ManagedObject, Optional[Interface]]
+        # type: (Optional[Dict[str, Any]], Optional[Dict[str, Any]], Optional[Dict[str, Any]], Optional[Dict[str, Any]]) -> Tuple[ManagedObject, Optional[Interface]]
         """
         Process from and to section of request and get object and interface
 
@@ -260,12 +260,12 @@ class PathAPI(NBIAPI):
                     }
                     for obj in order
                 ]
-            }  # type: Dict[str, Any]
+            }
 
         finder = KSPFinder(start, goal, max_depth=max_depth, n_shortest=n_shortest)
         for path in finder.iter_shortest_paths():  # type: List[PathInfo]
             last = {"obj": start}  # type: Dict[str, ManagedObject]
-            r = {"path": [], "cost": {"l2": 0}}
+            r = {"path": [], "cost": {"l2": 0}}  # type: Dict[str, Any]
             if start_iface:
                 r["path"] += [{"links": [encode_link([start_iface])]}]
             for pi in path:  # type: PathInfo

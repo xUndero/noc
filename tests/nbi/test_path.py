@@ -23,7 +23,6 @@ from noc.services.nbi.api.path import (
     RequestFrom,
     RequestTo,
     RequestConfig,
-    RequestConstraints,
     Request,
     MAX_DEPTH_DEFAULT,
     N_SHORTEST_DEFAULT,
