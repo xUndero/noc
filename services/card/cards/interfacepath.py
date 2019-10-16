@@ -156,7 +156,7 @@ class InterfacePathCard(BaseCard):
           WHERE
             date >= toDate('%s')
             AND ts >= toDateTime('%s')
-            AND (%s)  
+            AND (%s)
           GROUP BY managed_object, iface
         """ % (
             from_ts.date().isoformat(),
