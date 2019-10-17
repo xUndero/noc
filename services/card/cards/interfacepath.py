@@ -198,7 +198,7 @@ class InterfacePathCard(BaseCard):
 
         interface_metrics = {"speed", "load_in", "load_out", "packets_in", "packets_out"}
         for mo_bi_id, iface in query:
-            if (mo_bi_id, iface) not in m_index:
+            if (int(mo_bi_id), str(bi_hash(iface))) not in m_index:
                 for metric in interface_metrics:
                     metrics += [(str(mo_bi_id), str(bi_hash(iface)), metric, "+")]
         return metrics
