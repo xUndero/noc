@@ -63,6 +63,8 @@ class InterfacePathCard(BaseCard):
                         egress, ingress = self.split_interfaces(pi.start, link.interfaces)
                         ingress_links += [ingress]
                         item["egress"] += [egress]
+                    if item["ingress"] == item["egress"]:
+                        item["ingress"] = []
                     r["link_sets"] = max(r["link_sets"], len(item["egress"]))
                     items += [item]
                 items += [{"object": pi.end, "ingress": ingress_links, "egress": []}]
