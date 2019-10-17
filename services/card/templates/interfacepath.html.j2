@@ -7,7 +7,12 @@
         display: flex;
         flex-direction: row;
         padding: 4px;
-        margin: 4px;
+        margin: 4px 4px 4px 6px;
+        font-weight: bold;
+    }
+
+    .ruler div {
+        border-right: 1px solid #808080;
     }
 
     .ruler .object {
@@ -97,6 +102,41 @@
     .right {
         text-align: right;
     }
+
+    .ingress .dir-in:after {
+        font: normal normal normal 14px/1 FontAwesome;
+        content: "\f175";
+    }
+
+    .ingress .dir-out:after {
+        content: "\f176";
+        font: normal normal normal 14px/1 FontAwesome;
+    }
+
+    .egress .dir-in:after {
+        content: "\f176";
+        font: normal normal normal 14px/1 FontAwesome;
+    }
+
+    .egress .dir-out:after {
+        content: "\f175";
+        font: normal normal normal 14px/1 FontAwesome;
+    }
+
+    .alert {
+        background-color: #c0392b;
+        color: #ecf0f1;
+    }
+
+    .warn {
+        background-color: #f39c12;
+        color: #ecf0f1;
+    }
+
+    .adm-down {
+        background-color: #7f8c8d;
+        color: #ecf0f1;
+    }
 </style>
 
 <h1>Path from {{ object.managed_object.name }}:{{ object.name }} upwards</h1>
@@ -150,10 +190,10 @@
                                 <div class="x2 name">{{ iface.name }}</div>
                                 <div class="x1 right m-speed">-</div>
                                 <div class="x1 right">-</div>
-                                <div class="x1 right m-load_in">-</div>
-                                <div class="x1 right m-load_out">-</div>
-                                <div class="x1 right m-packets_in">-</div>
-                                <div class="x1 right m-packets_out">-</div>
+                                <div class="x1 right m-load_in dir-in">-</div>
+                                <div class="x1 right m-load_out dir-out">-</div>
+                                <div class="x1 right m-packets_in dir-in">-</div>
+                                <div class="x1 right m-packets_out dir-out">-</div>
                                 <div class="x1 right">-</div>
                                 <div class="x1 right">-</div>
                             </div>
