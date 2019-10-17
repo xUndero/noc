@@ -42,28 +42,34 @@ class InterfacePathCard(BaseCard):
             "paths": [],
             "link_sets": 0,
             "if_hash": {},
+            "error": None,
+            "ajax_query_key": None,
         }  # type: Dict[str, Any]
         mo = self.object.managed_object
         target_level = (mo.object_profile.level // 10 + 1) * 10
-        finder = KSPFinder(mo, ManagedObjectLevelGoal(target_level), n_shortest=self.N_PATHS)
-        for path in finder.iter_shortest_paths():
-            items = []  # type: List[Dict[str, Any]]
-            ingress_links = [[self.object]]  # type: List[List[Interface]]
-            for pi in path:
-                item = {
-                    "object": pi.start,
-                    "ingress": ingress_links,
-                    "egress": [],
-                }  # type: Dict[str, Any]
-                ingress_links = []
-                for link in pi.links:
-                    egress, ingress = self.split_interfaces(pi.start, link.interfaces)
-                    ingress_links += [ingress]
-                    item["egress"] += [egress]
-                r["link_sets"] = max(r["link_sets"], len(item["egress"]))
-                items += [item]
-            items += [{"object": pi.end, "ingress": ingress_links, "egress": []}]
-            r["paths"] += [items]
+        try:
+            finder = KSPFinder(mo, ManagedObjectLevelGoal(target_level), n_shortest=self.N_PATHS)
+            for path in finder.iter_shortest_paths():
+                items = []  # type: List[Dict[str, Any]]
+                ingress_links = [[self.object]]  # type: List[List[Interface]]
+                for pi in path:
+                    item = {
+                        "object": pi.start,
+                        "ingress": ingress_links,
+                        "egress": [],
+                    }  # type: Dict[str, Any]
+                    ingress_links = []
+                    for link in pi.links:
+                        egress, ingress = self.split_interfaces(pi.start, link.interfaces)
+                        ingress_links += [ingress]
+                        item["egress"] += [egress]
+                    r["link_sets"] = max(r["link_sets"], len(item["egress"]))
+                    items += [item]
+                items += [{"object": pi.end, "ingress": ingress_links, "egress": []}]
+                r["paths"] += [items]
+        except ValueError as e:
+            r["error"] = str(e)
+            return r
         # Build interface hashes
         to_collect = set()  # type: Set[Tuple[int, str]]
         for path in r["paths"]:
