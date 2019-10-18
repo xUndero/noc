@@ -8,12 +8,14 @@
 
 # Python modules
 from __future__ import print_function
+
 # import re
 import six
 
 # NOC modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetinterfaces import IGetInterfaces
+
 # from noc.core.ip import IPv4
 
 
