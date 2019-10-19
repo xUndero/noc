@@ -160,7 +160,6 @@ class InterfacePathCard(BaseCard):
           SELECT
             managed_object,
             path[4] AS iface,
-            argMax(speed, ts) AS speed,
             argMax(load_in, ts) AS load_in,
             argMax(load_out, ts) AS load_out,
             argMax(packets_in, ts) AS packets_in,
@@ -183,12 +182,12 @@ class InterfacePathCard(BaseCard):
         metrics = []  # type: List[Tuple[int, str, str, str]]
         ch = ch_connection()
         try:
-            for (mo, iface, speed, load_in, load_out, packets_in, packets_out) in ch.execute(
+            for (mo, iface, load_in, load_out, packets_in, packets_out) in ch.execute(
                 post=interface_sql
             ):
                 if_hash = str(bi_hash(iface))
                 metrics += [
-                    (mo, if_hash, "speed", self.humanize_metric(speed)),
+                    # (mo, if_hash, "speed", self.humanize_metric(speed)),
                     (mo, if_hash, "load_in", self.humanize_metric(load_in)),
                     (mo, if_hash, "load_out", self.humanize_metric(load_out)),
                     (mo, if_hash, "packets_in", self.humanize_metric(packets_in)),
@@ -205,9 +204,34 @@ class InterfacePathCard(BaseCard):
         for _, mo_bi_id, iface in query:
             if (int(mo_bi_id), str(bi_hash(iface))) not in m_index:
                 for metric in interface_metrics:
-                    metrics += [(str(mo_bi_id), str(bi_hash(iface)), metric, "+")]
-        # Get current object statuses
+                    metrics += [(str(mo_bi_id), str(bi_hash(iface)), metric, "-")]
+        # managed object id -> bi id
         mo_map = {q[0]: q[1] for q in query}  # type: Dict[int, int]
+        # Get interface statuses
+        for doc in Interface._get_collection().find(
+            {"$or": [{"managed_object": q[0], "name": q[2]} for q in query]},
+            {
+                "_id": 0,
+                "managed_object": 1,
+                "name": 1,
+                "admin_status": 1,
+                "oper_status": 1,
+                "in_speed": 1,
+                "out_speed": 1,
+                "full_duplex": 1,
+            },
+        ):
+            mo = str(mo_map[doc["managed_object"]])
+            if_hash = str(bi_hash(doc["name"]))
+            status = 0
+            if doc["admin_status"]:
+                status = 2 if doc["oper_status"] else 1
+            metrics += [
+                (mo, if_hash, "speed", self.humanize_metric(doc["in_speed"] * 1000)),
+                (mo, if_hash, "duplex", "Full" if doc["full_duplex"] else "Half"),
+                (mo, if_hash, "status", status),
+            ]
+        # Get current object statuses
         obj_statuses = ObjectStatus.get_statuses(list(mo_map))
         statuses = {str(mo_map[mo_id]): obj_statuses.get(mo_id, True) for mo_id in obj_statuses}
         return {"metrics": metrics, "statuses": list(statuses.items())}

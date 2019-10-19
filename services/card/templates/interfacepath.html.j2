@@ -1,6 +1,7 @@
 <style>
-    .path {
-        padding-bottom: 8px;
+    .path:not(:last-child) {
+        margin-bottom: 8px;
+        border-bottom: 2px dashed #808080;
     }
 
     .ruler {
@@ -157,8 +158,7 @@
                 <div class="x2 center">Errors</div>
             </div>
             <div class="level">
-                <div class="x1"></div>
-                <div class="x1"></div>
+                <div class="x2"></div>
                 <div class="x1 center">Speed</div>
                 <div class="x1 center">Duplex</div>
                 <div class="x1 center">In</div>
@@ -189,7 +189,7 @@
                             <div class="interface iface-{{ if_hash[iface.name] }}">
                                 <div class="x2 name">{{ iface.name }}</div>
                                 <div class="x1 right m-speed">-</div>
-                                <div class="x1 right">-</div>
+                                <div class="x1 right m-duplex">-</div>
                                 <div class="x1 right m-load_in dir-in">-</div>
                                 <div class="x1 right m-load_out dir-out">-</div>
                                 <div class="x1 right m-packets_in dir-in">-</div>
