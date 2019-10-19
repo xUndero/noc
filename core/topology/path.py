@@ -108,6 +108,8 @@ class KSPFinder(object):
 
         def is_allowed_link(current_mo, link):
             # type: (ManagedObject, Link) -> bool
+            if not self.constraint.is_valid_link(link):
+                return False
             allow_egress = False
             allow_ingress = False
             for iface in link.interfaces:

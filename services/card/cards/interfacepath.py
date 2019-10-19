@@ -11,7 +11,7 @@ from __future__ import absolute_import
 import datetime
 
 #  Third-party modules
-from typing import Dict, Any, List, Tuple, Set
+from typing import Dict, Any, List, Tuple, Set, Optional
 import ujson
 
 # NOC modules
@@ -20,7 +20,10 @@ from noc.sa.models.managedobject import ManagedObject
 from noc.sa.models.objectstatus import ObjectStatus
 from noc.inv.models.interface import Interface
 from noc.core.topology.path import KSPFinder
+from noc.core.topology.constraint.base import BaseConstraint
+from noc.core.topology.constraint.vlan import VLANConstraint
 from noc.core.topology.goal.level import ManagedObjectLevelGoal
+from noc.inv.models.subinterface import SubInterface
 from noc.core.text import split_alnum
 from noc.core.bi.decorator import bi_hash
 from noc.core.clickhouse.connect import connection as ch_connection
@@ -49,7 +52,12 @@ class InterfacePathCard(BaseCard):
         mo = self.object.managed_object
         target_level = (mo.object_profile.level // 10 + 1) * 10
         try:
-            finder = KSPFinder(mo, ManagedObjectLevelGoal(target_level), n_shortest=self.N_PATHS)
+            finder = KSPFinder(
+                mo,
+                ManagedObjectLevelGoal(target_level),
+                constraint=self.get_constraint(),
+                n_shortest=self.N_PATHS,
+            )
             for path in finder.iter_shortest_paths():
                 items = []  # type: List[Dict[str, Any]]
                 ingress_links = [[self.object]]  # type: List[List[Interface]]
@@ -235,3 +243,16 @@ class InterfacePathCard(BaseCard):
         obj_statuses = ObjectStatus.get_statuses(list(mo_map))
         statuses = {str(mo_map[mo_id]): obj_statuses.get(mo_id, True) for mo_id in obj_statuses}
         return {"metrics": metrics, "statuses": list(statuses.items())}
+
+    def get_constraint(self):
+        # type: () -> Optional[BaseConstraint]
+        """
+        Get optional path constraint
+        :return:
+        """
+        for doc in SubInterface._get_collection().find(
+            {"interface": self.object.id}, {"_id": 0, "enabled_afi": 1, "untagged_vlan": 1}
+        ):
+            if "BRIDGE" in doc["enabled_afi"] and doc.get("untagged_vlan"):
+                return VLANConstraint(vlan=doc["untagged_vlan"])
+        return None

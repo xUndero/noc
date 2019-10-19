@@ -18,14 +18,24 @@ from typing import Tuple, Optional, Dict, List, Iterable, DefaultDict, Any
 
 # NOC modules
 from noc.core.service.apiaccess import authenticated
-from noc.sa.interfaces.base import DictParameter, StringParameter, IntParameter, ObjectIdParameter
+from noc.sa.interfaces.base import (
+    DictParameter,
+    StringParameter,
+    IntParameter,
+    ObjectIdParameter,
+    VLANIDParameter,
+    BooleanParameter,
+)
 from noc.main.models.remotesystem import RemoteSystem
 from noc.sa.models.managedobject import ManagedObject
 from noc.inv.models.interface import Interface
+from noc.inv.models.subinterface import SubInterface
 from noc.sa.models.service import Service
 from noc.core.span import Span
 from noc.core.backport.time import perf_counter
 from noc.core.topology.path import KSPFinder, PathInfo
+from noc.core.topology.constraint.base import BaseConstraint
+from noc.core.topology.constraint.vlan import VLANConstraint
 from noc.core.topology.goal.base import BaseGoal
 from noc.core.topology.goal.managedobject import ManagedObjectGoal
 from noc.core.topology.goal.level import ManagedObjectLevelGoal
@@ -66,7 +76,15 @@ RequestConfig = DictParameter(
     },
     required=False,
 )
-RequestConstraints = DictParameter(required=False)
+# constraints: section
+RequestVLANConstraint = DictParameter(
+    attrs={
+        "vlan": VLANIDParameter(required=False),
+        "interface_untagged": BooleanParameter(required=False),
+    },
+    required=False,
+)
+RequestConstraints = DictParameter(attrs={"vlan": RequestVLANConstraint}, required=False)
 Request = DictParameter(
     attrs={
         "from": RequestFrom,
@@ -137,6 +155,7 @@ class PathAPI(NBIAPI):
                         start_iface,
                         goal,
                         end_iface,
+                        constraints=self.get_constaints(start, start_iface, req.get("constraints")),
                         max_depth=max_depth,
                         n_shortest=n_shortest,
                     )
@@ -216,10 +235,11 @@ class PathAPI(NBIAPI):
         start_iface,
         goal,
         end_iface,
+        constraints=None,
         max_depth=MAX_DEPTH_DEFAULT,
         n_shortest=N_SHORTEST_DEFAULT,
     ):
-        # type: (ManagedObject, Optional[Interface], BaseGoal, Optional[Interface], int, int) -> Iterable[Dict]
+        # type: (ManagedObject, Optional[Interface], BaseGoal, Optional[Interface], Optional[BaseConstraint], int, int) -> Iterable[Dict]
         """
         Iterate possible paths
 
@@ -227,6 +247,7 @@ class PathAPI(NBIAPI):
         :param start_iface: Starting interface or None
         :param goal: BaseGoal instance to match end of path
         :param end_iface: Ending interface or None
+        :param constraints: Path constraints
         :param max_depth: Max search depth
         :param n_shortest: Restrict to `n_shortest` shortest paths
         :return:
@@ -274,3 +295,36 @@ class PathAPI(NBIAPI):
             if end_iface:
                 r["path"] += [{"links": [encode_link([end_iface])]}]
             yield r
+
+    def get_constraints(self, start, start_iface, constraints):
+        # type: (ManagedObject, Optional[Interface], Dict[str, Any]) -> Optional[BaseConstraint]
+        """
+        Calculate path constraints
+        :param start: Start of path
+        :param start_iface: Starting interface
+        :param constraints: request.constraints section
+        :return: BaseConstraint index
+        """
+        if not constraints:
+            return None
+        if "vlan" in constraints:
+            vcon = constraints["vlan"]
+            if "vlan" in vcon:
+                return VLANConstraint(vcon["vlan"])
+            if vcon.get("interface_untagged"):
+                if start_iface is None:
+                    raise ValueError("No starting interface")
+                return self.get_interface_untagged_constraint(start_iface)
+        return None
+
+    def get_interface_untagged_constraint(self, iface):
+        # type: (Interface) -> BaseConstraint
+        for doc in SubInterface._get_collection().find(
+            {"interface": iface.id},
+            {"_id": 0, "enabled_afi": 1, "untagged_vlan": 1, "tagged_vlans": 1},
+        ):
+            if "BRIDGE" not in doc["enabled_afi"]:
+                continue
+            if doc.get("untagged_vlan"):
+                return VLANConstraint(doc["untagged_vlan"])
+        raise ValueError("Cannot get untagged vlan from interface")

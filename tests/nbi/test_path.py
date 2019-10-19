@@ -23,6 +23,7 @@ from noc.services.nbi.api.path import (
     RequestFrom,
     RequestTo,
     RequestConfig,
+    RequestConstraints,
     Request,
     MAX_DEPTH_DEFAULT,
     N_SHORTEST_DEFAULT,
@@ -192,6 +193,13 @@ from noc.services.nbi.api.path import (
         (RequestConfig, {"max_depth": 100}, {"max_depth": 100, "n_shortest": N_SHORTEST_DEFAULT}),
         (RequestConfig, {"n_shortest": 15}, {"max_depth": MAX_DEPTH_DEFAULT, "n_shortest": 15}),
         (RequestConfig, {"n_shortest": "15", "max_depth": 20}, {"max_depth": 20, "n_shortest": 15}),
+        # Constraints
+        (RequestConstraints, {"vlan": {"vlan": 10}}, {"vlan": {"vlan": 10}}),
+        (
+            RequestConstraints,
+            {"vlan": {"interface_untagged": True}},
+            {"vlan": {"interface_untagged": True}},
+        ),
         # Request
         (Request, {}, ValueError),
         (
@@ -229,6 +237,36 @@ from noc.services.nbi.api.path import (
                 "from": {"object": {"id": "15"}, "interface": {"name": "Gi 0/1"}},
                 "to": {"object": {"remote_system": "20", "remote_id": "25"}},
                 "config": {"max_depth": 20, "n_shortest": N_SHORTEST_DEFAULT},
+            },
+        ),
+        (
+            Request,
+            {
+                "from": {"object": {"id": 15}, "interface": {"name": "Gi 0/1"}},
+                "to": {"object": {"remote_system": "20", "remote_id": "25"}},
+                "config": {"max_depth": 20},
+                "constraints": {"vlan": {"vlan": 10}},
+            },
+            {
+                "from": {"object": {"id": "15"}, "interface": {"name": "Gi 0/1"}},
+                "to": {"object": {"remote_system": "20", "remote_id": "25"}},
+                "config": {"max_depth": 20, "n_shortest": N_SHORTEST_DEFAULT},
+                "constraints": {"vlan": {"vlan": 10}},
+            },
+        ),
+        (
+            Request,
+            {
+                "from": {"object": {"id": 15}, "interface": {"name": "Gi 0/1"}},
+                "to": {"object": {"remote_system": "20", "remote_id": "25"}},
+                "config": {"max_depth": 20},
+                "constraints": {"vlan": {"interface_untagged": True}},
+            },
+            {
+                "from": {"object": {"id": "15"}, "interface": {"name": "Gi 0/1"}},
+                "to": {"object": {"remote_system": "20", "remote_id": "25"}},
+                "config": {"max_depth": 20, "n_shortest": N_SHORTEST_DEFAULT},
+                "constraints": {"vlan": {"interface_untagged": True}},
             },
         ),
     ],

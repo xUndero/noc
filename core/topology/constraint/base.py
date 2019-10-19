@@ -9,6 +9,7 @@
 # NOC modules
 from noc.sa.models.managedobject import ManagedObject
 from noc.inv.models.interface import Interface
+from noc.inv.models.link import Link
 
 
 class BaseConstraint(object):
@@ -23,6 +24,15 @@ class BaseConstraint(object):
 
         :param obj: Managed Object
         :return: True if path can be continued via neighbors
+        """
+        return True
+
+    def is_valid_link(self, link):
+        # type: (Link) -> bool
+        """
+        Check if link is valid on the path
+        :param link: Link instance
+        :return:
         """
         return True
 
