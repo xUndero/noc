@@ -213,7 +213,7 @@
 
     function getMetrics() {
         $.ajax("/api/card/view/interfacepath/ajax/?key=" + queryKey).done(function(data) {
-            function setValue(root, item, idx) {
+            function setMetrics(root, item, idx) {
                 var lCls = mLevelPrefixes[idx] + item[idx];
                 var elements = root.getElementsByClassName(lCls);
                 for(var i = 0; i < elements.length; i++) {
@@ -221,15 +221,38 @@
                     if(idx === 2) {
                         el.innerHTML = item[3];
                     } else {
-                        setValue(el, item, idx + 1);
+                        setMetrics(el, item, idx + 1);
+                    }
+                }
+            }
+            function setStatuses(statuses) {
+                for(var i = 0; i < statuses.length; i++) {
+                    var item = statuses[i],
+                        objId = item[0],
+                        status = item[1];
+                    var elements = document.getElementsByClassName("item obj-" + objId);
+                    for(var j = 0; j < elements.length; j++) {
+                        var el = elements[j],
+                            hasAlert = el.classList.contains("alert");
+                        if(status && hasAlert) {
+                            // Remove alert
+                            el.classList.remove("alert");
+                        }
+                        if(!status && !hasAlert) {
+                            // Add alert
+                            el.classList.add("alert");
+                        }
                     }
                 }
             }
 
-            for(var i = 0; i < data.length; i++) {
+            // Set metrics
+            for(var i = 0; i < data.metrics.length; i++) {
                 // obj, iface, metric, value
-                setValue(document, data[i], 0);
+                setMetrics(document, data.metrics[i], 0);
             }
+            // Set statuses
+            setStatuses(data.statuses);
         })
     }
 

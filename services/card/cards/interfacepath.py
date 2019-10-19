@@ -17,6 +17,7 @@ import ujson
 # NOC modules
 from noc.config import config
 from noc.sa.models.managedobject import ManagedObject
+from noc.sa.models.objectstatus import ObjectStatus
 from noc.inv.models.interface import Interface
 from noc.core.topology.path import KSPFinder
 from noc.core.topology.goal.level import ManagedObjectLevelGoal
@@ -73,7 +74,7 @@ class InterfacePathCard(BaseCard):
             r["error"] = str(e)
             return r
         # Build interface hashes
-        to_collect = set()  # type: Set[Tuple[int, str]]
+        to_collect = set()  # type: Set[Tuple[int, int, str]]
         for path in r["paths"]:
             for item in path:
                 for direction in ("ingress", "egress"):
@@ -82,7 +83,9 @@ class InterfacePathCard(BaseCard):
                             ifname = iface.name
                             if ifname not in r["if_hash"]:
                                 r["if_hash"][ifname] = bi_hash(ifname)
-                            to_collect.add((iface.managed_object.bi_id, ifname))
+                            to_collect.add(
+                                (iface.managed_object.id, iface.managed_object.bi_id, ifname)
+                            )
         # @todo: Encrypt
         r["ajax_query_key"] = self.encode_query(to_collect)
         return r
@@ -100,13 +103,13 @@ class InterfacePathCard(BaseCard):
 
     @classmethod
     def encode_query(cls, to_collect):
-        # type: (Set[Tuple[int, str]]) -> str
+        # type: (Set[Tuple[int, int, str]]) -> str
         data = ujson.dumps(to_collect).encode("base64").replace("\n", "")
         return cls.get_signature(data) + data
 
     @classmethod
     def decode_query(cls, query):
-        # type: (str) -> List[Tuple[int, str]]
+        # type: (str) -> List[Tuple[int, int, str]]
         sig, data = query[: cls.SIG_LEN], query[cls.SIG_LEN :]
         if sig != cls.get_signature(data):
             raise ValueError
@@ -147,7 +150,9 @@ class InterfacePathCard(BaseCard):
 
     def get_ajax_data(self, **kwargs):
         # Parse query params
-        query = self.decode_query(self.handler.get_argument("key"))
+        query = self.decode_query(
+            self.handler.get_argument("key")
+        )  # type: List[Tuple[int, int, str]]
         # Get metrics
         from_ts = datetime.datetime.now() - datetime.timedelta(seconds=1800)
         from_ts = from_ts.replace(microsecond=0)
@@ -170,7 +175,7 @@ class InterfacePathCard(BaseCard):
             from_ts.date().isoformat(),
             from_ts.isoformat(sep=" "),
             " OR ".join(
-                "(managed_object=%d AND path[4]='%s')" % (q[0], q[1].replace("'", "''"))
+                "(managed_object=%d AND path[4]='%s')" % (q[1], q[2].replace("'", "''"))
                 for q in query
             ),
         )
@@ -197,8 +202,12 @@ class InterfacePathCard(BaseCard):
             m_index.add((int(mo_bi_id), iface))
 
         interface_metrics = {"speed", "load_in", "load_out", "packets_in", "packets_out"}
-        for mo_bi_id, iface in query:
+        for _, mo_bi_id, iface in query:
             if (int(mo_bi_id), str(bi_hash(iface))) not in m_index:
                 for metric in interface_metrics:
                     metrics += [(str(mo_bi_id), str(bi_hash(iface)), metric, "+")]
-        return metrics
+        # Get current object statuses
+        mo_map = {q[0]: q[1] for q in query}  # type: Dict[int, int]
+        obj_statuses = ObjectStatus.get_statuses(list(mo_map))
+        statuses = {str(mo_map[mo_id]): obj_statuses.get(mo_id, True) for mo_id in obj_statuses}
+        return {"metrics": metrics, "statuses": list(statuses.items())}
