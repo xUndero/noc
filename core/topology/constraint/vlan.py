@@ -11,7 +11,7 @@ from __future__ import absolute_import
 import operator
 
 # Third-party modules
-from typing import Dict
+from typing import Dict, Set
 import cachetools
 
 # NOC modules
@@ -31,7 +31,7 @@ class VLANConstraint(BaseConstraint):
         self.vlan = vlan
         self.allow_tagged = allow_tagged
         self.allow_untagged = allow_untagged
-        self._is_valid_link_cache = {}  # type: Dict[Link]
+        self._is_valid_link_cache = {}  # type: Dict[Link, bool]
 
     @cachetools.cachedmethod(operator.attrgetter("_is_valid_link_cache"))
     def is_valid_link(self, link):

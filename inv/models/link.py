@@ -18,6 +18,7 @@ from mongoengine.fields import StringField, DateTimeField, ListField, IntField, 
 # NOC modules
 from noc.config import config
 from noc.core.mongo.fields import PlainReferenceListField
+from noc.inv.models.interface import Interface
 from noc.core.model.decorator import on_delete, on_save
 from noc.core.datastream.decorator import datastream
 
@@ -98,7 +99,7 @@ class Link(Document):
         self.type = self.get_type()
 
     def contains(self, iface):
-        # type: (Interface) -> boll
+        # type: (Interface) -> bool
         """
         Check link contains interface
         :return: boolean
