@@ -89,6 +89,8 @@ class Script(BaseScript):
             match = self.rx_hw.search(self.cli("sys info show", cached=True))
             if match:
                 c = self.profile.get_platform(self, slots, match.group("part_no"))
+                if match.group("part_no").startswith("AAM"):
+                    module = match.group("part_no")
             else:
                 match1 = self.rx_chips.search(self.cli("chips info", cached=True))
                 c = match1.group("platform")
