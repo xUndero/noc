@@ -254,5 +254,5 @@ class InterfacePathCard(BaseCard):
             {"interface": self.object.id}, {"_id": 0, "enabled_afi": 1, "untagged_vlan": 1}
         ):
             if "BRIDGE" in doc["enabled_afi"] and doc.get("untagged_vlan"):
-                return VLANConstraint(vlan=doc["untagged_vlan"])
+                return VLANConstraint(vlan=doc["untagged_vlan"], strict=False)
         return None
