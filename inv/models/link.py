@@ -98,7 +98,6 @@ class Link(Document):
         self.type = self.get_type()
 
     def contains(self, iface):
-        # type: (Interface) -> boll
         """
         Check link contains interface
         :return: boolean
