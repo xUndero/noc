@@ -1,33 +1,51 @@
 <style>
     .path:not(:last-child) {
         margin-bottom: 8px;
-        border-bottom: 2px dashed #808080;
+/*       border-bottom: 2px dashed #808080; */
     }
 
     .ruler {
         display: flex;
         flex-direction: row;
-        padding: 4px;
-        margin: 4px 4px 4px 6px;
         font-weight: bold;
     }
 
-    .ruler div {
-        border-right: 1px solid #808080;
+    .object {
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        padding: 5px;
+    }
+
+    .hw-data {
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        padding: 5px;
+    }
+
+    .links-data {
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+    }
+
+    .link-set {
+        border: 1px solid black;
     }
 
     .ruler .object {
         min-width: 200px;
-        flex-grow: 2;
+        flex-grow: 1;
     }
 
     .ruler .hw-data {
         min-width: 200px;
-        flex-grow: 2;
+        flex-grow: 1;
     }
 
     .ruler .link-set {
         display: flex;
+        flex-grow: 10;
         flex-direction: column;
     }
 
@@ -50,41 +68,50 @@
     }
 
     .item {
-        border: 1px solid #808080;
-        border-radius: 8px;
-        padding: 4px;
-        margin: 4px;
         display: flex;
         flex-direction: row;
     }
+
+    .item:hover {
+        background-color: #f5f5f5;
+    }
+
     .item .object {
         min-width: 200px;
-        flex-grow: 2;
+        flex-grow: 1;
     }
+
     .item .hw-data {
         min-width: 200px;
-        flex-grow: 2;
+        flex-grow: 1;
     }
+
     .item .links-data {
         display: flex;
+        flex-grow: 10;
         flex-direction: column;
     }
+
     .links-data .links {
     }
+
     .links .link {
         border-left: 1px solid #808080;
     }
+
     .link .interface {
         display: flex;
         flex-direction: row;
     }
+
     .link .interface div {
         padding: 4px;
     }
+/*
     .link .interface div:not(:last-child) {
         border-left: 1px solid #c0c0c0;
     }
-
+*/
     .ingress {
         border-bottom: 2px solid #c0c0c0;
     }
@@ -147,33 +174,33 @@
     }
 </style>
 
-<h1>Path from {{ object.managed_object.name }}:{{ object.name }} upwards</h1>
+<h4><u>Path from {{ object.managed_object.name }}&nbsp;:&nbsp;{{ object.name }} upwards</u></h4>
 {% if error %}Ошибка: {{ error }}
 {% else %}
 {% for path in paths %}
 <div class="path">
     <div class="ruler">
-        <div class="object center">Object</div>
-        <div class="hw-data center">Platform</div>
+        <div class="object center">{{ _("Object") }}<br/>{{ _("IP") }}</div>
+        <div class="hw-data center">{{ _("Platform") }}<br/>{{ _("Version") }}</div>
         <div class="link-set">
             <div class="level center">1</div>
             <div class="level">
-                <div class="x2 center">Interface</div>
-                <div class="x2 center">State</div>
-                <div class="x2 center">Utilization</div>
-                <div class="x2 center">Packets</div>
-                <div class="x2 center">Errors</div>
+                <div class="x2 center">{{ _("Interface") }}</div>
+                <div class="x2 center">{{ _("State") }}</div>
+                <div class="x2 center">{{ _("Utilization") }}</div>
+                <div class="x2 center">{{ _("Packets") }}</div>
+                <div class="x2 center">{{ _("Errors") }}</div>
             </div>
             <div class="level">
                 <div class="x2"></div>
-                <div class="x1 center">Speed</div>
-                <div class="x1 center">Duplex</div>
-                <div class="x1 center">In</div>
-                <div class="x1 center">Out</div>
-                <div class="x1 center">In</div>
-                <div class="x1 center">Out</div>
-                <div class="x1 center">In</div>
-                <div class="x1 center">Out</div>
+                <div class="x1 center">{{ _("Speed") }}</div>
+                <div class="x1 center">{{ _("Duplex") }}</div>
+                <div class="x1 center">{{ _("In") }}</div>
+                <div class="x1 center">{{ _("Out") }}</div>
+                <div class="x1 center">{{ _("In") }}</div>
+                <div class="x1 center">{{ _("Out") }}</div>
+                <div class="x1 center">{{ _("In") }}</div>
+                <div class="x1 center">{{ _("Out") }}</div>
             </div>
         </div>
     </div>
