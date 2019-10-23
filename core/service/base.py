@@ -726,7 +726,7 @@ class Service(object):
         self.logger.info("[nsq|%s] Starting NSQ publisher", topic)
         while not queue.to_shutdown:
             # Message throttling. Wait and allow to collect more messages
-            yield queue.wait(rate=config.nsqd.topic_mpub_rate)
+            yield queue.wait(timeout=10, rate=config.nsqd.topic_mpub_rate)
             # Get next batch up to `mpub_messages` messages or up to `mpub_size` size
             messages = list(
                 queue.iter_get(
