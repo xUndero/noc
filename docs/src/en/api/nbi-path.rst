@@ -383,11 +383,16 @@ Explicit VLAN
 
     {
         "vlan": {
-            "vlan": 1234
+            "vlan": 1234,
+            "strict": false
         }
     }
 
 Restrict paths to links having VLAN `1234`, either tagged or untagged.
+`strict` parameter enforces additional checking:
+
+* `true` - VLAN must be present on both sides of the link.
+* `false` - VLAN must be present at least on one side of the link.
 
 Implicit VLAN
 ^^^^^^^^^^^^^
@@ -396,12 +401,18 @@ Implicit VLAN
 
     {
         "vlan": {
-            "interface_untagged": true
+            "interface_untagged": true,
+            "strict": true
         }
     }
 
 Get untagged vlan from start of path interface and restrict path
 to links having this VLAN, either tagged or untagged.
+
+`strict` parameter enforces additional checking:
+
+* `true` - VLAN must be present on both sides of the link.
+* `false` - VLAN must be present at least on one side of the link.
 
 Upward Direction
 ^^^^^^^^^^^^^^^^

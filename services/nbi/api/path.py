@@ -83,6 +83,7 @@ RequestVLANConstraint = DictParameter(
     attrs={
         "vlan": VLANIDParameter(required=False),
         "interface_untagged": BooleanParameter(required=False),
+        "strict": BaseConstraint(default=False),
     },
     required=False,
 )
@@ -318,14 +319,16 @@ class PathAPI(NBIAPI):
         if "vlan" in constraints:
             vconst = constraints["vlan"]
             if "vlan" in vconst:
-                constraint &= VLANConstraint(vconst["vlan"])
+                constraint &= VLANConstraint(vconst["vlan"], strict=vconst.get("strict", False))
             elif vconst.get("interface_untagged"):
                 if start_iface is None:
                     raise ValueError("No starting interface")
-                constraint &= self.get_interface_untagged_constraint(start_iface)
+                constraint &= self.get_interface_untagged_constraint(
+                    start_iface, strict=vconst.get("strict", False)
+                )
         return None
 
-    def get_interface_untagged_constraint(self, iface):
+    def get_interface_untagged_constraint(self, iface, strict=False):
         # type: (Interface) -> BaseConstraint
         for doc in SubInterface._get_collection().find(
             {"interface": iface.id},
@@ -334,5 +337,5 @@ class PathAPI(NBIAPI):
             if "BRIDGE" not in doc["enabled_afi"]:
                 continue
             if doc.get("untagged_vlan"):
-                return VLANConstraint(doc["untagged_vlan"])
+                return VLANConstraint(doc["untagged_vlan"], strict=strict)
         raise ValueError("Cannot get untagged vlan from interface")
