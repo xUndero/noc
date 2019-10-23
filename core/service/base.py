@@ -700,7 +700,7 @@ class Service(object):
             q = self.topic_queues.get(topic)
             if q:
                 return q  # Created in concurrent task
-            q = TopicQueue(topic)
+            q = TopicQueue(topic, io_loop=self.ioloop)
             self.topic_queues[topic] = q
             self.ioloop.add_callback(self.nsq_publisher_guard, q)
             return q

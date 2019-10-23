@@ -16,7 +16,8 @@ import six
 import ujson
 import tornado.gen
 import tornado.locks
-from typing import Union, Iterable, List, Dict, Any
+import tornado.ioloop
+from typing import Union, Iterable, List, Dict, Any, Optional
 
 # NOC modules
 from noc.config import config
@@ -24,8 +25,8 @@ from noc.core.backport.time import perf_counter
 
 
 class TopicQueue(object):
-    def __init__(self, topic):
-        # type: (str) -> None
+    def __init__(self, topic, io_loop=None):
+        # type: (str, Optional[tornado.ioloop.IOLoop]) -> None
         self.topic = topic
         self.lock = Lock()
         self.put_condition = tornado.locks.Condition()
@@ -34,6 +35,7 @@ class TopicQueue(object):
         self.queue_size = 0
         self.to_shutdown = False
         self.last_get = None
+        self.io_loop = io_loop
         # Metrics
         self.msg_put = 0
         self.msg_get = 0
@@ -98,7 +100,14 @@ class TopicQueue(object):
             self.msg_put += 1
             self.msg_put_size += m_size
             # Unblock waiters in main thread
-            self.put_condition.notify_all()
+            if self.io_loop:
+                # Execute in the main thread
+                self.io_loop.add_callback(self._notify_all)
+            else:
+                self._notify_all()
+
+    def _notify_all(self):
+        self.put_condition.notify_all()
 
     def return_messages(self, messages):
         # type: (List[str]) -> None
