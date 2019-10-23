@@ -194,11 +194,15 @@ from noc.services.nbi.api.path import (
         (RequestConfig, {"n_shortest": 15}, {"max_depth": MAX_DEPTH_DEFAULT, "n_shortest": 15}),
         (RequestConfig, {"n_shortest": "15", "max_depth": 20}, {"max_depth": 20, "n_shortest": 15}),
         # Constraints
-        (RequestConstraints, {"vlan": {"vlan": 10}}, {"vlan": {"vlan": 10}}),
+        (
+            RequestConstraints,
+            {"vlan": {"vlan": 10}},
+            {"upwards": False, "vlan": {"vlan": 10, "strict": False}},
+        ),
         (
             RequestConstraints,
             {"vlan": {"interface_untagged": True}},
-            {"vlan": {"interface_untagged": True}},
+            {"upwards": False, "vlan": {"interface_untagged": True, "strict": False}},
         ),
         # Request
         (Request, {}, ValueError),
@@ -251,7 +255,7 @@ from noc.services.nbi.api.path import (
                 "from": {"object": {"id": "15"}, "interface": {"name": "Gi 0/1"}},
                 "to": {"object": {"remote_system": "20", "remote_id": "25"}},
                 "config": {"max_depth": 20, "n_shortest": N_SHORTEST_DEFAULT},
-                "constraints": {"vlan": {"vlan": 10}},
+                "constraints": {"upwards": False, "vlan": {"vlan": 10, "strict": False}},
             },
         ),
         (
@@ -260,13 +264,19 @@ from noc.services.nbi.api.path import (
                 "from": {"object": {"id": 15}, "interface": {"name": "Gi 0/1"}},
                 "to": {"object": {"remote_system": "20", "remote_id": "25"}},
                 "config": {"max_depth": 20},
-                "constraints": {"vlan": {"interface_untagged": True}},
+                "constraints": {
+                    "upwards": False,
+                    "vlan": {"interface_untagged": True, "strict": False},
+                },
             },
             {
                 "from": {"object": {"id": "15"}, "interface": {"name": "Gi 0/1"}},
                 "to": {"object": {"remote_system": "20", "remote_id": "25"}},
                 "config": {"max_depth": 20, "n_shortest": N_SHORTEST_DEFAULT},
-                "constraints": {"vlan": {"interface_untagged": True}},
+                "constraints": {
+                    "upwards": False,
+                    "vlan": {"interface_untagged": True, "strict": False},
+                },
             },
         ),
     ],

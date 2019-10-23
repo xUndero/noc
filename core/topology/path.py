@@ -80,19 +80,20 @@ class KSPFinder(object):
         """
         return self._find_shortest_path(self.start)
 
-    def _find_shortest_path(self, start, pruned_links=None):
+    def _find_shortest_path(self, start, pruned_links=None, max_depth=MAX_PATH_LENGTH):
         # type: (ManagedObject, Optional[Set[ObjectId]]) -> List[PathInfo]
         """
         Returns a list of Managed Objects along shortest path
         using modified A* algorithm
 
         :param pruned_links: Set of links id to be excluded from path calculation
+        :param max_depth: Depth limit search
         :return:
         """
 
         def max_path_length():
             # type: () -> int
-            return self.max_depth
+            return max_depth + 1
 
         def iter_neighbors(n_ids):
             # type: (Iterable[int]) -> Iterable[ManagedObject]
@@ -153,6 +154,17 @@ class KSPFinder(object):
                 full_path += [PathInfo(mo1, mo2, links, cost)]
             return full_path
 
+        def current_path_len(current_mo):
+            # type: (ManagedObject) -> int
+            n = 0
+            while current_mo != start:
+                current_mo = came_from.get(current_mo)
+                assert current_mo
+                n += 1
+            return n
+
+        # Effective search depth limitation
+        max_depth = min(max_depth, self.max_depth)
         # Already evaluated nodes, contains MO ids
         closed_set = set()  # type: Set[int]
         # Currently discovered nodes than are not evaluated yet.
@@ -182,6 +194,9 @@ class KSPFinder(object):
             # Move current from open_set to closed_set
             open_set.remove(current)
             closed_set.add(current.id)
+            # Restrict path length
+            if current_path_len(current) >= max_depth:
+                continue
             # Get neighbors of current and their distances
             seen_neighbors = set()  # type: Set[int]
             dist = {}  # type: Dict[int, int]
@@ -248,7 +263,9 @@ class KSPFinder(object):
             for i, spur_node in enumerate(a_path):
                 root_path = A[:i]
                 try:
-                    spur_path = self._find_shortest_path(spur_node, pruned_links[spur_node])
+                    spur_path = self._find_shortest_path(
+                        spur_node, pruned_links[spur_node], self.max_depth - i
+                    )
                 except ValueError:
                     continue
                 total_path = root_path + spur_path
