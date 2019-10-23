@@ -21,6 +21,7 @@ from noc.sa.models.objectstatus import ObjectStatus
 from noc.inv.models.interface import Interface
 from noc.core.topology.path import KSPFinder
 from noc.core.topology.constraint.base import BaseConstraint
+from noc.core.topology.constraint.upwards import UpwardsConstraint
 from noc.core.topology.constraint.vlan import VLANConstraint
 from noc.core.topology.goal.level import ManagedObjectLevelGoal
 from noc.inv.models.subinterface import SubInterface
@@ -250,9 +251,11 @@ class InterfacePathCard(BaseCard):
         Get optional path constraint
         :return:
         """
+        constraint = UpwardsConstraint()
         for doc in SubInterface._get_collection().find(
             {"interface": self.object.id}, {"_id": 0, "enabled_afi": 1, "untagged_vlan": 1}
         ):
             if "BRIDGE" in doc["enabled_afi"] and doc.get("untagged_vlan"):
-                return VLANConstraint(vlan=doc["untagged_vlan"], strict=False)
-        return None
+                constraint &= VLANConstraint(vlan=doc["untagged_vlan"], strict=False)
+                break
+        return constraint

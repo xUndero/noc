@@ -194,7 +194,7 @@ class KSPFinder(object):
                     dist[mo] = min(l.l2_cost, dist.get(mo, MAX_PATH_LENGTH))
             # Evaluate neighbors
             for neighbor in iter_neighbors(seen_neighbors):
-                if self.constraint and not self.constraint.is_valid_neighbor(neighbor):
+                if self.constraint and not self.constraint.is_valid_neighbor(current, neighbor):
                     continue  # Skip invalid neighbors
                 if neighbor not in open_set:
                     open_set.add(neighbor)  # Discover a new node

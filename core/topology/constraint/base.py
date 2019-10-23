@@ -17,12 +17,13 @@ class BaseConstraint(object):
         # type: () -> None
         pass
 
-    def is_valid_neighbor(self, obj):
-        # type: (ManagedObject) -> bool
+    def is_valid_neighbor(self, current, neighbor):
+        # type: (ManagedObject, ManagedObject) -> bool
         """
         Check if neighbor is valid neighbor for the path
 
-        :param obj: Managed Object
+        :param current: Current Managed Object
+        :param neighbor: Neighbor Managed Object
         :return: True if path can be continued via neighbors
         """
         return True
@@ -86,9 +87,11 @@ class AndConstraint(BaseConstraint):
         self.left = left
         self.right = right
 
-    def is_valid_neighbor(self, obj):
-        # type: (ManagedObject) -> bool
-        return self.left.is_valid_neighbor(obj) and self.right.is_valid_neighbor(obj)
+    def is_valid_neighbor(self, current, neighbor):
+        # type: (ManagedObject, ManagedObject) -> bool
+        return self.left.is_valid_neighbor(current, neighbor) and self.right.is_valid_neighbor(
+            current, neighbor
+        )
 
     def is_valid_interface(self, interface):
         # type: (Interface) -> bool
@@ -110,9 +113,11 @@ class OrConstraint(BaseConstraint):
         self.left = left
         self.right = right
 
-    def is_valid_neighbor(self, obj):
-        # type: (ManagedObject) -> bool
-        return self.left.is_valid_neighbor(obj) or self.right.is_valid_neighbor(obj)
+    def is_valid_neighbor(self, current, neighbor):
+        # type: (ManagedObject, ManagedObject) -> bool
+        return self.left.is_valid_neighbor(current, neighbor) or self.right.is_valid_neighbor(
+            current, neighbor
+        )
 
     def is_valid_interface(self, interface):
         # type: (Interface) -> bool
@@ -133,9 +138,9 @@ class NotConstraint(BaseConstraint):
         super(NotConstraint, self).__init__()
         self.constraint = constraint
 
-    def is_valid_neighbor(self, obj):
-        # type: (ManagedObject) -> bool
-        return not self.constraint.is_valid_neighbor(obj)
+    def is_valid_neighbor(self, current, neighbor):
+        # type: (ManagedObject, ManagedObject) -> bool
+        return not self.constraint.is_valid_neighbor(current, neighbor)
 
     def is_valid_interface(self, interface):
         # type: (Interface) -> bool
