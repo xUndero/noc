@@ -83,7 +83,7 @@ RequestVLANConstraint = DictParameter(
     attrs={
         "vlan": VLANIDParameter(required=False),
         "interface_untagged": BooleanParameter(required=False),
-        "strict": BaseConstraint(default=False),
+        "strict": BooleanParameter(default=False),
     },
     required=False,
 )
