@@ -36,6 +36,8 @@ from noc.core.backport.time import perf_counter
 from noc.core.topology.path import KSPFinder, PathInfo
 from noc.core.topology.constraint.base import BaseConstraint
 from noc.core.topology.constraint.vlan import VLANConstraint
+from noc.core.topology.constraint.upwards import UpwardsConstraint
+from noc.core.topology.constraint.any import AnyConstraint
 from noc.core.topology.goal.base import BaseGoal
 from noc.core.topology.goal.managedobject import ManagedObjectGoal
 from noc.core.topology.goal.level import ManagedObjectLevelGoal
@@ -84,7 +86,10 @@ RequestVLANConstraint = DictParameter(
     },
     required=False,
 )
-RequestConstraints = DictParameter(attrs={"vlan": RequestVLANConstraint}, required=False)
+RequestConstraints = DictParameter(
+    attrs={"vlan": RequestVLANConstraint, "upwards": BooleanParameter(default=False)},
+    required=False,
+)
 Request = DictParameter(
     attrs={
         "from": RequestFrom,
@@ -307,14 +312,17 @@ class PathAPI(NBIAPI):
         """
         if not constraints:
             return None
+        constraint = AnyConstraint()
+        if constraints.get("upwards"):
+            constraint &= UpwardsConstraint()
         if "vlan" in constraints:
-            vcon = constraints["vlan"]
-            if "vlan" in vcon:
-                return VLANConstraint(vcon["vlan"])
-            if vcon.get("interface_untagged"):
+            vconst = constraints["vlan"]
+            if "vlan" in vconst:
+                constraint &= VLANConstraint(vconst["vlan"])
+            elif vconst.get("interface_untagged"):
                 if start_iface is None:
                     raise ValueError("No starting interface")
-                return self.get_interface_untagged_constraint(start_iface)
+                constraint &= self.get_interface_untagged_constraint(start_iface)
         return None
 
     def get_interface_untagged_constraint(self, iface):

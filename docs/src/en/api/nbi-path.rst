@@ -382,7 +382,9 @@ Explicit VLAN
 ..  sourcecode:: json
 
     {
-        "vlan": 1234
+        "vlan": {
+            "vlan": 1234
+        }
     }
 
 Restrict paths to links having VLAN `1234`, either tagged or untagged.
@@ -393,8 +395,24 @@ Implicit VLAN
 .. sourcecode:: json
 
     {
-        "interface_untagged": true
+        "vlan": {
+            "interface_untagged": true
+        }
     }
 
 Get untagged vlan from start of path interface and restrict path
 to links having this VLAN, either tagged or untagged.
+
+Upward Direction
+^^^^^^^^^^^^^^^^
+.. sourcecode:: json
+
+    {
+        "upwards": true
+    }
+
+Forces upward direction of path.
+i.e. Managed Object :ref:`Level <reference-managed-object-profile-level>`
+of each next object of the path may not be less that level of current
+object. Effectively speed-ups path finding by denying descending to
+lower levels of networks.
