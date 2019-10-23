@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # Metric collector
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2018 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -32,6 +32,7 @@ from noc.sla.models.slaprobe import SLAProbe
 from noc.pm.models.thresholdprofile import ThresholdProfile
 from noc.core.handler import get_handler
 from noc.core.hash import hash_str
+from noc.core.nsq.pub import nsq_pub
 
 
 MAX31 = 0x7FFFFFFF
@@ -324,6 +325,7 @@ class MetricsCheck(DiscoveryCheck):
             self.job.context["counters"] = {}
         counters = self.job.context["counters"]
         alarms = []
+        events = []
         data = defaultdict(dict)  # table -> item hash -> {field:value, ...}
         n_metrics = 0
         mo_id = self.object.bi_id
@@ -422,7 +424,9 @@ class MetricsCheck(DiscoveryCheck):
                     data[cfg.metric_type.scope.table_name][item_hash]["time_delta"] = time_delta
                 n_metrics += 1
             if cfg.threshold_profile and m.abs_value is not None:
-                alarms += self.process_thresholds(m, cfg)
+                alarm, event = self.process_thresholds(m, cfg)
+                alarms += alarm
+                events += event
         return n_metrics, data, alarms
 
     def handler(self):
@@ -445,7 +449,7 @@ class MetricsCheck(DiscoveryCheck):
             self.logger.info("No metrics found")
             return
         # Process results
-        n_metrics, data, alarms = self.process_result(result)
+        n_metrics, data, alarms, events = self.process_result(result)
         # Send metrics
         if n_metrics:
             self.logger.info("Spooling %d metrics", n_metrics)
@@ -453,6 +457,8 @@ class MetricsCheck(DiscoveryCheck):
                 self.service.register_metrics(table, list(six.itervalues(data[table])))
         # Set up threshold alarms
         self.logger.info("%d alarms detected", len(alarms))
+        if events:
+            self.logger.info("%d events detected", len(events))
         self.job.update_umbrella(self.get_ac_pm_thresholds(), alarms)
 
     def convert_delta(self, m, r):
@@ -575,29 +581,57 @@ class MetricsCheck(DiscoveryCheck):
         :return: List of umbrella alarm details
         """
         alarms = []
+        events = []
+        new_threshold = None
         # Check if profile has configured thresholds
         if not cfg.threshold_profile.thresholds:
             return alarms
         w_value = self.get_window_function(m, cfg)
         if w_value is None:
-            return alarms
+            return alarms, events
         # Metrics path
         path = m.metric
         if m.path:
-            path += " | ".join(m.path)
+            path = "%s | %s" % (path, " | ".join(m.path))
         # Get active threshold name
         active = self.job.context["active_thresholds"].get(path)
         if active:
             # Check we should close existing threshold
+            for th in cfg.threshold_profile.thresholds:
+                if th.is_open_match(w_value):
+                    new_threshold = th
+                    break
             threshold = cfg.threshold_profile.find_threshold(active)
-            if threshold:
+            if new_threshold and threshold != new_threshold:
+                # Close Event
+                active = None  # Reset threshold
+                del self.job.context["active_thresholds"][path]
+                if threshold.close_event_class:
+                    events += self.get_event_cfg(
+                        cfg, threshold.name, threshold.close_event_class.name, path, w_value
+                    )
+                if threshold.close_handler:
+                    if threshold.close_handler.allow_threshold:
+                        handler = threshold.close_handler.get_handler()
+                        if handler:
+                            try:
+                                handler(self, cfg, threshold, w_value)
+                            except Exception as e:
+                                self.logger.error("Exception when calling close handler: %s", e)
+                    else:
+                        self.logger.warning("Handler is not allowed for Thresholds")
+                elif threshold.alarm_class:
+                    # Remain umbrella alarm
+                    alarms += self.get_umbrella_alarm_cfg(cfg, threshold, path, w_value)
+            elif threshold:
                 if threshold.is_clear_match(w_value):
-                    # Close threshold
+                    # Close Event
                     active = None  # Reset threshold
                     del self.job.context["active_thresholds"][path]
                     if threshold.close_event_class:
-                        # @todo
-                        pass
+                        events += self.get_event_cfg(
+                            cfg, threshold.name, threshold.close_event_class.name, path, w_value
+                        )
                     if threshold.close_handler:
                         if threshold.close_handler.allow_threshold:
                             handler = threshold.close_handler.get_handler()
@@ -623,8 +657,10 @@ class MetricsCheck(DiscoveryCheck):
                 # Set context
                 self.job.context["active_thresholds"][path] = threshold.name
                 if threshold.open_event_class:
-                    # @todo
-                    pass
+                    # Raise Event
+                    events += self.get_event_cfg(
+                        cfg, threshold.name, threshold.open_event_class.name, path, w_value
+                    )
                 if threshold.open_handler:
                     if threshold.open_handler.allow_threshold:
                         # Call handler
@@ -640,7 +676,7 @@ class MetricsCheck(DiscoveryCheck):
                     # Raise umbrella alarm
                     alarms += self.get_umbrella_alarm_cfg(cfg, threshold, path, w_value)
                 break
-        return alarms
+        return alarms, events
 
     def get_umbrella_alarm_cfg(self, metric_config, threshold, path, value):
         """
@@ -674,3 +710,52 @@ class MetricsCheck(DiscoveryCheck):
             except Exception as e:
                 self.logger.error("Exception when loading handler %s", e)
         return [alarm_cfg]
+
+    def get_event_cfg(self, metric_config, threshold, event_class, path, value):
+        """
+        Get configuration for umbrella alarm
+        :param metric_config:
+        :param threshold:
+        :param event_class:
+        :param path:
+        :param value:
+        :return: List of dicts or empty list
+        """
+        full_path = path
+        if path != metric_config.metric_type.name:
+            path = path.replace("%s |" % metric_config.metric_type.name, "")
+        result = False
+        raw_vars = {
+            "path": path.strip(),
+            "full_path": full_path,
+            "threshold": threshold,
+            "metric": metric_config.metric_type.name,
+            "value": str(value),
+            "window_type": metric_config.threshold_profile.window_type,
+            "window": str(metric_config.threshold_profile.window),
+            "window_function": metric_config.threshold_profile.window_function,
+        }
+        if metric_config.threshold_profile.umbrella_filter_handler:
+            try:
+                handler = get_handler(metric_config.threshold_profile.umbrella_filter_handler)
+                if handler:
+                    raw_vars = handler(self, raw_vars)
+                    if not raw_vars:
+                        return []
+            except Exception as e:
+                self.logger.error("Exception when loading handler %s", e)
+        try:
+            self.raise_event(event_class, raw_vars)
+            result = True
+        except Exception as e:
+            self.logger.error("Exception when send message %s", e)
+        if result:
+            return [raw_vars]
+
+    def raise_event(self, event_class, raw_vars=None):
+        if not raw_vars:
+            raw_vars = {}
+        data = {"$event": {"class": event_class, "vars": raw_vars}}
+        msg = {"ts": time.time(), "object": self.object.id, "data": data}
+        self.logger.info("Pub Event: %s", msg)
+        nsq_pub("events.%s" % self.object.pool.name, msg)
