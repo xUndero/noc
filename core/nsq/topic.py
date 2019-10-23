@@ -8,7 +8,7 @@
 
 # Python modules
 from collections import deque
-from threading import Lock, Condition
+from threading import Lock
 import datetime
 
 # Third-party modules
@@ -16,6 +16,7 @@ import six
 import ujson
 import tornado.gen
 import tornado.locks
+from typing import Union, Iterable, List, Dict, Any
 
 # NOC modules
 from noc.config import config
@@ -24,11 +25,12 @@ from noc.core.backport.time import perf_counter
 
 class TopicQueue(object):
     def __init__(self, topic):
+        # type: (str) -> None
         self.topic = topic
         self.lock = Lock()
-        self.put_condition = Condition()
-        self.put_async_condition = tornado.locks.Condition()
-        self.queue = deque()  # @todo: maxlen
+        self.put_condition = tornado.locks.Condition()
+        self.shutdown_complete = tornado.locks.Event()
+        self.queue = deque()  # type: deque
         self.queue_size = 0
         self.to_shutdown = False
         self.last_get = None
@@ -42,6 +44,7 @@ class TopicQueue(object):
 
     @staticmethod
     def iter_encode_chunks(message, limit=config.nsqd.mpub_size - 8):
+        # type: (Union[str, object], int) -> Iterable[str]
         """
         Encode data to iterable atomic chunks of up to limit size
 
@@ -72,6 +75,7 @@ class TopicQueue(object):
                 raise ValueError("Message too big")
 
     def put(self, message, fifo=True):
+        # type: (object, bool) -> None
         """
         Put message into queue. Block if queue is full
 
@@ -93,11 +97,11 @@ class TopicQueue(object):
             self.queue_size += m_size
             self.msg_put += 1
             self.msg_put_size += m_size
-        with self.put_condition:
+            # Unblock waiters in main thread
             self.put_condition.notify_all()
-            self.put_async_condition.notify_all()
 
     def return_messages(self, messages):
+        # type: (List[str]) -> None
         """
         Return messages to the start of the queue
 
@@ -111,8 +115,11 @@ class TopicQueue(object):
                 self.queue.appendleft(msg)
                 self.msg_requeued += 1
                 self.msg_requeued_size += len(msg)
+            # Unblock waiters in main thread
+            self.put_condition.notify_all()
 
     def iter_get(self, n=1, size=None, total_overhead=0, message_overhead=0):
+        # type:  (int, int, int, int) -> Iterable[str]
         """
         Get up to `n` items up to `size` size.
 
@@ -145,9 +152,10 @@ class TopicQueue(object):
                     yield msg
                 except IndexError:
                     break
-        self.last_get = perf_counter()
+            self.last_get = perf_counter()
 
     def is_empty(self):
+        # () -> bool
         """
         Check if queue is empty
 
@@ -156,6 +164,7 @@ class TopicQueue(object):
         return not self.queue_size
 
     def qsize(self):
+        # () -> int
         """
         Returns amount of messages and size of queue
 
@@ -165,6 +174,7 @@ class TopicQueue(object):
             return len(self.queue), self.queue_size
 
     def shutdown(self):
+        # () -> ()
         """
         Begin shutdown sequence. Disable queue writes
 
@@ -173,22 +183,12 @@ class TopicQueue(object):
         if self.to_shutdown:
             raise RuntimeError("Already in shutdown")
         self.to_shutdown = True
-        with self.put_condition:
+        with self.lock:
             self.put_condition.notify_all()
 
-    def wait(self, timeout=None):
-        """
-        Block and wait for new messages up to `timeout`
-
-        :param timeout: Wait timeout. No limit if None
-        """
-        if self.queue_size:
-            return  # Data ready
-        with self.put_condition:
-            self.put_condition.wait(timeout)
-
     @tornado.gen.coroutine
-    def wait_async(self, timeout=None, rate=None):
+    def wait(self, timeout=None, rate=None):
+        # (Optional[float], Optional[int]) -> None
         """
         Block and wait up to `timeout`
         :param timeout: Max. wait in seconds
@@ -196,7 +196,7 @@ class TopicQueue(object):
         :return:
         """
         # Sleep to throttle rate
-        if rate and self.last_get:
+        if rate and self.last_get and not self.to_shutdown:
             now = perf_counter()
             delta = max(self.last_get + 1.0 / rate - now, 0)
             if delta > 0:
@@ -209,13 +209,14 @@ class TopicQueue(object):
                         # Timeout expired
                         raise tornado.gen.Return()
         # Check if queue already contains messages
-        if not self.queue_size:
+        if not self.queue_size and not self.to_shutdown:
             # No messages, wait
             if timeout is not None:
                 timeout = datetime.timedelta(seconds=timeout)
-            yield self.put_async_condition.wait(timeout)
+            yield self.put_condition.wait(timeout)
 
     def apply_metrics(self, data):
+        # type: (Dict[str, Any]) -> None
         data.update(
             {
                 ("nsq_msg_put", ("topic", self.topic)): self.msg_put,
