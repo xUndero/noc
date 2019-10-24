@@ -108,6 +108,8 @@ def csv_export(model, queryset=None, first_row_only=False):
                 "effective_client_groups",
             }:
                 row += [",".join(v)]
+            elif f in {"vendor"} and v.code:
+                row += v.code
             elif rel is None or not v:
                 row += [v]
             else:
@@ -220,6 +222,7 @@ def csv_import(model, f, resolution=IR_FAIL, delimiter=","):
                     "effective_service_groups",
                     "static_client_groups",
                     "effective_client_groups",
+                    "vendor",
                 }:
                     variables[h] = [x.strip() for x in v.split(",") if x.strip()]
         # Find object
