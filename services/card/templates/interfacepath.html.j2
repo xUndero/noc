@@ -170,13 +170,18 @@
         background-color: #7f8c8d;
         color: #ecf0f1;
     }
+
+    .header {
+        color: #0066CC;
+    }
 </style>
 
-<h4><u>Path from {{ object.managed_object.name }}&nbsp;:&nbsp;{{ object.name }} upwards</u></h4>
+<h3 class="header">Path from {{ object.managed_object.name }}&nbsp;:&nbsp;{{ object.name }} upwards</h3>
 {% if error %}Ошибка: {{ error }}
 {% else %}
 {% for path in paths %}
 <div class="path">
+    <h4 class="header">{{ _("Alternative path") }} {{ loop.index }}</h4>
     <div class="ruler">
         <div class="object center">{{ _("Object") }}<br/>{{ _("IP") }}</div>
         <div class="hw-data center">{{ _("Platform") }}<br/>{{ _("Version") }}</div>
