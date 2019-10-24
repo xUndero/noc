@@ -46,8 +46,13 @@ class Script(BaseScript):
             freq = self.snmp.get("1.3.6.1.4.1.41752.3.10.1.2.1.1.6.%s" % sifindex)
             channel = self.snmp.get("1.3.6.1.4.1.41752.3.10.1.2.1.1.7.%s" % sifindex)
             broadcast = self.snmp.get("1.2.840.10036.1.1.1.7.%s" % sifindex)
-            ss[sifindex] = {"ssid": sname, "ieee_mode": ieee_mode, "channel": channel, "freq": freq,
-                            "broadcast": "enable" if broadcast else "disable"}
+            ss[sifindex] = {
+                "ssid": sname,
+                "ieee_mode": ieee_mode,
+                "channel": channel,
+                "freq": freq,
+                "broadcast": "enable" if broadcast else "disable",
+            }
         for v in self.snmp.getnext("1.3.6.1.2.1.2.2.1.1", cached=True):
             ifindex = v[1]
             name = self.snmp.get("1.3.6.1.2.1.2.2.1.2.%s" % str(ifindex))
@@ -148,7 +153,6 @@ class Script(BaseScript):
                     "channel": channel,
                     "freq": freq,
                 }
-
         with self.profile.shell(self):
             v = self.cli("ip a", cached=True)
             for match in self.rx_sh_int.finditer(v):
