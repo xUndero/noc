@@ -24,28 +24,26 @@
     }
 
     .links-data {
-        border-bottom: 1px solid black;
-        border-top: 1px solid black;
-        border-right: 1px solid black;
+        border: 1px solid black;
     }
 
     .link-set {
         border: 1px solid black;
+        flex-grow: 1;
     }
 
     .ruler .object {
         min-width: 200px;
-        flex-grow: 1;
+        max-width: 200px;
     }
 
     .ruler .hw-data {
         min-width: 200px;
-        flex-grow: 1;
+        max-width: 200px;
     }
 
     .ruler .link-set {
         display: flex;
-        flex-grow: 10;
         flex-direction: column;
     }
 
@@ -64,7 +62,6 @@
 
     .ruler .interface {
         min-width: 150px;
-        flex-grow: 1.5;
     }
 
     .item {
@@ -79,25 +76,24 @@
 
     .item .object {
         min-width: 200px;
-        flex-grow: 1;
+        max-width: 200px;
     }
 
     .item .hw-data {
         min-width: 200px;
-        flex-grow: 1;
+        max-width: 200px;
     }
 
     .item .links-data {
-        display: flex;
-        flex-grow: 10;
-        flex-direction: column;
+        flex-grow: 1;
     }
 
     .links-data .links {
     }
 
     .links .link {
-        border-left: 1px solid #808080;
+        display: flex;
+        flex-direction: column;
     }
 
     .link .interface {
@@ -116,6 +112,7 @@
     .ingress {
         border-bottom: 2px solid #c0c0c0;
     }
+
     .interface .name {
         text-align: right;
     }
@@ -207,11 +204,11 @@
     </div>
   {%  for item in path %}
     <div class="item obj-{{ item["object"].bi_id }}">
-        <div class="object">
+        <div class="x2 object">
             <div class="name">{{ item["object"].name }}</div>
             <div class="address">{{ item["object"].address }}</div>
         </div>
-        <div class="hw-data">
+        <div class="x2 hw-data">
             <div class="platform">{{ item["object"].platform.name }}</div>
             <div class="version">{{ item["object"].version.version }}</div>
         </div>
