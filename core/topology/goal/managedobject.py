@@ -19,40 +19,43 @@ from .base import BaseGoal
 
 
 class ManagedObjectGoal(BaseGoal):
-    SEGMENT_COST_MULTIPLIER = 1
-    HORIZONTAL_COST = 3
+    SEGMENT_COST_MULTIPLIER = 100
+    HORIZONTAL_COST = 10
 
     def __init__(self, obj):
         # type: (ManagedObject) -> None
         super(ManagedObjectGoal, self).__init__()
         self.object = obj
         # Use A* acceleration
-        self.use_a_star = True
+        self.use_segment_path = True
         # Heuristic weight is the number of segments to be passed to goal
         self.hw = {}  # type: Dict[NetworkSegment, int]
 
+    def segment_cost_estimate(self, neighbor, current=None):
+        if not self.hw:
+            # Not initialized still
+            self._init_weights(neighbor)
+            if not self.use_segment_path:
+                # No segment paths, disabled during weight calculation
+                return 0
+        cost = self.hw.get(neighbor.segment)
+        if cost is not None:
+            return cost
+        if current and neighbor.segment.enable_horizontal_transit:
+            # Horizontal transit modifier
+            # Add horizontal transit segment
+            cost = self.hw[current.segment] + self.HORIZONTAL_COST
+            self.hw[neighbor.segment] = cost
+            return cost
+        return self.DROP_COST
+
     def cost_estimate(self, neighbor, current=None):
         # type: (ManagedObject, Optional[ManagedObject]) -> int
-        if self.use_a_star:
-            if not self.hw:
-                # Not initialized still
-                self._init_weights(neighbor)
-                if not self.use_a_star:
-                    # No segment path
-                    return self.DEFAULT_COST
-            cost = self.hw.get(neighbor.segment)
-            if cost is not None:
-                return cost
-            if neighbor.segment.enable_horizontal_transit:
-                # Horizontal transit modifier
-                if current:
-                    # Add horizontal transit segment
-                    cost = self.hw[current.segment] + self.HORIZONTAL_COST
-                    self.hw[neighbor.segment] = cost
-                    return cost
-            return self.DROP_COST
-        # Disable A* acceleration
-        return self.DEFAULT_COST
+        cost = self.DEFAULT_COST
+        # Apply segment penalty
+        if self.use_segment_path:
+            cost += self.segment_cost_estimate(neighbor, current)
+        return cost
 
     def is_goal(self, obj):
         # type: (ManagedObject) -> bool
@@ -77,7 +80,7 @@ class ManagedObjectGoal(BaseGoal):
         # if searching within one segment
         if len(seg_path) == 1 and seg_path[0].parent:
             self.hw[seg_path[0].parent] = 2 * self.SEGMENT_COST_MULTIPLIER
-        self.use_a_star = bool(self.hw)
+        self.use_segment_path = bool(self.hw)
 
     @staticmethod
     def get_segment_path(start, goal):

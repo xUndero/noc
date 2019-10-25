@@ -68,7 +68,7 @@ class KSPFinder(object):
         # Managed Object cache
         self.mo_cache = {}  # type: Dict[int, ManagedObject]
         # Links cache
-        self.mo_links = {}  # type: Dict[ManagedObject, Set[Link]]
+        self.mo_links = defaultdict(set)  # type: DefaultDict[int, Set[Link]]
 
     def find_shortest_path(self):
         # type: () -> List[PathInfo]
@@ -93,7 +93,7 @@ class KSPFinder(object):
 
         def max_path_length():
             # type: () -> int
-            return max_depth + 1
+            return MAX_PATH_LENGTH
 
         def iter_neighbors(n_ids):
             # type: (Iterable[int]) -> Iterable[ManagedObject]
@@ -128,11 +128,12 @@ class KSPFinder(object):
 
         def iter_links(current_mo):
             # type:(ManagedObject) -> Iterable[Link]
-            links = self.mo_links.get(current_mo, None)  # type: Optional[Set[Link]]
-            if links is None:
-                links = set(Link.objects.filter(linked_objects=current_mo.id))
-                self.mo_links[current_mo] = links
-            for link in links:
+            if current_mo.id not in self.mo_links:
+                # Read all segment's links at once and fill the cache
+                for link in Link.objects.filter(linked_segments=current_mo.segment.id):
+                    for l_mo in link.linked_objects:
+                        self.mo_links[l_mo].add(link)
+            for link in self.mo_links[current_mo.id]:
                 # Prune excluded links
                 if pruned_links and link.id in pruned_links:
                     continue
@@ -149,7 +150,7 @@ class KSPFinder(object):
                 obj_path.insert(0, goal_mo)
             full_path = []  # type: List[PathInfo]
             for mo1, mo2 in six.moves.zip(obj_path, obj_path[1:]):
-                links = [link for link in self.mo_links[mo1] if mo2.id in link.linked_objects]
+                links = [link for link in self.mo_links[mo1.id] if mo2.id in link.linked_objects]
                 cost = min(link.l2_cost or 1 for link in links)
                 full_path += [PathInfo(mo1, mo2, links, cost)]
             return full_path
@@ -194,6 +195,9 @@ class KSPFinder(object):
             # Move current from open_set to closed_set
             open_set.remove(current)
             closed_set.add(current.id)
+            # Discard if drop cost
+            if f_score[current] >= self.goal.DROP_COST:
+                continue
             # Restrict path length
             if current_path_len(current) >= max_depth:
                 continue
@@ -206,7 +210,7 @@ class KSPFinder(object):
                 )  # Current is already in closed set
                 seen_neighbors |= new_neighbors
                 for mo in new_neighbors:
-                    dist[mo] = min(l.l2_cost, dist.get(mo, MAX_PATH_LENGTH))
+                    dist[mo] = 1  # min(l.l2_cost, dist.get(mo, MAX_PATH_LENGTH))
             # Evaluate neighbors
             for neighbor in iter_neighbors(seen_neighbors):
                 if self.constraint and not self.constraint.is_valid_neighbor(current, neighbor):
