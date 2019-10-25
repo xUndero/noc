@@ -69,6 +69,8 @@ class KSPFinder(object):
         self.mo_cache = {}  # type: Dict[int, ManagedObject]
         # Links cache
         self.mo_links = defaultdict(set)  # type: DefaultDict[int, Set[Link]]
+        # Segments with valid cached links
+        self.cached_seg_links = set()  #  type: Set[ObjectId]
 
     def find_shortest_path(self):
         # type: () -> List[PathInfo]
@@ -128,11 +130,18 @@ class KSPFinder(object):
 
         def iter_links(current_mo):
             # type:(ManagedObject) -> Iterable[Link]
+            if (
+                current_mo.id in self.mo_links
+                and current_mo.segment.id not in self.cached_seg_links
+            ):
+                # Invalidate incomplete cache records for border objects
+                del self.mo_links[current_mo.id]
             if current_mo.id not in self.mo_links:
                 # Read all segment's links at once and fill the cache
                 for link in Link.objects.filter(linked_segments=current_mo.segment.id):
                     for l_mo in link.linked_objects:
                         self.mo_links[l_mo].add(link)
+                    self.cached_seg_links.add(current_mo.segment.id)
             for link in self.mo_links[current_mo.id]:
                 # Prune excluded links
                 if pruned_links and link.id in pruned_links:
