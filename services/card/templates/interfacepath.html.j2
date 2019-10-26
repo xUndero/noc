@@ -231,8 +231,8 @@
                                 <div class="x1 right m-load_out dir-out">-</div>
                                 <div class="x1 right m-packets_in dir-in">-</div>
                                 <div class="x1 right m-packets_out dir-out">-</div>
-                                <div class="x1 right">-</div>
-                                <div class="x1 right">-</div>
+                                <div class="x1 right m-errors_in dir-in">-</div>
+                                <div class="x1 right m-errors_out dir-out">-</div>
                             </div>
                             {% endfor %}
                         </div>
@@ -245,7 +245,7 @@
 </div>
 {% endfor %}
 <script>
-    var queryKey = "{{ ajax_query_key }}";
+    var queryKey = "{{ ajax_query_key | urlencode }}";
     var mLevelPrefixes = ["obj-", "iface-", "m-"];
 
     function getMetrics() {

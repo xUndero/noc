@@ -172,7 +172,9 @@ class InterfacePathCard(BaseCard):
             argMax(load_in, ts) AS load_in,
             argMax(load_out, ts) AS load_out,
             argMax(packets_in, ts) AS packets_in,
-            argMax(packets_out, ts) AS packets_out
+            argMax(packets_out, ts) AS packets_out,
+            argMax(errors_in, ts) AS errors_in,
+            argMax(errors_out, ts) AS errors_out
           FROM interface
           WHERE
             date >= toDate('%s')
@@ -188,12 +190,19 @@ class InterfacePathCard(BaseCard):
             ),
         )
         # Get data
-        metrics = []  # type: List[Tuple[int, str, str, str]]
+        metrics = []  # type: List[Tuple[int, str, str, str, str, str]]
         ch = ch_connection()
         try:
-            for (mo, iface, load_in, load_out, packets_in, packets_out) in ch.execute(
-                post=interface_sql
-            ):
+            for (
+                mo,
+                iface,
+                load_in,
+                load_out,
+                packets_in,
+                packets_out,
+                errors_in,
+                errors_out,
+            ) in ch.execute(post=interface_sql):
                 if_hash = str(bi_hash(iface))
                 metrics += [
                     # (mo, if_hash, "speed", self.humanize_metric(speed)),
@@ -201,6 +210,8 @@ class InterfacePathCard(BaseCard):
                     (mo, if_hash, "load_out", self.humanize_metric(load_out)),
                     (mo, if_hash, "packets_in", self.humanize_metric(packets_in)),
                     (mo, if_hash, "packets_out", self.humanize_metric(packets_out)),
+                    (mo, if_hash, "errors_in", self.humanize_metric(errors_in)),
+                    (mo, if_hash, "errors_out", self.humanize_metric(errors_out)),
                 ]
         except ClickhouseError:
             pass
@@ -208,8 +219,15 @@ class InterfacePathCard(BaseCard):
         m_index = set()  # type: Set[Tuple[int, str]]
         for mo_bi_id, iface, _, _ in metrics:
             m_index.add((int(mo_bi_id), iface))
-
-        interface_metrics = {"speed", "load_in", "load_out", "packets_in", "packets_out"}
+        interface_metrics = {
+            "speed",
+            "load_in",
+            "load_out",
+            "packets_in",
+            "packets_out",
+            "errors_in",
+            "errors_out",
+        }
         for _, mo_bi_id, iface in query:
             if (int(mo_bi_id), str(bi_hash(iface))) not in m_index:
                 for metric in interface_metrics:
@@ -233,11 +251,17 @@ class InterfacePathCard(BaseCard):
             mo = str(mo_map[doc["managed_object"]])
             if_hash = str(bi_hash(doc["name"]))
             status = 0
-            if doc["admin_status"]:
+            if "admin_status" in doc and doc["admin_status"]:
                 status = 2 if doc["oper_status"] else 1
+            duplex = "-"
+            if "full_duplex" in doc:
+                duplex = "Full" if doc["full_duplex"] else "Half"
+            speed = "-"
+            if "in_speed" in doc:
+                speed = self.humanize_metric(doc["in_speed"] * 1000)
             metrics += [
-                (mo, if_hash, "speed", self.humanize_metric(doc["in_speed"] * 1000)),
-                (mo, if_hash, "duplex", "Full" if doc["full_duplex"] else "Half"),
+                (mo, if_hash, "speed", speed),
+                (mo, if_hash, "duplex", duplex),
                 (mo, if_hash, "status", status),
             ]
         # Get current object statuses
