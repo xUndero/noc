@@ -161,7 +161,9 @@ class PathAPI(NBIAPI):
                         start_iface,
                         goal,
                         end_iface,
-                        constraints=self.get_constaints(start, start_iface, req.get("constraints")),
+                        constraints=self.get_constraints(
+                            start, start_iface, req.get("constraints")
+                        ),
                         max_depth=max_depth,
                         n_shortest=n_shortest,
                     )
@@ -289,7 +291,9 @@ class PathAPI(NBIAPI):
                 ]
             }
 
-        finder = KSPFinder(start, goal, max_depth=max_depth, n_shortest=n_shortest)
+        finder = KSPFinder(
+            start, goal, constraint=constraints, max_depth=max_depth, n_shortest=n_shortest
+        )
         for path in finder.iter_shortest_paths():  # type: List[PathInfo]
             last = {"obj": start}  # type: Dict[str, ManagedObject]
             r = {"path": [], "cost": {"l2": 0}}  # type: Dict[str, Any]
