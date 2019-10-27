@@ -230,7 +230,10 @@
                         <div class="link">
                             {% for iface in link %}
                             <div class="interface iface-{{ if_hash[iface.name] }}">
-                                <div class="x2 name">{{ iface.name }}</div>
+                                <div class="x2 name">
+                                    <a target="_blank" href="/ui/grafana/dashboard/script/noc.js?dashboard=mocard&id={{ item["object"].id }}&extra_template={'type': 'iface', 'name': '{{iface.name}}'}">
+                                    <i class="fa fa-dashboard"></i>&nbsp;{{ iface.name }}</a>
+                                </div>
                                 <div class="x1 right m-speed">-</div>
                                 <div class="x1 right m-duplex">-</div>
                                 <div class="x1 right m-load_in dir-in">-</div>
