@@ -70,7 +70,7 @@ class KSPFinder(object):
         # Links cache
         self.mo_links = defaultdict(set)  # type: DefaultDict[int, Set[Link]]
         # Segments with valid cached links
-        self.cached_seg_links = set()  #  type: Set[ObjectId]
+        self.cached_seg_links = set()  # type: Set[ObjectId]
 
     def find_shortest_path(self):
         # type: () -> List[PathInfo]
