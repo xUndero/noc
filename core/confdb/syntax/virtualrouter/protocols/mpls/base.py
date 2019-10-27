@@ -39,7 +39,7 @@ MPLS_SYNTAX = DEF(
                         ),
                         DEF(
                             "cost",
-                            [[DEF(INTEGER, name="cost", required=True, gen="make_mpls_srlg_cost")]],
+                            [DEF(INTEGER, name="cost", required=True, gen="make_mpls_srlg_cost")],
                         ),
                     ],
                     name="name",
