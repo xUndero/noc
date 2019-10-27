@@ -15,12 +15,14 @@
         border-bottom: 1px solid black;
         border-top: 1px solid black;
         padding: 5px;
+        hyphens: auto;
     }
 
     .hw-data {
         border-bottom: 1px solid black;
         border-top: 1px solid black;
         padding: 5px;
+        hyphens: auto;
     }
 
     .links-data {
@@ -210,7 +212,7 @@
   {%  for item in path %}
     <div class="item obj-{{ item["object"].bi_id }}">
         <div class="x2 object">
-            <div class="name">{{ item["object"].name }}</div>
+            <div class="name"><a href="/api/card/view/managedobject/{{ item["object"].id }}/">{{ item["object"].name }}</a></div>
             <div class="address">{{ item["object"].address }}</div>
         </div>
         <div class="x2 hw-data">
