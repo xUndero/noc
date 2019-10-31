@@ -28,12 +28,8 @@ class Script(BaseScript):
     rx_export = re.compile(
         r"^\s+Export VPN Targets :\s+(?P<rt_export>(\S+:\S+\s*){1,}|<not set>)\s*", re.IGNORECASE
     )
-    rx_rt_format = re.compile(
-        r"(\d+\:\d+,?)+"
-    )
-    rx_iface_format = re.compile(
-        r"(\S+,?)+"
-    )
+    rx_rt_format = re.compile(r"(\d+\:\d+,?)+")
+    rx_iface_format = re.compile(r"(\S+,?)+")
     rx_vpn = re.compile(
         r"^VPN\-Instance :\s+(?P<vrf>\S+)\s*\n"
         r"^\s+(?P<description>.*)\n"
@@ -104,7 +100,6 @@ class Script(BaseScript):
                     vpns[-1]["rt_import"] = match_import.group("rt_import").split()
                     block = "rt_import"
                     line_format = self.rx_rt_format
-
         if vpns:
             return vpns
         # Second attempt
