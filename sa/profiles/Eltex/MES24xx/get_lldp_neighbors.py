@@ -10,7 +10,7 @@
 import re
 
 # NOC modules
-from noc.core.script.base import BaseScript
+from noc.sa.profiles.Generic.get_lldp_neighbors import Script as BaseScript
 from noc.sa.interfaces.igetlldpneighbors import IGetLLDPNeighbors
 from noc.core.lldp import (
     LLDP_CHASSIS_SUBTYPE_MAC,
@@ -52,7 +52,7 @@ class Script(BaseScript):
     CHASSIS_SUBTYPE = {"Mac Address": LLDP_CHASSIS_SUBTYPE_MAC, "Local": LLDP_CHASSIS_SUBTYPE_LOCAL}
     PORT_SUBTYPE = {"Mac Address": LLDP_PORT_SUBTYPE_MAC, "Local": LLDP_PORT_SUBTYPE_LOCAL}
 
-    def execute(self):
+    def execute_cli(self):
         r = []
         c = self.cli("show lldp neighbors detail")
         for match in self.rx_detail.finditer(c):
