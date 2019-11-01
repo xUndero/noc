@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # Generic.get_lldp_neighbors
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2018 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -22,6 +22,11 @@ class Script(BaseScript):
     cache = True
     interface = IGetLLDPNeighbors
 
+    # Lookup from different tables if port type is `Iface alias`
+    # 1 - LLDP-MIB::lldpLocPortId
+    # 2 - LLDP-MIB::lldpLocPortDesc
+    LLDP_PORT_TABLE = 2
+
     def get_local_iface(self):
         r = {}
         names = {x: y for y, x in six.iteritems(self.scripts.get_ifindexes())}
@@ -35,7 +40,10 @@ class Script(BaseScript):
         ):
             if port_subtype == 1:
                 # Iface alias
-                iface_name = port_descr
+                if self.LLDP_PORT_TABLE == 1:
+                    iface_name = port_id
+                else:
+                    iface_name = port_descr
             elif port_subtype == 3:
                 # Iface MAC address
                 raise NotImplementedError()
