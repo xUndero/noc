@@ -12,7 +12,7 @@ from noc.sa.interfaces.igetinventory import IGetInventory
 
 
 class Script(BaseScript):
-    name = "Alstec.24xx..get_inventory"
+    name = "Alstec.24xx.get_inventory"
     interface = IGetInventory
     port_map = {10: "1", 18: "2", 26: "3"}  # 16, 2  # 8, 2  # 24, 2
 
