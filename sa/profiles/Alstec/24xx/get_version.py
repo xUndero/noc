@@ -52,7 +52,7 @@ class Script(BaseScript):
             "vendor": "Alstec",
             "platform": platform,
             "version": version,
-            "attributes": {"Serial Number": serial,},
+            "attributes": {"Serial Number": serial},
         }
 
     def execute_cli(self, **kwargs):
