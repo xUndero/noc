@@ -2,7 +2,7 @@
 stages:
   - lint
   - test
-  - build web
+  - Build web
   - Build docs
   - Build release container
   - Build additional release containers
@@ -195,10 +195,10 @@ futurize stage2:
   allow_failure: true
 
 Build web:
-  stage: build web
+  stage: Build web
   image: node:12
   script:
-    - cd ui/web/build
+    - cd ui/web/builder
     - yarn install
     - node src/index.js
   tags:
