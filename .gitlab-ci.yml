@@ -2,6 +2,7 @@
 stages:
   - lint
   - test
+  - build web
   - Build docs
   - Build release container
   - Build additional release containers
@@ -193,6 +194,20 @@ futurize stage2:
     - docker
   allow_failure: true
 
+Build web:
+  stage: build web
+  image: node:12
+  script:
+    - cd ui/web/build
+    - yarn install
+    - node src/index.js
+  tags:
+    - docker
+  artifacts:
+    untracked: true
+    paths:
+      - ui/web/build/
+
 Test migrate:
   stage: test
   before_script:
@@ -363,8 +378,8 @@ Build release image:
     - docker build --target dev -t $CI_REGISTRY_IMAGE/dev:$CI_COMMIT_TAG -f .docker/Dockerfile .
     # registry.getnoc.com/noc/noc/static:stable
     - docker build --target static -t $CI_REGISTRY_IMAGE/static:$CI_COMMIT_TAG -f .docker/Dockerfile .
-    - docker push $CI_REGISTRY_IMAGE/code:$CI_COMMIT_TAG 
-    - docker push $CI_REGISTRY_IMAGE/dev:$CI_COMMIT_TAG 
+    - docker push $CI_REGISTRY_IMAGE/code:$CI_COMMIT_TAG
+    - docker push $CI_REGISTRY_IMAGE/dev:$CI_COMMIT_TAG
     - docker push $CI_REGISTRY_IMAGE/static:$CI_COMMIT_TAG
     - docker rmi $CI_REGISTRY_IMAGE/code:$CI_COMMIT_TAG $CI_REGISTRY_IMAGE/dev:$CI_COMMIT_TAG $CI_REGISTRY_IMAGE/static:$CI_COMMIT_TAG
   tags:
