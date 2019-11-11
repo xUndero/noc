@@ -27,6 +27,12 @@ class Script(BaseScript):
     # 2 - LLDP-MIB::lldpLocPortDesc
     LLDP_PORT_TABLE = 2
 
+    def get_interface_alias(self, port_id, port_descr):
+        if self.LLDP_PORT_TABLE == 1:
+            return port_id
+        else:
+            return port_descr
+
     def get_local_iface(self):
         r = {}
         names = {x: y for y, x in six.iteritems(self.scripts.get_ifindexes())}
@@ -40,10 +46,7 @@ class Script(BaseScript):
         ):
             if port_subtype == 1:
                 # Iface alias
-                if self.LLDP_PORT_TABLE == 1:
-                    iface_name = port_id
-                else:
-                    iface_name = port_descr
+                iface_name = self.get_interface_alias(port_id, port_descr)
             elif port_subtype == 3:
                 # Iface MAC address
                 raise NotImplementedError()
