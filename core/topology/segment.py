@@ -282,6 +282,9 @@ class SegmentTopology(BaseTopology):
             # Segment role and clouds
             ups = {}
             for u in uplinks:
+                if u == node:
+                    # skip self
+                    continue
                 for next_hop, path_len in iter_next_hops(self.G, node, u):
                     ups[next_hop] = min(path_len, ups.get(next_hop, path_len))
             # Shortest path first
