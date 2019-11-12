@@ -78,12 +78,13 @@ class Profile(BaseProfile):
             "version": {"$regex": r"5.20.+"},
             "platform": {"$in": ["S5628F", "S5628F-HI"]},
         },
-        "is_ne_platform": {"platform": {"$regex": "^NE"}},
+        "is_ne_platform": {"platform": {"$regex": r"^NE"}},
         "is_ar": {"platform": {"$regex": r"^AR\d+.+"}},
         "is_extended_entity_mib_supported": {"caps": {"$in": ["Huawei | MIB | ENTITY-EXTENT-MIB"]}},
         "is_stack": {"caps": {"$in": ["Stack | Members"]}},
         "is_s85xx": {"platform": {"$regex": r"^(S85.+)$"}},
-        "is_ar12_93xx": {"platform": {"$regex": "^(S93..|AR[12].+)$"}},
+        "is_ar12_93xx": {"platform": {"$regex": r"^(S93..|AR[12].+)$"}},
+        "is_cloud_engine": {"platform": {"$regex": r"^CE-68\S+"}},
     }
 
     rx_ver = re.compile(

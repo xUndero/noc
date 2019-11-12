@@ -318,6 +318,8 @@ class Script(BaseScript):
                 i_slot = i["SlotNo."]
             elif "SlotNo" in i:
                 i_slot = i["SlotNo"]
+            elif "Slot #" in i:
+                i_slot = i["Slot #"]
             if i_slot and self.rx_slot_num.match(i_slot):
                 # For FAN1, PWR2
                 i_type, i_slot = self.rx_slot_num.match(i_slot).groups()
@@ -333,6 +335,8 @@ class Script(BaseScript):
                 i_sub = i["Sub"]
             elif "SubCard#" in i:
                 i_sub = i["SubCard#"]
+            elif "SubCard #" in i:
+                i_sub = i["SubCard #"]
             elif "SubslotNum" in i:
                 i_sub = i["SubslotNum"]
             elif "SubSNo" in i:
@@ -394,6 +398,9 @@ class Script(BaseScript):
                 if " #" in l_old:
                     # If Slot # in first column name - strip whitespace
                     l_old = self.rx_header_repl.sub(r"\g<2>", l_old)
+                if columns:
+                    # If header ----- \n header \n ------- format (C65xx)
+                    r.pop()
                 columns = l_old.split()
             elif columns:
                 # Fetch cells
@@ -419,8 +426,11 @@ class Script(BaseScript):
         if self.is_s85xx:
             return self.part_parse_s8500()
         slot_num, device_slots = self.get_device_inventory()
+        cmd = "display elabel"
+        if self.is_cloud_engine:
+            cmd = "display device elabel"
         try:
-            v = self.cli("display elabel")
+            v = self.cli(cmd)
             parse_result = self.parse_elabel(v)
         except self.CLISyntaxError:
             r = self.scripts.get_version()
