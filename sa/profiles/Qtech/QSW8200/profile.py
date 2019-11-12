@@ -25,14 +25,16 @@ class Profile(BaseProfile):
     command_exit = "quit"
 
     INTERFACE_TYPES = {
-        "fastethernet": "physical",
-        "gigaethernet": "physical",
-        "tengigabitethernet": "physical",
-        "trunk": "aggregated",
-        "vlan-interface": "SVI",
-        "unknown": "unknown",
+        "fa": "physical",  # fastethernet1/0/1
+        "gi": "physical",  # gigaethernet1/1/7
+        "te": "physical",  # tengigabitethernet1/1/28
+        "tr": "aggregated",  #
+        "vl": "SVI",  # vlan
+        "lo": "loopback",  # loopback
+        "un": "unknown",  # unknown
+        "nu": "null",  # NULL
     }
 
     @classmethod
     def get_interface_type(cls, name):
-        return cls.INTERFACE_TYPES.get((name).lower())
+        return cls.INTERFACE_TYPES.get(name[:2].lower())

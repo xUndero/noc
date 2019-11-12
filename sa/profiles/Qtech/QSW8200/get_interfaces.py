@@ -83,7 +83,7 @@ class Script(BaseScript):
             elif ifname.startswith("NULL"):  # NULL has iftype `unknown`
                 iface["type"] = "null"
             else:
-                iface["type"] = self.profile.get_interface_type(match.group("iftype"))
+                iface["type"] = self.profile.get_interface_type(ifname)
                 iface["mac"] = match.group("mac")
                 sub["mac"] = match.group("mac")
             if iface["type"] == "physical":
