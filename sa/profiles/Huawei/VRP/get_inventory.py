@@ -85,7 +85,7 @@ class Script(BaseScript):
                 raise self.UnexpectedResultError("Partial parsed properties")
             elif "vendor" not in p and p["type"].startswith("H"):
                 p["vendor"] = "Huawei"
-            elif not p["vendor"]:
+            elif "vendor" not in p or not p["vendor"]:
                 self.logger.debug("[%s] Empty Vendor Properties. Skipping...", match["sec_name"])
                 continue
             try:
