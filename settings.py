@@ -114,9 +114,9 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "APP_DIRS": False,
         "DIRS": [".", "templates"],
-        'OPTIONS': {
-            'libraries':{
-                'template_exists': 'noc.templatetags.template_exists',
+        "OPTIONS": {
+            "libraries": {
+                "template_exists": "noc.templatetags.template_exists",
             }
         },
     }
