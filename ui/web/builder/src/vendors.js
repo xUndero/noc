@@ -14,7 +14,9 @@ function vendors (theme) {
         '.pkg_cache/ui/pkg/codemirror/addon/edit/matchbrackets.js',
         '.pkg_cache/ui/pkg/codemirror/addon/merge/merge.js',
         '.pkg_cache/ui/pkg/filesaver/filesaver.min.js',
-        '.pkg_cache/ui/pkg/visibility/visibility.min.js'
+        '.pkg_cache/ui/pkg/visibility/visibility.min.js',
+        '.pkg_cache/ui/pkg/moment/moment.min.js',
+        '.pkg_cache/ui/pkg/moment-timezone/moment-timezone-with-data-1970-2030.min.js',
     ];
 }
 module.exports = vendors;

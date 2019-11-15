@@ -15,10 +15,15 @@ const queue = [
     ...load_packages('../../../requirements/theme-noc.json')
 ];
 
-const template = '{% if setup.theme == "{theme}" %}\n' +
+const themeTemplate = '{% if setup.theme == "{theme}" %}\n' +
     '<link rel="stylesheet" type="text/css" href="/ui/pkg/noc/bundle_app_{app_hash}_{theme}.min.css " />\n' +
     '<script type="text/javascript" src="/ui/pkg/noc/bundle_vendor_{vendor_hash}_{theme}.min.js"></script>\n' +
     '{% endif %}';
+
+const bundleTemplate = '<script type="text/javascript" src="/ui/pkg/noc/bundle_boot_{hash}.min.js"></script>\n' +
+    '<!-- Include the translations -->\n' +
+    '<script type="text/javascript" src="/ui/web/locale/{{ language }}/ext-locale-{{ language }}.js"></script>\n' +
+    '<script type="text/javascript" src="/ui/pkg/noc/bundle_noc_{hash}.min.js"></script>\n';
 
 fs.mkdirSync(destDir, {recursive: true});
 
@@ -39,10 +44,10 @@ function assets(dest, theme) {
     );
 }
 
-function writeDesktop(data) {
-    const dest = `${distDir}/services/web/apps/main/desktop/templates`;
+function writeBundle(name, data) {
+    const dest = `${distDir}/templates`;
     fs.mkdirSync(dest, {recursive: true});
-    fs.writeFileSync(`${dest}/desktop.html`, data);
+    fs.writeFileSync(`${dest}/${name}.html`, data);
 }
 
 function hash(values, file, theme) {
@@ -63,8 +68,9 @@ Promise.all(queue).then(values => {
             ...build_js.boot('bundle_boot', destDir, themes),
         ];
         Promise.all(stages).then(values => {
-                const output = fs.createWriteStream(`ui-web@${version}.tgz`);
-                let content = fs.readFileSync('src/desktop.html').toString();
+                const output = fs.createWriteStream(`ui-web.tgz`);
+                // let content = fs.readFileSync('src/desktop.html').toString();
+                let content = bundleTemplate;
                 let themeSpecific = [];
                 // make desktop.html add hash
                 values.filter(value => value.hash | value.theme === '')
@@ -72,17 +78,18 @@ Promise.all(queue).then(values => {
                     const file = value.name.replace(/{hash}/, value.hash);
                     content = content.replace(value.name, file);
                 });
+                writeBundle('bundle', content);
                 // add hash to theme specific files
                 themes.forEach(theme => {
                     const appHash = hash(values,'bundle_app_{hash}', theme);
                     const vendorHash = hash(values, 'bundle_vendor_{hash}', theme);
                     let body;
-                    body = template.replace(/{theme}/g, theme);
+                    body = themeTemplate.replace(/{theme}/g, theme);
                     body = body.replace(/{app_hash}/, appHash);
                     themeSpecific.push(body.replace(/{vendor_hash}/, vendorHash));
                 });
-                content = content.replace(/{theme_specific}/, themeSpecific.join('\n'));
-                writeDesktop(content);
+                // content = content.replace(/{theme_specific}/, themeSpecific.join('\n'));
+                writeBundle('bundle_theme', themeSpecific.join('\n'));
                 tar.pack(distDir).pipe(zlib.createGzip()).pipe(output);
                 console.log('Done');
             },
