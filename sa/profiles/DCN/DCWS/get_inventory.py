@@ -20,7 +20,7 @@ class Script(BaseScript):
         return [
             {
                 "type": "CHASSIS",
-                "vendor": "NSN",
+                "vendor": "DCN",
                 "part_no": [v["platform"]],
                 "serial": v["attributes"]["Serial Number"],
             }
