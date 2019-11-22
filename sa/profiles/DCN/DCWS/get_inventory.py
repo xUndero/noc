@@ -17,4 +17,11 @@ class Script(BaseScript):
 
     def execute_snmp(self):
         v = self.scripts.get_version()
-        return [{"type": "CHASSIS", "vendor": "NSN", "part_no": [v["platform"]], "serial": v["attributes"]["Serial Number"]}]
+        return [
+            {
+                "type": "CHASSIS",
+                "vendor": "NSN",
+                "part_no": [v["platform"]],
+                "serial": v["attributes"]["Serial Number"],
+            }
+        ]
