@@ -16,10 +16,7 @@ import six
 
 # NOC modules
 from noc.core.script.base import BaseScript
-from noc.sa.interfaces.igetlldpneighbors import (
-    IGetLLDPNeighbors,
-    MACAddressParameter,
-)
+from noc.sa.interfaces.igetlldpneighbors import IGetLLDPNeighbors, MACAddressParameter
 from noc.core.mib import mib
 from noc.core.mac import MAC
 from noc.core.lldp import (
@@ -45,8 +42,7 @@ class Script(BaseScript):
     interface = IGetLLDPNeighbors
 
     rx_localport = re.compile(
-        r"^\s*Eth(| )(.+?)\s*(\|)MAC Address\s+(\S+).+?$",
-        re.MULTILINE | re.DOTALL,
+        r"^\s*Eth(| )(.+?)\s*(\|)MAC Address\s+(\S+).+?$", re.MULTILINE | re.DOTALL
     )
     rx_neigh = re.compile(
         r"(?P<local_if>Eth\s\S+)\s+(\||)\s+(?P<id>\S+).*?(?P<name>\S*)$",
@@ -60,17 +56,10 @@ class Script(BaseScript):
         r"(?P<capability>[^\n]*)|).*",
         re.MULTILINE | re.IGNORECASE | re.DOTALL,
     )
-    rx_port_descr = re.compile(
-        r"^\s*Port Description\s+:\s+(?P<descr>.+)\n", re.MULTILINE
-    )
-    rx_system_descr = re.compile(
-        r"^\s*System Description\s+:\s+(?P<descr>.+)\n", re.MULTILINE
-    )
+    rx_port_descr = re.compile(r"^\s*Port Description\s+:\s+(?P<descr>.+)\n", re.MULTILINE)
+    rx_system_descr = re.compile(r"^\s*System Description\s+:\s+(?P<descr>.+)\n", re.MULTILINE)
 
-    CHASSIS_SUBTYPE = {
-        "Mac Address": LLDP_CHASSIS_SUBTYPE_MAC,
-        "Local": LLDP_CHASSIS_SUBTYPE_LOCAL,
-    }
+    CHASSIS_SUBTYPE = {"Mac Address": LLDP_CHASSIS_SUBTYPE_MAC, "Local": LLDP_CHASSIS_SUBTYPE_LOCAL}
     PORT_SUBTYPE = {
         "Mac Address": LLDP_PORT_SUBTYPE_MAC,
         "Interface Name": LLDP_PORT_SUBTYPE_NAME,
@@ -135,25 +124,18 @@ class Script(BaseScript):
                 if v:
                     neigh = dict(zip(neighb, v[2:]))
                     if neigh["remote_chassis_id_subtype"] == 4:
-                        neigh["remote_chassis_id"] = MAC(
-                            neigh["remote_chassis_id"]
-                        )
+                        neigh["remote_chassis_id"] = MAC(neigh["remote_chassis_id"])
                     if neigh["remote_port_subtype"] == 3:
                         try:
                             neigh["remote_port"] = MAC(neigh["remote_port"])
                         except ValueError:
-                            neigh["remote_port"] = neigh["remote_port"].strip(
-                                " \x00"
-                            )
+                            neigh["remote_port"] = neigh["remote_port"].strip(" \x00")
                             self.logger.warning(
-                                "Bad MAC address on Remote Neighbor: %s",
-                                neigh["remote_port"],
+                                "Bad MAC address on Remote Neighbor: %s", neigh["remote_port"]
                             )
                     r += [
                         {
-                            "local_interface": local_ports[v[0].split(".")[1]][
-                                "local_interface"
-                            ],
+                            "local_interface": local_ports[v[0].split(".")[1]]["local_interface"],
                             # @todo if local interface subtype != 5
                             # "local_interface_id": 5,
                             "neighbors": [neigh],
@@ -171,23 +153,15 @@ class Script(BaseScript):
         # EdgeCore ES3526 advertises MAC address(3) port sub-type,
         # so local_interface_id parameter required Collect data
         local_port_ids = {}  # name -> id
-        for port, local_id in self.rx_localport.findall(
-            self.cli("show lldp info local-device")
-        ):
-            local_port_ids["Eth " + port] = MACAddressParameter().clean(
-                local_id
-            )
+        for port, local_id in self.rx_localport.findall(self.cli("show lldp info local-device")):
+            local_port_ids["Eth " + port] = MACAddressParameter().clean(local_id)
         v = self.cli("show lldp info remote-device")
         for match in self.rx_neigh.finditer(v):
-            ifs += [
-                {"local_interface": match.group("local_if"), "neighbors": []}
-            ]
+            ifs += [{"local_interface": match.group("local_if"), "neighbors": []}]
         for i in ifs:
             if i["local_interface"] in local_port_ids:
                 i["local_interface_id"] = local_port_ids[i["local_interface"]]
-            v = self.cli(
-                "show lldp info remote detail %s" % i["local_interface"]
-            )
+            v = self.cli("show lldp info remote detail %s" % i["local_interface"])
             match = self.re_search(self.rx_detail, v)
             n = {"remote_chassis_id_subtype": LLDP_CHASSIS_SUBTYPE_MAC}
             if match:
@@ -204,17 +178,13 @@ class Script(BaseScript):
                     "Locally assigned": LLDP_PORT_SUBTYPE_LOCAL,
                 }[match.group("p_type")]
                 if n["remote_port_subtype"] == LLDP_PORT_SUBTYPE_MAC:
-                    remote_port = MACAddressParameter().clean(
-                        match.group("p_id")
-                    )
+                    remote_port = MACAddressParameter().clean(match.group("p_id"))
                 elif n["remote_port_subtype"] == LLDP_PORT_SUBTYPE_NAME:
                     remote_port = match.group("p_id").strip()
                 elif "-" in match.group("p_id"):
                     # Removing bug
                     try:
-                        remote_port = binascii.unhexlify(
-                            "".join(match.group("p_id").split("-"))
-                        )
+                        remote_port = binascii.unhexlify("".join(match.group("p_id").split("-")))
                     except TypeError:
                         remote_port = str(match.group("p_id"))
                     remote_port = remote_port.rstrip("\x00")
