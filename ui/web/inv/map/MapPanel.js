@@ -267,6 +267,7 @@ Ext.define("NOC.inv.map.MapPanel", {
             url += "?force=spring"
         }
         me.segmentId = segmentId;
+        me.mask(__("Map loading ..."));
         Ext.Ajax.request({
             url: url,
             method: "GET",
@@ -278,6 +279,7 @@ Ext.define("NOC.inv.map.MapPanel", {
                 } else {
                     me.renderMap(data);
                 }
+                me.unmask();
             },
             failure: function() {
                 NOC.error(__("Failed to get data"));
