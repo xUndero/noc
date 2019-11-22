@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------
 # EdgeCore.ES.get_lldp_neighbors
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2017 The NOC Project
+# Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -71,11 +71,11 @@ class Script(BaseScript):
         names = {x: y for y, x in six.iteritems(self.scripts.get_ifindexes())}
         # Get LocalPort Table
         for port_num, port_subtype, port_id, port_descr in self.snmp.get_tables(
-            [
-                mib["LLDP-MIB::lldpLocPortIdSubtype"],
-                mib["LLDP-MIB::lldpLocPortId"],
-                mib["LLDP-MIB::lldpLocPortDesc"],
-            ]
+                [
+                    mib["LLDP-MIB::lldpLocPortIdSubtype"],
+                    mib["LLDP-MIB::lldpLocPortId"],
+                    mib["LLDP-MIB::lldpLocPortDesc"],
+                ]
         ):
             if port_subtype == 1:
                 # Iface alias
@@ -83,14 +83,14 @@ class Script(BaseScript):
             elif port_subtype == 3:
                 # Iface MAC address
                 iface_name = port_descr
-#                raise NotImplementedError()
+            #                raise NotImplementedError()
             elif port_subtype == 7 and port_id.isdigit():
                 # Iface local (ifindex)
                 iface_name = names[int(port_id)]
             else:
                 # Iface local
                 iface_name = port_id
-            r[port_num] = {"local_interface": iface_name}#, "local_interface_subtype": port_subtype}
+            r[port_num] = {"local_interface": iface_name}  # , "local_interface_subtype": port_subtype}
         if not r:
             self.logger.warning(
                 "Not getting local LLDP port mappings. Check 1.0.8802.1.1.2.1.3.7 table"
@@ -111,23 +111,23 @@ class Script(BaseScript):
         local_ports = self.get_local_iface()
         if self.has_snmp():
             for v in self.snmp.get_tables(
-                [
-                    mib["LLDP-MIB::lldpRemLocalPortNum"],
-                    mib["LLDP-MIB::lldpRemChassisIdSubtype"],
-                    mib["LLDP-MIB::lldpRemChassisId"],
-                    mib["LLDP-MIB::lldpRemPortIdSubtype"],
-                    mib["LLDP-MIB::lldpRemPortId"],
-                    mib["LLDP-MIB::lldpRemPortDesc"],
-                    mib["LLDP-MIB::lldpRemSysName"],
-                ],
-                bulk=True,
+                    [
+                        mib["LLDP-MIB::lldpRemLocalPortNum"],
+                        mib["LLDP-MIB::lldpRemChassisIdSubtype"],
+                        mib["LLDP-MIB::lldpRemChassisId"],
+                        mib["LLDP-MIB::lldpRemPortIdSubtype"],
+                        mib["LLDP-MIB::lldpRemPortId"],
+                        mib["LLDP-MIB::lldpRemPortDesc"],
+                        mib["LLDP-MIB::lldpRemSysName"],
+                    ],
+                    bulk=True,
             ):
                 if v:
                     neigh = dict(zip(neighb, v[2:]))
                     # cleaning
-                    #neigh["remote_port"] = neigh["remote_port"].strip(
+                    # neigh["remote_port"] = neigh["remote_port"].strip(
                     #    " \x00"
-                    #)  # \x00 Found on some devices
+                    # )  # \x00 Found on some devices
                     if neigh["remote_chassis_id_subtype"] == 4:
                         neigh["remote_chassis_id"] = MAC(neigh["remote_chassis_id"])
                     if neigh["remote_port_subtype"] == 3:
