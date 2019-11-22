@@ -94,16 +94,13 @@ class Script(BaseScript):
             elif port_subtype == 3:
                 # Iface MAC address
                 iface_name = port_descr
-            #                raise NotImplementedError()
             elif port_subtype == 7 and port_id.isdigit():
                 # Iface local (ifindex)
                 iface_name = names[int(port_id)]
             else:
                 # Iface local
                 iface_name = port_id
-            r[port_num] = {
-                "local_interface": iface_name
-            }  # , "local_interface_subtype": port_subtype}
+            r[port_num] = {"local_interface": iface_name}
         if not r:
             self.logger.warning(
                 "Not getting local LLDP port mappings. Check 1.0.8802.1.1.2.1.3.7 table"
