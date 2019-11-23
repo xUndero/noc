@@ -10,6 +10,7 @@
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetinventory import IGetInventory
 
+
 class Script(BaseScript):
     name = "Proscend.SHDSL.get_inventory"
     interface = IGetInventory
