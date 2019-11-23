@@ -10,6 +10,7 @@
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetinventory import IGetInventory
 
+
 class Script(BaseScript):
     name = "Nateks.FlexGainACE16.get_inventory"
     interface = IGetInventory
