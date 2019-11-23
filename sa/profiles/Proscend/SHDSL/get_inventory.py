@@ -19,7 +19,7 @@ class Script(BaseScript):
         return [
             {
                 "type": "CHASSIS",
-                "vendor": "Qtech",
+                "vendor": "Proscend",
                 "part_no": [v["platform"]],
                 "serial": v["attributes"]["Serial Number"],
             }
