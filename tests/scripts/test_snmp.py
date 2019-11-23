@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------
-# CLI testing
+# SNMP testing
 # ----------------------------------------------------------------------
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
@@ -49,10 +49,13 @@ class GetDiagScript(BaseScript):
         return r
 
 
-@pytest.mark.parametrize("host,version,community,xcls", [
-    (SNMP_HOST, SNMP_v2c, SNMP_COMMUNITY, None),
-    (SNMP_HOST, SNMP_v2c, SNMP_COMMUNITY + "X", SNMP.TimeOutError)
-])
+@pytest.mark.parametrize(
+    "host,version,community,xcls",
+    [
+        (SNMP_HOST, SNMP_v2c, SNMP_COMMUNITY, None),
+        (SNMP_HOST, SNMP_v2c, SNMP_COMMUNITY + "X", SNMP.TimeOutError),
+    ],
+)
 def test_snmp(host, version, community, xcls):
     try:
         address = socket.gethostbyname(host)
@@ -60,16 +63,11 @@ def test_snmp(host, version, community, xcls):
         pytest.fail("Cannot resolve host '%s'" % host)
     scr = GetDiagScript(
         service=ServiceStub(),
-
-        credentials={
-            "access_preference": "S",
-            "address": address,
-            "snmp_ro": community
-        },
+        credentials={"access_preference": "S", "address": address, "snmp_ro": community},
         capabilities={},
         args={},
         version={},
-        timeout=60
+        timeout=60,
     )
     # Run script
     if xcls:
