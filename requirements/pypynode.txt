@@ -14,7 +14,7 @@ Jinja2==2.8
 jsonschema==2.4.0
 pynsq==0.8.1
 pyparsing==2.0.3
-pyproj==2.4.1
+pyproj==2.2.2
 python-creole==0.2.4
 pytz>=2014.4
 python-consul==1.1.0
