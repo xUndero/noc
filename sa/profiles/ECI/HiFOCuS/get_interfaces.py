@@ -18,8 +18,6 @@ from noc.sa.interfaces.igetinterfaces import IGetInterfaces
 from noc.core.ip import IPv4
 from noc.core.mib import mib
 
-# from noc.core.ip import IPv4
-
 
 class Script(BaseScript):
     name = "ECI.HiFOCuS.get_interfaces"

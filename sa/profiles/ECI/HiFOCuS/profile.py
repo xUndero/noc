@@ -11,7 +11,7 @@
 import re
 
 # NOC modules
-from noc.core.profile.base import BaseProfile, InterfaceTypeError
+from noc.core.profile.base import BaseProfile
 
 
 class Profile(BaseProfile):
