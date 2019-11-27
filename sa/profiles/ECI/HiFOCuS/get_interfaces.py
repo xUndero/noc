@@ -71,7 +71,7 @@ class Script(BaseScript):
                     "type": iftype,
                     "admin_status": True,
                     "oper_status": True,
-                    "subinterfaces": [{"name": ifname, "admin_status": True, "oper_status": True,}],
+                    "subinterfaces": [{"name": ifname, "admin_status": True, "oper_status": True}],
                 }
                 continue
             match = self.rx_iface_mac.search(block)
