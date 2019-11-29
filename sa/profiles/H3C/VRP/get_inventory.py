@@ -16,12 +16,14 @@ class Script(BaseScript):
     interface = IGetInventory
 
     def execute(self):
+        objects = []
         v = self.scripts.get_version()
-        return [
-            {
-                "type": "CHASSIS",
-                "vendor": "H3C",
-                "part_no": [v["platform"]],
-                "serial": v["attributes"]["Serial Number"],
-            }
-        ]
+        inv = {
+            "type": "CHASSIS",
+            "vendor": "H3C",
+            "part_no": [v["platform"]],
+        }
+        if v.get("attributes", {}).get("Serial Number", ""):
+            inv["serial"] = v["attributes"]["Serial Number"]
+        objects += [inv]
+        return objects
