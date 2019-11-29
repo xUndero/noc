@@ -116,7 +116,8 @@ class CLI(object):
         with self.close_timeout_lock:
             if not self.close_timeout:
                 return  # Race with execute(), no need to close
-            self.ioloop.remove_timeout(self.close_timeout)
+            if self.ioloop:
+                self.ioloop.remove_timeout(self.close_timeout)
             self.close_timeout = None
             self.close()
 
