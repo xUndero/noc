@@ -18,11 +18,7 @@ class Script(BaseScript):
     def execute(self):
         objects = []
         v = self.scripts.get_version()
-        inv = {
-            "type": "CHASSIS",
-            "vendor": "H3C",
-            "part_no": [v["platform"]],
-        }
+        inv = {"type": "CHASSIS", "vendor": "H3C", "part_no": [v["platform"]]}
         if v.get("attributes", {}).get("Serial Number", ""):
             inv["serial"] = v["attributes"]["Serial Number"]
         objects += [inv]
