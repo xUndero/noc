@@ -24,7 +24,7 @@ class Script(BaseScript):
         r"\s*inventory \d+ class\s+: (?P<type>\S+)"
         r"\s*inventory \d+ rel-pos\s+: .*"
         r"\s*inventory \d+ name\s+: (?P<name>.*)"
-        r"\s*inventory \d+ hw-rev\s+: (?P<revision>\S+)?\s*"
+        r"\s*inventory \d+ hw-rev\s+: (?P<revision>(\S+|\S+\s\S+))?\s*"
         r"\s*inventory \d+ fw-rev\s+: (?P<fwrevision>.*)"
         r"\s*inventory \d+ sw-rev\s+: (?P<swrevision>.*)"
         r"\s*inventory \d+ serial\s+: (?P<serial>\S+)?\s*"
