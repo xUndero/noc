@@ -19,7 +19,7 @@ class Script(BaseScript):
         objects = []
         v = self.scripts.get_version()
         inv = {"type": "CHASSIS", "vendor": "H3C", "part_no": [v["platform"]]}
-        if v.get("attributes", {}).get("Serial Number", ""):
+        if "attributes" in v and "Serial Number" in v["attributes"]:
             inv["serial"] = v["attributes"]["Serial Number"]
         objects += [inv]
         return objects
