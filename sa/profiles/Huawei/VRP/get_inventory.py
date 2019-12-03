@@ -216,6 +216,8 @@ class Script(BaseScript):
             else:
                 return None, slot, part_no
             return tp, slot, part_no
+        elif self.is_cloud_engine and part_no.startswith("CE"):
+            return "CHASSIS", slot, part_no
         elif not name and slot_hints and (part_no.endswith("PWD") or part_no in ["PDC-350WC-B"]):
             # 5XX chassis PWR card
             # Try detect slot number by display device, use for 53XX series
@@ -226,6 +228,8 @@ class Script(BaseScript):
         elif "PAC" in part_no:
             # PAC-350WB-L
             return "PWR", slot, part_no
+        elif part_no and part_no.startswith("FAN"):
+            return "FAN", slot, part_no
         elif not name and part_no.endswith("FANA"):
             # 5XXX FAN card
             return "FAN", 3, part_no
@@ -267,7 +271,7 @@ class Script(BaseScript):
             return "FPIC", slot, part_no
         elif "Fixed Card" in descr:
             return "FPIC", slot, part_no
-        elif "Fan Box" in descr:
+        elif "Fan Box" in descr or "Fan Module" in descr:
             if name and (name.startswith("A") or name.startswith("B")):
                 slot = name
             return "FAN", slot, part_no
