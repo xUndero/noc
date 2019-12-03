@@ -35,7 +35,6 @@ class Script(BaseScript):
         r = {}
         v = self.cli("show snmp mib ifmib ifIndex")
         v = parse_table(v, max_width=200)
-        print(v)
         for row in v:
             r[row[2]] = row[0]
         return r
