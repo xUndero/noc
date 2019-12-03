@@ -13,7 +13,7 @@ import re
 from six.moves import zip
 from collections import namedtuple
 
-# from typing import List, TypedDict, Tuple
+from typing import List, TypedDict, Tuple
 from dateutil.parser import parse as parse_date
 
 # NOC modules
