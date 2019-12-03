@@ -13,7 +13,7 @@ import re
 from six.moves import zip
 from collections import namedtuple
 
-from typing import List, TypedDict, Tuple
+# from typing import List, TypedDict, Tuple
 from dateutil.parser import parse as parse_date
 
 # NOC modules
@@ -39,7 +39,7 @@ class Script(BaseScript):
 
     rx_int_elabel_universal = re.compile(
         r"(?:\[(?P<sec_name>(?P<role>Rack|Back[Pp]lane|FanFrame|Slot|Main_Board|"
-        r"Daughter_Board|[Pp]ort|PowerSlot|FanSlot|SubRack|[AB]\d)(?:_(?P<num>\S+)|))\]\n|)?\n?"
+        r"Daughter_Board|[Pp]ort|PowerSlot|FanSlot|SubRack|[AB]\d|FAN\d|PWR\d)(?:_(?P<num>\S+)|))\]\n|)?\n?"
         r"(?:\/\$\[.+\]\s*\n"
         r"+\/\$(?:\S+=.*)\n+)+"
         r"(?P<properties>\[Board.?Properties\]\n(?:(?:\S+\=.*|[\w\s*,\(\)\*\/\-]+)\n)+)?",
@@ -182,7 +182,9 @@ class Script(BaseScript):
         if name and name.lower().startswith("port"):
             self.logger.debug("Detect type by by name")
             num = name
-            if self.sfp_number.match(name):
+            if self.is_cloud_engine:
+                pass
+            elif self.sfp_number.match(name):
                 # Port_GigabitEthernet2/0/19 format
                 num = self.sfp_number.match(name).group("num")
             elif "_" in name:
@@ -229,6 +231,9 @@ class Script(BaseScript):
             # PAC-350WB-L
             return "PWR", slot, part_no
         elif part_no and part_no.startswith("FAN"):
+            if name and self.rx_slot_num.match(name):
+                # FAN1, FAN2
+                slot = self.rx_slot_num.match(name).group("num")
             return "FAN", slot, part_no
         elif not name and part_no.endswith("FANA"):
             # 5XXX FAN card
@@ -280,6 +285,9 @@ class Script(BaseScript):
         ):
             if name and (name.startswith("A") or name.startswith("B")):
                 slot = name
+            elif name and self.rx_slot_num.match(name):
+                # PWR1, PWR2
+                slot = self.rx_slot_num.match(name).group("num")
             return "PWR", slot, part_no
         else:
             self.logger.info("Not response number place")
