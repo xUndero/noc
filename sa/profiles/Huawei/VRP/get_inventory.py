@@ -158,7 +158,7 @@ class Script(BaseScript):
 
     cx_600_t = {"IPU", "LPU", "MPU", "SFU", "CLK", "PWR", "FAN", "POWER"}
 
-    sfp_number = re.compile(r"^\w+\d+\/\d+\/(?P<num>\d+)")
+    sfp_number = re.compile(r"^(?P<type>\w+)\d+\/\d+\/(?P<num>\d+)")
 
     def get_type(self, slot, sub=None, name=None, part_no=None, descr="", slot_hints=None):
         """
@@ -182,8 +182,9 @@ class Script(BaseScript):
         if name and name.lower().startswith("port"):
             self.logger.debug("Detect type by by name")
             num = name
-            if self.is_cloud_engine:
-                pass
+            if self.is_cloud_engine and self.sfp_number.match(name):
+                # Port_10GE1/0/48, Port_10GE2/0/48
+                num = "%s%s" % self.sfp_number.match(name).groups()
             elif self.sfp_number.match(name):
                 # Port_GigabitEthernet2/0/19 format
                 num = self.sfp_number.match(name).group("num")
@@ -229,6 +230,9 @@ class Script(BaseScript):
             return "PWR", num, part_no
         elif "PAC" in part_no:
             # PAC-350WB-L
+            if name and self.rx_slot_num.match(name):
+                # PWR1, PWR2
+                slot = self.rx_slot_num.match(name).group("num")
             return "PWR", slot, part_no
         elif part_no and part_no.startswith("FAN"):
             if name and self.rx_slot_num.match(name):
