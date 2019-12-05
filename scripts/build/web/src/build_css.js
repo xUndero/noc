@@ -9,12 +9,12 @@ const cssnano = require('cssnano');
 const url = require('postcss-url');
 
 const sha1 = loaderJS.sha1;
-const bundleName = 'bundle_app';
+const bundleName = 'app';
 
 const build = function(destDir, themes) {
     function _build(destDir, theme) {
         const source = 'src/application.css';
-        const prodName = `${destDir}/${bundleName}_{hash}_${theme}.min.css`;
+        const prodName = `${destDir}/${bundleName}.{hash}.${theme}.min.css`;
         const processors = [
             atImport,
             // autoprefixer,
@@ -43,7 +43,7 @@ const build = function(destDir, themes) {
                         // if(result.map) {
                         //     fs.writeFileSync(`${prodName}.map`, result.map);
                         // }
-                        resolve({name: `${bundleName}_{hash}`, theme: theme, hash: hash});
+                        resolve({name: `${bundleName}.{hash}`, theme: theme, hash: hash});
                         return true;
                     });
             })

@@ -16,8 +16,8 @@ const parse = function(entry) {
         debug: false,
         nameSpace: 'NOC',
         paths: {
-            'Ext.ux': '../ux',
-            NOC: '..',
+            'Ext.ux': '../../../ui/web/ux',
+            NOC: '../../../ui/web',
         }
     };
     const configMap = {

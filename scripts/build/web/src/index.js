@@ -7,7 +7,8 @@ const tar = require('tar-fs');
 const zlib = require("zlib");
 
 const distDir = 'dist';
-const destDir = `${distDir}/ui/pkg/noc`;
+let packageDir = `/ui/pkg/web`;
+const destDir = `${distDir}${packageDir}`;
 // const args = process.argv.slice(2);
 const themes = ['gray', 'noc'];
 const queue = [
@@ -16,16 +17,17 @@ const queue = [
 ];
 
 const themeTemplate = '{% if setup.theme == "{theme}" %}\n' +
-    '<link rel="stylesheet" type="text/css" href="/ui/pkg/noc/bundle_app_{app_hash}_{theme}.min.css " />\n' +
-    '<script type="text/javascript" src="/ui/pkg/noc/bundle_vendor_{vendor_hash}_{theme}.min.js"></script>\n' +
+    `<link rel="stylesheet" type="text/css" href="${packageDir}/app.{app_hash}.{theme}.min.css " />\n` +
+    `<script type="text/javascript" src="${packageDir}/vendor.{vendor_hash}.{theme}.min.js"></script>\n` +
     '{% endif %}';
 
-const bundleTemplate = '<script type="text/javascript" src="/ui/pkg/noc/bundle_boot_{hash}.min.js"></script>\n' +
+const bundleTemplate = `<script type="text/javascript" src="${packageDir}/boot.{hash}.min.js"></script>\n` +
     '<!-- Include the translations -->\n' +
-    '<script type="text/javascript" src="/ui/web/locale/{{ language }}/ext-locale-{{ language }}.js"></script>\n' +
-    '<script type="text/javascript" src="/ui/pkg/noc/bundle_noc_{hash}.min.js"></script>\n';
+    `<script type="text/javascript" src="/ui/web/locale/{{ language }}/ext-locale-{{ language }}.js"></script>\n` +
+    `<script type="text/javascript" src="${packageDir}/app.{hash}.min.js"></script>\n`;
 
 fs.mkdirSync(destDir, {recursive: true});
+fs.mkdirSync(`${destDir}.debug`, {recursive: true});
 
 // ToDo test theme-noc, perhaps need other resources!
 function assets(dest, theme) {
@@ -61,11 +63,11 @@ function hash(values, file, theme) {
 
 Promise.all(queue).then(values => {
         let stages = [
-            ...assets(destDir, themes),
+            // ...assets(destDir, themes),
             ...build_css(destDir, themes),
-            ...build_js.application('bundle_noc', destDir, themes),
-            ...build_js.vendor('bundle_vendor', destDir, themes),
-            ...build_js.boot('bundle_boot', destDir, themes),
+            ...build_js.application('app', destDir, themes),
+            ...build_js.vendor('vendor', destDir, themes),
+            ...build_js.boot('boot', destDir, themes),
         ];
         Promise.all(stages).then(values => {
                 const output = fs.createWriteStream(`ui-web.tgz`);
@@ -81,15 +83,15 @@ Promise.all(queue).then(values => {
                 writeBundle('bundle', content);
                 // add hash to theme specific files
                 themes.forEach(theme => {
-                    const appHash = hash(values,'bundle_app_{hash}', theme);
-                    const vendorHash = hash(values, 'bundle_vendor_{hash}', theme);
+                    const appHash = hash(values,'app.{hash}', theme);
+                    const vendorHash = hash(values, 'vendor.{hash}', theme);
                     let body;
                     body = themeTemplate.replace(/{theme}/g, theme);
                     body = body.replace(/{app_hash}/, appHash);
                     themeSpecific.push(body.replace(/{vendor_hash}/, vendorHash));
                 });
                 // content = content.replace(/{theme_specific}/, themeSpecific.join('\n'));
-                writeBundle('bundle_theme', themeSpecific.join('\n'));
+                writeBundle('theme', themeSpecific.join('\n'));
                 tar.pack(distDir).pipe(zlib.createGzip()).pipe(output);
                 console.log('Done');
             },

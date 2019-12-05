@@ -16,8 +16,8 @@ function appendFile(name, file) {
 
 function makeNames(dir, name, theme) {
     return {
-        prod: `${dir}/${name}_{hash}${theme}.min.js`,
-        dev: `${dir}/${name}.js`
+        prod: `${dir}/${name}.{hash}${theme}.min.js`,
+        dev: `${dir}.debug/${name}.js`
     }
 }
 
@@ -37,7 +37,7 @@ function minify(destDir, bundleName, files, theme) {
     bundle = fs.openSync(prodName.replace(/{hash}/, hash), 'w');
     fs.appendFileSync(prodName.replace(/{hash}/, hash), minified);
     fs.closeSync(bundle);
-    return new Promise((resolve, reject) => resolve({name: `${bundleName}_{hash}`, theme: `${theme.replace(/_/, '')}`, hash: hash}));
+    return new Promise((resolve, reject) => resolve({name: `${bundleName}.{hash}`, theme: `${theme.replace(/\./, '')}`, hash: hash}));
 }
 
 const application = function(bundleName, destDir, theme) {
@@ -54,7 +54,7 @@ const application = function(bundleName, destDir, theme) {
 };
 
 const vendor = function(bundleName, destDir, themes) {
-    return themes.map(theme => minify(destDir, bundleName, vendors(theme), `_${theme}`));
+    return themes.map(theme => minify(destDir, bundleName, vendors(theme), `.${theme}`));
 };
 
 const boot = function(bundleName, destDir, theme) {

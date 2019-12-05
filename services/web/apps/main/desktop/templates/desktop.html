@@ -10,7 +10,7 @@
         {% if setup.favicon_mime %}<link rel="icon" type="{{setup.favicon_mime}}" href="{{setup.favicon_url}}" />{% endif %}
         <!-- l10n -->
         <link rel="gettext" href="/ui/web/translations/{{ language }}.json" lang="{{ language }}">
-        {% with bundle_name="bundle_theme.html" %}
+        {% with bundle_name="theme.html" %}
             {% if bundle_name|template_exists %}
                 {% include bundle_name %}
             {% else %}

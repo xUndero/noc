@@ -1,6 +1,6 @@
 function vendors (theme) {
    return [
-        '../../common/diff_match_patch.js',
+        '../../../ui/common/diff_match_patch.js',
         '.pkg_cache/ui/pkg/extjs/ext-all.js',
         `.pkg_cache/ui/pkg/extjs/classic/theme-${theme}/theme-${theme}.js`,
         '.pkg_cache/ui/pkg/extjs/packages/charts/classic/charts.js',
