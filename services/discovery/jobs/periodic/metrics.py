@@ -32,7 +32,6 @@ from noc.sla.models.slaprobe import SLAProbe
 from noc.pm.models.thresholdprofile import ThresholdProfile
 from noc.core.handler import get_handler
 from noc.core.hash import hash_str
-from noc.core.nsq.pub import nsq_pub
 
 
 MAX31 = 0x7FFFFFFF
@@ -427,7 +426,7 @@ class MetricsCheck(DiscoveryCheck):
                 alarm, event = self.process_thresholds(m, cfg)
                 alarms += alarm
                 events += event
-        return n_metrics, data, alarms
+        return n_metrics, data, alarms, events
 
     def handler(self):
         self.logger.info("Collecting metrics")
@@ -758,4 +757,4 @@ class MetricsCheck(DiscoveryCheck):
         data = {"$event": {"class": event_class, "vars": raw_vars}}
         msg = {"ts": time.time(), "object": self.object.id, "data": data}
         self.logger.info("Pub Event: %s", msg)
-        nsq_pub("events.%s" % self.object.pool.name, msg)
+        self.job.service.pub("events.%s" % self.object.pool.name, msg)
