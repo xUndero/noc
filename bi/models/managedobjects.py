@@ -15,6 +15,7 @@ from noc.core.clickhouse.fields import (
     Int32Field,
     BooleanField,
     StringField,
+    Float32Field,
     Float64Field,
     ReferenceField,
     IPv4Field,
@@ -24,6 +25,7 @@ from noc.core.clickhouse.engines import MergeTree
 from noc.core.bi.dictionaries.managedobject import ManagedObject as ManagedObjectDict
 from noc.core.bi.dictionaries.pool import Pool
 from noc.core.bi.dictionaries.profile import Profile
+from noc.core.bi.dictionaries.objectprofile import ObjectProfile
 from noc.core.bi.dictionaries.vendor import Vendor
 from noc.core.bi.dictionaries.platform import Platform
 from noc.core.bi.dictionaries.version import Version
@@ -54,6 +56,7 @@ class ManagedObject(Model):
     y = Float64Field(description=_("Latitude"))
     # Management
     pool = ReferenceField(Pool, description=_("Pool Name"))
+    object_profile = ReferenceField(ObjectProfile, description=_("Object Profile"))
     name = StringField(description=_("Name"))
     hostname = StringField(description=_("Hostaname"))
     ip = IPv4Field(description=_("IP Address"))
@@ -85,6 +88,13 @@ class ManagedObject(Model):
     has_snmp_v2c = BooleanField(description=_("Has SNMP v2c"))
     # Counter
     uptime = Float64Field(description=_("Uptime"))
+    # Stats
+    n_reboots = UInt16Field(description=_("Reboots by period"))
+    availability = Float32Field(description=_("Availability by period (%)"))
+    total_unavailability = UInt16Field(description=_("Unavailability (sec.)"))
+    n_outages = UInt16Field(description=_("Outagees count by period"))
+    # Metrics stats
+    n_stp_topo_changes = UInt16Field(description=_("STP Topology Changes by period"))
     # SerialNumber
     serials = ArrayField(StringField(), description=_("Serial Numbers"))
     # Tags

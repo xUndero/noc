@@ -38,11 +38,15 @@ class Script(BaseScript):
         "CHASSIS": "CHASSIS",
         "PEM": "PEM",
         "POWER SUPPLY": "PEM",
+        "PDM": "PDM",  # Power Distribution Module
         "PSU": "PSU",
         "ROUTING ENGINE": "RE",
         "AFEB": "AFEB",
         "CB": "SCB",
         "MGMT BRD": "MGMT",
+        "FPM BOARD": "FPM",  # Front Panel Display
+        "QXM": "QXM",  # QX chip (Dense Queuing Block)
+        "CPU": "CPU",  # MPC CPU
         "FPC": "FPC",
         "MPC": "FPC",
         "MIC": "MIC",
@@ -123,6 +127,8 @@ class Script(BaseScript):
             # Get chassis part number from description
             if t == "CHASSIS":
                 part_no = description.split()[0].upper()
+                if part_no.endswith(","):  # EX4200-48T, 8 POE
+                    part_no = part_no[:-1]
                 chassis_sn.add(serial)
             elif t == "FPC":
                 if description.startswith("EX4"):
@@ -137,6 +143,8 @@ class Script(BaseScript):
                         continue
                     t = "CHASSIS"
                     part_no = description.split()[0].upper()
+                    if part_no.endswith(","):  # EX4200-48T, 8 POE
+                        part_no = part_no[:-1]
                     chassis_sn.add(serial)
             elif t == "XCVR":
                 if vendor == "NONAME":
@@ -149,6 +157,8 @@ class Script(BaseScript):
                 part_no = []
             if t == "CHASSIS" and number is None and self.chassis_no is not None:
                 number = self.chassis_no
+            if t in ["QXM", "CPU", "PDM"]:
+                builtin = True
             # Submit object
             objects += [
                 {

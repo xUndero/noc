@@ -8,6 +8,7 @@
 
 # Python modules
 from __future__ import absolute_import
+from collections import OrderedDict
 import datetime
 import operator
 
@@ -57,6 +58,16 @@ class ManagedObjectCard(BaseCard):
 
     # get data function
     def get_data(self):
+        def sortdict(dct):
+            kys = dct.keys()
+            kys.sort()
+            res = OrderedDict()
+            for x in kys:
+                for k, v in dct.iteritems():
+                    if k == x:
+                        res[k] = v
+            return res
+
         def get_container_path(self):
             # Get container path
             if not self.object:
@@ -358,7 +369,7 @@ class ManagedObjectCard(BaseCard):
             "links": links,
             "alarms": alarm_list,
             "interfaces": interfaces,
-            "metrics": meta,
+            "metrics": sortdict(meta),
             "maintenance": maintenance,
             "redundancy": redundancy,
             "inventory": self.flatten_inventory(inv),
@@ -366,8 +377,12 @@ class ManagedObjectCard(BaseCard):
             "attributes": list(
                 ManagedObjectAttribute.objects.filter(managed_object=self.object.id)
             ),
-            "confdb": self.object.get_confdb(),
+            "confdb": None,
         }
+        try:
+            r["confdb"] = self.object.get_confdb()
+        except SyntaxError:
+            pass
         return r
 
     def get_service_glyphs(self, service):

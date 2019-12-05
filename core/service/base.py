@@ -26,6 +26,8 @@ import tornado.httpserver
 import tornado.locks
 import setproctitle
 import ujson
+from typing import Dict, List, Generator
+import six
 
 # NOC modules
 from noc.config import config, CH_UNCLUSTERED, CH_REPLICATED, CH_SHARDED
@@ -44,7 +46,7 @@ from noc.core.nsq.topic import TopicQueue
 from noc.core.nsq.pub import mpub
 from noc.core.nsq.error import NSQPubError
 from noc.core.clickhouse.shard import ShardingFunction
-from .api import APIRequestHandler
+from .api import API, APIRequestHandler
 from .doc import DocRequestHandler
 from .mon import MonRequestHandler
 from .metrics import MetricsHandler
@@ -87,7 +89,7 @@ class Service(object):
     # Connect to MongoDB on activate
     use_mongo = False
     # List of API instances
-    api = []
+    api = []  # type: List[API]
     # Request handler class
     api_request_handler = APIRequestHandler
     # Initialize gettext and process *language* configuration
@@ -162,9 +164,9 @@ class Service(object):
         else:
             self.die("Invalid ClickHouse cluster topology")
         # NSQ Topics
-        self.topic_queues = {}  # name -> TopicQueue()
+        # name -> TopicQueue()
+        self.topic_queues = {}  # type: Dict[str, TopicQueue]
         self.topic_queue_lock = threading.Lock()
-        self.topic_shutdown = {}  # name -> event
 
     def create_parser(self):
         """
@@ -479,14 +481,7 @@ class Service(object):
             except tornado.gen.TimeoutError:
                 self.logger.info("Timed out when shutting down scheduler")
         # Shutdown executors
-        if self.executors:
-            self.logger.info("Shutting down executors")
-            for x in self.executors:
-                try:
-                    self.logger.info("Shutting down %s", x)
-                    yield self.executors[x].shutdown()
-                except tornado.gen.TimeoutError:
-                    self.logger.info("Timed out when shutting down %s", x)
+        yield self.shutdown_executors()
         # Custom deactivation
         yield self.on_deactivate()
         # Shutdown NSQ topics
@@ -699,24 +694,33 @@ class Service(object):
             q = self.topic_queues.get(topic)
             if q:
                 return q  # Created in concurrent task
-            q = TopicQueue(topic)
+            q = TopicQueue(topic, io_loop=self.ioloop)
             self.topic_queues[topic] = q
-            self.topic_shutdown[topic] = tornado.locks.Lock()
-            self.ioloop.add_callback(self.nsq_publisher, topic)
+            self.ioloop.add_callback(self.nsq_publisher_guard, q)
             return q
 
     @tornado.gen.coroutine
-    def nsq_publisher(self, topic):
+    def nsq_publisher_guard(self, queue):
+        # type: (TopicQueue) -> Generator
+        while not queue.to_shutdown:
+            try:
+                yield self.nsq_publisher(queue)
+            except Exception as e:
+                self.logger.error("Unhandled exception in NSQ publisher, restarting: %s", e)
+        queue.shutdown_complete.set()
+
+    @tornado.gen.coroutine
+    def nsq_publisher(self, queue):
         """
         Publisher for NSQ topic
 
         :return:
         """
+        topic = queue.topic
         self.logger.info("[nsq|%s] Starting NSQ publisher", topic)
-        queue = self.topic_queues[topic]
         while not queue.to_shutdown:
             # Message throttling. Wait and allow to collect more messages
-            yield queue.wait_async(rate=config.nsqd.topic_mpub_rate)
+            yield queue.wait(timeout=10, rate=config.nsqd.topic_mpub_rate)
             # Get next batch up to `mpub_messages` messages or up to `mpub_size` size
             messages = list(
                 queue.iter_get(
@@ -726,6 +730,8 @@ class Service(object):
                     message_overhead=4,
                 )
             )
+            if not messages:
+                continue
             try:
                 self.logger.debug("[nsq|%s] Publishing %d messages", topic, len(messages))
                 yield mpub(topic, messages, dcs=self.dcs, io_loop=self.ioloop)
@@ -736,7 +742,7 @@ class Service(object):
                     )
                 else:
                     # Return to queue
-                    self.logger.debug(
+                    self.logger.info(
                         "[nsq|%s] Failed to publish. %d messages returned to queue",
                         topic,
                         len(messages),
@@ -744,17 +750,39 @@ class Service(object):
                     queue.return_messages(messages)
             del messages  # Release memory
         self.logger.info("[nsq|%s] Stopping NSQ publisher", topic)
-        self.topic_shutdown[topic].set()
+
+    @tornado.gen.coroutine
+    def shutdown_executors(self):
+        if self.executors:
+            self.logger.info("Shutting down executors")
+            for x in self.executors:
+                try:
+                    self.logger.info("Shutting down %s", x)
+                    yield self.executors[x].shutdown()
+                except tornado.gen.TimeoutError:
+                    self.logger.info("Timed out when shutting down %s", x)
 
     @tornado.gen.coroutine
     def shutdown_topic_queues(self):
+        # Issue shutdown
         with self.topic_queue_lock:
-            # Send shutdown signal
+            has_topics = bool(self.topic_queues)
+            if has_topics:
+                self.logger.info("Shutting down topic queues")
             for topic in self.topic_queues:
                 self.topic_queues[topic].shutdown()
-            # Wait for queue
-            for topic in self.topic_queues:
-                yield self.topic_queues[topic].wait()
+        # Wait for shutdown
+        while has_topics:
+            with self.topic_queue_lock:
+                topic = next(six.iterkeys(self.topic_queues))
+                queue = self.topic_queues[topic]
+                del self.topic_queues[topic]
+                has_topics = bool(self.topic_queues)
+            try:
+                self.logger.info("Waiting shutdown of topic queue %s", topic)
+                yield queue.shutdown_complete.wait(5)
+            except tornado.gen.TimeoutError:
+                self.logger.info("Failed to shutdown topic queue %s: Timed out", topic)
 
     def pub(self, topic, data, raw=False):
         """
@@ -765,9 +793,12 @@ class Service(object):
           otherwise
         :param raw: True - pass message as-is, False - convert to JSON
         """
-        if not raw:
-            data = ujson.dumps(data)
-        self.get_topic_queue(topic).put(data)
+        q = self.get_topic_queue(topic)
+        if raw:
+            q.put(data)
+        else:
+            for chunk in q.iter_encode_chunks(data):
+                q.put(chunk)
 
     def mpub(self, topic, messages):
         """
@@ -775,7 +806,8 @@ class Service(object):
         """
         q = self.get_topic_queue(topic)
         for m in messages:
-            q.put(ujson.dumps(m))
+            for chunk in q.iter_encode_chunks(m):
+                q.put(chunk)
 
     def get_executor(self, name):
         """
@@ -803,10 +835,21 @@ class Service(object):
         raise NotImplementedError()
 
     @staticmethod
-    def _iter_metrics_body(table, metrics):
-        yield table
-        for m in metrics:
-            yield ujson.dumps(m)
+    def _iter_metrics_raw_chunks(table, metrics):
+        start = 0
+        while start < len(metrics):
+            limit = config.nsqd.mpub_size - 8
+            r = [table]
+            limit -= len(table) + 1
+            for m in metrics[start:]:
+                jm = ujson.dumps(m)
+                js = len(jm) + 1
+                if limit < js:
+                    break
+                r += [jm]
+                limit -= js
+                start += 1
+            yield "\n".join(r)
 
     def _register_unclustered_metrics(self, table, metrics):
         """
@@ -817,7 +860,8 @@ class Service(object):
         :param metrics: List of dicts containing metrics records
         :return:
         """
-        self.pub("chwriter", "\n".join(self._iter_metrics_body(table, metrics)), raw=True)
+        for chunk in self._iter_metrics_raw_chunks(table, metrics):
+            self.pub("chwriter", chunk, raw=True)
 
     def _register_replicated_metrics(self, table, metrics):
         """
@@ -828,18 +872,20 @@ class Service(object):
         :param metrics: List of dicts containing metrics records
         :return:
         """
+        # Change table name to raw_*
         table = "raw_%s" % table
+        # Split and publish parts
         replicas = config.ch_cluster_topology[0].replicas
-        body = "\n".join(self._iter_metrics_body(table, metrics))
-        for nr in range(replicas):
-            self.pub("chwriter-1-%s" % (nr + 1), body, raw=True)
+        for chunk in self._iter_metrics_raw_chunks(table, metrics):
+            for nr in range(replicas):
+                self.pub("chwriter-1-%s" % (nr + 1), chunk, raw=True)
 
     def _register_sharded_metrics(self, table, metrics):
         """
         Register metrics to send in sharded replicated configuration
         Must be used via register_metrics only
 
-        :param fields: Table name
+        :param table: Table name
         :param metrics: List of dicts containing metrics records
         :return:
         """
@@ -852,7 +898,8 @@ class Service(object):
         table = "raw_%s" % table
         # Publish metrics
         for ch in data:
-            self.pub(ch, "\n".join(self._iter_metrics_body(table, data[ch])), raw=True)
+            for chunk in self._iter_metrics_raw_chunks(table, data[ch]):
+                self.pub(ch, chunk, raw=True)
 
     def start_telemetry_callback(self):
         """

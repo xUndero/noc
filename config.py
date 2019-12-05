@@ -161,9 +161,6 @@ class Config(BaseConfig):
         #   second shard has 2 replicas and weight 1
         cluster_topology = StringParameter(default="1")
 
-    class cm(ConfigSection):
-        vcs_type = StringParameter(default="gridvcs", choices=["hg", "CVS", "gridvcs"])
-
     class collections(ConfigSection):
         allow_sharing = BooleanParameter(default=True)
         project_id = IntParameter(default=59)
@@ -318,6 +315,7 @@ class Config(BaseConfig):
 
     thread_stack_size = IntParameter(default=0)
     gitlab_url = StringParameter("https://code.getnoc.com/")
+    version_format = StringParameter(default="%(version)s+%(branch)s.%(number)s.%(changeset)s")
 
     class logging(ConfigSection):
         log_api_calls = BooleanParameter(default=False)
@@ -508,6 +506,11 @@ class Config(BaseConfig):
         enable_freebind = BooleanParameter(default=False)
         # DataStream request limit
         ds_limit = IntParameter(default=1000)
+
+    class icqsender(ConfigSection):
+        token = SecretParameter()
+        retry_timeout = IntParameter(default=2)
+        use_proxy = BooleanParameter(default=False)
 
     class tgsender(ConfigSection):
         token = SecretParameter()
