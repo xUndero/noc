@@ -216,7 +216,7 @@ Build web:
   image: node:12
   script:
     - cd ui/web/builder
-    - yarn install
+    - npm install
     - node src/index.js
   tags:
     - docker
