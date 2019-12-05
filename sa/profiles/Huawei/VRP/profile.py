@@ -33,7 +33,7 @@ class Profile(BaseProfile):
         (r"unchanged press the enter key\)\:", "\n"),
     ]
     pattern_prompt = (
-        r"^[<#\[](~|\*|)(?P<hostname>[a-zA-Z0-9-_\\\.\[\(/`'\"\|\s:,=]+)"
+        r"^[<#\[](~|\*|)(?P<hostname>[a-zA-Z0-9-_\\\.\[\(/`'\"\|\s:,=\+]+)"
         r"(?:-[a-zA-Z0-9/\_]+)*[>#\]\)]"
     )
     pattern_syntax_error = (

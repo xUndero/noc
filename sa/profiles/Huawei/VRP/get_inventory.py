@@ -158,7 +158,7 @@ class Script(BaseScript):
 
     cx_600_t = {"IPU", "LPU", "MPU", "SFU", "CLK", "PWR", "FAN", "POWER"}
 
-    sfp_number = re.compile(r"^(?P<type>\w+)\d+\/\d+\/(?P<num>\d+)")
+    sfp_number = re.compile(r"^(?:Port_|port_|)(?P<type>\w+)\d+\/\d+\/(?P<num>\d+)")
 
     def get_type(self, slot, sub=None, name=None, part_no=None, descr="", slot_hints=None):
         """
@@ -481,12 +481,13 @@ class Script(BaseScript):
                 descr=item.description,
                 slot_hints=board_hints,
             )
-            if item.barcode in proccessed_serials:
-                # CX600
+            if item.barcode in proccessed_serials and i_type != "XCVR":
+                # CX600 has integrated card with same serial
+                # but, Twinax will same S/N as normal
                 continue
-            if not i_type:
+            elif not i_type:
                 i_type = "CHASSIS"
-            proccessed_serials.add(item.barcode)
+            proccessed_serials.add(item.barcode)  # Same serial on LPUI output
             data = {
                 "type": i_type,
                 "number": slot_,
