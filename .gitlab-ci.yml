@@ -1,15 +1,12 @@
 ---
 stages:
-  - lint
-  - test
-  - Build web
-  - Build docs
-  - Build release container
-  - Build additional release containers
-  - Upload docs
+  - Lint
+  - Test
+  - Build
+  - Upload
 
 check labels:
-  stage: lint
+  stage: Lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
     - FLIST=$(git --no-pager diff --name-only $(git merge-base origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME $CI_COMMIT_SHA) $CI_COMMIT_SHA)
@@ -20,7 +17,7 @@ check labels:
     - docker
 
 flake8:
-  stage: lint
+  stage: Lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
     - set -x
@@ -39,7 +36,7 @@ flake8:
     - docker
 
 black:
-  stage: lint
+  stage: Lint
   image: registry.getnoc.com/infrastructure/black:master
   script:
     - set -x
@@ -59,7 +56,7 @@ black:
   allow_failure: false
 
 mypy:
-  stage: lint
+  stage: Lint
   image: registry.getnoc.com/infrastructure/mypy:master
   script:
     - set -x
@@ -79,7 +76,7 @@ mypy:
   allow_failure: true
 
 prettier:
-  stage: lint
+  stage: Lint
   image: registry.getnoc.com/infrastructure/prettier:master
   script:
     - set -x
@@ -100,7 +97,7 @@ prettier:
 
 # waiting for https://github.com/rubik/xenon/issues/21
 xenon:
-  stage: lint
+  stage: Lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
     - set -x
@@ -122,7 +119,7 @@ xenon:
   allow_failure: true
 
 pylint:
-  stage: lint
+  stage: Lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
     - set -x
@@ -141,7 +138,7 @@ pylint:
     - docker
 
 pylint3k:
-  stage: lint
+  stage: Lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
     - set -x
@@ -160,7 +157,7 @@ pylint3k:
     - docker
 
 bandit:
-  stage: lint
+  stage: Lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
     - set -x
@@ -180,7 +177,7 @@ bandit:
   allow_failure: true
 
 caniusepython3:
-  stage: lint
+  stage: Lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
     - caniusepython3 -r requirements/*.txt
@@ -192,7 +189,7 @@ caniusepython3:
   when: manual
 
 futurize:
-  stage: lint
+  stage: Lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
     - FLIST=$(git --no-pager diff --name-only $(git merge-base origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME $CI_COMMIT_SHA) $CI_COMMIT_SHA | egrep ".py$" | grep -v ".docker/"|| true)
@@ -203,7 +200,7 @@ futurize:
     - docker
 
 futurize stage2:
-  stage: lint
+  stage: Lint
   image: registry.getnoc.com/infrastructure/noc-lint:master
   script:
     - FLIST=$(git --no-pager diff --name-only $(git merge-base origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME $CI_COMMIT_SHA) $CI_COMMIT_SHA | egrep ".py$" | grep -v ".docker/"|| true)
@@ -215,7 +212,7 @@ futurize stage2:
   allow_failure: true
 
 Build web:
-  stage: Build web
+  stage: Build
   image: node:12
   script:
     - cd ui/web/builder
@@ -229,7 +226,7 @@ Build web:
       - ui/web/build/
 
 Test migrate:
-  stage: test
+  stage: Test
   before_script:
     - DOCKER_COMPOSE_PROJECT=${CI_COMMIT_REF_SLUG}-${CI_JOB_ID}
   script:
@@ -263,7 +260,7 @@ Test migrate:
   allow_failure: false
 
 Test code:
-  stage: test
+  stage: Test
   before_script:
     - DOCKER_COMPOSE_PROJECT=${CI_COMMIT_REF_SLUG}-${CI_JOB_ID}
     - mv .dockerignore .dockerignore.prod
@@ -304,7 +301,7 @@ Test code:
     expire_in: 1 day
 
 Test python 3:
-  stage: test
+  stage: Test
   before_script:
     - DOCKER_COMPOSE_PROJECT=${CI_COMMIT_REF_SLUG}-${CI_JOB_ID}
     - mv .dockerignore .dockerignore.prod
@@ -337,8 +334,8 @@ Test python 3:
   allow_failure: true
   when: manual
 
-Build docs:
-  stage: Build docs
+Build Docs:
+  stage: Build
   environment: docs
   image: registry.getnoc.com/infrastructure/docs:master
   script:
@@ -366,7 +363,7 @@ Build docs:
     - merge_requests
 
 Build Master Docs:
-  stage: Build docs
+  stage: Build
   environment: docs
   image: registry.getnoc.com/infrastructure/docs:master
   script:
@@ -387,9 +384,8 @@ Build Master Docs:
       - master
       - /^release-\d+\.\d+/
 
-Build release image:
-  stage: Build release container
-  before_script:
+Build Release Image:
+  stage: Build
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     # registry.getnoc.com/noc/noc/code:stable
@@ -407,8 +403,8 @@ Build release image:
   only:
     - tags
 
-upload docs:
-  stage: Upload docs
+Upload Docs:
+  stage: Upload
   environment: docs
   image: registry.getnoc.com/infrastructure/s3helper:master
   script:
