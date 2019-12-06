@@ -422,10 +422,28 @@ class MetricsCheck(DiscoveryCheck):
                 if time_delta and cfg.metric_type.scope.enable_timedelta:
                     data[cfg.metric_type.scope.table_name][item_hash]["time_delta"] = time_delta
                 n_metrics += 1
+            # Metrics path
+            path = m.metric
+            if m.path:
+                m_path = " | ".join(m.path)
+                if not path.endswith(m_path):
+                    path = "%s | %s" % (path, m_path)
             if cfg.threshold_profile and m.abs_value is not None:
-                alarm, event = self.process_thresholds(m, cfg)
+                alarm, event = self.process_thresholds(m, cfg, path)
                 alarms += alarm
                 events += event
+            elif self.job.context["active_thresholds"].get(path):
+                alarm, event = self.clear_process_thresholds(m, cfg, path)
+                alarms += alarm
+                events += event
+            else:
+                # Build window state key
+                if m.path:
+                    key = "%x|%s" % (cfg.metric_type.bi_id, "|".join(str(p) for p in m.path))
+                else:
+                    key = "%x" % cfg.metric_type.bi_id
+                if self.job.context["metric_windows"].get(key):
+                    del self.job.context["metric_windows"][key]
         return n_metrics, data, alarms, events
 
     def handler(self):
@@ -572,7 +590,55 @@ class MetricsCheck(DiscoveryCheck):
             self.logger.error("Cannot calculate thresholds for %s (%s): %s", m.metric, m.path, e)
             return None
 
-    def process_thresholds(self, m, cfg):
+    def clear_process_thresholds(self, m, cfg, path):
+        """
+        Check thresholds
+        :param m: dict with metric result
+        :param cfg: MetricConfig
+        :return: List of umbrella alarm details
+        """
+        alarms = []
+        events = []
+        # Build window state key
+        if m.path:
+            key = "%x|%s" % (cfg.metric_type.bi_id, "|".join(str(p) for p in m.path))
+        else:
+            key = "%x" % cfg.metric_type.bi_id
+        active = self.job.context["active_thresholds"].get(path)
+        threshold_profile = active["threshold_profile"]
+        threshold = threshold_profile.find_threshold(active["threshold"])
+        if threshold:
+            # Close Event
+            self.logger.debug(
+                "Remove active thresholds %s from metric %s",
+                self.job.context["active_thresholds"].get(path),
+                path,
+            )
+            del self.job.context["active_thresholds"][path]
+            if self.job.context["metric_windows"].get(key):
+                del self.job.context["metric_windows"][key]
+            if threshold.close_event_class:
+                events += self.get_event_cfg(
+                    cfg,
+                    threshold_profile,
+                    threshold.name,
+                    threshold.close_event_class.name,
+                    path,
+                    m.value,
+                )
+            if threshold.close_handler:
+                if threshold.close_handler.allow_threshold:
+                    handler = threshold.close_handler.get_handler()
+                    if handler:
+                        try:
+                            handler(self, cfg, threshold, m.value)
+                        except Exception as e:
+                            self.logger.error("Exception when calling close handler: %s", e)
+                else:
+                    self.logger.warning("Handler is not allowed for Thresholds")
+        return alarms, events
+
+    def process_thresholds(self, m, cfg, path):
         """
         Check thresholds
         :param m: dict with metric result
@@ -584,14 +650,10 @@ class MetricsCheck(DiscoveryCheck):
         new_threshold = None
         # Check if profile has configured thresholds
         if not cfg.threshold_profile.thresholds:
-            return alarms
+            return alarms, events
         w_value = self.get_window_function(m, cfg)
         if w_value is None:
             return alarms, events
-        # Metrics path
-        path = m.metric
-        if m.path:
-            path = "%s | %s" % (path, " | ".join(m.path))
         # Get active threshold name
         active = self.job.context["active_thresholds"].get(path)
         if active:
@@ -600,14 +662,19 @@ class MetricsCheck(DiscoveryCheck):
                 if th.is_open_match(w_value):
                     new_threshold = th
                     break
-            threshold = cfg.threshold_profile.find_threshold(active)
+            threshold = cfg.threshold_profile.find_threshold(active["threshold"])
             if new_threshold and threshold != new_threshold:
                 # Close Event
                 active = None  # Reset threshold
                 del self.job.context["active_thresholds"][path]
                 if threshold.close_event_class:
                     events += self.get_event_cfg(
-                        cfg, threshold.name, threshold.close_event_class.name, path, w_value
+                        cfg,
+                        cfg.threshold_profile,
+                        threshold.name,
+                        threshold.close_event_class.name,
+                        path,
+                        w_value,
                     )
                 if threshold.close_handler:
                     if threshold.close_handler.allow_threshold:
@@ -629,7 +696,12 @@ class MetricsCheck(DiscoveryCheck):
                     del self.job.context["active_thresholds"][path]
                     if threshold.close_event_class:
                         events += self.get_event_cfg(
-                            cfg, threshold.name, threshold.close_event_class.name, path, w_value
+                            cfg,
+                            cfg.threshold_profile,
+                            threshold.name,
+                            threshold.close_event_class.name,
+                            path,
+                            w_value,
                         )
                     if threshold.close_handler:
                         if threshold.close_handler.allow_threshold:
@@ -654,11 +726,19 @@ class MetricsCheck(DiscoveryCheck):
                 if not threshold.is_open_match(w_value):
                     continue
                 # Set context
-                self.job.context["active_thresholds"][path] = threshold.name
+                self.job.context["active_thresholds"][path] = {
+                    "threshold": threshold.name,
+                    "threshold_profile": cfg.threshold_profile,
+                }
                 if threshold.open_event_class:
                     # Raise Event
                     events += self.get_event_cfg(
-                        cfg, threshold.name, threshold.open_event_class.name, path, w_value
+                        cfg,
+                        cfg.threshold_profile,
+                        threshold.name,
+                        threshold.open_event_class.name,
+                        path,
+                        w_value,
                     )
                 if threshold.open_handler:
                     if threshold.open_handler.allow_threshold:
@@ -710,7 +790,7 @@ class MetricsCheck(DiscoveryCheck):
                 self.logger.error("Exception when loading handler %s", e)
         return [alarm_cfg]
 
-    def get_event_cfg(self, metric_config, threshold, event_class, path, value):
+    def get_event_cfg(self, metric_config, threshold_profile, threshold, event_class, path, value):
         """
         Get configuration for umbrella alarm
         :param metric_config:
@@ -730,13 +810,13 @@ class MetricsCheck(DiscoveryCheck):
             "threshold": threshold,
             "metric": metric_config.metric_type.name,
             "value": str(value),
-            "window_type": metric_config.threshold_profile.window_type,
-            "window": str(metric_config.threshold_profile.window),
-            "window_function": metric_config.threshold_profile.window_function,
+            "window_type": threshold_profile.window_type,
+            "window": str(threshold_profile.window),
+            "window_function": threshold_profile.window_function,
         }
-        if metric_config.threshold_profile.umbrella_filter_handler:
+        if threshold_profile.umbrella_filter_handler:
             try:
-                handler = get_handler(metric_config.threshold_profile.umbrella_filter_handler)
+                handler = get_handler(threshold_profile.umbrella_filter_handler)
                 if handler:
                     raw_vars = handler(self, raw_vars)
                     if not raw_vars:
