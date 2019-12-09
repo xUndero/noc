@@ -328,6 +328,8 @@ class Script(BaseScript):
                 return "MOTHERBOARD", None, "CISCO1921-MB"
             return "MOTHERBOARD", None, pid
         elif pid.startswith("WS-X4920") or (pid.startswith("WS-C4900M") and "Linecard" in name):
+            if pid == "WS-C4900M":
+                pid = "WS-C4900M-LC"  # First builtin linecard
             return "LINECARD", self.slot_id, pid
         elif (
             (lo == 0 or pid.startswith("CISCO") or pid.startswith("WS-C"))
