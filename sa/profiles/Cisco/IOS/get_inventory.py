@@ -53,6 +53,7 @@ class Script(BaseScript):
     rx_7100 = re.compile(
         r"^(?:uBR|CISCO)?71(?:20|40|11|14)(-\S+)? " r"(?:Universal Broadband Router|chassis)"
     )
+    rx_c4900m = re.compile(r"^Cisco Systems, Inc. (?P<part_no>\S+) \d+ slot switch")
     rx_slot_id = re.compile(
         r"^.*(slot|[tr|b]ay|pem|supply|fan|module)(\s*:?)" r"(?P<slot_id>[\d|\w]+).*", re.IGNORECASE
     )
@@ -72,7 +73,7 @@ class Script(BaseScript):
     def get_inv(self):
         objects = []
         try:
-            v = self.cli("show inventory raw")
+            v = self.cli("show inventory raw", cached=True)
             self.slot_id = 0
             for match in self.rx_item.finditer(v):
                 vendor, serial = "", ""
@@ -132,7 +133,7 @@ class Script(BaseScript):
                         "number": number,
                         "vendor": vendor,
                         "serial": serial,
-                        "description": match.group("descr"),
+                        "description": match.group("descr").strip(),
                         "part_no": [part_no],
                         "revision": match.group("vid"),
                         "builtin": False,
@@ -344,6 +345,10 @@ class Script(BaseScript):
                 pid = descr
             if is_int(name):  # Stacking
                 return "CHASSIS", int(name), pid
+            if pid == "MIDPLANE" and name == "Switch System":
+                match = self.rx_c4900m.search(descr)
+                if match:
+                    pid = match.group("part_no")
             return "CHASSIS", self.slot_id, pid
         elif ("SUP" in pid or "S2U" in pid) and "supervisor" in descr:
             # Sup2

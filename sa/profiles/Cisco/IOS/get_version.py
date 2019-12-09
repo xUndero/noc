@@ -136,7 +136,7 @@ class Script(BaseScript):
     def execute_cli(self, **kwargs):
         c = ""
         try:
-            v = self.cli("show inventory raw")
+            v = self.cli("show inventory raw", cached=True)
             i = 0
             serial = None
             for match in self.rx_item.finditer(v):
