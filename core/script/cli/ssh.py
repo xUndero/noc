@@ -43,6 +43,10 @@ class SSHIOStream(IOStream):
         self.session = None
         self.channel = None
 
+    def __del__(self):
+        self.channel = None
+        self.session = None
+
     @classmethod
     @cachetools.cachedmethod(operator.attrgetter("_key_cache"), lock=lambda _: key_lock)
     def get_publickey(cls, pool):
@@ -140,6 +144,20 @@ class SSHIOStream(IOStream):
                 self.session = None
         super(SSHIOStream, self).close(exc_info=exc_info)
 
+    def get_user(self):
+        # type: () -> str
+        """
+        Get current user
+        """
+        return self.script.credentials["user"] or ""
+
+    def get_password(self):
+        # type: () -> str
+        """
+        Get current user's password
+        """
+        return self.script.credentials["password"] or ""
+
     def auth_publickey(self):
         """
         Public key authentication
@@ -149,9 +167,7 @@ class SSHIOStream(IOStream):
         if not pub_key or not priv_key:
             self.logger.debug("No keys for pool. Skipping")
             return False
-        user = self.script.credentials["user"]
-        if user is None:
-            user = ""
+        user = self.get_user()
         try:
             self.session.userauth_publickey_frommemory(user, priv_key, "", pub_key)
             return True
@@ -168,14 +184,8 @@ class SSHIOStream(IOStream):
         if not hasattr(self.session, "userauth_keyboardinteractive"):
             self.logger.debug("keyboard-interactive is not supported by ssh library. Skipping")
             return False
-        user = self.script.credentials["user"]
-        if user is None:
-            user = ""
-        password = self.script.credentials["password"]
-        if password is None:
-            password = ""
         try:
-            self.session.userauth_keyboardinteractive(user, password)
+            self.session.userauth_keyboardinteractive(self.get_user(), self.get_password())
             self.logger.debug("Success")
             return True
         except SSH2Error:
@@ -188,14 +198,8 @@ class SSHIOStream(IOStream):
         Password authentication. Send username and password
         """
         self.logger.debug("Trying password authentication")
-        user = self.script.credentials["user"]
-        if user is None:
-            user = ""
-        password = self.script.credentials["password"]
-        if password is None:
-            password = ""
         try:
-            self.session.userauth_password(user, password)
+            self.session.userauth_password(self.get_user(), self.get_password())
             self.logger.debug("Success")
             return True
         except SSH2Error:
