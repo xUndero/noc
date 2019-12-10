@@ -236,7 +236,10 @@ class TelnetIOStream(IOStream):
     def read_from_fd(self):
         metrics["telnet_reads"] += 1
         chunk = super(TelnetIOStream, self).read_from_fd()
-        metrics["telnet_read_bytes"] += len(chunk)
+        if chunk:
+            metrics["telnet_read_bytes"] += len(chunk)
+        elif chunk is None:
+            metrics["telnet_reads_blocked"] += 1
         return self.parser.feed(chunk)
 
     def write(self, data, callback=None):

@@ -116,6 +116,7 @@ class SSHIOStream(IOStream):
                 if self.channel.eof():
                     self.logger.info("SSH session reset")
                     self.close()
+                metrics["ssh_reads_blocked"] += 1
                 return None
             elif code > 0:
                 metrics["ssh_read_bytes"] += len(data)
