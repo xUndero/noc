@@ -215,7 +215,7 @@ Build web:
   stage: Build
   image: node:12
   script:
-    - cd ui/web/builder
+    - cd scripts/build/web
     - npm install
     - node src/index.js
   tags:
@@ -223,7 +223,8 @@ Build web:
   artifacts:
     untracked: true
     paths:
-      - ui/web/build/
+      - dist/ui/pkg/web
+      - dist/ui/pkg/web.debug
 
 Test migrate:
   stage: Test

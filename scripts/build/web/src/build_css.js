@@ -14,7 +14,7 @@ const bundleName = 'app';
 const build = function(destDir, themes) {
     function _build(destDir, theme) {
         const source = 'src/application.css';
-        const prodName = `${destDir}/${bundleName}.{hash}.${theme}.min.css`;
+        const prodName = `${destDir}/${bundleName}.{hash}.${theme}.css`;
         const processors = [
             atImport,
             // autoprefixer,

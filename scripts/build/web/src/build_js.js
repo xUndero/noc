@@ -16,7 +16,7 @@ function appendFile(name, file) {
 
 function makeNames(dir, name, theme) {
     return {
-        prod: `${dir}/${name}.{hash}${theme}.min.js`,
+        prod: `${dir}/${name}.{hash}${theme}.js`,
         dev: `${dir}.debug/${name}.js`
     }
 }

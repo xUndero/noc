@@ -6,7 +6,7 @@ const load_packages = require('./load_packages');
 const tar = require('tar-fs');
 const zlib = require("zlib");
 
-const distDir = 'dist';
+const distDir = '../../../dist';
 let packageDir = `/ui/pkg/web`;
 const destDir = `${distDir}${packageDir}`;
 // const args = process.argv.slice(2);
@@ -17,14 +17,14 @@ const queue = [
 ];
 
 const themeTemplate = '{% if setup.theme == "{theme}" %}\n' +
-    `<link rel="stylesheet" type="text/css" href="${packageDir}/app.{app_hash}.{theme}.min.css " />\n` +
-    `<script type="text/javascript" src="${packageDir}/vendor.{vendor_hash}.{theme}.min.js"></script>\n` +
+    `<link rel="stylesheet" type="text/css" href="${packageDir}/app.{app_hash}.{theme}.css " />\n` +
+    `<script type="text/javascript" src="${packageDir}/vendor.{vendor_hash}.{theme}.js"></script>\n` +
     '{% endif %}';
 
-const bundleTemplate = `<script type="text/javascript" src="${packageDir}/boot.{hash}.min.js"></script>\n` +
+const bundleTemplate = `<script type="text/javascript" src="${packageDir}/boot.{hash}.js"></script>\n` +
     '<!-- Include the translations -->\n' +
     `<script type="text/javascript" src="/ui/web/locale/{{ language }}/ext-locale-{{ language }}.js"></script>\n` +
-    `<script type="text/javascript" src="${packageDir}/app.{hash}.min.js"></script>\n`;
+    `<script type="text/javascript" src="${packageDir}/app.{hash}.js"></script>\n`;
 
 fs.mkdirSync(destDir, {recursive: true});
 fs.mkdirSync(`${destDir}.debug`, {recursive: true});
