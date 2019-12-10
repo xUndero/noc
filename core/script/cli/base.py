@@ -370,12 +370,13 @@ class CLI(object):
                 match = rx.search(self.buffer, offset)
                 if match:
                     self.logger.debug("Match: %s", rx.pattern)
-                    metrics["cli_state", ("state", handler.__name__)] += 1
                     matched = self.buffer[: match.start()]
                     self.buffer = self.buffer[match.end() :]
                     if isinstance(handler, tuple):
+                        metrics["cli_state", ("state", handler[0].__name__)] += 1
                         r = yield handler[0](matched, match, *handler[1:])
                     else:
+                        metrics["cli_state", ("state", handler.__name__)] += 1
                         r = yield handler(matched, match)
                     if r is not None:
                         raise tornado.gen.Return(r)
