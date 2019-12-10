@@ -16,6 +16,7 @@ static/doc/*
 contrib/lib/*
 contrib/bin/*
 contrib/share/*
+.*
 !/.docker/*
 !/.gitignore
 !/.dockerignore*
