@@ -23,6 +23,7 @@ from ssh2.error_codes import LIBSSH2_ERROR_EAGAIN
 
 # NOC modules
 from noc.config import config
+from noc.core.perf import metrics
 from .base import CLI
 from .error import CLIAuthFailed, CLISSHProtocolError
 
@@ -87,9 +88,12 @@ class SSHIOStream(IOStream):
             for method in auth_methods:
                 ah = getattr(self, "auth_%s" % method.replace("-", ""), None)
                 if ah:
+                    metrics["ssh_auth", ("method", method)] += 1
                     authenticated |= ah()
                     if authenticated:
+                        metrics["ssh_auth_success", ("method", method)] += 1
                         break
+                    metrics["ssh_auth_fail", ("method", method)] += 1
             if not authenticated:
                 self.logger.error("Failed to authenticate user '%s'", user)
                 raise CLIAuthFailed("Failed to log in")
@@ -106,6 +110,7 @@ class SSHIOStream(IOStream):
 
     def read_from_fd(self):
         try:
+            metrics["ssh_reads"] += 1
             code, data = self.channel.read(self.read_chunk_size)
             if code == 0:
                 if self.channel.eof():
@@ -113,19 +118,24 @@ class SSHIOStream(IOStream):
                     self.close()
                 return None
             elif code > 0:
+                metrics["ssh_read_bytes"] += len(data)
                 return data
             elif code == LIBSSH2_ERROR_EAGAIN:
+                metrics["ssh_reads_blocked"] += 1
                 return None  # Blocking call
+            metrics["ssh_errors", ("code", code)] += 1
             raise CLISSHProtocolError("SSH Error code %s" % code)
         except SSH2Error as e:
             raise CLISSHProtocolError("SSH Error: %s" % e)
 
     def write_to_fd(self, data):
         # ssh2 doesn't accept memoryview
+        metrics["ssh_writes"] += 1
         if isinstance(data, memoryview):
             data = data.tobytes()
         try:
             _, written = self.channel.write(data)
+            metrics["ssh_write_bytes"] += written
             return written
         except SSH2Error as e:
             raise CLISSHProtocolError("SSH Error: %s" % e)
