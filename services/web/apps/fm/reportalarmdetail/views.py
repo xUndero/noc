@@ -443,7 +443,7 @@ class ReportAlarmDetailApplication(ExtApplication):
                     ]
                 )
             ):
-                dt = fd - a["timestamp"]
+                dt = datetime.datetime.now() - a["timestamp"]
                 duration = int(dt.total_seconds())
                 total_objects = sum(ss["summary"] for ss in a["total_objects"])
                 if min_objects and total_objects < min_objects:
