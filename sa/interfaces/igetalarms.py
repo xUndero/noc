@@ -10,9 +10,10 @@
 from __future__ import absolute_import
 from dateutil.parser import parse
 import datetime
+
 # NOC modules
 from noc.core.interface.base import BaseInterface
-from .base import (StringParameter, DateTimeParameter, DictListParameter)
+from .base import StringParameter, DateTimeParameter, DictListParameter
 
 
 class IGetAlarms(BaseInterface):
@@ -25,13 +26,17 @@ class IGetAlarms(BaseInterface):
     * message - Full Alarm message
     * vars - Variables for different sorts of alarms
     """
-    returns = DictListParameter(attrs={
-        "object_id": StringParameter(required=False),
-        "alarm_id": StringParameter(),
-        "type": StringParameter(default="alarm"),
-        "alarm_time": DateTimeParameter(default=parse(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))),
-        "alarm_name": StringParameter(),
-        "message": StringParameter(),
-        "vars": StringParameter(required=False),
 
-    })
+    returns = DictListParameter(
+        attrs={
+            "object_id": StringParameter(required=False),
+            "alarm_id": StringParameter(),
+            "type": StringParameter(default="alarm"),
+            "alarm_time": DateTimeParameter(
+                default=parse(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            ),
+            "alarm_name": StringParameter(),
+            "message": StringParameter(),
+            "vars": StringParameter(required=False),
+        }
+    )
